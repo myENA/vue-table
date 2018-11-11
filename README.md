@@ -5,7 +5,7 @@ Components to render a table using client or remote data
 
 ## Install
 ```
-npm install @ena/vue-table
+npm install @myena/vue-table
 ```
 
 # Vue Client Table
@@ -43,8 +43,8 @@ Entire table data should be given to the table and will be paginated client side
 
 ```javascript
 // this will create the global (window) object "EnaTableClient"
-import '@ena/vue-table/dist/EnaTableClient';
-// or include as script in html : <script type="text/javascript" src="node_modules/@ena/vue-table/dist/EnaTableClient/index.js"></script>
+import '@myena/vue-table/dist/EnaTableClient';
+// or include as script in html : <script type="text/javascript" src="node_modules/@myena/vue-table/dist/EnaTableClient/index.js"></script>
 // registers the component globally
 
 // in the view that contains the table
@@ -308,7 +308,7 @@ const MyView = new Vue({
 ### As module/local component
 
 ```javascript
-import { Client } from '@ena/vue-table';
+import { Client } from '@myena/vue-table';
 
 // in the view that contains the table
 const MyView = new Vue({
