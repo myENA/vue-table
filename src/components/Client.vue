@@ -210,7 +210,8 @@
                   <span>
                     {{opts.text.pagination.info.showing | format(startRow+1, endRow, totalRows)}}
                   </span>
-                  <select v-model="perPage" :class="[$style.perPageSelector, opts.classes.formControl]">
+                  <select v-model="perPage"
+                    :class="[$style.perPageSelector, opts.classes.formControl]">
                     <option
                       v-for="perPageValue in opts.perPageValues"
                       :value="perPageValue"
