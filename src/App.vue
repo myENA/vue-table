@@ -1,16 +1,17 @@
 <template>
   <div id="app">
-    <TableServer :columns="columns" :url="url" />
+    <ServerTable :columns="columns" :url="url" />
+    <ClientTable :columns="columns" :data="clientData" />
   </div>
 </template>
 
 <script>
-import $ from 'jquery';
 import 'bootstrap/dist/js/bootstrap';
-import TableServer from './components/Server.vue';
+import ServerTable from './components/Server.vue';
+import ClientTable from './components/Client.vue';
 
-const myComp = {
-  extends: TableServer,
+const myServerTable = {
+  extends: ServerTable,
   methods: {
     fetch() {
       return {
@@ -21,14 +22,23 @@ const myComp = {
   },
 };
 
+const myClientTable = {
+  extends: ClientTable,
+  methods: {
+
+  },
+};
+
 export default {
   name: 'app',
   components: {
-    TableServer: myComp,
+    ServerTable: myServerTable,
+    ClientTable: myClientTable,
   },
   data: () => ({
     columns: ['id', 'first_name', 'last_name'],
     url: 'http://localhost:5000/api/users',
+    clientData: [{ first_name: '1', id: 1 }],
   }),
 };
 </script>
