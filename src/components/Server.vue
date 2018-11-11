@@ -2,12 +2,12 @@
   <div>
     <slot name="filter">
     </slot>
-    <div :class="opts.classes.wrapper">
-      <table :class="opts.classes.table">
+    <div :class="[opts.classes.wrapper, $style.wrapper]">
+      <table :class="[opts.classes.table, $style.table]">
         <thead>
           <tr>
             <th v-for="key in columns" :key="key" @click="sortBy({key})"
-              :class="{ sortable: opts.sortable[key], sorted: sortKey === key }">
+              :class="{ [$style.sortable]: opts.sortable[key], sorted: sortKey === key }">
               <slot :name="'heading_' + key">
                 <template>
                   {{ key | heading(opts.headings) }}
@@ -29,15 +29,15 @@
         </thead>
         <tbody v-if="loading">
           <tr>
-            <td class="msg-row" :colspan="columns.length + (opts.detailsRow ? 1 : 0)">
-              <slot name="loading"><span v-html="opts.loadingMsg"></span></slot>
+            <td class="msg-row" :colspan="colspan">
+              <slot name="loading"><span v-html="opts.text.loading"></span></slot>
             </td>
           </tr>
         </tbody>
         <tbody v-else-if="data.length === 0">
           <tr>
-            <td class="msg-row" :colspan="columns.length + (opts.detailsRow ? 1 : 0)">
-              <slot name="no_data"><span v-html="opts.noDataMsg"></span></slot>
+            <td class="msg-row" :colspan="colspan">
+              <slot name="no_data"><span v-html="opts.text.noData"></span></slot>
             </td>
           </tr>
         </tbody>
@@ -71,7 +71,7 @@
               :key="'details_row_'+entry[opts.uniqueKey]"
               :data-details="entry[opts.uniqueKey]"
               >
-              <td :colspan="columns.length + (opts.detailsRow ? 1 : 0)">
+              <td :colspan="colspan">
                 <slot name="details_row" :row="entry">
                 </slot>
               </td>
@@ -80,7 +80,7 @@
         </tbody>
         <tfoot>
           <tr>
-            <td :colspan="columns.length + (opts.detailsRow ? 1 : 0)">
+            <td :colspan="colspan">
               <ul :class="[$style.pagination, opts.classes.pagination.wrapper]">
                 <li :class="{
                     [$style.disabled]: currentPage === 1,
@@ -142,7 +142,7 @@
                   <span>
                     {{opts.text.pagination.info.showing | format(startRow+1, endRow, totalRows)}}
                   </span>
-                  <select v-model="perPage">
+                  <select v-model="perPage" :class="[$style.perPageSelector, opts.classes.formControl]">
                     <option
                       v-for="perPageValue in opts.perPageValues"
                       :value="perPageValue"
@@ -157,7 +157,7 @@
                 </div>
                 <div v-else >
                   <span>
-                    No rows to display
+                    {{opts.text.pagination.info.noRows}}
                   </span>
                 </div>
               </div>
@@ -170,26 +170,47 @@
 </template>
 
 <style lang="less" module>
-.pagination {
-  float: left;
-  list-style-type: none;
-  > li {
-    display: inline;
-    &.disabled {
-      a {
-        cursor: none;
-        pointer-events: none;
-      }
+.table {
+  border-bottom: 1px solid #ddd;
+  > thead:first-child > tr:first-child > th {
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+  }
+  tbody > tr:first-child > th {
+    background-color: #F2F2F2;
+    a + span {
+      margin-left: 5px;
     }
-    &.active {
-      a {
-        cursor: none;
-        pointer-events: none;
-      }
+    a {
+      color: #333;
+      font-size: 16px;
+      display: inline-block;
+      width: 20px;
+      text-align: center;
+    }
+  }
+  .checkbox {
+    margin: 0;
+    label {
+      min-height: 18px;
     }
   }
 }
-.info {
+th.sortable {
+  cursor: pointer;
+  i {
+    margin-top: 5px;
+    margin-left: 5px;
+  }
+}
+.pagination {
+  margin: 0;
+}
+.info{
+  .perPageSelector{
+    margin-left: 20px;
+    margin-right: 10px;
+  }
   float: right;
 }
 </style>
@@ -246,6 +267,7 @@ export default {
         classes: {
           wrapper: 'table-responsive',
           table: 'table',
+          formControl: 'form-control',
           sort: {
             none: 'fa fa-sort',
             ascending: 'fa fa-sort-asc',
@@ -253,7 +275,7 @@ export default {
           },
           pagination: {
             wrapper: 'pagination',
-            info: 'info',
+            info: 'info form-inline',
             first: 'fa fa-angle-double-left',
             prev: 'fa fa-angle-left',
             next: 'fa fa-angle-right',
@@ -300,6 +322,21 @@ export default {
            */
           collapse: 'Hide details',
           /**
+           * Message to show when there is no data
+           * @type {String}
+           */
+          noData: 'No data to show',
+          /**
+           * Message to show when no results are found for the search
+           * @type {String}
+           */
+          emptyResults: 'No results for this filter',
+          /**
+           * Message to show when no results are found for the search
+           * @type {String}
+           */
+          loading: 'Loading ...',
+          /**
            * Text to show for pagination helper buttons
            * @type {Object}
            */
@@ -311,6 +348,7 @@ export default {
             info: {
               showing: 'Showing %s to %s of %s rows.',
               records: 'records per page',
+              noRows: 'No rows to display',
             },
           },
         },
@@ -343,16 +381,6 @@ export default {
          * @type {Array}
          */
         perPageValues: [1, 2, 5, 10, 20, 50],
-        /**
-         * Message to show when there is no data
-         * @type {String}
-         */
-        noDataMsg: 'No data to show',
-        /**
-         * Message to show when no results are found for the search
-         * @type {String}
-         */
-        loadingMsg: 'Loading ...',
         /**
          * Object (key, order) to sort table by on first load (on created)
          * @type {Object}
@@ -391,6 +419,9 @@ export default {
     };
   },
   computed: {
+    colspan() {
+      return this.columns.length + (this.opts.detailsRow ? 1 : 0);
+    },
     opts() {
       const opts = Object.assign(
         {},
