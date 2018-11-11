@@ -38,8 +38,8 @@ export default {
 @import '~font-awesome/css/font-awesome.min.css';
 
 tfoot {
-  [class^='TableServer_pagination'],
-  [class^='TableServer_info'] {
+  [class^='EnaServerTable_pagination'],
+  [class^='EnaServerTable_info'] {
     margin: 20px 0;
   }
 }
