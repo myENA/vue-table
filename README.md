@@ -33,8 +33,8 @@ Entire table data should be given to the table and will be paginated client side
   <template slot="column_column1" slot-scope="{ row }" >
     <span><i v-if="row.column2 === 'disable'" class="fa fa-ban"></i> {{row.column1}}</span>
   </template>
-  <template slot="child_row" slot-scope="{ row }">
-    <div>Div for child (expanded) row</div>
+  <template slot="details_row" slot-scope="{ row }">
+    <div>Div for details (expanded) row</div>
   </template>
 </EnaTableClient>
 ```
@@ -86,6 +86,34 @@ const MyView = new Vue({
        */
       options: {
         /**
+         * Classes to use on various elements
+         *
+         * @inner
+         * @type {Object}
+         */
+        classes: {
+          wrapper: 'table-responsive',
+          table: 'table',
+          formControl: 'form-control',
+          sort: {
+            none: 'fa fa-sort',
+            ascending: 'fa fa-sort-asc',
+            descending: 'fa fa-sort-desc',
+          },
+          pagination: {
+            wrapper: 'pagination',
+            info: 'info form-inline',
+            first: 'fa fa-angle-double-left',
+            prev: 'fa fa-angle-left',
+            next: 'fa fa-angle-right',
+            last: 'fa fa-angle-double-right',
+          },
+          group: {
+            show: 'fa fa-chevron-right',
+            hide: 'fa fa-chevron-down',
+          },
+        },
+        /**
          * Key-value pairs with the headings to overwrite (label to display)
          * can also be overwritten with slot: "heading_colname"
          *
@@ -100,7 +128,8 @@ const MyView = new Vue({
          */
         templates: {},
         /**
-         * Key-value pairs with custom search function per column, or false to disable search for that column
+         * Key-value pairs with custom search function per column,
+         * or false to disable search for that column
          *
          * @type {Object}
          */
@@ -140,17 +169,55 @@ const MyView = new Vue({
          */
         detailsRow: false,
         /**
-         * Text to show when row can be expanded
-         * @type {String}
+         * Texts
+         *
+         * @type Object
          */
-        expandText: 'Show details',
+        text: {
+          /**
+           * Text to show when row can be expanded
+           * @type {String}
+           */
+          expand: 'Show details',
+          /**
+           * Text to show when row can be collapsed
+           * @type {String}
+           */
+          collapse: 'Hide details',
+          /**
+           * Message to show when there is no data
+           * @type {String}
+           */
+          noData: 'No data to show',
+          /**
+           * Message to show when no results are found for the search
+           * @type {String}
+           */
+          emptyResults: 'No results for this filter',
+          /**
+           * Message to show when no results are found for the search
+           * @type {String}
+           */
+          loading: 'Loading ...',
+          /**
+           * Text to show for pagination helper buttons
+           * @type {Object}
+           */
+          pagination: {
+            first: '',
+            prev: '',
+            next: '',
+            last: '',
+            info: {
+              showing: 'Showing %s to %s of %s rows.',
+              records: 'records per page',
+              noRows: 'No rows to display',
+            },
+          },
+        },
         /**
-         * Text to show when row can be collapsed
-         * @type {String}
-         */
-        collapseText: 'Hide details',
-        /**
-         * empty object to disable sorting for all, or define what columns are sortable; defaults to all sortable
+         * empty object to disable sorting for all,
+         * or define what columns are sortable; defaults to all sortable
          *
          * @default
          * @type {true|Object}
@@ -190,28 +257,13 @@ const MyView = new Vue({
          */
         editable: false,
         /**
-         * Message to show when there is no data
-         * @type {String}
+         * Object (key, order) to sort table by on first load (on created)
+         * @type {Object}
          */
-        noDataMsg: 'No data to show',
-        /**
-         * Message to show when no results are found for the search
-         * @type {String}
-         */
-        emptyResultsMsg: 'No results for this filter',
-        /**
-         * Message to show when no results are found for the search
-         * @type {String}
-         */
-        loadingMsg: 'Loading ...',
-				/**
-				 * Object (key, order) to sort table by on first load (on created)
-				 * @type {Object}
-				 */
-				sortBy: {
-					column: null,
-					order: null,
-				},
+        sortBy: {
+          column: null,
+          order: null,
+        },
         /**
          * The collator used for sorting
          * @type {Intl.Collator}
