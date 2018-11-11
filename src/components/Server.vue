@@ -81,86 +81,16 @@
         <tfoot>
           <tr>
             <td :colspan="colspan">
-              <ul :class="[$style.pagination, opts.classes.pagination.wrapper]">
-                <li :class="{
-                    [$style.disabled]: currentPage === 1,
-                    disabled: currentPage === 1
-                  }">
-                  <a href="#"
-                    :aria-label="opts.text.pagination.first || 'First'"
-                    :title="opts.text.pagination.first || 'First'"
-                    @click.prevent="goToPage(1)">
-                    <span aria-hidden="true"><i
-                      :class="opts.classes.pagination.first"
-                      ></i></span>{{opts.text.pagination.first}}</a>
-                </li>
-                <li :class="{
-                    [$style.disabled]: currentPage === 1,
-                    disabled: currentPage === 1
-                  }">
-                  <a href="#"
-                    :aria-label="opts.text.pagination.previous || 'Previous'"
-                    :title="opts.text.pagination.previous || 'Previous'"
-                    @click.prevent="goToPage(currentPage-1)">
-                    <span aria-hidden="true"><i
-                      :class="opts.classes.pagination.prev"
-                      ></i></span>{{opts.text.pagination.prev}}</a>
-                </li>
-                <li v-for="page in pagesToShow"
-                  :key="page"
-                  :class="{
-                      [$style.active]: page === currentPage,
-                      active: page === currentPage,
-                    }">
-                  <a href="#" @click.prevent="goToPage(page)">{{page}}</a>
-                </li>
-                <li :class="{
-                    [$style.disabled]: currentPage === totalPages || totalPages === 0,
-                    disabled: currentPage === totalPages || totalPages === 0
-                  }">
-                  <a href="#"
-                    :aria-label="opts.text.pagination.next || 'Next'"
-                    :title="opts.text.pagination.next || 'Next'"
-                    @click.prevent="goToPage(currentPage+1)">{{opts.text.pagination.next}}<span
-                      aria-hidden="true"><i :class="opts.classes.pagination.next"></i></span>
-                  </a>
-                </li>
-                <li :class="{
-                    [$style.disabled]: currentPage === totalPages || totalPages === 0,
-                    disabled: currentPage === totalPages || totalPages === 0
-                  }">
-                  <a href="#"
-                    :aria-label="opts.text.pagination.last || 'Last'"
-                    :title="opts.text.pagination.last || 'Last'"
-                    @click.prevent="goToPage(totalPages)">{{opts.text.pagination.last}}<span
-                      aria-hidden="true"><i :class="opts.classes.pagination.last"></i></span>
-                  </a>
-                </li>
-              </ul>
-              <div :class="[$style.info, opts.classes.pagination.info]">
-                <div v-if="totalRows">
-                  <span>
-                    {{opts.text.pagination.info.showing | format(startRow+1, endRow, totalRows)}}
-                  </span>
-                  <select v-model="perPage" :class="[$style.perPageSelector, opts.classes.formControl]">
-                    <option
-                      v-for="perPageValue in opts.perPageValues"
-                      :value="perPageValue"
-                      :key="perPageValue"
-                      >
-                      {{perPageValue}}
-                    </option>
-                  </select>
-                  <span>
-                    {{opts.text.pagination.info.records}}
-                  </span>
-                </div>
-                <div v-else >
-                  <span>
-                    {{opts.text.pagination.info.noRows}}
-                  </span>
-                </div>
-              </div>
+              <Pagination
+                @paginate="paginate"
+                :classes="opts.classes.pagination"
+                :text="opts.text.pagination"
+                :pageInterval="opts.pageInterval"
+                :perPage="opts.perPage"
+                :perPageValues="opts.perPageValues"
+                :currentPage="currentPage"
+                :totalRows="totalRows"
+              />
             </td>
           </tr>
         </tfoot>
@@ -217,20 +147,17 @@ th.sortable {
 
 <script type="text/javascript">
 import axios from 'axios';
+import filters from './mixins/filters';
+import defaultProps from './mixins/default-props';
+import Pagination from './mixins/Pagination.vue';
 
 /**
- * @module VueTableServer
+ * @module EnaTableServer
  */
 export default {
-  filters: {
-    heading(key, headings) {
-      if (undefined !== headings[key]) {
-        return headings[key];
-      }
-      const firstUpper = w => w.charAt(0).toUpperCase() + w.slice(1);
-      return key.split('_').map(firstUpper).join(' ');
-    },
-    format: (str, ...args) => [...args].reduce((s, a) => s.replace(/%s/, a), str),
+  mixins: [filters],
+  components: {
+    Pagination,
   },
   props: {
     /**
@@ -263,132 +190,7 @@ export default {
      */
     defaults: {
       type: Object,
-      default: () => ({
-        classes: {
-          wrapper: 'table-responsive',
-          table: 'table',
-          formControl: 'form-control',
-          sort: {
-            none: 'fa fa-sort',
-            ascending: 'fa fa-sort-asc',
-            descending: 'fa fa-sort-desc',
-          },
-          pagination: {
-            wrapper: 'pagination',
-            info: 'info form-inline',
-            first: 'fa fa-angle-double-left',
-            prev: 'fa fa-angle-left',
-            next: 'fa fa-angle-right',
-            last: 'fa fa-angle-double-right',
-          },
-        },
-        /**
-         * Key-value pairs with the headings to overwrite (label to display)
-         * can also be overwritten with slot: "heading_colname"
-         *
-         * @inner
-         * @type {Object}
-         */
-        headings: {},
-        /**
-         * Key-value pairs with templates (components) for the column value
-         *
-         * @type {Object}
-         */
-        templates: {},
-        /**
-         * Required, unique identifier
-         *
-         * @default
-         * @type {String}
-         */
-        uniqueKey: 'id',
-        /**
-         * show extra row for each row with details
-         *
-         * @default
-         * @type {Boolean}
-         */
-        detailsRow: false,
-        text: {
-          /**
-           * Text to show when row can be expanded
-           * @type {String}
-           */
-          expand: 'Show details',
-          /**
-           * Text to show when row can be collapsed
-           * @type {String}
-           */
-          collapse: 'Hide details',
-          /**
-           * Message to show when there is no data
-           * @type {String}
-           */
-          noData: 'No data to show',
-          /**
-           * Message to show when no results are found for the search
-           * @type {String}
-           */
-          emptyResults: 'No results for this filter',
-          /**
-           * Message to show when no results are found for the search
-           * @type {String}
-           */
-          loading: 'Loading ...',
-          /**
-           * Text to show for pagination helper buttons
-           * @type {Object}
-           */
-          pagination: {
-            first: '',
-            prev: '',
-            next: '',
-            last: '',
-            info: {
-              showing: 'Showing %s to %s of %s rows.',
-              records: 'records per page',
-              noRows: 'No rows to display',
-            },
-          },
-        },
-        /**
-         * empty object to disable sorting for all,
-         * or define what columns are sortable; defaults to all sortable
-         *
-         * @default
-         * @type {true|Object}
-         */
-        sortable: true,
-        /**
-         * number of items per page
-         *
-         * @default
-         * @type {Number}
-         */
-        perPage: 10,
-        /**
-         * How many pages to show in the paginator. Odd number
-         *
-         * @default
-         * @type {Number}
-         */
-        pageInterval: 9,
-        /**
-         * values to show in the selector of items per page
-         *
-         * @default
-         * @type {Array}
-         */
-        perPageValues: [1, 2, 5, 10, 20, 50],
-        /**
-         * Object (key, order) to sort table by on first load (on created)
-         * @type {Object}
-         */
-        sortBy: {
-          column: null,
-          order: null,
-        },
+      default: () => Object.assign({}, defaultProps, {
         /**
          * Object with request params mapping
          */
@@ -441,49 +243,8 @@ export default {
         }
       );
     },
-    pagesToShow() {
-      const halfInterval = (this.opts.pageInterval - 1) / 2;
-      let startPage = Math.max(1, this.currentPage - halfInterval);
-      let endPage = Math.min(this.totalPages, this.currentPage + halfInterval);
-      if (this.totalPages <= this.opts.pageInterval) {
-        startPage = 1;
-        endPage = this.totalPages;
-      } else {
-        while (endPage - startPage < this.opts.pageInterval - 1) {
-          // stabilize the interval
-          endPage = Math.min(this.totalPages, startPage + this.opts.pageInterval - 1);
-          startPage = Math.max(1, endPage - this.opts.pageInterval + 1);
-        }
-      }
-      const pages = [];
-      for (let i = startPage; i <= endPage; i += 1) {
-        pages.push(i);
-      }
-      return pages;
-    },
-    totalPages() {
-      return Math.ceil(this.totalRows / this.perPage);
-    },
-    startRow() {
-      return (this.currentPage - 1) * this.perPage;
-    },
-    endRow() {
-      return Math.min(this.startRow + this.perPage, this.totalRows);
-    },
   },
   watch: {
-    totalPages() {
-      if (this.currentPage > this.totalPages) {
-        // set the current page to the last page if the number of pages has been reduced below it
-        this.currentPage = this.totalPages;
-      } else if (!this.currentPage && this.totalPages) {
-        // if there was no current page and then the number of pages was set, go to first page
-        this.currentPage = 1;
-      }
-    },
-    perPage() {
-      this.loadData();
-    },
   },
   created() {
     this.loadData();
@@ -561,16 +322,15 @@ export default {
     isRowExpanded(id) {
       return this.expandedRows[id];
     },
-    goToPage(page) {
-      if (page >= 1 && page <= this.totalPages) {
-        this.currentPage = page;
-      }
-      this.loadData();
-    },
     getToggleText(entry) {
       return this.isRowExpanded(entry[this.opts.uniqueKey]) ?
         this.opts.text.collapse :
         this.opts.text.expand;
+    },
+    paginate({ currentPage, perPage }) {
+      this.currentPage = currentPage;
+      this.perPage = perPage;
+      this.loadData();
     },
   },
 };
