@@ -192,6 +192,14 @@ function isSlowBuffer (obj) {
 
 /***/ }),
 
+/***/ "0953":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+module.exports = {"pagination":"EnaTablePagination_pagination_2tfqR","info":"EnaTablePagination_info_ZKSSF","perPageSelector":"EnaTablePagination_perPageSelector_3xG0c"};
+
+/***/ }),
+
 /***/ "0a06":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -323,6 +331,29 @@ module.exports = function spread(callback) {
   return function wrap(arr) {
     return callback.apply(null, arr);
   };
+};
+
+
+/***/ }),
+
+/***/ "11e9":
+/***/ (function(module, exports, __webpack_require__) {
+
+var pIE = __webpack_require__("52a7");
+var createDesc = __webpack_require__("4630");
+var toIObject = __webpack_require__("6821");
+var toPrimitive = __webpack_require__("6a99");
+var has = __webpack_require__("69a8");
+var IE8_DOM_DEFINE = __webpack_require__("c69a");
+var gOPD = Object.getOwnPropertyDescriptor;
+
+exports.f = __webpack_require__("9e1e") ? gOPD : function getOwnPropertyDescriptor(O, P) {
+  O = toIObject(O);
+  P = toPrimitive(P, true);
+  if (IE8_DOM_DEFINE) try {
+    return gOPD(O, P);
+  } catch (e) { /* empty */ }
+  if (has(O, P)) return createDesc(!pIE.f.call(O, P), O[P]);
 };
 
 
@@ -768,6 +799,16 @@ module.exports = function isCancel(value) {
   return !!(value && value.__CANCEL__);
 };
 
+
+/***/ }),
+
+/***/ "2f27":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_10_oneOf_0_0_node_modules_css_loader_index_js_ref_10_oneOf_0_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_10_oneOf_0_2_node_modules_less_loader_dist_cjs_js_ref_10_oneOf_0_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Pagination_vue_vue_type_style_index_0_lang_less_module_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("0953");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_10_oneOf_0_0_node_modules_css_loader_index_js_ref_10_oneOf_0_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_10_oneOf_0_2_node_modules_less_loader_dist_cjs_js_ref_10_oneOf_0_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Pagination_vue_vue_type_style_index_0_lang_less_module_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_10_oneOf_0_0_node_modules_css_loader_index_js_ref_10_oneOf_0_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_10_oneOf_0_2_node_modules_less_loader_dist_cjs_js_ref_10_oneOf_0_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Pagination_vue_vue_type_style_index_0_lang_less_module_true___WEBPACK_IMPORTED_MODULE_0__);
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_mini_css_extract_plugin_dist_loader_js_ref_10_oneOf_0_0_node_modules_css_loader_index_js_ref_10_oneOf_0_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_10_oneOf_0_2_node_modules_less_loader_dist_cjs_js_ref_10_oneOf_0_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Pagination_vue_vue_type_style_index_0_lang_less_module_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -1322,6 +1363,22 @@ module.exports = $export;
 
 /***/ }),
 
+/***/ "5dbc":
+/***/ (function(module, exports, __webpack_require__) {
+
+var isObject = __webpack_require__("d3f4");
+var setPrototypeOf = __webpack_require__("8b97").set;
+module.exports = function (that, target, C) {
+  var S = target.constructor;
+  var P;
+  if (S !== C && typeof S == 'function' && (P = S.prototype) !== C.prototype && isObject(P) && setPrototypeOf) {
+    setPrototypeOf(that, P);
+  } return that;
+};
+
+
+/***/ }),
+
 /***/ "5eda":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1655,6 +1712,38 @@ exports.f = __webpack_require__("9e1e") ? Object.defineProperty : function defin
 
 /***/ }),
 
+/***/ "8b97":
+/***/ (function(module, exports, __webpack_require__) {
+
+// Works with __proto__ only. Old v8 can't work with null proto objects.
+/* eslint-disable no-proto */
+var isObject = __webpack_require__("d3f4");
+var anObject = __webpack_require__("cb7c");
+var check = function (O, proto) {
+  anObject(O);
+  if (!isObject(proto) && proto !== null) throw TypeError(proto + ": can't set as prototype!");
+};
+module.exports = {
+  set: Object.setPrototypeOf || ('__proto__' in {} ? // eslint-disable-line
+    function (test, buggy, set) {
+      try {
+        set = __webpack_require__("9b43")(Function.call, __webpack_require__("11e9").f(Object.prototype, '__proto__').set, 2);
+        set(test, []);
+        buggy = !(test instanceof Array);
+      } catch (e) { buggy = true; }
+      return function setPrototypeOf(O, proto) {
+        check(O, proto);
+        if (buggy) O.__proto__ = proto;
+        else set(O, proto);
+        return O;
+      };
+    }({}, false) : undefined),
+  check: check
+};
+
+
+/***/ }),
+
 /***/ "8bbf":
 /***/ (function(module, exports) {
 
@@ -1723,6 +1812,20 @@ CancelToken.source = function source() {
 };
 
 module.exports = CancelToken;
+
+
+/***/ }),
+
+/***/ "9093":
+/***/ (function(module, exports, __webpack_require__) {
+
+// 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
+var $keys = __webpack_require__("ce10");
+var hiddenKeys = __webpack_require__("e11e").concat('length', 'prototype');
+
+exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
+  return $keys(O, hiddenKeys);
+};
 
 
 /***/ }),
@@ -2583,6 +2686,43 @@ __webpack_require__("214f")('replace', 2, function (defined, REPLACE, $replace) 
 
 /***/ }),
 
+/***/ "aa77":
+/***/ (function(module, exports, __webpack_require__) {
+
+var $export = __webpack_require__("5ca1");
+var defined = __webpack_require__("be13");
+var fails = __webpack_require__("79e5");
+var spaces = __webpack_require__("fdef");
+var space = '[' + spaces + ']';
+var non = '\u200b\u0085';
+var ltrim = RegExp('^' + space + space + '*');
+var rtrim = RegExp(space + space + '*$');
+
+var exporter = function (KEY, exec, ALIAS) {
+  var exp = {};
+  var FORCE = fails(function () {
+    return !!spaces[KEY]() || non[KEY]() != non;
+  });
+  var fn = exp[KEY] = FORCE ? exec(trim) : spaces[KEY];
+  if (ALIAS) exp[ALIAS] = fn;
+  $export($export.P + $export.F * FORCE, 'String', exp);
+};
+
+// 1 -> String#trimLeft
+// 2 -> String#trimRight
+// 3 -> String#trim
+var trim = exporter.trim = function (string, TYPE) {
+  string = String(defined(string));
+  if (TYPE & 1) string = string.replace(ltrim, '');
+  if (TYPE & 2) string = string.replace(rtrim, '');
+  return string;
+};
+
+module.exports = exporter;
+
+
+/***/ }),
+
 /***/ "aae3":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3300,6 +3440,83 @@ module.exports = {
 
 /***/ }),
 
+/***/ "c5f6":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var global = __webpack_require__("7726");
+var has = __webpack_require__("69a8");
+var cof = __webpack_require__("2d95");
+var inheritIfRequired = __webpack_require__("5dbc");
+var toPrimitive = __webpack_require__("6a99");
+var fails = __webpack_require__("79e5");
+var gOPN = __webpack_require__("9093").f;
+var gOPD = __webpack_require__("11e9").f;
+var dP = __webpack_require__("86cc").f;
+var $trim = __webpack_require__("aa77").trim;
+var NUMBER = 'Number';
+var $Number = global[NUMBER];
+var Base = $Number;
+var proto = $Number.prototype;
+// Opera ~12 has broken Object#toString
+var BROKEN_COF = cof(__webpack_require__("2aeb")(proto)) == NUMBER;
+var TRIM = 'trim' in String.prototype;
+
+// 7.1.3 ToNumber(argument)
+var toNumber = function (argument) {
+  var it = toPrimitive(argument, false);
+  if (typeof it == 'string' && it.length > 2) {
+    it = TRIM ? it.trim() : $trim(it, 3);
+    var first = it.charCodeAt(0);
+    var third, radix, maxCode;
+    if (first === 43 || first === 45) {
+      third = it.charCodeAt(2);
+      if (third === 88 || third === 120) return NaN; // Number('+0x1') should be NaN, old V8 fix
+    } else if (first === 48) {
+      switch (it.charCodeAt(1)) {
+        case 66: case 98: radix = 2; maxCode = 49; break; // fast equal /^0b[01]+$/i
+        case 79: case 111: radix = 8; maxCode = 55; break; // fast equal /^0o[0-7]+$/i
+        default: return +it;
+      }
+      for (var digits = it.slice(2), i = 0, l = digits.length, code; i < l; i++) {
+        code = digits.charCodeAt(i);
+        // parseInt parses a string to a first unavailable symbol
+        // but ToNumber should return NaN if a string contains unavailable symbols
+        if (code < 48 || code > maxCode) return NaN;
+      } return parseInt(digits, radix);
+    }
+  } return +it;
+};
+
+if (!$Number(' 0o1') || !$Number('0b1') || $Number('+0x1')) {
+  $Number = function Number(value) {
+    var it = arguments.length < 1 ? 0 : value;
+    var that = this;
+    return that instanceof $Number
+      // check on 1..constructor(foo) case
+      && (BROKEN_COF ? fails(function () { proto.valueOf.call(that); }) : cof(that) != NUMBER)
+        ? inheritIfRequired(new Base(toNumber(it)), that, $Number) : toNumber(it);
+  };
+  for (var keys = __webpack_require__("9e1e") ? gOPN(Base) : (
+    // ES3:
+    'MAX_VALUE,MIN_VALUE,NaN,NEGATIVE_INFINITY,POSITIVE_INFINITY,' +
+    // ES6 (in case, if modules with ES6 Number statics required before):
+    'EPSILON,isFinite,isInteger,isNaN,isSafeInteger,MAX_SAFE_INTEGER,' +
+    'MIN_SAFE_INTEGER,parseFloat,parseInt,isInteger'
+  ).split(','), j = 0, key; keys.length > j; j++) {
+    if (has(Base, key = keys[j]) && !has($Number, key)) {
+      dP($Number, key, gOPD(Base, key));
+    }
+  }
+  $Number.prototype = proto;
+  proto.constructor = $Number;
+  __webpack_require__("2aba")(global, NUMBER, $Number);
+}
+
+
+/***/ }),
+
 /***/ "c69a":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3913,29 +4130,14 @@ var web_dom_iterable = __webpack_require__("ac6a");
 var external_vue_ = __webpack_require__("8bbf");
 var external_vue_default = /*#__PURE__*/__webpack_require__.n(external_vue_);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"52c9b316-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Server.vue?vue&type=template&id=0c0018b1&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"4d96bfd7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Server.vue?vue&type=template&id=3b6449e4&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_vm._t("filter"),_c('div',{class:[_vm.opts.classes.wrapper, _vm.$style.wrapper]},[_c('table',{class:[_vm.opts.classes.table, _vm.$style.table]},[_c('thead',[_c('tr',[_vm._l((_vm.columns),function(key){return _c('th',{key:key,class:( _obj = { sorted: _vm.sortKey === key }, _obj[_vm.$style.sortable] = _vm.opts.sortable[key], _obj ),on:{"click":function($event){_vm.sortBy({key: key})}}},[_vm._t('heading_' + key,[[_vm._v("\n                "+_vm._s(_vm._f("heading")(key,_vm.opts.headings))+"\n              ")]]),(_vm.opts.sortable[key])?_c('i',{class:( _obj$1 = {}, _obj$1[_vm.opts.classes.sort.none] = _vm.sortKey !== key || _vm.sortOrders[key] === null, _obj$1[_vm.opts.classes.sort[_vm.sortOrders[key]]] = _vm.sortKey === key, _obj$1 )}):_vm._e()],2)
 var _obj;
-var _obj$1;}),(_vm.opts.detailsRow)?_c('th',[_vm._t("heading_actions",[_vm._v("\n              Actions\n            ")])],2):_vm._e()],2)]),(_vm.loading)?_c('tbody',[_c('tr',[_c('td',{staticClass:"msg-row",attrs:{"colspan":_vm.colspan}},[_vm._t("loading",[_c('span',{domProps:{"innerHTML":_vm._s(_vm.opts.text.loading)}})])],2)])]):(_vm.data.length === 0)?_c('tbody',[_c('tr',[_c('td',{staticClass:"msg-row",attrs:{"colspan":_vm.colspan}},[_vm._t("no_data",[_c('span',{domProps:{"innerHTML":_vm._s(_vm.opts.text.noData)}})])],2)])]):_c('tbody',[_vm._l((_vm.data),function(entry,index){return [_c('tr',{key:'row_'+entry[_vm.opts.uniqueKey],attrs:{"data-id":entry[_vm.opts.uniqueKey]}},[_vm._l((_vm.columns),function(key){return _c('td',{key:'cell_'+key},[_vm._t('column_' + key,[(_vm.opts.templates[key])?_c(_vm.opts.templates[key],{tag:"component",attrs:{"data":entry,"column":key,"index":index}}):[_vm._v(_vm._s(entry[key]))]],{row:entry})],2)}),(_vm.opts.detailsRow)?_c('td',[_vm._t("column_actions_pre",null,{row:entry}),_vm._t("column_actions",[_c('a',{attrs:{"href":"#"},domProps:{"innerHTML":_vm._s(_vm.getToggleText(entry))},on:{"click":function($event){$event.preventDefault();_vm.toggleRow(entry[_vm.opts.uniqueKey])}}})],{row:entry}),_vm._t("column_actions_post",null,{row:entry})],2):_vm._e()],2),(_vm.opts.detailsRow)?_c('tr',{directives:[{name:"show",rawName:"v-show",value:(_vm.isRowExpanded(entry[_vm.opts.uniqueKey])),expression:"isRowExpanded(entry[opts.uniqueKey])"}],key:'details_row_'+entry[_vm.opts.uniqueKey],attrs:{"data-details":entry[_vm.opts.uniqueKey]}},[_c('td',{attrs:{"colspan":_vm.colspan}},[_vm._t("details_row",null,{row:entry})],2)]):_vm._e()]})],2),_c('tfoot',[_c('tr',[_c('td',{attrs:{"colspan":_vm.colspan}},[_c('ul',{class:[_vm.$style.pagination, _vm.opts.classes.pagination.wrapper]},[_c('li',{class:( _obj = {
-                  disabled: _vm.currentPage === 1
-                }, _obj[_vm.$style.disabled] = _vm.currentPage === 1, _obj )},[_c('a',{attrs:{"href":"#","aria-label":_vm.opts.text.pagination.first || 'First',"title":_vm.opts.text.pagination.first || 'First'},on:{"click":function($event){$event.preventDefault();_vm.goToPage(1)}}},[_c('span',{attrs:{"aria-hidden":"true"}},[_c('i',{class:_vm.opts.classes.pagination.first})]),_vm._v(_vm._s(_vm.opts.text.pagination.first))])]),_c('li',{class:( _obj$1 = {
-                  disabled: _vm.currentPage === 1
-                }, _obj$1[_vm.$style.disabled] = _vm.currentPage === 1, _obj$1 )},[_c('a',{attrs:{"href":"#","aria-label":_vm.opts.text.pagination.previous || 'Previous',"title":_vm.opts.text.pagination.previous || 'Previous'},on:{"click":function($event){$event.preventDefault();_vm.goToPage(_vm.currentPage-1)}}},[_c('span',{attrs:{"aria-hidden":"true"}},[_c('i',{class:_vm.opts.classes.pagination.prev})]),_vm._v(_vm._s(_vm.opts.text.pagination.prev))])]),_vm._l((_vm.pagesToShow),function(page){return _c('li',{key:page,class:( _obj = {
-                    active: page === _vm.currentPage,
-                  }, _obj[_vm.$style.active] = page === _vm.currentPage, _obj )},[_c('a',{attrs:{"href":"#"},on:{"click":function($event){$event.preventDefault();_vm.goToPage(page)}}},[_vm._v(_vm._s(page))])])
-                var _obj;}),_c('li',{class:( _obj$2 = {
-                  disabled: _vm.currentPage === _vm.totalPages || _vm.totalPages === 0
-                }, _obj$2[_vm.$style.disabled] = _vm.currentPage === _vm.totalPages || _vm.totalPages === 0, _obj$2 )},[_c('a',{attrs:{"href":"#","aria-label":_vm.opts.text.pagination.next || 'Next',"title":_vm.opts.text.pagination.next || 'Next'},on:{"click":function($event){$event.preventDefault();_vm.goToPage(_vm.currentPage+1)}}},[_vm._v(_vm._s(_vm.opts.text.pagination.next)),_c('span',{attrs:{"aria-hidden":"true"}},[_c('i',{class:_vm.opts.classes.pagination.next})])])]),_c('li',{class:( _obj$3 = {
-                  disabled: _vm.currentPage === _vm.totalPages || _vm.totalPages === 0
-                }, _obj$3[_vm.$style.disabled] = _vm.currentPage === _vm.totalPages || _vm.totalPages === 0, _obj$3 )},[_c('a',{attrs:{"href":"#","aria-label":_vm.opts.text.pagination.last || 'Last',"title":_vm.opts.text.pagination.last || 'Last'},on:{"click":function($event){$event.preventDefault();_vm.goToPage(_vm.totalPages)}}},[_vm._v(_vm._s(_vm.opts.text.pagination.last)),_c('span',{attrs:{"aria-hidden":"true"}},[_c('i',{class:_vm.opts.classes.pagination.last})])])])],2),_c('div',{class:[_vm.$style.info, _vm.opts.classes.pagination.info]},[(_vm.totalRows)?_c('div',[_c('span',[_vm._v("\n                  "+_vm._s(_vm._f("format")(_vm.opts.text.pagination.info.showing,_vm.startRow+1, _vm.endRow, _vm.totalRows))+"\n                ")]),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.perPage),expression:"perPage"}],class:[_vm.$style.perPageSelector, _vm.opts.classes.formControl],on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.perPage=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},_vm._l((_vm.opts.perPageValues),function(perPageValue){return _c('option',{key:perPageValue,domProps:{"value":perPageValue}},[_vm._v("\n                    "+_vm._s(perPageValue)+"\n                  ")])})),_c('span',[_vm._v("\n                  "+_vm._s(_vm.opts.text.pagination.info.records)+"\n                ")])]):_c('div',[_c('span',[_vm._v("\n                  "+_vm._s(_vm.opts.text.pagination.info.noRows)+"\n                ")])])])])])])])])],2)
-var _obj;
-var _obj$1;
-var _obj$2;
-var _obj$3;}
+var _obj$1;}),(_vm.opts.detailsRow)?_c('th',[_vm._t("heading_actions",[_vm._v("\n              Actions\n            ")])],2):_vm._e()],2)]),(_vm.loading)?_c('tbody',[_c('tr',[_c('td',{staticClass:"msg-row",attrs:{"colspan":_vm.colspan}},[_vm._t("loading",[_c('span',{domProps:{"innerHTML":_vm._s(_vm.opts.text.loading)}})])],2)])]):(_vm.data.length === 0)?_c('tbody',[_c('tr',[_c('td',{staticClass:"msg-row",attrs:{"colspan":_vm.colspan}},[_vm._t("no_data",[_c('span',{domProps:{"innerHTML":_vm._s(_vm.opts.text.noData)}})])],2)])]):_c('tbody',[_vm._l((_vm.data),function(entry,index){return [_c('tr',{key:'row_'+entry[_vm.opts.uniqueKey],attrs:{"data-id":entry[_vm.opts.uniqueKey]}},[_vm._l((_vm.columns),function(key){return _c('td',{key:'cell_'+key},[_vm._t('column_' + key,[(_vm.opts.templates[key])?_c(_vm.opts.templates[key],{tag:"component",attrs:{"data":entry,"column":key,"index":index}}):[_vm._v(_vm._s(entry[key]))]],{row:entry})],2)}),(_vm.opts.detailsRow)?_c('td',[_vm._t("column_actions_pre",null,{row:entry}),_vm._t("column_actions",[_c('a',{attrs:{"href":"#"},domProps:{"innerHTML":_vm._s(_vm.getToggleText(entry))},on:{"click":function($event){$event.preventDefault();_vm.toggleRow(entry[_vm.opts.uniqueKey])}}})],{row:entry}),_vm._t("column_actions_post",null,{row:entry})],2):_vm._e()],2),(_vm.opts.detailsRow)?_c('tr',{directives:[{name:"show",rawName:"v-show",value:(_vm.isRowExpanded(entry[_vm.opts.uniqueKey])),expression:"isRowExpanded(entry[opts.uniqueKey])"}],key:'details_row_'+entry[_vm.opts.uniqueKey],attrs:{"data-details":entry[_vm.opts.uniqueKey]}},[_c('td',{attrs:{"colspan":_vm.colspan}},[_vm._t("details_row",null,{row:entry})],2)]):_vm._e()]})],2),_c('tfoot',[_c('tr',[_c('td',{attrs:{"colspan":_vm.colspan}},[_c('Pagination',{attrs:{"classes":_vm.opts.classes.pagination,"text":_vm.opts.text.pagination,"pageInterval":_vm.opts.pageInterval,"perPage":_vm.opts.perPage,"perPageValues":_vm.opts.perPageValues,"currentPage":_vm.currentPage,"totalRows":_vm.totalRows},on:{"paginate":_vm.paginate}})],1)])])])])],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Server.vue?vue&type=template&id=0c0018b1&
+// CONCATENATED MODULE: ./src/components/Server.vue?vue&type=template&id=3b6449e4&
 
 // CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/defineProperty.js
 function _defineProperty(obj, key, value) {
@@ -3994,247 +4196,20 @@ function _asyncToGenerator(fn) {
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.object.assign.js
 var es6_object_assign = __webpack_require__("f751");
 
+// EXTERNAL MODULE: ./node_modules/axios/index.js
+var axios = __webpack_require__("bc3a");
+var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
+
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
 var es6_regexp_replace = __webpack_require__("a481");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.split.js
 var es6_regexp_split = __webpack_require__("28a5");
 
-// EXTERNAL MODULE: ./node_modules/axios/index.js
-var axios = __webpack_require__("bc3a");
-var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Server.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./src/components/mixins/filters.js
 
 
-
-
-
-
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/**
- * @module VueTableServer
- */
-
-/* harmony default export */ var Servervue_type_script_lang_js_ = ({
+/* harmony default export */ var filters = ({
   filters: {
     heading: function heading(key, headings) {
       if (undefined !== headings[key]) {
@@ -4256,6 +4231,703 @@ var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
         return s.replace(/%s/, a);
       }, str);
     }
+  }
+});
+// CONCATENATED MODULE: ./src/components/mixins/default-props.js
+/* harmony default export */ var default_props = ({
+  /**
+   * Key-value pairs with the headings to overwrite (label to display)
+   * can also be overwritten with slot: "heading_colname"
+   *
+   * @inner
+   * @type {Object}
+   */
+  headings: {},
+
+  /**
+   * Key-value pairs with templates (components) for the column value
+   *
+   * @type {Object}
+   */
+  templates: {},
+
+  /**
+   * empty object to disable sorting for all,
+   * or define what columns are sortable; defaults to all sortable
+   *
+   * @default
+   * @type {true|Object}
+   */
+  sortable: true,
+
+  /**
+   * Object (key, order) to sort table by on first load (on created)
+   * @type {Object}
+   */
+  sortBy: {
+    column: null,
+    order: null
+  },
+
+  /**
+   * Required, unique identifier
+   *
+   * @default
+   * @type {String}
+   */
+  uniqueKey: 'id',
+
+  /**
+   * show extra row for each row with details
+   *
+   * @default
+   * @type {Boolean}
+   */
+  detailsRow: false,
+
+  /**
+   * number of items per page
+   *
+   * @default
+   * @type {Number}
+   */
+  perPage: 10,
+
+  /**
+   * How many pages to show in the paginator. Odd number
+   *
+   * @default
+   * @type {Number}
+   */
+  pageInterval: 9,
+
+  /**
+   * values to show in the selector of items per page
+   *
+   * @default
+   * @type {Array}
+   */
+  perPageValues: [1, 2, 5, 10, 20, 50],
+
+  /**
+   * Classes to use on various elements
+   *
+   * @inner
+   * @type {Object}
+   */
+  classes: {
+    wrapper: 'table-responsive',
+    table: 'table',
+    sort: {
+      none: 'fa fa-sort',
+      ascending: 'fa fa-sort-asc',
+      descending: 'fa fa-sort-desc'
+    },
+    pagination: {
+      wrapper: 'pagination',
+      formControl: 'form-control',
+      info: 'info form-inline',
+      first: 'fa fa-angle-double-left',
+      prev: 'fa fa-angle-left',
+      next: 'fa fa-angle-right',
+      last: 'fa fa-angle-double-right'
+    },
+    group: {
+      show: 'fa fa-chevron-right',
+      hide: 'fa fa-chevron-down'
+    }
+  },
+
+  /**
+   * Texts
+   *
+   * @type Object
+   */
+  text: {
+    /**
+     * Text to show when row can be expanded
+     * @type {String}
+     */
+    expand: 'Show details',
+
+    /**
+     * Text to show when row can be collapsed
+     * @type {String}
+     */
+    collapse: 'Hide details',
+
+    /**
+     * Message to show when there is no data
+     * @type {String}
+     */
+    noData: 'No data to show',
+
+    /**
+     * Message to show when no results are found for the search
+     * @type {String}
+     */
+    emptyResults: 'No results for this filter',
+
+    /**
+     * Message to show when no results are found for the search
+     * @type {String}
+     */
+    loading: 'Loading ...',
+
+    /**
+     * Text to show for pagination helper buttons
+     * @type {Object}
+     */
+    pagination: {
+      first: '',
+      prev: '',
+      next: '',
+      last: '',
+      info: {
+        showing: 'Showing %s to %s of %s rows.',
+        records: 'records per page',
+        noRows: 'No rows to display'
+      }
+    }
+  }
+});
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"4d96bfd7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/mixins/Pagination.vue?vue&type=template&id=32cdb4ad&
+var Paginationvue_type_template_id_32cdb4ad_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('ul',{class:[_vm.$style.pagination, _vm.classes.wrapper]},[_c('li',{class:( _obj = {
+        disabled: _vm.currentPageValue === 1
+      }, _obj[_vm.$style.disabled] = _vm.currentPageValue === 1, _obj )},[_c('a',{attrs:{"href":"#","aria-label":_vm.text.first || 'First',"title":_vm.text.first || 'First'},on:{"click":function($event){$event.preventDefault();_vm.goToPage(1)}}},[_c('span',{attrs:{"aria-hidden":"true"}},[_c('i',{class:_vm.classes.first})]),_vm._v(_vm._s(_vm.text.first))])]),_c('li',{class:( _obj$1 = {
+        disabled: _vm.currentPageValue === 1
+      }, _obj$1[_vm.$style.disabled] = _vm.currentPageValue === 1, _obj$1 )},[_c('a',{attrs:{"href":"#","aria-label":_vm.text.previous || 'Previous',"title":_vm.text.previous || 'Previous'},on:{"click":function($event){$event.preventDefault();_vm.goToPage(_vm.currentPageValue-1)}}},[_c('span',{attrs:{"aria-hidden":"true"}},[_c('i',{class:_vm.classes.prev})]),_vm._v(_vm._s(_vm.text.prev))])]),_vm._l((_vm.pagesToShow),function(page){return _c('li',{key:page,class:( _obj = {
+          active: page === _vm.currentPageValue,
+        }, _obj[_vm.$style.active] = page === _vm.currentPageValue, _obj )},[_c('a',{attrs:{"href":"#"},on:{"click":function($event){$event.preventDefault();_vm.goToPage(page)}}},[_vm._v(_vm._s(page))])])
+      var _obj;}),_c('li',{class:( _obj$2 = {
+        disabled: _vm.currentPageValue === _vm.totalPages || _vm.totalPages === 0
+      }, _obj$2[_vm.$style.disabled] = _vm.currentPageValue === _vm.totalPages || _vm.totalPages === 0, _obj$2 )},[_c('a',{attrs:{"href":"#","aria-label":_vm.text.next || 'Next',"title":_vm.text.next || 'Next'},on:{"click":function($event){$event.preventDefault();_vm.goToPage(_vm.currentPageValue+1)}}},[_vm._v(_vm._s(_vm.text.next)),_c('span',{attrs:{"aria-hidden":"true"}},[_c('i',{class:_vm.classes.next})])])]),_c('li',{class:( _obj$3 = {
+        disabled: _vm.currentPageValue === _vm.totalPages || _vm.totalPages === 0
+      }, _obj$3[_vm.$style.disabled] = _vm.currentPageValue === _vm.totalPages || _vm.totalPages === 0, _obj$3 )},[_c('a',{attrs:{"href":"#","aria-label":_vm.text.last || 'Last',"title":_vm.text.last || 'Last'},on:{"click":function($event){$event.preventDefault();_vm.goToPage(_vm.totalPages)}}},[_vm._v(_vm._s(_vm.text.last)),_c('span',{attrs:{"aria-hidden":"true"}},[_c('i',{class:_vm.classes.last})])])])],2),_c('div',{class:[_vm.$style.info, _vm.classes.info]},[(_vm.totalRows)?_c('div',[_c('span',[_vm._v("\n        "+_vm._s(_vm._f("format")(_vm.text.info.showing,_vm.startRow+1, _vm.endRow, _vm.totalRows))+"\n      ")]),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.perPageValue),expression:"perPageValue"}],class:[_vm.$style.perPageSelector, _vm.classes.formControl],on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.perPageValue=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},_vm._l((_vm.perPageValues),function(perPageValue){return _c('option',{key:perPageValue,domProps:{"value":perPageValue}},[_vm._v("\n          "+_vm._s(perPageValue)+"\n        ")])})),_c('span',[_vm._v("\n        "+_vm._s(_vm.text.info.records)+"\n      ")])]):_c('div',[_c('span',[_vm._v("\n        "+_vm._s(_vm.text.info.noRows)+"\n      ")])])])])
+var _obj;
+var _obj$1;
+var _obj$2;
+var _obj$3;}
+var Paginationvue_type_template_id_32cdb4ad_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/mixins/Pagination.vue?vue&type=template&id=32cdb4ad&
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.number.constructor.js
+var es6_number_constructor = __webpack_require__("c5f6");
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/mixins/Pagination.vue?vue&type=script&lang=js&
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ var Paginationvue_type_script_lang_js_ = ({
+  mixins: [filters],
+  props: {
+    classes: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
+    },
+    text: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
+    },
+    currentPage: {
+      type: Number,
+      default: 1
+    },
+    perPage: {
+      type: Number,
+      default: 10
+    },
+    perPageValues: {
+      type: Array,
+      default: function _default() {
+        return [1, 2, 5, 10, 20, 50];
+      }
+    },
+    pageInterval: {
+      type: Number,
+      default: 9
+    },
+    totalRows: {
+      type: Number,
+      required: true
+    }
+  },
+  data: function data() {
+    return {
+      perPageValue: this.perPage,
+      currentPageValue: this.currentPage
+    };
+  },
+  computed: {
+    pagesToShow: function pagesToShow() {
+      var halfInterval = (this.pageInterval - 1) / 2;
+      var startPage = Math.max(1, this.currentPageValue - halfInterval);
+      var endPage = Math.min(this.totalPages, this.currentPageValue + halfInterval);
+
+      if (this.totalPages <= this.pageInterval) {
+        startPage = 1;
+        endPage = this.totalPages;
+      } else {
+        while (endPage - startPage < this.pageInterval - 1) {
+          // stabilize the interval
+          endPage = Math.min(this.totalPages, startPage + this.pageInterval - 1);
+          startPage = Math.max(1, endPage - this.pageInterval + 1);
+        }
+      }
+
+      var pages = [];
+
+      for (var i = startPage; i <= endPage; i += 1) {
+        pages.push(i);
+      }
+
+      return pages;
+    },
+    totalPages: function totalPages() {
+      return Math.ceil(this.totalRows / this.perPageValue);
+    },
+    startRow: function startRow() {
+      return (this.currentPageValue - 1) * this.perPageValue;
+    },
+    endRow: function endRow() {
+      return Math.min(this.startRow + this.perPageValue, this.totalRows);
+    }
+  },
+  watch: {
+    totalPages: function totalPages() {
+      if (this.currentPageValue > this.totalPages) {
+        // set the current page to the last page if the number of pages has been reduced below it
+        this.currentPageValue = this.totalPages;
+      } else if (!this.currentPageValue && this.totalPages) {
+        // if there was no current page and then the number of pages was set, go to first page
+        this.currentPageValue = 1;
+      }
+    },
+    perPageValue: function perPageValue() {
+      this.paginate();
+    },
+    perPage: function perPage() {
+      this.perPageValue = this.perPage;
+    }
+  },
+  created: function created() {
+    this.paginate();
+  },
+  methods: {
+    goToPage: function goToPage(page) {
+      if (page >= 1 && page <= this.totalPages) {
+        this.currentPageValue = page;
+      }
+
+      this.paginate();
+    },
+    paginate: function paginate() {
+      this.$emit('paginate', {
+        currentPage: this.currentPageValue,
+        perPage: this.perPageValue
+      });
+    }
+  }
+});
+// CONCATENATED MODULE: ./src/components/mixins/Pagination.vue?vue&type=script&lang=js&
+ /* harmony default export */ var mixins_Paginationvue_type_script_lang_js_ = (Paginationvue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./src/components/mixins/Pagination.vue?vue&type=style&index=0&lang=less&module=true&
+var Paginationvue_type_style_index_0_lang_less_module_true_ = __webpack_require__("2f27");
+
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+function normalizeComponent (
+  scriptExports,
+  render,
+  staticRenderFns,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier, /* server only */
+  shadowMode /* vue-cli only */
+) {
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (render) {
+    options.render = render
+    options.staticRenderFns = staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = 'data-v-' + scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = shadowMode
+      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
+      : injectStyles
+  }
+
+  if (hook) {
+    if (options.functional) {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      var originalRender = options.render
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return originalRender(h, context)
+      }
+    } else {
+      // inject component registration as beforeCreate hook
+      var existing = options.beforeCreate
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    }
+  }
+
+  return {
+    exports: scriptExports,
+    options: options
+  }
+}
+
+// CONCATENATED MODULE: ./src/components/mixins/Pagination.vue
+
+
+
+
+
+
+
+
+function injectStyles (context) {
+  
+  this["$style"] = (Paginationvue_type_style_index_0_lang_less_module_true_["default"].locals || Paginationvue_type_style_index_0_lang_less_module_true_["default"])
+
+}
+
+/* normalize component */
+
+var component = normalizeComponent(
+  mixins_Paginationvue_type_script_lang_js_,
+  Paginationvue_type_template_id_32cdb4ad_render,
+  Paginationvue_type_template_id_32cdb4ad_staticRenderFns,
+  false,
+  injectStyles,
+  null,
+  null
+  
+)
+
+component.options.__file = "Pagination.vue"
+/* harmony default export */ var Pagination = (component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Server.vue?vue&type=script&lang=js&
+
+
+
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/**
+ * @module EnaTableServer
+ */
+
+/* harmony default export */ var Servervue_type_script_lang_js_ = ({
+  mixins: [filters],
+  components: {
+    Pagination: Pagination
   },
   props: {
     /**
@@ -4296,147 +4968,7 @@ var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
     defaults: {
       type: Object,
       default: function _default() {
-        return {
-          classes: {
-            wrapper: 'table-responsive',
-            table: 'table',
-            formControl: 'form-control',
-            sort: {
-              none: 'fa fa-sort',
-              ascending: 'fa fa-sort-asc',
-              descending: 'fa fa-sort-desc'
-            },
-            pagination: {
-              wrapper: 'pagination',
-              info: 'info form-inline',
-              first: 'fa fa-angle-double-left',
-              prev: 'fa fa-angle-left',
-              next: 'fa fa-angle-right',
-              last: 'fa fa-angle-double-right'
-            }
-          },
-
-          /**
-           * Key-value pairs with the headings to overwrite (label to display)
-           * can also be overwritten with slot: "heading_colname"
-           *
-           * @inner
-           * @type {Object}
-           */
-          headings: {},
-
-          /**
-           * Key-value pairs with templates (components) for the column value
-           *
-           * @type {Object}
-           */
-          templates: {},
-
-          /**
-           * Required, unique identifier
-           *
-           * @default
-           * @type {String}
-           */
-          uniqueKey: 'id',
-
-          /**
-           * show extra row for each row with details
-           *
-           * @default
-           * @type {Boolean}
-           */
-          detailsRow: false,
-          text: {
-            /**
-             * Text to show when row can be expanded
-             * @type {String}
-             */
-            expand: 'Show details',
-
-            /**
-             * Text to show when row can be collapsed
-             * @type {String}
-             */
-            collapse: 'Hide details',
-
-            /**
-             * Message to show when there is no data
-             * @type {String}
-             */
-            noData: 'No data to show',
-
-            /**
-             * Message to show when no results are found for the search
-             * @type {String}
-             */
-            emptyResults: 'No results for this filter',
-
-            /**
-             * Message to show when no results are found for the search
-             * @type {String}
-             */
-            loading: 'Loading ...',
-
-            /**
-             * Text to show for pagination helper buttons
-             * @type {Object}
-             */
-            pagination: {
-              first: '',
-              prev: '',
-              next: '',
-              last: '',
-              info: {
-                showing: 'Showing %s to %s of %s rows.',
-                records: 'records per page',
-                noRows: 'No rows to display'
-              }
-            }
-          },
-
-          /**
-           * empty object to disable sorting for all,
-           * or define what columns are sortable; defaults to all sortable
-           *
-           * @default
-           * @type {true|Object}
-           */
-          sortable: true,
-
-          /**
-           * number of items per page
-           *
-           * @default
-           * @type {Number}
-           */
-          perPage: 10,
-
-          /**
-           * How many pages to show in the paginator. Odd number
-           *
-           * @default
-           * @type {Number}
-           */
-          pageInterval: 9,
-
-          /**
-           * values to show in the selector of items per page
-           *
-           * @default
-           * @type {Array}
-           */
-          perPageValues: [1, 2, 5, 10, 20, 50],
-
-          /**
-           * Object (key, order) to sort table by on first load (on created)
-           * @type {Object}
-           */
-          sortBy: {
-            column: null,
-            order: null
-          },
-
+        return Object.assign({}, default_props, {
           /**
            * Object with request params mapping
            */
@@ -4446,7 +4978,7 @@ var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
             sort_by: 'sort_by',
             sort_dir: 'sort_dir'
           }
-        };
+        });
       }
     }
   },
@@ -4482,55 +5014,9 @@ var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
       return Object.assign(opts, {
         sortable: sortable
       });
-    },
-    pagesToShow: function pagesToShow() {
-      var halfInterval = (this.opts.pageInterval - 1) / 2;
-      var startPage = Math.max(1, this.currentPage - halfInterval);
-      var endPage = Math.min(this.totalPages, this.currentPage + halfInterval);
-
-      if (this.totalPages <= this.opts.pageInterval) {
-        startPage = 1;
-        endPage = this.totalPages;
-      } else {
-        while (endPage - startPage < this.opts.pageInterval - 1) {
-          // stabilize the interval
-          endPage = Math.min(this.totalPages, startPage + this.opts.pageInterval - 1);
-          startPage = Math.max(1, endPage - this.opts.pageInterval + 1);
-        }
-      }
-
-      var pages = [];
-
-      for (var i = startPage; i <= endPage; i += 1) {
-        pages.push(i);
-      }
-
-      return pages;
-    },
-    totalPages: function totalPages() {
-      return Math.ceil(this.totalRows / this.perPage);
-    },
-    startRow: function startRow() {
-      return (this.currentPage - 1) * this.perPage;
-    },
-    endRow: function endRow() {
-      return Math.min(this.startRow + this.perPage, this.totalRows);
     }
   },
-  watch: {
-    totalPages: function totalPages() {
-      if (this.currentPage > this.totalPages) {
-        // set the current page to the last page if the number of pages has been reduced below it
-        this.currentPage = this.totalPages;
-      } else if (!this.currentPage && this.totalPages) {
-        // if there was no current page and then the number of pages was set, go to first page
-        this.currentPage = 1;
-      }
-    },
-    perPage: function perPage() {
-      this.loadData();
-    }
-  },
+  watch: {},
   created: function created() {
     this.loadData();
   },
@@ -4669,15 +5155,15 @@ var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
     isRowExpanded: function isRowExpanded(id) {
       return this.expandedRows[id];
     },
-    goToPage: function goToPage(page) {
-      if (page >= 1 && page <= this.totalPages) {
-        this.currentPage = page;
-      }
-
-      this.loadData();
-    },
     getToggleText: function getToggleText(entry) {
       return this.isRowExpanded(entry[this.opts.uniqueKey]) ? this.opts.text.collapse : this.opts.text.expand;
+    },
+    paginate: function paginate(_ref2) {
+      var currentPage = _ref2.currentPage,
+          perPage = _ref2.perPage;
+      this.currentPage = currentPage;
+      this.perPage = perPage;
+      this.loadData();
     }
   }
 });
@@ -4685,101 +5171,6 @@ var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
  /* harmony default export */ var components_Servervue_type_script_lang_js_ = (Servervue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./src/components/Server.vue?vue&type=style&index=0&lang=less&module=true&
 var Servervue_type_style_index_0_lang_less_module_true_ = __webpack_require__("4c67");
-
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-function normalizeComponent (
-  scriptExports,
-  render,
-  staticRenderFns,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier, /* server only */
-  shadowMode /* vue-cli only */
-) {
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (render) {
-    options.render = render
-    options.staticRenderFns = staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = 'data-v-' + scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = shadowMode
-      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
-      : injectStyles
-  }
-
-  if (hook) {
-    if (options.functional) {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      var originalRender = options.render
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return originalRender(h, context)
-      }
-    } else {
-      // inject component registration as beforeCreate hook
-      var existing = options.beforeCreate
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    }
-  }
-
-  return {
-    exports: scriptExports,
-    options: options
-  }
-}
 
 // CONCATENATED MODULE: ./src/components/Server.vue
 
@@ -4790,7 +5181,7 @@ function normalizeComponent (
 
 
 
-function injectStyles (context) {
+function Server_injectStyles (context) {
   
   this["$style"] = (Servervue_type_style_index_0_lang_less_module_true_["default"].locals || Servervue_type_style_index_0_lang_less_module_true_["default"])
 
@@ -4798,19 +5189,19 @@ function injectStyles (context) {
 
 /* normalize component */
 
-var component = normalizeComponent(
+var Server_component = normalizeComponent(
   components_Servervue_type_script_lang_js_,
   render,
   staticRenderFns,
   false,
-  injectStyles,
+  Server_injectStyles,
   null,
   null
   
 )
 
-component.options.__file = "Server.vue"
-/* harmony default export */ var Server = (component.exports);
+Server_component.options.__file = "Server.vue"
+/* harmony default export */ var Server = (Server_component.exports);
 // CONCATENATED MODULE: ./src/components/entry.js
 
 
@@ -4838,6 +5229,15 @@ function register() {
 
 /* harmony default export */ var entry_lib = __webpack_exports__["default"] = (entry);
 
+
+
+/***/ }),
+
+/***/ "fdef":
+/***/ (function(module, exports) {
+
+module.exports = '\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u180E\u2000\u2001\u2002\u2003' +
+  '\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000\u2028\u2029\uFEFF';
 
 
 /***/ })
