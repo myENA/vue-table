@@ -388,6 +388,14 @@ module.exports = __webpack_require__("9e1e") ? Object.defineProperties : functio
 
 /***/ }),
 
+/***/ "16c0":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+module.exports = {"table":"EnaTableClient_table_2CDV8","checkbox":"EnaTableClient_checkbox_h-og5","sortable":"EnaTableClient_sortable_1P_i-"};
+
+/***/ }),
+
 /***/ "1d2b":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -811,6 +819,23 @@ module.exports = function isCancel(value) {
 
 /***/ }),
 
+/***/ "2f21":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var fails = __webpack_require__("79e5");
+
+module.exports = function (method, arg) {
+  return !!method && fails(function () {
+    // eslint-disable-next-line no-useless-call
+    arg ? method.call(null, function () { /* empty */ }, 1) : method.call(null);
+  });
+};
+
+
+/***/ }),
+
 /***/ "2f27":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -906,6 +931,23 @@ module.exports = __webpack_require__("9e1e") ? function (object, key, value) {
   object[key] = value;
   return object;
 };
+
+
+/***/ }),
+
+/***/ "386d":
+/***/ (function(module, exports, __webpack_require__) {
+
+// @@search logic
+__webpack_require__("214f")('search', 1, function (defined, SEARCH, $search) {
+  // 21.1.3.15 String.prototype.search(regexp)
+  return [function search(regexp) {
+    'use strict';
+    var O = defined(this);
+    var fn = regexp == undefined ? undefined : regexp[SEARCH];
+    return fn !== undefined ? fn.call(regexp, O) : new RegExp(regexp)[SEARCH](String(O));
+  }, $search];
+});
 
 
 /***/ }),
@@ -1317,6 +1359,37 @@ var store = global[SHARED] || (global[SHARED] = {});
   version: core.version,
   mode: __webpack_require__("2d00") ? 'pure' : 'global',
   copyright: '© 2018 Denis Pushkarev (zloirock.ru)'
+});
+
+
+/***/ }),
+
+/***/ "55dd":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $export = __webpack_require__("5ca1");
+var aFunction = __webpack_require__("d8e8");
+var toObject = __webpack_require__("4bf8");
+var fails = __webpack_require__("79e5");
+var $sort = [].sort;
+var test = [1, 2, 3];
+
+$export($export.P + $export.F * (fails(function () {
+  // IE8-
+  test.sort(undefined);
+}) || !fails(function () {
+  // V8 bug
+  test.sort(null);
+  // Old WebKit
+}) || !__webpack_require__("2f21")($sort)), 'Array', {
+  // 22.1.3.25 Array.prototype.sort(comparefn)
+  sort: function sort(comparefn) {
+    return comparefn === undefined
+      ? $sort.call(toObject(this))
+      : $sort.call(toObject(this), aFunction(comparefn));
+  }
 });
 
 
@@ -1836,6 +1909,16 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
   return $keys(O, hiddenKeys);
 };
 
+
+/***/ }),
+
+/***/ "910e":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_10_oneOf_0_0_node_modules_css_loader_index_js_ref_10_oneOf_0_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_10_oneOf_0_2_node_modules_less_loader_dist_cjs_js_ref_10_oneOf_0_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Client_vue_vue_type_style_index_0_lang_less_module_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("16c0");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_10_oneOf_0_0_node_modules_css_loader_index_js_ref_10_oneOf_0_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_10_oneOf_0_2_node_modules_less_loader_dist_cjs_js_ref_10_oneOf_0_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Client_vue_vue_type_style_index_0_lang_less_module_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_10_oneOf_0_0_node_modules_css_loader_index_js_ref_10_oneOf_0_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_10_oneOf_0_2_node_modules_less_loader_dist_cjs_js_ref_10_oneOf_0_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Client_vue_vue_type_style_index_0_lang_less_module_true___WEBPACK_IMPORTED_MODULE_0__);
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_mini_css_extract_plugin_dist_loader_js_ref_10_oneOf_0_0_node_modules_css_loader_index_js_ref_10_oneOf_0_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_10_oneOf_0_2_node_modules_less_loader_dist_cjs_js_ref_10_oneOf_0_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Client_vue_vue_type_style_index_0_lang_less_module_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -5211,6 +5294,647 @@ var Server_component = normalizeComponent(
 
 Server_component.options.__file = "Server.vue"
 /* harmony default export */ var Server = (Server_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"4d96bfd7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Client.vue?vue&type=template&id=342c7784&
+var Clientvue_type_template_id_342c7784_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_vm._t("filter",[_c('div',[_c('div',{staticClass:"row"},[_c('div',{staticClass:"col-md-2"},[_vm._t("filters",[_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Search")]),_c('div',{staticClass:"input-group"},[_c('input',{staticClass:"form-control",attrs:{"type":"text","placeholder":"Search by keyword"},on:{"input":function($event){_vm.search($event.target.value)}}}),_vm._m(0)])])])],2),_c('div',{staticClass:"col-md-10"},[_c('div',{staticClass:"pull-right"},[_c('div',{staticClass:"form-group"},[_c('label',[_vm._v(" ")]),_c('div',[_vm._t("buttons")],2)])])])])])]),_c('div',{class:[_vm.opts.classes.wrapper, _vm.$style.wrapper]},[_c('table',{class:[_vm.opts.classes.table, _vm.$style.table]},[_c('thead',[_c('tr',[_vm._l((_vm.columns),function(key){return _c('th',{key:key,class:( _obj = { sorted: _vm.sortKey === key }, _obj[_vm.$style.sortable] = _vm.opts.sortable[key], _obj ),on:{"click":function($event){_vm.sortBy({key: key})}}},[_vm._t('heading_' + key,[(key === 'select')?[_c('div',{class:_vm.$style.checkbox},[_c('label',[_c('input',{staticClass:"check-all",attrs:{"type":"checkbox","disabled":!_vm.opts.editable},domProps:{"checked":_vm.allSelected},on:{"change":_vm.selectAll}})])])]:[_vm._v("\n                "+_vm._s(_vm._f("heading")(key,_vm.opts.headings))+"\n              ")]]),(_vm.opts.sortable[key])?_c('i',{class:( _obj$1 = {}, _obj$1[_vm.opts.classes.sort.none] = _vm.sortKey !== key || _vm.sortOrders[key] === null, _obj$1[_vm.opts.classes.sort[_vm.sortOrders[key]]] = _vm.sortKey === key, _obj$1 )}):_vm._e()],2)
+var _obj;
+var _obj$1;}),(_vm.opts.detailsRow)?_c('th',[_vm._t("heading_actions",[_vm._v("\n              Actions\n            ")])],2):_vm._e()],2)]),(_vm.loading)?_c('tbody',[_c('tr',[_c('td',{staticClass:"msg-row",attrs:{"colspan":_vm.colspan}},[_vm._t("loading",[_c('span',{domProps:{"innerHTML":_vm._s(_vm.opts.text.loading)}})])],2)])]):(_vm.data.length === 0)?_c('tbody',[_c('tr',[_c('td',{staticClass:"msg-row",attrs:{"colspan":_vm.colspan}},[_vm._t("no_data",[_c('span',{domProps:{"innerHTML":_vm._s(_vm.opts.text.noData)}})])],2)])]):(_vm.filteredData.length === 0)?_c('tbody',[_c('tr',[_c('td',{staticClass:"msg-row",attrs:{"colspan":_vm.colspan}},[_vm._t("empty_results",[_c('span',{domProps:{"innerHTML":_vm._s(_vm.opts.text.emptyResults)}})])],2)])]):_vm._l((_vm.pageData),function(group,groupKey){return _c('tbody',{key:groupKey},[(groupKey !== 'all')?_c('tr',[_c('th',{attrs:{"colspan":_vm.colspan}},[_c('a',{attrs:{"href":"#"},on:{"click":function($event){$event.preventDefault();_vm.toggleGroup(groupKey)}}},[_c('i',{class:( _obj = {}, _obj[_vm.opts.classes.group.hide] = _vm.isShown(groupKey), _obj[_vm.opts.classes.group.show] = !_vm.isShown(groupKey), _obj )})]),_vm._t("__group_meta",[_vm._v("\n              "+_vm._s(groupKey)+"\n            ")],{data:_vm.opts.groupMeta[groupKey]})],2)]):_vm._e(),_vm._l((group),function(entry,index){return [(_vm.isShown(groupKey))?_c('tr',{key:'row_'+entry[_vm.opts.uniqueKey],attrs:{"data-id":entry[_vm.opts.uniqueKey]}},[_vm._l((_vm.columns),function(key){return _c('td',{key:'cell_'+key},[_vm._t('column_' + key,[(_vm.opts.templates[key])?_c(_vm.opts.templates[key],{tag:"component",attrs:{"data":entry,"column":key,"index":index}}):(key === 'select')?[(entry.showSelect)?_c('div',{class:_vm.$style.checkbox},[_c('label',[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.selectedRows),expression:"selectedRows"}],key:'select-'+entry[_vm.opts.uniqueKey],attrs:{"type":"checkbox","name":"selectedRows","disabled":!_vm.opts.editable},domProps:{"value":entry[_vm.opts.uniqueKey],"checked":Array.isArray(_vm.selectedRows)?_vm._i(_vm.selectedRows,entry[_vm.opts.uniqueKey])>-1:(_vm.selectedRows)},on:{"change":function($event){var $$a=_vm.selectedRows,$$el=$event.target,$$c=$$el.checked?(true):(false);if(Array.isArray($$a)){var $$v=entry[_vm.opts.uniqueKey],$$i=_vm._i($$a,$$v);if($$el.checked){$$i<0&&(_vm.selectedRows=$$a.concat([$$v]))}else{$$i>-1&&(_vm.selectedRows=$$a.slice(0,$$i).concat($$a.slice($$i+1)))}}else{_vm.selectedRows=$$c}}}})])]):_vm._e()]:[_vm._v(_vm._s(entry[key]))]],{row:entry})],2)}),(_vm.opts.detailsRow)?_c('td',[_vm._t("column_actions_pre",null,{row:entry}),_vm._t("column_actions",[_c('a',{attrs:{"href":"#"},domProps:{"innerHTML":_vm._s(_vm.getToggleText(entry))},on:{"click":function($event){$event.preventDefault();_vm.toggleRow(entry[_vm.opts.uniqueKey])}}})],{row:entry}),_vm._t("column_actions_post",null,{row:entry})],2):_vm._e()],2):_vm._e(),(_vm.opts.detailsRow && _vm.isShown(groupKey))?_c('tr',{directives:[{name:"show",rawName:"v-show",value:(_vm.isRowExpanded(entry[_vm.opts.uniqueKey])),expression:"isRowExpanded(entry[opts.uniqueKey])"}],key:'details_row_'+entry[_vm.opts.uniqueKey],attrs:{"data-details":entry[_vm.opts.uniqueKey]}},[_c('td',{attrs:{"colspan":_vm.colspan}},[_vm._t("details_row",null,{row:entry})],2)]):_vm._e()]})],2)
+              var _obj;}),_c('tfoot',[_c('tr',[_c('td',{attrs:{"colspan":_vm.colspan}},[_c('Pagination',{attrs:{"classes":_vm.opts.classes.pagination,"text":_vm.opts.text.pagination,"pageInterval":_vm.opts.pageInterval,"perPage":_vm.opts.perPage,"perPageValues":_vm.opts.perPageValues,"currentPage":_vm.currentPage,"totalRows":_vm.totalRows},on:{"paginate":_vm.paginate}})],1)])])],2)])],2)}
+var Clientvue_type_template_id_342c7784_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{staticClass:"input-group-addon"},[_c('i',{staticClass:"fa fa-search"})])}]
+
+
+// CONCATENATED MODULE: ./src/components/Client.vue?vue&type=template&id=342c7784&
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.array.sort.js
+var es6_array_sort = __webpack_require__("55dd");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.search.js
+var es6_regexp_search = __webpack_require__("386d");
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Client.vue?vue&type=script&lang=js&
+
+
+
+
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/**
+ * @module EnaTableClient
+ */
+
+/* harmony default export */ var Clientvue_type_script_lang_js_ = ({
+  mixins: [filters],
+  components: {
+    Pagination: Pagination
+  },
+  props: {
+    /**
+     * List of objects to present in the table
+     *
+     * @member
+     * @type {Array}
+     */
+    data: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+
+    /**
+     * List of keys to use from each object (table columns)
+     *
+     * @type {Array}
+     */
+    columns: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+
+    /**
+     * The search query string. If updated will filter the results by the value
+     * @type {String}
+     */
+    searchQuery: {
+      type: String,
+      default: ''
+    },
+
+    /**
+     * Loading indicator. If true, will display the `loadingMsg` instead of the body
+     * @type {Boolean}
+     */
+    loading: {
+      type: Boolean,
+      default: false
+    },
+
+    /**
+     * Options for the table
+     *
+     * @inner
+     * @type {Object}
+     */
+    options: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
+    },
+
+    /**
+     * Default option values. Will be overwritten by the "options" value
+     *
+     * @type {Object<Object>}
+     */
+    defaults: {
+      type: Object,
+      default: function _default() {
+        return Object.assign({}, default_props, {
+          /**
+           * Key-value pairs with custom search function per column,
+           * or false to disable search for that column
+           *
+           * @type {Object}
+           */
+          search: {},
+
+          /**
+           * Field to group by - key name
+           *
+           * @default
+           * @type {Boolean|String}
+           */
+          groupBy: false,
+
+          /**
+           * Expand/collapse groups
+           *
+           * @default
+           * @type {Boolean}
+           */
+          toggleGroups: false,
+
+          /**
+           * Object of data to use for each group "header" (key is the group value)
+           *
+           * @type {Object}
+           */
+          groupMeta: {},
+
+          /**
+           * false, to disable pagination - show all; defaults to true
+           *
+           * @default
+           * @type {Boolean}
+           */
+          pagination: true,
+
+          /**
+           * Is the table editable (eg: can select value)
+           * @type {Boolean}
+           */
+          editable: false,
+
+          /**
+           * The collator used for sorting
+           * @type {Intl.Collator}
+           */
+          sortCollator: new Intl.Collator('en', {
+            numeric: true,
+            sensitivity: 'base'
+          })
+        });
+      }
+    }
+  },
+  data: function data() {
+    var sortOrders = {};
+    this.columns.forEach(function (key) {
+      sortOrders[key] = null;
+    });
+    return {
+      allSelected: false,
+      selectedRows: [],
+      sortOrders: sortOrders,
+      sortKey: '',
+      searchBy: '',
+      shown: {},
+      expandedRows: {},
+      currentPage: 1,
+      perPage: this.options.perPage || this.defaults.perPage
+    };
+  },
+  computed: {
+    colspan: function colspan() {
+      return this.columns.length + (this.opts.detailsRow ? 1 : 0);
+    },
+    opts: function opts() {
+      var opts = Object.assign({}, this.defaults, this.options);
+      var sortable = {};
+      var search = {};
+      this.columns.forEach(function (key) {
+        if (key !== 'select' && (opts.sortable === true || opts.sortable[key])) {
+          sortable[key] = opts.sortable[key] || true;
+        }
+
+        if (typeof opts.search[key] === 'undefined') {
+          search[key] = true;
+        } else {
+          search[key] = opts.search[key];
+        }
+      });
+      return Object.assign(opts, {
+        sortable: sortable,
+        search: search
+      });
+    },
+    filteredData: function filteredData() {
+      var _this = this;
+
+      var data = this.data;
+      var searchQuery = this.searchBy && this.searchBy.toLowerCase();
+
+      if (searchQuery) {
+        data = data.filter(function (row) {
+          return Object.keys(_this.opts.search).some(function (key) {
+            if (typeof _this.opts.search[key] === 'function') {
+              return _this.opts.search[key](row, key, searchQuery);
+            }
+
+            return String(row[key]).toLowerCase().indexOf(searchQuery) > -1;
+          });
+        });
+      }
+
+      return data;
+    },
+    pageData: function pageData() {
+      var _this2 = this;
+
+      var sortKey = this.sortKey;
+      var data = this.filteredData;
+      var order = 0;
+
+      if (this.sortOrders[sortKey] === 'ascending') {
+        order = 1;
+      } else if (this.sortOrders[sortKey] === 'descending') {
+        order = -1;
+      }
+
+      if (sortKey && this.opts.sortable && order) {
+        var sortableFn;
+
+        if (this.opts.sortable[sortKey] === true) {
+          sortableFn = function sortableFn(a, b) {
+            var aF = String(a[sortKey]);
+            var bF = String(b[sortKey]);
+            return _this2.opts.sortCollator.compare(aF, bF) * order;
+          };
+        } else if (typeof this.opts.sortable[sortKey] === 'function') {
+          sortableFn = function sortableFn(a, b) {
+            return _this2.opts.sortable[sortKey](a, b) * order;
+          };
+        }
+
+        data = data.slice().sort(sortableFn);
+      }
+
+      if (this.opts.pagination) {
+        // slice the data if pagionation is enabled
+        data = data.slice(this.startRow, this.endRow);
+      }
+
+      if (this.opts.groupBy) {
+        return data.reduce(function (groupedData, row) {
+          // eslint-disable-next-line
+          (groupedData[row[_this2.opts.groupBy]] = groupedData[row[_this2.opts.groupBy]] || []).push(row);
+          return groupedData;
+        }, {});
+      }
+
+      return {
+        all: data
+      };
+    },
+    totalRows: function totalRows() {
+      return this.filteredData.length;
+    },
+    startRow: function startRow() {
+      return (this.currentPage - 1) * this.perPage;
+    },
+    endRow: function endRow() {
+      return Math.min(this.startRow + this.perPage, this.totalRows);
+    }
+  },
+  watch: {
+    searchQuery: function searchQuery(query) {
+      this.searchBy = query;
+    },
+    searchBy: function searchBy() {
+      // go to first page when search query changes
+      this.currentPage = 1;
+    },
+    filteredData: function filteredData() {
+      var _this3 = this;
+
+      this.selectedRows = this.filteredData.reduce(function (acc, d) {
+        if (d.showSelect && d.selected) {
+          acc.push(d[_this3.opts.uniqueKey]);
+        }
+
+        return acc;
+      }, []);
+    },
+    selectedRows: function selectedRows() {
+      var _this4 = this;
+
+      this.setAllSelected();
+      var selected = this.selectedRows.reduce(function (acc, id) {
+        // eslint-disable-next-line
+        acc[id] = true;
+        return acc;
+      }, {});
+      var selectedData = this.filteredData.reduce(function (data, row) {
+        if (row.showSelect) {
+          var selectedRow = selected[row[_this4.opts.uniqueKey]] || false;
+
+          if (selectedRow) {
+            data.push(Object.assign({}, row, {
+              selected: selectedRow
+            }));
+          }
+        }
+
+        return data;
+      }, []);
+      this.$emit('selectedRows', selectedData);
+    }
+  },
+  mounted: function mounted() {
+    if (this.opts.sortBy) {
+      this.sortBy(this.opts.sortBy);
+    }
+  },
+  methods: {
+    search: function search(value) {
+      this.searchBy = value;
+    },
+    sortBy: function sortBy(obj) {
+      var _this5 = this;
+
+      var key = obj.key,
+          order = obj.order;
+
+      if (this.opts.sortable[key]) {
+        this.sortKey = key;
+        this.columns.forEach(function (elem) {
+          if (elem !== _this5.sortKey) {
+            _this5.sortOrders[elem] = null;
+          }
+        });
+
+        if (order) {
+          this.sortOrders[key] = order;
+        } else if (this.sortOrders[key] === null) {
+          this.sortOrders[key] = 'ascending';
+        } else if (this.sortOrders[key] === 'ascending') {
+          this.sortOrders[key] = 'descending';
+        } else {
+          this.sortOrders[key] = null;
+        }
+      }
+    },
+    isShown: function isShown(key) {
+      return typeof this.shown[key] === 'undefined' || this.shown[key];
+    },
+    toggleGroup: function toggleGroup(key) {
+      this.shown[key] = typeof this.shown[key] === 'undefined' ? false : !this.shown[key];
+      this.shown = Object.assign({}, this.shown);
+    },
+    toggleRow: function toggleRow(id) {
+      this.expandedRows[id] = !this.expandedRows[id];
+      this.expandedRows = Object.assign({}, this.expandedRows);
+    },
+    isRowExpanded: function isRowExpanded(id) {
+      return this.expandedRows[id];
+    },
+    selectAll: function selectAll() {
+      var _this6 = this;
+
+      if (this.allSelected) {
+        this.selectedRows = [];
+      } else {
+        this.selectedRows = this.filteredData.reduce(function (acc, d) {
+          if (d.showSelect) {
+            acc.push(d[_this6.opts.uniqueKey]);
+          }
+
+          return acc;
+        }, []);
+      }
+    },
+    setAllSelected: function setAllSelected() {
+      this.allSelected = this.selectedRows.length > 0 && this.selectedRows.length === this.filteredData.filter(function (d) {
+        return d.showSelect;
+      }).length;
+    },
+    getToggleText: function getToggleText(entry) {
+      return this.isRowExpanded(entry[this.opts.uniqueKey]) ? this.opts.text.collapse : this.opts.text.expand;
+    },
+    paginate: function paginate(_ref) {
+      var currentPage = _ref.currentPage,
+          perPage = _ref.perPage;
+      this.currentPage = currentPage;
+      this.perPage = perPage;
+    }
+  }
+});
+// CONCATENATED MODULE: ./src/components/Client.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_Clientvue_type_script_lang_js_ = (Clientvue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./src/components/Client.vue?vue&type=style&index=0&lang=less&module=true&
+var Clientvue_type_style_index_0_lang_less_module_true_ = __webpack_require__("910e");
+
+// CONCATENATED MODULE: ./src/components/Client.vue
+
+
+
+
+
+
+
+
+function Client_injectStyles (context) {
+  
+  this["$style"] = (Clientvue_type_style_index_0_lang_less_module_true_["default"].locals || Clientvue_type_style_index_0_lang_less_module_true_["default"])
+
+}
+
+/* normalize component */
+
+var Client_component = normalizeComponent(
+  components_Clientvue_type_script_lang_js_,
+  Clientvue_type_template_id_342c7784_render,
+  Clientvue_type_template_id_342c7784_staticRenderFns,
+  false,
+  Client_injectStyles,
+  null,
+  null
+  
+)
+
+Client_component.options.__file = "Client.vue"
+/* harmony default export */ var Client = (Client_component.exports);
 // CONCATENATED MODULE: ./src/components/entry.js
 
 
@@ -5218,8 +5942,10 @@ Server_component.options.__file = "Server.vue"
 
 
 
+
 var components = {
-  Server: Server
+  Server: Server,
+  Client: Client
 }; // global register components
 
 function register() {
@@ -5234,6 +5960,7 @@ function register() {
 /* harmony default export */ var entry = (register);
 // CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/entry-lib.js
 /* concated harmony reexport Server */__webpack_require__.d(__webpack_exports__, "Server", function() { return Server; });
+/* concated harmony reexport Client */__webpack_require__.d(__webpack_exports__, "Client", function() { return Client; });
 
 
 /* harmony default export */ var entry_lib = __webpack_exports__["default"] = (entry);
