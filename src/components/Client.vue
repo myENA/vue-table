@@ -111,7 +111,7 @@
                     :data="entry" :column="key" :index="index">
                   </component>
                   <template v-else-if="key === 'select'">
-                    <div v-if="entry.showSelect" :class="$style.checkbox">
+                    <div v-if="entry.showSelect" :class="[opts.classes.checkbox, $style.checkbox]">
                       <label>
                         <input type="checkbox" name="selectedRows"
                           v-model="selectedRows" :disabled="!opts.editable"
