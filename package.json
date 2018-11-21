@@ -16,7 +16,7 @@
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit",
     "preversion": "npm run test:unit && npm run build && git add -A dist",
-    "postversion": "git push && git push --tags && npm publish"
+    "postversion": "git push && git push --tags && echo Run: \"npm publish\""
   },
   "main": "dist/index.js",
   "files": [

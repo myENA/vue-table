@@ -36,7 +36,7 @@
               :class="{ [$style.sortable]: opts.sortable[key], sorted: sortKey === key }">
               <slot :name="'heading_' + key">
                 <template v-if="key === 'select'">
-                  <div :class="$style.checkbox">
+                  <div :class="[opts.classes.checkbox, $style.checkbox]">
                     <label>
                       <input class="check-all"
                         type="checkbox"

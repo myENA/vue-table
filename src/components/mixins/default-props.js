@@ -78,6 +78,7 @@ export default {
       ascending: 'fa fa-sort-asc',
       descending: 'fa fa-sort-desc',
     },
+    checkbox: 'checkbox',
     pagination: {
       wrapper: 'pagination',
       formControl: 'form-control',
