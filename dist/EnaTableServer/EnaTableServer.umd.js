@@ -4256,6 +4256,7 @@ var es6_regexp_split = __webpack_require__("28a5");
       ascending: 'fa fa-sort-asc',
       descending: 'fa fa-sort-desc'
     },
+    checkbox: 'checkbox',
     pagination: {
       wrapper: 'pagination',
       formControl: 'form-control',
