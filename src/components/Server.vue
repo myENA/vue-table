@@ -149,13 +149,14 @@ th.sortable {
 import axios from 'axios';
 import filters from './mixins/filters';
 import defaultProps from './mixins/default-props';
+import methods from './mixins/methods';
 import Pagination from './mixins/Pagination.vue';
 
 /**
  * @module EnaTableServer
  */
 export default {
-  mixins: [filters],
+  mixins: [filters, methods],
   components: {
     Pagination,
   },
@@ -311,21 +312,6 @@ export default {
         }
         this.loadData();
       }
-    },
-    isShown(key) {
-      return typeof this.shown[key] === 'undefined' || this.shown[key];
-    },
-    toggleRow(id) {
-      this.expandedRows[id] = !this.expandedRows[id];
-      this.expandedRows = Object.assign({}, this.expandedRows);
-    },
-    isRowExpanded(id) {
-      return this.expandedRows[id];
-    },
-    getToggleText(entry) {
-      return this.isRowExpanded(entry[this.opts.uniqueKey]) ?
-        this.opts.text.collapse :
-        this.opts.text.expand;
     },
     paginate({ currentPage, perPage }) {
       this.currentPage = currentPage;
