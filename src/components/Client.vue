@@ -456,7 +456,7 @@ export default {
         if (row.showSelect) {
           const selectedRow = selected[row[this.opts.uniqueKey]] || false;
           if (selectedRow) {
-            data.push(Object.assign({}, row, {
+            data.push(Object.assign(row, {
               selected: selectedRow,
             }));
           }
