@@ -287,12 +287,12 @@ export default {
          */
         groupBy: false,
         /**
-         * Expand/collapse groups
+         * Expand/collapse all groups
          *
          * @default
          * @type {Boolean}
          */
-        toggleGroups: false,
+        collapseAllGroups: false,
         /**
          * Object of data to use for each group "header" (key is the group value)
          *
@@ -369,6 +369,9 @@ export default {
         }
       );
     },
+    collapseAllGroups() {
+      return this.opts.collapseAllGroups;
+    },
     filteredData() {
       let { data } = this;
       const searchQuery = this.searchBy && this.searchBy.toLowerCase();
@@ -414,6 +417,10 @@ export default {
           // eslint-disable-next-line
           (groupedData[row[this.opts.groupBy]] = groupedData[row[this.opts.groupBy]] || [])
             .push(row);
+          this.shown[row[this.opts.groupBy]] =
+            typeof this.shown[row[this.opts.groupBy]] === 'undefined' ?
+              !this.opts.collapseAllGroups :
+              this.shown[row[this.opts.groupBy]];
           return groupedData;
         }, {});
       }
@@ -464,6 +471,13 @@ export default {
         return data;
       }, []);
       this.$emit('selectedRows', selectedData);
+    },
+    collapseAllGroups(collapse) {
+      const shown = Object.assign({}, this.shown);
+      Object.keys(shown).forEach((key) => {
+        shown[key] = !collapse;
+      });
+      this.shown = shown;
     },
   },
   mounted() {
