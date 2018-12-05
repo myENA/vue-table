@@ -134,11 +134,11 @@ th.sortable {
   }
 }
 .pagination {
-  margin: 0;
+  margin: 0px;
 }
 .info{
   .perPageSelector{
-    margin-left: 20px;
+    margin-left: 10px;
     margin-right: 10px;
   }
   float: right;
@@ -248,7 +248,9 @@ export default {
   watch: {
   },
   created() {
-    this.loadData();
+    if (this.initialFetch) {
+      this.loadData();
+    }
   },
   methods: {
     async fetch(params) {
@@ -262,10 +264,11 @@ export default {
       let direction;
       if (this.sortOrders[this.sortKey] === 'ascending') {
         direction = 1;
-      } else if (this.sortOrders[this.sortKey] === 'desending') {
+      } else if (this.sortOrders[this.sortKey] === 'descending') {
         direction = -1;
       } else {
         direction = 0;
+        this.sortKey = '';
       }
       const params = {
         [this.opts.params.page]: this.currentPage,
