@@ -86,11 +86,11 @@
 
 <style lang="less" module>
 .pagination {
-  margin: 0;
+  margin: 0px;
 }
 .info {
   .perPageSelector{
-    margin-left: 20px;
+    margin-left: 10px;
     margin-right: 10px;
   }
   float: right;
@@ -184,6 +184,9 @@ export default {
     },
     perPage() {
       this.perPageValue = this.perPage;
+    },
+    currentPageValue() {
+      this.currentPageValue = this.currentPage;
     },
   },
   created() {
