@@ -33,7 +33,8 @@
         <thead>
           <tr>
             <th v-for="key in columns" :key="key" @click="sortBy({key})"
-              :class="{ [$style.sortable]: opts.sortable[key], sorted: sortKey === key }">
+              :class="{ [$style.sortable]: opts.sortable[key], sorted: sortKey === key,
+                [opts.columnsClasses[key]]: opts.columnsClasses[key] != null }">
               <slot :name="'heading_' + key">
                 <template v-if="key === 'select'">
                   <div :class="[opts.classes.checkbox, $style.checkbox]">
@@ -105,7 +106,8 @@
               :key="'row_'+entry[opts.uniqueKey]"
               :data-id="entry[opts.uniqueKey]"
               >
-              <td v-for="key in columns" :key="'cell_'+key">
+              <td v-for="key in columns" :key="'cell_'+key"
+              :class="{[opts.columnsClasses[key]]: opts.columnsClasses[key] != null }">
                 <slot :name="'column_' + key" :row="entry">
                   <component v-if="opts.templates[key]" :is="opts.templates[key]"
                     :data="entry" :column="key" :index="index">
@@ -344,6 +346,13 @@ export default {
       return this.columns.length + (this.opts.detailsRow ? 1 : 0);
     },
     opts() {
+      if (this.options.text) {
+        this.options.text = Object.assign(
+          {},
+          this.defaults.text,
+          this.options.text
+        );
+      }
       const opts = Object.assign(
         {},
         this.defaults,

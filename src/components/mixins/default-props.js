@@ -140,4 +140,12 @@ export default {
       },
     },
   },
+  /*
+   * Key-value options for column and class
+   */
+  columnsClasses: {},
+  /*
+   * If to do inital fetch on create
+   */
+  initialFetch: true,
 };
