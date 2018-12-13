@@ -207,6 +207,7 @@ th.sortable {
 </style>
 
 <script type="text/javascript">
+import { mergeDeepRight } from 'ramda';
 import filters from './mixins/filters';
 import defaultProps from './mixins/default-props';
 import methods from './mixins/methods';
@@ -346,15 +347,7 @@ export default {
       return this.columns.length + (this.opts.detailsRow ? 1 : 0);
     },
     opts() {
-      if (this.options.text) {
-        this.options.text = Object.assign(
-          {},
-          this.defaults.text,
-          this.options.text
-        );
-      }
-      const opts = Object.assign(
-        {},
+      const opts = mergeDeepRight(
         this.defaults,
         this.options
       );
