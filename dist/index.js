@@ -5310,16 +5310,16 @@ var Server_component = normalizeComponent(
 
 Server_component.options.__file = "Server.vue"
 /* harmony default export */ var Server = (Server_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"4d96bfd7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Client.vue?vue&type=template&id=681f91b4&
-var Clientvue_type_template_id_681f91b4_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_vm._t("filter",[_c('div',[_c('div',{staticClass:"row"},[_c('div',{staticClass:"col-md-2"},[_vm._t("filters",[_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Search")]),_c('div',{staticClass:"input-group"},[_c('input',{staticClass:"form-control",attrs:{"type":"text","placeholder":"Search by keyword"},on:{"input":function($event){_vm.search($event.target.value)}}}),_vm._m(0)])])])],2),_c('div',{staticClass:"col-md-10"},[_c('div',{staticClass:"pull-right"},[_c('div',{staticClass:"form-group"},[_c('label',[_vm._v(" ")]),_c('div',[_vm._t("buttons")],2)])])])])])]),_c('div',{class:[_vm.opts.classes.wrapper, _vm.$style.wrapper]},[_c('table',{class:[_vm.opts.classes.table, _vm.$style.table]},[_c('thead',[_c('tr',[_vm._l((_vm.columns),function(key){return _c('th',{key:key,class:( _obj = { sorted: _vm.sortKey === key }, _obj[_vm.$style.sortable] = _vm.opts.sortable[key], _obj[_vm.opts.columnsClasses[key]] = _vm.opts.columnsClasses[key] != null, _obj ),on:{"click":function($event){_vm.sortBy({key: key})}}},[_vm._t('heading_' + key,[(key === 'select')?[_c('div',{class:[_vm.opts.classes.checkbox, _vm.$style.checkbox]},[_c('label',[_c('input',{staticClass:"check-all",attrs:{"type":"checkbox","disabled":!_vm.opts.editable},domProps:{"checked":_vm.allSelected},on:{"change":_vm.selectAll}})])])]:[_vm._v("\n                "+_vm._s(_vm._f("heading")(key,_vm.opts.headings))+"\n              ")]]),(_vm.opts.sortable[key])?_c('i',{class:( _obj$1 = {}, _obj$1[_vm.opts.classes.sort.none] = _vm.sortKey !== key || _vm.sortOrders[key] === null, _obj$1[_vm.opts.classes.sort[_vm.sortOrders[key]]] = _vm.sortKey === key, _obj$1 )}):_vm._e()],2)
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"4d96bfd7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Client.vue?vue&type=template&id=47ce28bf&
+var Clientvue_type_template_id_47ce28bf_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_vm._t("filter",[_c('div',[_c('div',{staticClass:"row"},[_c('div',{staticClass:"col-md-2"},[_vm._t("filters",[_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Search")]),_c('div',{staticClass:"input-group"},[_c('input',{staticClass:"form-control",attrs:{"type":"text","placeholder":"Search by keyword"},on:{"input":function($event){_vm.search($event.target.value)}}}),_vm._m(0)])])])],2),_c('div',{staticClass:"col-md-10"},[_c('div',{staticClass:"pull-right"},[_c('div',{staticClass:"form-group"},[_c('label',[_vm._v(" ")]),_c('div',[_vm._t("buttons")],2)])])])])])]),_c('div',{class:[_vm.opts.classes.wrapper, _vm.$style.wrapper]},[_c('table',{class:[_vm.opts.classes.table, _vm.$style.table]},[_c('thead',[_c('tr',[_vm._l((_vm.columns),function(key){return _c('th',{key:key,class:( _obj = { sorted: _vm.sortKey === key }, _obj[_vm.$style.sortable] = _vm.opts.sortable[key], _obj[_vm.opts.columnsClasses[key]] = _vm.opts.columnsClasses[key] != null, _obj ),on:{"click":function($event){_vm.sortBy({key: key})}}},[_vm._t('heading_' + key,[(key === 'select')?[_c('div',{class:[_vm.opts.classes.checkbox, _vm.$style.checkbox]},[_c('label',[_c('input',{staticClass:"check-all",attrs:{"type":"checkbox","disabled":!_vm.opts.editable},domProps:{"checked":_vm.allSelected},on:{"change":_vm.selectAll}})])])]:[_vm._v("\n                "+_vm._s(_vm._f("heading")(key,_vm.opts.headings))+"\n              ")]]),(_vm.opts.sortable[key])?_c('i',{class:( _obj$1 = {}, _obj$1[_vm.opts.classes.sort.none] = _vm.sortKey !== key || _vm.sortOrders[key] === null, _obj$1[_vm.opts.classes.sort[_vm.sortOrders[key]]] = _vm.sortKey === key, _obj$1 )}):_vm._e()],2)
 var _obj;
 var _obj$1;}),(_vm.opts.detailsRow)?_c('th',[_vm._t("heading_actions",[_vm._v("\n              Actions\n            ")])],2):_vm._e()],2)]),(_vm.loading)?_c('tbody',[_c('tr',[_c('td',{staticClass:"msg-row",attrs:{"colspan":_vm.colspan}},[_vm._t("loading",[_c('span',{domProps:{"innerHTML":_vm._s(_vm.opts.text.loading)}})])],2)])]):(_vm.data.length === 0)?_c('tbody',[_c('tr',[_c('td',{staticClass:"msg-row",attrs:{"colspan":_vm.colspan}},[_vm._t("no_data",[_c('span',{domProps:{"innerHTML":_vm._s(_vm.opts.text.noData)}})])],2)])]):(_vm.filteredData.length === 0)?_c('tbody',[_c('tr',[_c('td',{staticClass:"msg-row",attrs:{"colspan":_vm.colspan}},[_vm._t("empty_results",[_c('span',{domProps:{"innerHTML":_vm._s(_vm.opts.text.emptyResults)}})])],2)])]):_vm._l((_vm.pageData),function(group,groupKey){return _c('tbody',{key:groupKey},[(groupKey !== 'all')?_c('tr',[_c('th',{attrs:{"colspan":_vm.colspan}},[_c('a',{attrs:{"href":"#"},on:{"click":function($event){$event.preventDefault();_vm.toggleGroup(groupKey)}}},[_c('i',{class:( _obj = {}, _obj[_vm.opts.classes.group.hide] = _vm.isShown(groupKey), _obj[_vm.opts.classes.group.show] = !_vm.isShown(groupKey), _obj )})]),_vm._t("__group_meta",[_vm._v("\n              "+_vm._s(groupKey)+"\n            ")],{data:_vm.opts.groupMeta[groupKey]})],2)]):_vm._e(),_vm._l((group),function(entry,index){return [(_vm.isShown(groupKey))?_c('tr',{key:'row_'+entry[_vm.opts.uniqueKey],attrs:{"data-id":entry[_vm.opts.uniqueKey]}},[_vm._l((_vm.columns),function(key){return _c('td',{key:'cell_'+key,class:( _obj = {}, _obj[_vm.opts.columnsClasses[key]] = _vm.opts.columnsClasses[key] != null, _obj )},[_vm._t('column_' + key,[(_vm.opts.templates[key])?_c(_vm.opts.templates[key],{tag:"component",attrs:{"data":entry,"column":key,"index":index}}):(key === 'select')?[(entry.showSelect)?_c('div',{class:[_vm.opts.classes.checkbox, _vm.$style.checkbox]},[_c('label',[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.selectedRows),expression:"selectedRows"}],key:'select-'+entry[_vm.opts.uniqueKey],attrs:{"type":"checkbox","name":"selectedRows","disabled":!_vm.opts.editable},domProps:{"value":entry[_vm.opts.uniqueKey],"checked":Array.isArray(_vm.selectedRows)?_vm._i(_vm.selectedRows,entry[_vm.opts.uniqueKey])>-1:(_vm.selectedRows)},on:{"change":function($event){var $$a=_vm.selectedRows,$$el=$event.target,$$c=$$el.checked?(true):(false);if(Array.isArray($$a)){var $$v=entry[_vm.opts.uniqueKey],$$i=_vm._i($$a,$$v);if($$el.checked){$$i<0&&(_vm.selectedRows=$$a.concat([$$v]))}else{$$i>-1&&(_vm.selectedRows=$$a.slice(0,$$i).concat($$a.slice($$i+1)))}}else{_vm.selectedRows=$$c}}}})])]):_vm._e()]:[_vm._v(_vm._s(entry[key]))]],{row:entry})],2)
               var _obj;}),(_vm.opts.detailsRow)?_c('td',[_vm._t("column_actions_pre",null,{row:entry}),_vm._t("column_actions",[_c('a',{attrs:{"href":"#"},domProps:{"innerHTML":_vm._s(_vm.getToggleText(entry))},on:{"click":function($event){$event.preventDefault();_vm.toggleRow(entry[_vm.opts.uniqueKey])}}})],{row:entry}),_vm._t("column_actions_post",null,{row:entry})],2):_vm._e()],2):_vm._e(),(_vm.opts.detailsRow && _vm.isShown(groupKey))?_c('tr',{directives:[{name:"show",rawName:"v-show",value:(_vm.isRowExpanded(entry[_vm.opts.uniqueKey])),expression:"isRowExpanded(entry[opts.uniqueKey])"}],key:'details_row_'+entry[_vm.opts.uniqueKey],attrs:{"data-details":entry[_vm.opts.uniqueKey]}},[_c('td',{attrs:{"colspan":_vm.colspan}},[_vm._t("details_row",null,{row:entry})],2)]):_vm._e()]})],2)
               var _obj;}),(_vm.opts.pagination)?_c('tfoot',[_c('tr',[_c('td',{attrs:{"colspan":_vm.colspan}},[_c('Pagination',{attrs:{"classes":_vm.opts.classes.pagination,"text":_vm.opts.text.pagination,"pageInterval":_vm.opts.pageInterval,"perPage":_vm.opts.perPage,"perPageValues":_vm.opts.perPageValues,"currentPage":_vm.currentPage,"totalRows":_vm.totalRows},on:{"paginate":_vm.paginate}})],1)])]):_vm._e()],2)])],2)}
-var Clientvue_type_template_id_681f91b4_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{staticClass:"input-group-addon"},[_c('i',{staticClass:"fa fa-search"})])}]
+var Clientvue_type_template_id_47ce28bf_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{staticClass:"input-group-addon"},[_c('i',{staticClass:"fa fa-search"})])}]
 
 
-// CONCATENATED MODULE: ./src/components/Client.vue?vue&type=template&id=681f91b4&
+// CONCATENATED MODULE: ./src/components/Client.vue?vue&type=template&id=47ce28bf&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.array.sort.js
 var es6_array_sort = __webpack_require__("55dd");
@@ -5327,6 +5327,237 @@ var es6_array_sort = __webpack_require__("55dd");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.search.js
 var es6_regexp_search = __webpack_require__("386d");
 
+// CONCATENATED MODULE: ./node_modules/ramda/es/internal/_isPlaceholder.js
+function _isPlaceholder(a) {
+       return a != null && typeof a === 'object' && a['@@functional/placeholder'] === true;
+}
+// CONCATENATED MODULE: ./node_modules/ramda/es/internal/_curry1.js
+
+
+/**
+ * Optimized internal one-arity curry function.
+ *
+ * @private
+ * @category Function
+ * @param {Function} fn The function to curry.
+ * @return {Function} The curried function.
+ */
+function _curry1(fn) {
+  return function f1(a) {
+    if (arguments.length === 0 || _isPlaceholder(a)) {
+      return f1;
+    } else {
+      return fn.apply(this, arguments);
+    }
+  };
+}
+// CONCATENATED MODULE: ./node_modules/ramda/es/internal/_curry2.js
+
+
+
+/**
+ * Optimized internal two-arity curry function.
+ *
+ * @private
+ * @category Function
+ * @param {Function} fn The function to curry.
+ * @return {Function} The curried function.
+ */
+function _curry2(fn) {
+  return function f2(a, b) {
+    switch (arguments.length) {
+      case 0:
+        return f2;
+      case 1:
+        return _isPlaceholder(a) ? f2 : _curry1(function (_b) {
+          return fn(a, _b);
+        });
+      default:
+        return _isPlaceholder(a) && _isPlaceholder(b) ? f2 : _isPlaceholder(a) ? _curry1(function (_a) {
+          return fn(_a, b);
+        }) : _isPlaceholder(b) ? _curry1(function (_b) {
+          return fn(a, _b);
+        }) : fn(a, b);
+    }
+  };
+}
+// CONCATENATED MODULE: ./node_modules/ramda/es/internal/_curry3.js
+
+
+
+
+/**
+ * Optimized internal three-arity curry function.
+ *
+ * @private
+ * @category Function
+ * @param {Function} fn The function to curry.
+ * @return {Function} The curried function.
+ */
+function _curry3(fn) {
+  return function f3(a, b, c) {
+    switch (arguments.length) {
+      case 0:
+        return f3;
+      case 1:
+        return _isPlaceholder(a) ? f3 : _curry2(function (_b, _c) {
+          return fn(a, _b, _c);
+        });
+      case 2:
+        return _isPlaceholder(a) && _isPlaceholder(b) ? f3 : _isPlaceholder(a) ? _curry2(function (_a, _c) {
+          return fn(_a, b, _c);
+        }) : _isPlaceholder(b) ? _curry2(function (_b, _c) {
+          return fn(a, _b, _c);
+        }) : _curry1(function (_c) {
+          return fn(a, b, _c);
+        });
+      default:
+        return _isPlaceholder(a) && _isPlaceholder(b) && _isPlaceholder(c) ? f3 : _isPlaceholder(a) && _isPlaceholder(b) ? _curry2(function (_a, _b) {
+          return fn(_a, _b, c);
+        }) : _isPlaceholder(a) && _isPlaceholder(c) ? _curry2(function (_a, _c) {
+          return fn(_a, b, _c);
+        }) : _isPlaceholder(b) && _isPlaceholder(c) ? _curry2(function (_b, _c) {
+          return fn(a, _b, _c);
+        }) : _isPlaceholder(a) ? _curry1(function (_a) {
+          return fn(_a, b, c);
+        }) : _isPlaceholder(b) ? _curry1(function (_b) {
+          return fn(a, _b, c);
+        }) : _isPlaceholder(c) ? _curry1(function (_c) {
+          return fn(a, b, _c);
+        }) : fn(a, b, c);
+    }
+  };
+}
+// CONCATENATED MODULE: ./node_modules/ramda/es/internal/_isObject.js
+function _isObject(x) {
+  return Object.prototype.toString.call(x) === '[object Object]';
+}
+// CONCATENATED MODULE: ./node_modules/ramda/es/internal/_has.js
+function _has(prop, obj) {
+  return Object.prototype.hasOwnProperty.call(obj, prop);
+}
+// CONCATENATED MODULE: ./node_modules/ramda/es/mergeWithKey.js
+
+
+
+/**
+ * Creates a new object with the own properties of the two provided objects. If
+ * a key exists in both objects, the provided function is applied to the key
+ * and the values associated with the key in each object, with the result being
+ * used as the value associated with the key in the returned object.
+ *
+ * @func
+ * @memberOf R
+ * @since v0.19.0
+ * @category Object
+ * @sig ((String, a, a) -> a) -> {a} -> {a} -> {a}
+ * @param {Function} fn
+ * @param {Object} l
+ * @param {Object} r
+ * @return {Object}
+ * @see R.mergeDeepWithKey, R.merge, R.mergeWith
+ * @example
+ *
+ *      let concatValues = (k, l, r) => k == 'values' ? R.concat(l, r) : r
+ *      R.mergeWithKey(concatValues,
+ *                     { a: true, thing: 'foo', values: [10, 20] },
+ *                     { b: true, thing: 'bar', values: [15, 35] });
+ *      //=> { a: true, b: true, thing: 'bar', values: [10, 20, 15, 35] }
+ * @symb R.mergeWithKey(f, { x: 1, y: 2 }, { y: 5, z: 3 }) = { x: 1, y: f('y', 2, 5), z: 3 }
+ */
+var mergeWithKey_mergeWithKey = /*#__PURE__*/_curry3(function mergeWithKey(fn, l, r) {
+  var result = {};
+  var k;
+
+  for (k in l) {
+    if (_has(k, l)) {
+      result[k] = _has(k, r) ? fn(k, l[k], r[k]) : l[k];
+    }
+  }
+
+  for (k in r) {
+    if (_has(k, r) && !_has(k, result)) {
+      result[k] = r[k];
+    }
+  }
+
+  return result;
+});
+/* harmony default export */ var es_mergeWithKey = (mergeWithKey_mergeWithKey);
+// CONCATENATED MODULE: ./node_modules/ramda/es/mergeDeepWithKey.js
+
+
+
+
+/**
+ * Creates a new object with the own properties of the two provided objects.
+ * If a key exists in both objects:
+ * - and both associated values are also objects then the values will be
+ *   recursively merged.
+ * - otherwise the provided function is applied to the key and associated values
+ *   using the resulting value as the new value associated with the key.
+ * If a key only exists in one object, the value will be associated with the key
+ * of the resulting object.
+ *
+ * @func
+ * @memberOf R
+ * @since v0.24.0
+ * @category Object
+ * @sig ((String, a, a) -> a) -> {a} -> {a} -> {a}
+ * @param {Function} fn
+ * @param {Object} lObj
+ * @param {Object} rObj
+ * @return {Object}
+ * @see R.mergeWithKey, R.mergeDeepWith
+ * @example
+ *
+ *      let concatValues = (k, l, r) => k == 'values' ? R.concat(l, r) : r
+ *      R.mergeDeepWithKey(concatValues,
+ *                         { a: true, c: { thing: 'foo', values: [10, 20] }},
+ *                         { b: true, c: { thing: 'bar', values: [15, 35] }});
+ *      //=> { a: true, b: true, c: { thing: 'bar', values: [10, 20, 15, 35] }}
+ */
+var mergeDeepWithKey_mergeDeepWithKey = /*#__PURE__*/_curry3(function mergeDeepWithKey(fn, lObj, rObj) {
+  return es_mergeWithKey(function (k, lVal, rVal) {
+    if (_isObject(lVal) && _isObject(rVal)) {
+      return mergeDeepWithKey(fn, lVal, rVal);
+    } else {
+      return fn(k, lVal, rVal);
+    }
+  }, lObj, rObj);
+});
+/* harmony default export */ var es_mergeDeepWithKey = (mergeDeepWithKey_mergeDeepWithKey);
+// CONCATENATED MODULE: ./node_modules/ramda/es/mergeDeepRight.js
+
+
+
+/**
+ * Creates a new object with the own properties of the first object merged with
+ * the own properties of the second object. If a key exists in both objects:
+ * - and both values are objects, the two values will be recursively merged
+ * - otherwise the value from the second object will be used.
+ *
+ * @func
+ * @memberOf R
+ * @since v0.24.0
+ * @category Object
+ * @sig {a} -> {a} -> {a}
+ * @param {Object} lObj
+ * @param {Object} rObj
+ * @return {Object}
+ * @see R.merge, R.mergeDeepLeft, R.mergeDeepWith, R.mergeDeepWithKey
+ * @example
+ *
+ *      R.mergeDeepRight({ name: 'fred', age: 10, contact: { email: 'moo@example.com' }},
+ *                       { age: 40, contact: { email: 'baa@example.com' }});
+ *      //=> { name: 'fred', age: 40, contact: { email: 'baa@example.com' }}
+ */
+var mergeDeepRight_mergeDeepRight = /*#__PURE__*/_curry2(function mergeDeepRight(lObj, rObj) {
+  return es_mergeDeepWithKey(function (k, lVal, rVal) {
+    return rVal;
+  }, lObj, rObj);
+});
+/* harmony default export */ var es_mergeDeepRight = (mergeDeepRight_mergeDeepRight);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Client.vue?vue&type=script&lang=js&
 
 
@@ -5546,6 +5777,7 @@ var es6_regexp_search = __webpack_require__("386d");
 
 
 
+
 /**
  * @module EnaTableClient
  */
@@ -5700,11 +5932,7 @@ var es6_regexp_search = __webpack_require__("386d");
       return this.columns.length + (this.opts.detailsRow ? 1 : 0);
     },
     opts: function opts() {
-      if (this.options.text) {
-        this.options.text = Object.assign({}, this.defaults.text, this.options.text);
-      }
-
-      var opts = Object.assign({}, this.defaults, this.options);
+      var opts = es_mergeDeepRight(this.defaults, this.options);
       var sortable = {};
       var search = {};
       this.columns.forEach(function (key) {
@@ -5786,7 +6014,6 @@ var es6_regexp_search = __webpack_require__("386d");
         return data.reduce(function (groupedData, row) {
           // eslint-disable-next-line
           (groupedData[row[_this2.opts.groupBy]] = groupedData[row[_this2.opts.groupBy]] || []).push(row);
-          _this2.shown[row[_this2.opts.groupBy]] = typeof _this2.shown[row[_this2.opts.groupBy]] === 'undefined' ? !_this2.opts.collapseAllGroups : _this2.shown[row[_this2.opts.groupBy]];
           return groupedData;
         }, {});
       }
@@ -5824,8 +6051,17 @@ var es6_regexp_search = __webpack_require__("386d");
         return acc;
       }, []);
     },
-    selectedRows: function selectedRows() {
+    pageData: function pageData() {
       var _this4 = this;
+
+      Object.keys(this.pageData).forEach(function (group) {
+        _this4.pageData[group].forEach(function (row) {
+          _this4.shown[row[_this4.opts.groupBy]] = typeof _this4.shown[row[_this4.opts.groupBy]] === 'undefined' ? !_this4.opts.collapseAllGroups : _this4.shown[row[_this4.opts.groupBy]];
+        });
+      });
+    },
+    selectedRows: function selectedRows() {
+      var _this5 = this;
 
       this.setAllSelected();
       var selected = this.selectedRows.reduce(function (acc, id) {
@@ -5835,12 +6071,13 @@ var es6_regexp_search = __webpack_require__("386d");
       }, {});
       var selectedData = this.filteredData.reduce(function (data, row) {
         if (row.showSelect) {
-          var selectedRow = selected[row[_this4.opts.uniqueKey]] || false;
+          var selectedRow = selected[row[_this5.opts.uniqueKey]] || false;
+          Object.assign(row, {
+            selected: !!selectedRow
+          });
 
           if (selectedRow) {
-            data.push(Object.assign(row, {
-              selected: selectedRow
-            }));
+            data.push(row);
           }
         }
 
@@ -5866,7 +6103,7 @@ var es6_regexp_search = __webpack_require__("386d");
       this.searchBy = value;
     },
     sortBy: function sortBy(obj) {
-      var _this5 = this;
+      var _this6 = this;
 
       var key = obj.key,
           order = obj.order;
@@ -5874,8 +6111,8 @@ var es6_regexp_search = __webpack_require__("386d");
       if (this.opts.sortable[key]) {
         this.sortKey = key;
         this.columns.forEach(function (elem) {
-          if (elem !== _this5.sortKey) {
-            _this5.sortOrders[elem] = null;
+          if (elem !== _this6.sortKey) {
+            _this6.sortOrders[elem] = null;
           }
         });
 
@@ -5895,14 +6132,14 @@ var es6_regexp_search = __webpack_require__("386d");
       this.shown = Object.assign({}, this.shown);
     },
     selectAll: function selectAll() {
-      var _this6 = this;
+      var _this7 = this;
 
       if (this.allSelected) {
         this.selectedRows = [];
       } else {
         this.selectedRows = this.filteredData.reduce(function (acc, d) {
           if (d.showSelect) {
-            acc.push(d[_this6.opts.uniqueKey]);
+            acc.push(d[_this7.opts.uniqueKey]);
           }
 
           return acc;
@@ -5946,8 +6183,8 @@ function Client_injectStyles (context) {
 
 var Client_component = normalizeComponent(
   components_Clientvue_type_script_lang_js_,
-  Clientvue_type_template_id_681f91b4_render,
-  Clientvue_type_template_id_681f91b4_staticRenderFns,
+  Clientvue_type_template_id_47ce28bf_render,
+  Clientvue_type_template_id_47ce28bf_staticRenderFns,
   false,
   Client_injectStyles,
   null,
