@@ -426,10 +426,6 @@ export default {
           // eslint-disable-next-line
           (groupedData[row[this.opts.groupBy]] = groupedData[row[this.opts.groupBy]] || [])
             .push(row);
-          this.shown[row[this.opts.groupBy]] =
-            typeof this.shown[row[this.opts.groupBy]] === 'undefined' ?
-              !this.opts.collapseAllGroups :
-              this.shown[row[this.opts.groupBy]];
           return groupedData;
         }, {});
       }
@@ -460,6 +456,16 @@ export default {
         }
         return acc;
       }, []);
+    },
+    pageData() {
+      Object.keys(this.pageData).forEach((group) => {
+        this.pageData[group].forEach((row) => {
+        this.shown[row[this.opts.groupBy]] =
+          typeof this.shown[row[this.opts.groupBy]] === 'undefined' ?
+            !this.opts.collapseAllGroups :
+            this.shown[row[this.opts.groupBy]];
+      });
+      });
     },
     selectedRows() {
       this.setAllSelected();
