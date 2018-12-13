@@ -453,11 +453,11 @@ export default {
     pageData() {
       Object.keys(this.pageData).forEach((group) => {
         this.pageData[group].forEach((row) => {
-        this.shown[row[this.opts.groupBy]] =
-          typeof this.shown[row[this.opts.groupBy]] === 'undefined' ?
-            !this.opts.collapseAllGroups :
-            this.shown[row[this.opts.groupBy]];
-      });
+          this.shown[row[this.opts.groupBy]] =
+            typeof this.shown[row[this.opts.groupBy]] === 'undefined' ?
+              !this.opts.collapseAllGroups :
+              this.shown[row[this.opts.groupBy]];
+        });
       });
     },
     selectedRows() {
@@ -470,10 +470,11 @@ export default {
       const selectedData = this.filteredData.reduce((data, row) => {
         if (row.showSelect) {
           const selectedRow = selected[row[this.opts.uniqueKey]] || false;
+          Object.assign(row, {
+            selected: !!selectedRow,
+          });
           if (selectedRow) {
-            data.push(Object.assign(row, {
-              selected: selectedRow,
-            }));
+            data.push(row);
           }
         }
         return data;
