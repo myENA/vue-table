@@ -61,6 +61,7 @@ jobs:
           paths:
             - example
             - node_modules
+            - functions
             - .firebaserc
             - firebase.json
 
