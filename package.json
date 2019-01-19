@@ -13,6 +13,7 @@
   "scripts": {
     "serve": "vue-cli-service serve --host localhost",
     "build": "node build.js",
+    "build:example": "vue-cli-service build --dest example",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit",
     "preversion": "npm run test:unit && npm run build && git add -A dist",

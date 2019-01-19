@@ -1,0 +1,98 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2
+jobs:
+  install:
+    docker:
+      - image: circleci/node:10.13.0
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package-lock.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: npm ci
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package-lock.json" }}
+
+      - save_cache:
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/repo
+  test:
+    docker:
+      - image: circleci/node:10.13.0
+
+    working_directory: ~/repo
+
+    steps:
+      - restore_cache:
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+      # run tests!
+      - run: npm run test:unit
+
+  build:
+    docker:
+      - image: circleci/node:10.13.0
+
+    working_directory: ~/repo
+
+    steps:
+      - restore_cache:
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+
+      # build example
+      - run: npm run build:example
+
+      - save_cache:
+          key: v1-build-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - example
+            - node_modules
+            - .firebaserc
+            - firebase.json
+
+  deploy:
+    docker:
+      - image: circleci/node:10.13.0
+
+    working_directory: ~/repo
+
+    steps:
+      - restore_cache:
+          key: v1-build-{{ .Environment.CIRCLE_SHA1 }}
+      - run:
+          name: Deploy Master to Firebase
+          command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
+
+workflows:
+  version: 2
+
+  build-and-deploy:
+    jobs:
+      - install
+      - test:
+          requires:
+            - install
+      - build:
+          requires:
+            - install
+      - deploy:
+          requires:
+            - test
+            - build
+          filters:
+            branches:
+              only: master
