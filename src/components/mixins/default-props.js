@@ -56,7 +56,7 @@ export default {
    * @default
    * @type {Number}
    */
-  pageInterval: 9,
+  pageInterval: 7,
   /**
    * values to show in the selector of items per page
    *
@@ -129,10 +129,8 @@ export default {
      * @type {Object}
      */
     pagination: {
-      first: '',
       prev: '',
       next: '',
-      last: '',
       info: {
         showing: 'Showing %s to %s of %s rows.',
         records: 'records per page',

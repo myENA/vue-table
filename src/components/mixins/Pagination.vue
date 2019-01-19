@@ -6,18 +6,6 @@
           disabled: currentPageValue === 1
         }">
         <a href="#"
-          :aria-label="text.first || 'First'"
-          :title="text.first || 'First'"
-          @click.prevent="goToPage(1)">
-          <span aria-hidden="true"><i
-            :class="classes.first"
-            ></i></span>{{text.first}}</a>
-      </li>
-      <li :class="{
-          [$style.disabled]: currentPageValue === 1,
-          disabled: currentPageValue === 1
-        }">
-        <a href="#"
           :aria-label="text.previous || 'Previous'"
           :title="text.previous || 'Previous'"
           @click.prevent="goToPage(currentPageValue-1)">
@@ -25,13 +13,44 @@
             :class="classes.prev"
             ></i></span>{{text.prev}}</a>
       </li>
+      <li :class="{
+        [$style.active]: 1 === currentPageValue,
+        active: 1 === currentPageValue,
+        }">
+        <a href="#"
+          aria-label="Page 1"
+          title="Page 1"
+          @click.prevent="goToPage(1)">
+          1
+        </a>
+      </li>
+      <li v-if="startPage > 2">
+        <span>&hellip;</span>
+      </li>
       <li v-for="page in pagesToShow"
         :key="page"
         :class="{
             [$style.active]: page === currentPageValue,
             active: page === currentPageValue,
           }">
-        <a href="#" @click.prevent="goToPage(page)">{{page}}</a>
+        <a href="#"
+          :aria-label="`Page ${page}`"
+          :title="`Page ${page}`"
+          @click.prevent="goToPage(page)">{{page}}</a>
+      </li>
+      <li v-if="endPage < totalPages - 2">
+        <span>&hellip;</span>
+      </li>
+      <li v-if="totalPages > 1"
+        :class="{
+          [$style.active]: totalPages === currentPageValue,
+          active: totalPages === currentPageValue,
+        }">
+        <a href="#"
+          :aria-label="`Page ${totalPages}`"
+          :title="`Page ${totalPages}`"
+          @click.prevent="goToPage(totalPages)">{{totalPages}}</span>
+        </a>
       </li>
       <li :class="{
           [$style.disabled]: currentPageValue === totalPages || totalPages === 0,
@@ -42,17 +61,6 @@
           :title="text.next || 'Next'"
           @click.prevent="goToPage(currentPageValue+1)">{{text.next}}<span
             aria-hidden="true"><i :class="classes.next"></i></span>
-        </a>
-      </li>
-      <li :class="{
-          [$style.disabled]: currentPageValue === totalPages || totalPages === 0,
-          disabled: currentPageValue === totalPages || totalPages === 0
-        }">
-        <a href="#"
-          :aria-label="text.last || 'Last'"
-          :title="text.last || 'Last'"
-          @click.prevent="goToPage(totalPages)">{{text.last}}<span
-            aria-hidden="true"><i :class="classes.last"></i></span>
         </a>
       </li>
     </ul>
@@ -87,6 +95,16 @@
 <style lang="less" module>
 .pagination {
   margin: 0px;
+  > li > span,
+  > li > span:hover,
+  > li > span:focus {
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+  }
+  > li > span:hover,
+  > li > span:focus {
+    background-color: #fff;
+  }
 }
 .info {
   .perPageSelector{
@@ -125,7 +143,7 @@ export default {
     },
     pageInterval: {
       type: Number,
-      default: 9,
+      default: 7,
     },
     totalRows: {
       type: Number,
@@ -141,11 +159,11 @@ export default {
   computed: {
     pagesToShow() {
       const halfInterval = (this.pageInterval - 1) / 2;
-      let startPage = Math.max(1, this.currentPageValue - halfInterval);
-      let endPage = Math.min(this.totalPages, this.currentPageValue + halfInterval);
+      let startPage = Math.max(2, this.currentPageValue - halfInterval);
+      let endPage = Math.min(this.totalPages - 1, this.currentPageValue + halfInterval);
       if (this.totalPages <= this.pageInterval) {
-        startPage = 1;
-        endPage = this.totalPages;
+        startPage = 2;
+        endPage = this.totalPages - 1;
       } else {
         while (endPage - startPage < this.pageInterval - 1) {
           // stabilize the interval
@@ -167,6 +185,12 @@ export default {
     },
     endRow() {
       return Math.min(this.startRow + this.perPageValue, this.totalRows);
+    },
+    startPage() {
+      return this.pagesToShow[0];
+    },
+    endPage() {
+      return this.pagesToShow[this.pagesToShow.length - 2];
     },
   },
   watch: {
