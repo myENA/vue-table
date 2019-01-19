@@ -10,7 +10,13 @@
       </div>
     </ClientTable>
     <h2>ServerTable, which loads data page by page</h2>
-    <ServerTable :columns="columns" :url="url" :options="options" />
+    <ServerTable :columns="columns" :url="url" :options="options">
+      <div slot="details_row" slot-scope="{ row }">
+        <h4>Details for {{row.name}}.</h4>
+        <p><strong>Alpha2Code:</strong> {{row.alpha2Code}}</p>
+        <p><strong>Domain(s):</strong> {{row.topLevelDomain.join(', ')}}</p>
+      </div>
+    </ServerTable>
   </div>
 </template>
 
@@ -25,19 +31,14 @@ const myServerTable = {
   methods: {
     async fetch(params) {
       const { data } = await axios.get(this.url, {
-        params: {
-          limit: params.per_page,
-          offset: params.per_page * params.page,
-          // sort_by: params.sort_by,
-          // sort_dir: params.sort_dir,
-        },
+        params,
       });
       return data;
     },
-    parse(data) {
+    parse({ list, total }) {
       return {
-        data,
-        total: 2000, // normally this should be returned by the API
+        data: list,
+        total,
       };
     },
   },
@@ -57,10 +58,11 @@ export default {
     ClientTable: myClientTable,
   },
   data: () => ({
-    columns: ['number_of_pages', 'title', 'publish_date'],
-    url: 'http://openlibrary.org/query.json?type=/type/edition&*=',
+    columns: ['name', 'capital', 'population'],
+    url: 'https://us-central1-vue-myena-table.cloudfunctions.net/countries',
     options: {
       perPage: 5,
+      uniqueKey: 'alpha3Code',
     },
     clientColumns: ['select', 'name', 'capital', 'population'],
     clientData: [],

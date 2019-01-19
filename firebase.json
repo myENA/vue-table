@@ -12,5 +12,7 @@
         "destination": "/index.html"
       }
     ]
+  },
+  "functions": {
   }
 }
