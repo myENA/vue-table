@@ -8,18 +8,20 @@ const cors = require('cors')({
 const collator = new Intl.Collator('en', { sensitivity: 'base', numeric: true });
 
 exports.countries = functions.https.onRequest((req, res) => {
-  const { page = 1, per_page: perPage = 10, sort_by: sortBy = 'name', sort_dir: sortDir = 1 } = req.query;
+  const { page = 1, per_page: perPage = 10, sort_by: sortBy = 'name', sort_dir: sortDir = 1, filter = {} } = req.query;
+  // filter
+  const filtered = countries.filter(c => !filter.name ||
+    (filter.name && c.name.toLowerCase().indexOf(filter.name.toLowerCase()) !== -1));
   // sort
-  countries.sort((a, b) => sortDir * collator.compare(a[sortBy], b[sortBy]));
+  filtered.sort((a, b) => sortDir * collator.compare(a[sortBy], b[sortBy]));
   // slice & send
   const start = (page - 1) * perPage;
   const end = start + parseInt(perPage, 10);
-  console.log(req.query, page, start, end);
   // Enable CORS using the `cors` express middleware.
   return cors(req, res, () => {
     res.send({
-      list: countries.slice(start, end),
-      total: countries.length,
+      list: filtered.slice(start, end),
+      total: filtered.length,
     });
   });
 });

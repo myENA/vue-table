@@ -1,5 +1,14 @@
 # vue-table
 
+[![CircleCI (all branches)](https://img.shields.io/circleci/project/github/myENA/vue-table.svg)](https://circleci.com/gh/myENA/vue-table)
+[![npm (scoped)](https://img.shields.io/npm/v/@myena/vue-table.svg)](https://www.npmjs.com/package/@myena/vue-table)
+![](https://img.shields.io/npm/dt/@myena/vue-table.svg)
+[![NpmLicense](https://img.shields.io/npm/l/@myena/vue-table.svg)](https://www.npmjs.com/package/@myena/vue-table)
+![npm bundle size (minified + gzip)](https://img.shields.io/bundlephobia/minzip/@myena/vue-table.svg)
+![David](https://img.shields.io/david/peer/myena/vue-table.svg)
+![David](https://img.shields.io/david/dev/myena/vue-table.svg)
+
+
 ## What's this
 Components to render a table using client or remote data
 
@@ -8,16 +17,16 @@ Components to render a table using client or remote data
 npm install @myena/vue-table
 ```
 
-# Vue Client Table
-
-Vue component for rendering a client side table with pagination, grouping, sorting, filtering, details row.
-Entire table data should be given to the table and will be paginated client side. Data can come from a Vuex store.
-
-## Dependencies
+# Dependencies
 
 - Vue 2
 - Bootstrap 3
 - FontAwesome 4
+
+# Vue Client Table
+
+Vue component for rendering a client side table with pagination, grouping, sorting, filtering, details row.
+Entire table data should be given to the table and will be paginated client side. Data can come from a Vuex store.
 
 ## Usage:
 
@@ -204,8 +213,6 @@ const MyView = new Vue({
            * @type {Object}
            */
           pagination: {
-            first: '',
-            prev: '',
             next: '',
             last: '',
             info: {
@@ -243,7 +250,7 @@ const MyView = new Vue({
          * @default
          * @type {Number}
          */
-        pageInterval: 9,
+        pageInterval: 7,
         /**
          * values to show in the selector of items per page
          *
@@ -328,4 +335,90 @@ const MyView = new Vue({
     },
   },
 });
+```
+
+# Vue Server Table
+
+Vue component for rendering a table that loads data from the server, with pagination, sorting, filtering, details row.
+It doesn't support grouping.
+
+## Usage:
+
+```html
+<EnaTableServer :columns="columns" :options="options" ref="serverTable">
+  <div slot="filter">
+		<input placeholder="Search by name" v-model="options.filter.name"/>
+		<button @click="filter">Find</button>
+	</div>
+  <template slot="heading_column1">
+    <div>Custom heading of column1</div>
+  </template>
+  <template slot="column_column1" slot-scope="{ row }" >
+    <span><i v-if="row.column2 === 'disable'" class="fa fa-ban"></i> {{row.column1}}</span>
+  </template>
+  <template slot="details_row" slot-scope="{ row }">
+    <div>Div for details (expanded) row</div>
+  </template>
+</EnaTableServer>
+```
+
+```javascript
+import axios from 'axios';
+import Qs from 'qs';
+import { Server: ServerTable } from '@myena/vue-table';
+
+const myServerTable = {
+  extends: ServerTable,
+  methods: {
+		/**
+		 * Override the fetch method
+		 */
+    async fetch(params) {
+      const { data } = await axios.get(this.url, {
+        params: Object.assign({}, params, {
+          filter: this.options.filter,
+        }),
+        paramsSerializer(p) {
+          return Qs.stringify(p, { arrayFormat: 'brackets' });
+        },
+      });
+      return data;
+    },
+		/**
+		 * Override the parse method to return `data` and `total` fields
+		 */
+    parse({ list, total }) {
+      return {
+        data: list,
+        total,
+      };
+    },
+  },
+};
+
+export default {
+  name: 'app',
+  components: {
+    ServerTable: myServerTable,
+  },
+  data: () => ({
+    columns: ['name', 'capital', 'population'],
+    url: 'https://us-central1-vue-myena-table.cloudfunctions.net/countries',
+    options: {
+      perPage: 5,
+			uniqueKey: 'alpha3Code',
+			// not handled by the component
+			// added here for easier access in the overridden fetch function
+      filter: {
+        name: null,
+      },
+    },
+	}),
+	methods: {
+		filter() {
+			// call component loadData, which sets some params then calls fetch (above)
+      this.$refs.serverTable.loadData();
+		},
+	},
+};
 ```

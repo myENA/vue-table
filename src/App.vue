@@ -9,8 +9,14 @@
         <p><strong>Domain(s):</strong> {{row.topLevelDomain.join(', ')}}</p>
       </div>
     </ClientTable>
+
+    <h1>All countries</h1>
     <h2>ServerTable, which loads data page by page</h2>
-    <ServerTable :columns="columns" :url="url" :options="options">
+    <ServerTable :columns="columns" :url="url" :options="options" ref="serverTable">
+      <div slot="filter">
+        <input placeholder="Search by name" v-model="options.filter.name"/>
+        <button @click="filter">Find</button>
+      </div>
       <div slot="details_row" slot-scope="{ row }">
         <h4>Details for {{row.name}}.</h4>
         <p><strong>Alpha2Code:</strong> {{row.alpha2Code}}</p>
@@ -23,6 +29,7 @@
 <script>
 import 'bootstrap/dist/js/bootstrap';
 import axios from 'axios';
+import Qs from 'qs';
 import ServerTable from './components/Server.vue';
 import ClientTable from './components/Client.vue';
 
@@ -31,7 +38,12 @@ const myServerTable = {
   methods: {
     async fetch(params) {
       const { data } = await axios.get(this.url, {
-        params,
+        params: Object.assign({}, params, {
+          filter: this.options.filter,
+        }),
+        paramsSerializer(p) {
+          return Qs.stringify(p, { arrayFormat: 'brackets' });
+        },
       });
       return data;
     },
@@ -63,6 +75,9 @@ export default {
     options: {
       perPage: 5,
       uniqueKey: 'alpha3Code',
+      filter: {
+        name: null,
+      },
     },
     clientColumns: ['select', 'name', 'capital', 'population'],
     clientData: [],
@@ -77,6 +92,11 @@ export default {
   async created() {
     const { data } = await axios.get('https://restcountries.eu/rest/v2/region/europe');
     this.clientData = data.map(d => Object.assign({}, d, { showSelect: true }));
+  },
+  methods: {
+    filter() {
+      this.$refs.serverTable.loadData();
+    },
   },
 };
 </script>
