@@ -261,6 +261,11 @@ export default {
     },
     async loadData() {
       this.loading = true;
+
+      const params = {
+        [this.opts.params.page]: this.currentPage,
+        [this.opts.params.per_page]: this.perPage,
+      };
       let direction;
       if (this.sortOrders[this.sortKey] === 'ascending') {
         direction = 1;
@@ -268,14 +273,14 @@ export default {
         direction = -1;
       } else {
         direction = 0;
-        this.sortKey = '';
+        this.sortKey = undefined;
       }
-      const params = {
-        [this.opts.params.page]: this.currentPage,
-        [this.opts.params.per_page]: this.perPage,
-        [this.opts.params.sort_by]: this.sortKey,
-        [this.opts.params.sort_dir]: direction,
-      };
+      if (this.sortKey) {
+        Object.assign(params, {
+          [this.opts.params.sort_by]: this.sortKey,
+          [this.opts.params.sort_dir]: direction,
+        });
+      }
       try {
         const {
           data,
