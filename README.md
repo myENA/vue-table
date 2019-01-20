@@ -23,6 +23,9 @@ npm install @myena/vue-table
 - Bootstrap 3
 - FontAwesome 4
 
+# Demo
+https://vue-myena-table.firebaseapp.com/
+
 # Vue Client Table
 
 Vue component for rendering a client side table with pagination, grouping, sorting, filtering, details row.
