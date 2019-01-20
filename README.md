@@ -347,9 +347,9 @@ It doesn't support grouping.
 ```html
 <EnaTableServer :columns="columns" :options="options" ref="serverTable">
   <div slot="filter">
-		<input placeholder="Search by name" v-model="options.filter.name"/>
-		<button @click="filter">Find</button>
-	</div>
+    <input placeholder="Search by name" v-model="options.filter.name"/>
+    <button @click="filter">Find</button>
+  </div>
   <template slot="heading_column1">
     <div>Custom heading of column1</div>
   </template>
@@ -370,9 +370,9 @@ import { Server: ServerTable } from '@myena/vue-table';
 const myServerTable = {
   extends: ServerTable,
   methods: {
-		/**
-		 * Override the fetch method
-		 */
+    /**
+     * Override the fetch method
+     */
     async fetch(params) {
       const { data } = await axios.get(this.url, {
         params: Object.assign({}, params, {
@@ -384,9 +384,9 @@ const myServerTable = {
       });
       return data;
     },
-		/**
-		 * Override the parse method to return `data` and `total` fields
-		 */
+    /**
+     * Override the parse method to return `data` and `total` fields
+     */
     parse({ list, total }) {
       return {
         data: list,
@@ -406,19 +406,19 @@ export default {
     url: 'https://us-central1-vue-myena-table.cloudfunctions.net/countries',
     options: {
       perPage: 5,
-			uniqueKey: 'alpha3Code',
-			// not handled by the component
-			// added here for easier access in the overridden fetch function
+      uniqueKey: 'alpha3Code',
+      // not handled by the component
+      // added here for easier access in the overridden fetch function
       filter: {
         name: null,
       },
     },
-	}),
-	methods: {
-		filter() {
-			// call component loadData, which sets some params then calls fetch (above)
+  }),
+  methods: {
+    filter() {
+      // call component loadData, which sets some params then calls fetch (above)
       this.$refs.serverTable.loadData();
-		},
-	},
+    },
+  },
 };
 ```
