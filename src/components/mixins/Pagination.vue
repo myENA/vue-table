@@ -49,7 +49,7 @@
         <a href="#"
           :aria-label="`Page ${totalPages}`"
           :title="`Page ${totalPages}`"
-          @click.prevent="goToPage(totalPages)">{{totalPages}}</span>
+          @click.prevent="goToPage(totalPages)">{{totalPages}}
         </a>
       </li>
       <li :class="{
