@@ -38,7 +38,7 @@
           :title="`Page ${page}`"
           @click.prevent="goToPage(page)">{{page}}</a>
       </li>
-      <li v-if="endPage < totalPages - 2">
+      <li v-if="endPage < totalPages - 1">
         <span>&hellip;</span>
       </li>
       <li v-if="totalPages > 1"
@@ -167,7 +167,7 @@ export default {
       } else {
         while (endPage - startPage < this.pageInterval - 1) {
           // stabilize the interval
-          endPage = Math.min(this.totalPages, startPage + this.pageInterval - 1);
+          endPage = Math.min(this.totalPages - 1, startPage + this.pageInterval - 1);
           startPage = Math.max(1, endPage - this.pageInterval + 1);
         }
       }
@@ -190,7 +190,7 @@ export default {
       return this.pagesToShow[0];
     },
     endPage() {
-      return this.pagesToShow[this.pagesToShow.length - 2];
+      return this.pagesToShow[this.pagesToShow.length - 1];
     },
   },
   watch: {
