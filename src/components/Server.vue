@@ -78,7 +78,7 @@
             </tr>
           </template>
         </tbody>
-        <tfoot>
+        <tfoot v-show="totalRows">
           <tr>
             <td :colspan="colspan">
               <Pagination

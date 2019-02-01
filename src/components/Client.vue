@@ -148,7 +148,7 @@
             </tr>
           </template>
         </tbody>
-        <tfoot v-if="opts.pagination">
+        <tfoot v-if="opts.pagination && totalRows">
           <tr>
             <td :colspan="colspan">
               <Pagination
