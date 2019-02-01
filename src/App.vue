@@ -78,6 +78,9 @@ export default {
       filter: {
         name: null,
       },
+      columnsClasses: {
+        name: 'name-cls',
+      },
     },
     clientColumns: ['select', 'name', 'capital', 'population'],
     clientData: [],
