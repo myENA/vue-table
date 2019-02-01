@@ -105,8 +105,6 @@ export default {
 </script>
 
 <style lang="less">
-@import '~bootstrap/less/bootstrap';
-@import '~font-awesome/css/font-awesome.min.css';
 
 tfoot {
   [class^='EnaServerTable_pagination'],
