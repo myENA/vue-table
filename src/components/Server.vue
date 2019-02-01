@@ -101,7 +101,7 @@
 
 <style lang="less" module>
 .table {
-  border-bottom: 1px solid #ddd;
+  border-bottom: none;
   > thead:first-child > tr:first-child > th {
     border-top: 1px solid #333;
     border-bottom: 1px solid #333;
