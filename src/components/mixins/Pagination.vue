@@ -209,7 +209,7 @@ export default {
     perPage() {
       this.perPageValue = this.perPage;
     },
-    currentPageValue() {
+    currentPage() {
       this.currentPageValue = this.currentPage;
     },
   },
