@@ -168,7 +168,7 @@ export default {
         while (endPage - startPage < this.pageInterval - 1) {
           // stabilize the interval
           endPage = Math.min(this.totalPages - 1, startPage + this.pageInterval - 1);
-          startPage = Math.max(1, endPage - this.pageInterval + 1);
+          startPage = Math.max(2, endPage - this.pageInterval + 1);
         }
       }
       const pages = [];
