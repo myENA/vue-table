@@ -98,7 +98,8 @@ export default {
   },
   methods: {
     filter() {
-      this.$refs.serverTable.loadData();
+      // when filtering is applied, retrieve first page
+      this.$refs.serverTable.getFirstPage();
     },
   },
 };

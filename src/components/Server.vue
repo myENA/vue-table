@@ -323,6 +323,10 @@ export default {
         this.loadData();
       }
     },
+    getFirstPage() {
+      this.currentPage = 1;
+      this.loadData();
+    },
     paginate({ currentPage, perPage }) {
       this.currentPage = currentPage;
       this.perPage = perPage;
