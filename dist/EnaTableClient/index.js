@@ -2107,7 +2107,7 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"6ab95be2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Client.vue?vue&type=template&id=9ba4f7fa&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7fe3b643-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Client.vue?vue&type=template&id=9ba4f7fa&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_vm._t("filter",[_c('div',[_c('div',{staticClass:"row"},[_c('div',{staticClass:"col-md-2"},[_vm._t("filters",[_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Search")]),_c('div',{staticClass:"input-group"},[_c('input',{staticClass:"form-control",attrs:{"type":"text","placeholder":"Search by keyword"},on:{"input":function($event){return _vm.search($event.target.value)}}}),_vm._m(0)])])])],2),_c('div',{staticClass:"col-md-10"},[_c('div',{staticClass:"pull-right"},[_c('div',{staticClass:"form-group"},[_c('label',[_vm._v(" ")]),_c('div',[_vm._t("buttons")],2)])])])])])]),_c('div',{class:[_vm.opts.classes.wrapper, _vm.$style.wrapper]},[_c('table',{class:[_vm.opts.classes.table, _vm.$style.table]},[_c('thead',[_c('tr',[_vm._l((_vm.columns),function(key){
 var _obj, _obj$1;
 return _c('th',{key:key,class:( _obj = {}, _obj[_vm.$style.sortable] = _vm.opts.sortable[key], _obj.sorted = _vm.sortKey === key, _obj[_vm.opts.columnsClasses[key]] = _vm.opts.columnsClasses[key] != null, _obj ),on:{"click":function($event){return _vm.sortBy({key: key})}}},[_vm._t('heading_' + key,[(key === 'select')?[_c('div',{class:[_vm.opts.classes.checkbox, _vm.$style.checkbox]},[_c('label',[_c('input',{staticClass:"check-all",attrs:{"type":"checkbox","disabled":!_vm.opts.editable},domProps:{"checked":_vm.allSelected},on:{"change":_vm.selectAll}})])])]:[_vm._v("\n                "+_vm._s(_vm._f("heading")(key,_vm.opts.headings))+"\n              ")]]),(_vm.opts.sortable[key])?_c('i',{class:( _obj$1 = {}, _obj$1[_vm.opts.classes.sort.none] = _vm.sortKey !== key || _vm.sortOrders[key] === null, _obj$1[_vm.opts.classes.sort[_vm.sortOrders[key]]] = _vm.sortKey === key, _obj$1 )}):_vm._e()],2)}),(_vm.opts.detailsRow)?_c('th',[_vm._t("heading_actions",[_vm._v("\n              Actions\n            ")])],2):_vm._e()],2)]),(_vm.loading)?_c('tbody',[_c('tr',[_c('td',{staticClass:"msg-row",attrs:{"colspan":_vm.colspan}},[_vm._t("loading",[_c('span',{domProps:{"innerHTML":_vm._s(_vm.opts.text.loading)}})])],2)])]):(_vm.data.length === 0)?_c('tbody',[_c('tr',[_c('td',{staticClass:"msg-row",attrs:{"colspan":_vm.colspan}},[_vm._t("no_data",[_c('span',{domProps:{"innerHTML":_vm._s(_vm.opts.text.noData)}})])],2)])]):(_vm.filteredData.length === 0)?_c('tbody',[_c('tr',[_c('td',{staticClass:"msg-row",attrs:{"colspan":_vm.colspan}},[_vm._t("empty_results",[_c('span',{domProps:{"innerHTML":_vm._s(_vm.opts.text.emptyResults)}})])],2)])]):_vm._l((_vm.pageData),function(group,groupKey){
@@ -2589,16 +2589,16 @@ var es6_regexp_split = __webpack_require__("28a5");
     }
   }
 });
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"6ab95be2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/mixins/Pagination.vue?vue&type=template&id=65390e48&
-var Paginationvue_type_template_id_65390e48_render = function () {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7fe3b643-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/mixins/Pagination.vue?vue&type=template&id=31b55a73&
+var Paginationvue_type_template_id_31b55a73_render = function () {
 var _obj, _obj$1, _obj$2, _obj$3;
 var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('ul',{class:[_vm.$style.pagination, _vm.classes.wrapper]},[_c('li',{class:( _obj = {}, _obj[_vm.$style.disabled] = _vm.currentPageValue === 1, _obj.disabled = _vm.currentPageValue === 1, _obj )},[_c('a',{attrs:{"href":"#","aria-label":_vm.text.previous || 'Previous',"title":_vm.text.previous || 'Previous'},on:{"click":function($event){$event.preventDefault();return _vm.goToPage(_vm.currentPageValue-1)}}},[_c('span',{attrs:{"aria-hidden":"true"}},[_c('i',{class:_vm.classes.prev})]),_vm._v(_vm._s(_vm.text.prev))])]),_c('li',{class:( _obj$1 = {}, _obj$1[_vm.$style.active] = 1 === _vm.currentPageValue, _obj$1.active = 1 === _vm.currentPageValue, _obj$1 )},[_c('a',{attrs:{"href":"#","aria-label":"Page 1","title":"Page 1"},on:{"click":function($event){$event.preventDefault();return _vm.goToPage(1)}}},[_vm._v("\n        1\n      ")])]),(_vm.startPage > 2)?_c('li',[_c('span',[_vm._v("…")])]):_vm._e(),_vm._l((_vm.pagesToShow),function(page){
       var _obj;
 return _c('li',{key:page,class:( _obj = {}, _obj[_vm.$style.active] = page === _vm.currentPageValue, _obj.active = page === _vm.currentPageValue, _obj )},[_c('a',{attrs:{"href":"#","aria-label":("Page " + page),"title":("Page " + page)},on:{"click":function($event){$event.preventDefault();return _vm.goToPage(page)}}},[_vm._v(_vm._s(page))])])}),(_vm.endPage < _vm.totalPages - 1)?_c('li',[_c('span',[_vm._v("…")])]):_vm._e(),(_vm.totalPages > 1)?_c('li',{class:( _obj$2 = {}, _obj$2[_vm.$style.active] = _vm.totalPages === _vm.currentPageValue, _obj$2.active = _vm.totalPages === _vm.currentPageValue, _obj$2 )},[_c('a',{attrs:{"href":"#","aria-label":("Page " + _vm.totalPages),"title":("Page " + _vm.totalPages)},on:{"click":function($event){$event.preventDefault();return _vm.goToPage(_vm.totalPages)}}},[_vm._v(_vm._s(_vm.totalPages)+"\n      ")])]):_vm._e(),_c('li',{class:( _obj$3 = {}, _obj$3[_vm.$style.disabled] = _vm.currentPageValue === _vm.totalPages || _vm.totalPages === 0, _obj$3.disabled = _vm.currentPageValue === _vm.totalPages || _vm.totalPages === 0, _obj$3 )},[_c('a',{attrs:{"href":"#","aria-label":_vm.text.next || 'Next',"title":_vm.text.next || 'Next'},on:{"click":function($event){$event.preventDefault();return _vm.goToPage(_vm.currentPageValue+1)}}},[_vm._v(_vm._s(_vm.text.next)),_c('span',{attrs:{"aria-hidden":"true"}},[_c('i',{class:_vm.classes.next})])])])],2),_c('div',{class:[_vm.$style.info, _vm.classes.info]},[(_vm.totalRows)?_c('div',[_c('span',[_vm._v("\n        "+_vm._s(_vm._f("format")(_vm.text.info.showing,_vm.startRow+1, _vm.endRow, _vm.totalRows))+"\n      ")]),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.perPageValue),expression:"perPageValue"}],class:[_vm.$style.perPageSelector, _vm.classes.formControl],on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.perPageValue=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},_vm._l((_vm.perPageValues),function(perPageValue){return _c('option',{key:perPageValue,domProps:{"value":perPageValue}},[_vm._v("\n          "+_vm._s(perPageValue)+"\n        ")])}),0),_c('span',[_vm._v("\n        "+_vm._s(_vm.text.info.records)+"\n      ")])]):_c('div',[_c('span',[_vm._v("\n        "+_vm._s(_vm.text.info.noRows)+"\n      ")])])])])}
-var Paginationvue_type_template_id_65390e48_staticRenderFns = []
+var Paginationvue_type_template_id_31b55a73_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/mixins/Pagination.vue?vue&type=template&id=65390e48&
+// CONCATENATED MODULE: ./src/components/mixins/Pagination.vue?vue&type=template&id=31b55a73&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.number.constructor.js
 var es6_number_constructor = __webpack_require__("c5f6");
@@ -2773,15 +2773,12 @@ var es6_number_constructor = __webpack_require__("c5f6");
       var startPage = Math.max(2, this.currentPageValue - halfInterval);
       var endPage = Math.min(this.totalPages - 1, this.currentPageValue + halfInterval);
 
-      if (this.totalPages <= this.pageInterval) {
-        startPage = 2;
-        endPage = this.totalPages - 1;
-      } else {
-        while (endPage - startPage < this.pageInterval - 1) {
-          // stabilize the interval
-          endPage = Math.min(this.totalPages - 1, startPage + this.pageInterval - 1);
-          startPage = Math.max(2, endPage - this.pageInterval + 1);
-        }
+      if (startPage + this.pageInterval - 1 > endPage) {
+        endPage = Math.min(this.totalPages - 1, startPage + this.pageInterval - 1);
+      }
+
+      if (endPage - (this.pageInterval - 1)) {
+        startPage = Math.max(2, endPage - (this.pageInterval - 1));
       }
 
       var pages = [];
@@ -2966,8 +2963,8 @@ function injectStyles (context) {
 
 var component = normalizeComponent(
   mixins_Paginationvue_type_script_lang_js_,
-  Paginationvue_type_template_id_65390e48_render,
-  Paginationvue_type_template_id_65390e48_staticRenderFns,
+  Paginationvue_type_template_id_31b55a73_render,
+  Paginationvue_type_template_id_31b55a73_staticRenderFns,
   false,
   injectStyles,
   null,
