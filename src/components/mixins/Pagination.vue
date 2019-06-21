@@ -161,15 +161,11 @@ export default {
       const halfInterval = (this.pageInterval - 1) / 2;
       let startPage = Math.max(2, this.currentPageValue - halfInterval);
       let endPage = Math.min(this.totalPages - 1, this.currentPageValue + halfInterval);
-      if (this.totalPages <= this.pageInterval) {
-        startPage = 2;
-        endPage = this.totalPages - 1;
-      } else {
-        while (endPage - startPage < this.pageInterval - 1) {
-          // stabilize the interval
-          endPage = Math.min(this.totalPages - 1, startPage + this.pageInterval - 1);
-          startPage = Math.max(2, endPage - this.pageInterval + 1);
-        }
+      if (startPage + this.pageInterval - 1 > endPage) {
+        endPage = Math.min(this.totalPages - 1, startPage + this.pageInterval - 1);
+      }
+      if (endPage - (this.pageInterval - 1)) {
+        startPage = Math.max(2, endPage - (this.pageInterval - 1));
       }
       const pages = [];
       for (let i = startPage; i <= endPage; i += 1) {

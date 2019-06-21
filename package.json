@@ -16,6 +16,7 @@
     "build:example": "vue-cli-service build --dest example",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit",
+    "test:unitw": "vue-cli-service test:unit --watch",
     "preversion": "npm run test:unit && npm run build && git add -A dist",
     "postversion": "git push && git push --tags && echo Run: \"npm publish\""
   },
