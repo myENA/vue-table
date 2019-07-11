@@ -443,6 +443,8 @@ export default {
       this.currentPage = 1;
     },
     filteredData() {
+      // go to first page when filtered data is returned
+      this.currentPage = 1;
       this.selectedRows = this.filteredData.reduce((acc, d) => {
         if (d.showSelect && d.selected) {
           acc.push(d[this.opts.uniqueKey]);
