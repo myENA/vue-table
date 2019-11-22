@@ -8,7 +8,7 @@
         <a href="#"
           :aria-label="text.previous || 'Previous'"
           :title="text.previous || 'Previous'"
-          @click.prevent="goToPage(currentPageValue-1)">
+          @click.prevent="currentPageValue !== 1 && goToPage(currentPageValue-1)">
           <span aria-hidden="true"><i
             :class="classes.prev"
             ></i></span>{{text.prev}}</a>
@@ -59,7 +59,7 @@
         <a href="#"
           :aria-label="text.next || 'Next'"
           :title="text.next || 'Next'"
-          @click.prevent="goToPage(currentPageValue+1)">{{text.next}}<span
+          @click.prevent="(currentPageValue !== totalPages && totalPages !== 0) && goToPage(currentPageValue+1)">{{text.next}}<span
             aria-hidden="true"><i :class="classes.next"></i></span>
         </a>
       </li>
