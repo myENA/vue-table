@@ -47,9 +47,7 @@
             <tr
               :key="'row_'+entry[opts.uniqueKey]"
               :data-id="entry[opts.uniqueKey]"
-              :class="{
-                [opts.rowClasses[key]]: opts.rowClasses[key] != null && entry[key],
-              }"
+              :class="computedRowClasses[index]"
               >
               <td v-for="key in columns" :key="'cell_'+key"
               :class="{[opts.columnsClasses[key]]: opts.columnsClasses[key] != null }">
@@ -227,6 +225,17 @@ export default {
     };
   },
   computed: {
+    computedRowClasses() {
+      return this.data.map((row) => {
+        const classes = {};
+        Object.keys(this.opts.rowClasses).forEach(prop => {
+          if (row[prop]) {
+            classes[this.opts.rowClasses[prop]] = true;
+          }
+        });
+        return classes;
+      });
+    },
     colspan() {
       return this.columns.length + (this.opts.detailsRow ? 1 : 0);
     },
