@@ -146,4 +146,8 @@ export default {
    * If to do inital fetch on create
    */
   initialFetch: true,
+  /*
+   * Key-value options for column and class
+   */
+  rowClasses: {},
 };
