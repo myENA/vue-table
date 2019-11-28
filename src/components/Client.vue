@@ -108,6 +108,7 @@
               :class="{
                 selectable: opts.editable && entry.showSelect,
                 selected: selectedRowIds[entry[opts.uniqueKey]],
+                [opts.rowClasses[key]]: opts.rowClasses[key] != null && entry[key],
               }"
               @click="toggleSelected(entry)"
               >

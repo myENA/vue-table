@@ -47,6 +47,9 @@
             <tr
               :key="'row_'+entry[opts.uniqueKey]"
               :data-id="entry[opts.uniqueKey]"
+              :class="{
+                [opts.rowClasses[key]]: opts.rowClasses[key] != null && entry[key],
+              }"
               >
               <td v-for="key in columns" :key="'cell_'+key"
               :class="{[opts.columnsClasses[key]]: opts.columnsClasses[key] != null }">
