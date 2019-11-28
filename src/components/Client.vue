@@ -108,7 +108,7 @@
               :class="{
                 selectable: opts.editable && entry.showSelect,
                 selected: selectedRowIds[entry[opts.uniqueKey]],
-                [opts.rowClasses[key]]: opts.rowClasses[key] != null && entry[key],
+                ...computedRowClasses[index],
               }"
               @click="toggleSelected(entry)"
               >
@@ -351,6 +351,17 @@ export default {
     };
   },
   computed: {
+    computedRowClasses() {
+      return this.data.map((row) => {
+        const classes = {};
+        Object.keys(this.opts.rowClasses).forEach(prop => {
+          if (row[prop]) {
+            classes[this.opts.rowClasses[prop]] = true;
+          }
+        });
+        return classes;
+      });
+    },
     colspan() {
       return this.columns.length + (this.opts.detailsRow ? 1 : 0);
     },
