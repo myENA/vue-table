@@ -116,7 +116,7 @@
               :class="{
                 [opts.columnsClasses[key]]: opts.columnsClasses[key] != null,
               }">
-                <slot :name="'column_' + key" :row="entry">
+                <slot :name="'column_' + key" :row="entry" :index="index">
                   <component v-if="opts.templates[key]" :is="opts.templates[key]"
                     :data="entry" :column="key" :index="index">
                   </component>
