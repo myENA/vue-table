@@ -219,7 +219,7 @@ module.exports = function (it, key) {
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
-module.exports = {"pagination":"EnaTablePagination_pagination_2tfqR","info":"EnaTablePagination_info_ZKSSF","perPageSelector":"EnaTablePagination_perPageSelector_3xG0c"};
+module.exports = {"pagination":"EnaTablePagination_pagination_1xsiO","info":"EnaTablePagination_info_2cUbo","perPageSelector":"EnaTablePagination_perPageSelector_CN8cp"};
 
 /***/ }),
 
@@ -1863,7 +1863,7 @@ module.exports = (
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
-module.exports = {"table":"EnaTableServer_table_2tmVE","checkbox":"EnaTableServer_checkbox_11iTA","sortable":"EnaTableServer_sortable_1GtDK","pagination":"EnaTableServer_pagination_FYMVP","info":"EnaTableServer_info_10wXo","perPageSelector":"EnaTableServer_perPageSelector_pCu8s"};
+module.exports = {"table":"EnaTableServer_table_1-Jbh","checkbox":"EnaTableServer_checkbox_1lyNb","sortable":"EnaTableServer_sortable_351RP","pagination":"EnaTableServer_pagination_3erRE","info":"EnaTableServer_info_2gbZL","perPageSelector":"EnaTableServer_perPageSelector_3GVN9"};
 
 /***/ }),
 
@@ -6349,7 +6349,7 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"44f658e2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Server.vue?vue&type=template&id=07265325&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a2be812c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Server.vue?vue&type=template&id=7186aa22&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_vm._t("filter"),_c('div',{class:[_vm.opts.classes.wrapper, _vm.$style.wrapper]},[_c('table',{class:[_vm.opts.classes.table, _vm.$style.table]},[_c('thead',[_c('tr',[_vm._l((_vm.columns),function(key){
 var _obj, _obj$1;
 return _c('th',{key:key,class:( _obj = {}, _obj[_vm.$style.sortable] = _vm.opts.sortable[key], _obj.sorted = _vm.sortKey === key, _obj[_vm.opts.columnsClasses[key]] = _vm.opts.columnsClasses[key] != null, _obj ),on:{"click":function($event){return _vm.sortBy({key: key})}}},[_vm._t('heading_' + key,[[_vm._v("\n                "+_vm._s(_vm._f("heading")(key,_vm.opts.headings))+"\n              ")]]),(_vm.opts.sortable[key])?_c('i',{class:( _obj$1 = {}, _obj$1[_vm.opts.classes.sort.none] = _vm.sortKey !== key || _vm.sortOrders[key] === null, _obj$1[_vm.opts.classes.sort[_vm.sortOrders[key]]] = _vm.sortKey === key, _obj$1 )}):_vm._e()],2)}),(_vm.opts.detailsRow)?_c('th',[_vm._t("heading_actions",[_vm._v("\n              Actions\n            ")])],2):_vm._e()],2)]),(_vm.loading)?_c('tbody',[_c('tr',[_c('td',{staticClass:"msg-row",attrs:{"colspan":_vm.colspan}},[_vm._t("loading",[_c('span',{domProps:{"innerHTML":_vm._s(_vm.opts.text.loading)}})])],2)])]):(_vm.data.length === 0)?_c('tbody',[_c('tr',[_c('td',{staticClass:"msg-row",attrs:{"colspan":_vm.colspan}},[_vm._t("no_data",[_c('span',{domProps:{"innerHTML":_vm._s(_vm.opts.text.noData)}})])],2)])]):_c('tbody',[_vm._l((_vm.data),function(entry,index){return [_c('tr',{key:'row_'+entry[_vm.opts.uniqueKey],class:_vm.computedRowClasses[index],attrs:{"data-id":entry[_vm.opts.uniqueKey]}},[_vm._l((_vm.columns),function(key){
@@ -6358,7 +6358,7 @@ return _c('td',{key:'cell_'+key,class:( _obj = {}, _obj[_vm.opts.columnsClasses[
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Server.vue?vue&type=template&id=07265325&
+// CONCATENATED MODULE: ./src/components/Server.vue?vue&type=template&id=7186aa22&
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js
 var define_property = __webpack_require__("85f2");
@@ -6666,16 +6666,16 @@ var es6_regexp_split = __webpack_require__("28a5");
     }
   }
 });
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"44f658e2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/mixins/Pagination.vue?vue&type=template&id=c65e8f70&
-var Paginationvue_type_template_id_c65e8f70_render = function () {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a2be812c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/mixins/Pagination.vue?vue&type=template&id=19816e18&
+var Paginationvue_type_template_id_19816e18_render = function () {
 var _obj, _obj$1, _obj$2, _obj$3;
 var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('ul',{class:[_vm.$style.pagination, _vm.classes.wrapper]},[_c('li',{class:( _obj = {}, _obj[_vm.$style.disabled] = _vm.currentPageValue === 1, _obj.disabled = _vm.currentPageValue === 1, _obj )},[_c('a',{attrs:{"href":"#","aria-label":_vm.text.previous || 'Previous',"title":_vm.text.previous || 'Previous'},on:{"click":function($event){$event.preventDefault();_vm.currentPageValue !== 1 && _vm.goToPage(_vm.currentPageValue-1)}}},[_c('span',{attrs:{"aria-hidden":"true"}},[_c('i',{class:_vm.classes.prev})]),_vm._v(_vm._s(_vm.text.prev))])]),_c('li',{class:( _obj$1 = {}, _obj$1[_vm.$style.active] = 1 === _vm.currentPageValue, _obj$1.active = 1 === _vm.currentPageValue, _obj$1 )},[_c('a',{attrs:{"href":"#","aria-label":"Page 1","title":"Page 1"},on:{"click":function($event){$event.preventDefault();return _vm.goToPage(1)}}},[_vm._v("\n        1\n      ")])]),(_vm.startPage > 2)?_c('li',[_c('span',[_vm._v("…")])]):_vm._e(),_vm._l((_vm.pagesToShow),function(page){
       var _obj;
 return _c('li',{key:page,class:( _obj = {}, _obj[_vm.$style.active] = page === _vm.currentPageValue, _obj.active = page === _vm.currentPageValue, _obj )},[_c('a',{attrs:{"href":"#","aria-label":("Page " + page),"title":("Page " + page)},on:{"click":function($event){$event.preventDefault();return _vm.goToPage(page)}}},[_vm._v(_vm._s(page))])])}),(_vm.endPage < _vm.totalPages - 1)?_c('li',[_c('span',[_vm._v("…")])]):_vm._e(),(_vm.totalPages > 1)?_c('li',{class:( _obj$2 = {}, _obj$2[_vm.$style.active] = _vm.totalPages === _vm.currentPageValue, _obj$2.active = _vm.totalPages === _vm.currentPageValue, _obj$2 )},[_c('a',{attrs:{"href":"#","aria-label":("Page " + _vm.totalPages),"title":("Page " + _vm.totalPages)},on:{"click":function($event){$event.preventDefault();return _vm.goToPage(_vm.totalPages)}}},[_vm._v(_vm._s(_vm.totalPages)+"\n      ")])]):_vm._e(),_c('li',{class:( _obj$3 = {}, _obj$3[_vm.$style.disabled] = _vm.currentPageValue === _vm.totalPages || _vm.totalPages === 0, _obj$3.disabled = _vm.currentPageValue === _vm.totalPages || _vm.totalPages === 0, _obj$3 )},[_c('a',{attrs:{"href":"#","aria-label":_vm.text.next || 'Next',"title":_vm.text.next || 'Next'},on:{"click":function($event){$event.preventDefault();(_vm.currentPageValue !== _vm.totalPages && _vm.totalPages !== 0) && _vm.goToPage(_vm.currentPageValue+1)}}},[_vm._v(_vm._s(_vm.text.next)),_c('span',{attrs:{"aria-hidden":"true"}},[_c('i',{class:_vm.classes.next})])])])],2),_c('div',{class:[_vm.$style.info, _vm.classes.info]},[(_vm.totalRows)?_c('div',[_c('span',[_vm._v("\n        "+_vm._s(_vm._f("format")(_vm.text.info.showing,_vm.startRow+1, _vm.endRow, _vm.totalRows))+"\n      ")]),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.perPageValue),expression:"perPageValue"}],class:[_vm.$style.perPageSelector, _vm.classes.formControl],on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.perPageValue=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},_vm._l((_vm.perPageValues),function(perPageValue){return _c('option',{key:perPageValue,domProps:{"value":perPageValue}},[_vm._v("\n          "+_vm._s(perPageValue)+"\n        ")])}),0),_c('span',[_vm._v("\n        "+_vm._s(_vm.text.info.records)+"\n      ")])]):_c('div',[_c('span',[_vm._v("\n        "+_vm._s(_vm.text.info.noRows)+"\n      ")])])])])}
-var Paginationvue_type_template_id_c65e8f70_staticRenderFns = []
+var Paginationvue_type_template_id_19816e18_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/mixins/Pagination.vue?vue&type=template&id=c65e8f70&
+// CONCATENATED MODULE: ./src/components/mixins/Pagination.vue?vue&type=template&id=19816e18&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.number.constructor.js
 var es6_number_constructor = __webpack_require__("c5f6");
@@ -7040,8 +7040,8 @@ function injectStyles (context) {
 
 var component = normalizeComponent(
   mixins_Paginationvue_type_script_lang_js_,
-  Paginationvue_type_template_id_c65e8f70_render,
-  Paginationvue_type_template_id_c65e8f70_staticRenderFns,
+  Paginationvue_type_template_id_19816e18_render,
+  Paginationvue_type_template_id_19816e18_staticRenderFns,
   false,
   injectStyles,
   null,
