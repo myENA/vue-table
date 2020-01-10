@@ -228,7 +228,7 @@ export default {
     computedRowClasses() {
       return this.data.map((row) => {
         const classes = {};
-        Object.keys(this.opts.rowClasses).forEach(prop => {
+        Object.keys(this.opts.rowClasses).forEach((prop) => {
           if (row[prop]) {
             classes[this.opts.rowClasses[prop]] = true;
           }

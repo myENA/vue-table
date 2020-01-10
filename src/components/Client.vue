@@ -1,6 +1,6 @@
 <template>
   <div>
-    <slot name="filter">
+    <slot name="filter" v-if="opts.search">
       <div>
         <div class="row">
           <div class="col-md-2">
@@ -354,7 +354,7 @@ export default {
     computedRowClasses() {
       return this.data.map((row) => {
         const classes = {};
-        Object.keys(this.opts.rowClasses).forEach(prop => {
+        Object.keys(this.opts.rowClasses).forEach((prop) => {
           if (row[prop]) {
             classes[this.opts.rowClasses[prop]] = true;
           }
@@ -386,7 +386,7 @@ export default {
         opts,
         {
           sortable,
-          search,
+          search: opts.search === false ? opts.search : search,
         }
       );
     },

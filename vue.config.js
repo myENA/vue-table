@@ -10,7 +10,7 @@ module.exports = {
     },
   },
   lintOnSave: false,
-  configureWebpack: (/*config*/) => {
+  configureWebpack: (/* config */) => {
     const customConfig = {
       plugins: [
         new webpack.ProvidePlugin({
