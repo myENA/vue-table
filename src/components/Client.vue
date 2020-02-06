@@ -465,8 +465,7 @@ export default {
       this.currentPage = 1;
     },
     filteredData() {
-      // go to first page when filtered data is returned
-      this.currentPage = 1;
+      this.resetCurrentPage();
       this.selectedRows = this.filteredData.reduce((acc, d) => {
         if (d.showSelect && d.selected) {
           acc.push(d[this.opts.uniqueKey]);
@@ -575,6 +574,13 @@ export default {
         } else {
           this.selectedRows.push(entry[this.opts.uniqueKey]);
         }
+      }
+    },
+    resetCurrentPage() {
+      // go to last page if current page is no longer valid
+      const lastPage = Math.max(1, Math.ceil(this.totalRows / this.perPage));
+      if (lastPage < this.currentPage) {
+        this.currentPage = lastPage;
       }
     },
   },
