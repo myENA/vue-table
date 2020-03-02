@@ -110,12 +110,13 @@
                 selected: selectedRowIds[entry[opts.uniqueKey]],
                 ...computedRowClasses[index],
               }"
-              @click="toggleSelected(entry)"
               >
               <td v-for="key in columns" :key="'cell_'+key"
               :class="{
                 [opts.columnsClasses[key]]: opts.columnsClasses[key] != null,
-              }">
+              }"
+              @click="toggleSelected(entry, key)"
+              >
                 <slot :name="'column_' + key" :row="entry" :index="index">
                   <component v-if="opts.templates[key]" :is="opts.templates[key]"
                     :data="entry" :column="key" :index="index">
@@ -323,6 +324,11 @@ export default {
          */
         editable: false,
         /**
+         * List of columns that should be disabled for click to select/deselect
+         * @type {Array}
+         */
+        nonSelectableColumns: [],
+        /**
          * The collator used for sorting
          * @type {Intl.Collator}
          */
@@ -354,7 +360,7 @@ export default {
     computedRowClasses() {
       return this.data.map((row) => {
         const classes = {};
-        Object.keys(this.opts.rowClasses).forEach(prop => {
+        Object.keys(this.opts.rowClasses).forEach((prop) => {
           if (row[prop]) {
             classes[this.opts.rowClasses[prop]] = true;
           }
@@ -566,8 +572,9 @@ export default {
       this.currentPage = currentPage;
       this.perPage = perPage;
     },
-    toggleSelected(entry) {
-      if (this.opts.editable && entry.showSelect) {
+    toggleSelected(entry, column) {
+      const isColumnDisabled = this.opts.nonSelectableColumns.includes(column);
+      if (this.opts.editable && entry.showSelect && !isColumnDisabled) {
         if (entry.selected) {
           const idx = this.selectedRows.indexOf(entry[this.opts.uniqueKey]);
           this.selectedRows.splice(idx, 1);

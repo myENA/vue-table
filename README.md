@@ -267,6 +267,11 @@ const MyView = new Vue({
          */
         editable: false,
         /**
+         * List of columns that should be disabled for click to select/deselect
+         * @type {Array}
+         */
+        nonSelectableColumns: [],
+        /**
          * Object (key, order) to sort table by on first load (on created)
          * @type {Object}
          */

@@ -90,6 +90,7 @@ export default {
       editable: true,
       groupBy: 'subregion',
       uniqueKey: 'alpha3Code',
+      nonSelectableColumns: ['population'],
     },
   }),
   async created() {
