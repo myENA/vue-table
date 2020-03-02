@@ -113,6 +113,7 @@
               >
               <td v-for="key in columns" :key="'cell_'+key"
               :class="{
+                [$style.selectable]: isColumnSelectable(entry, key),
                 [opts.columnsClasses[key]]: opts.columnsClasses[key] != null,
               }"
               @click="toggleSelected(entry, key)"
@@ -204,6 +205,9 @@
       min-height: 18px;
     }
   }
+}
+td.selectable:hover {
+  cursor: pointer;
 }
 th.sortable {
   cursor: pointer;
@@ -572,9 +576,14 @@ export default {
       this.currentPage = currentPage;
       this.perPage = perPage;
     },
+    isColumnNonSelectable(column) {
+      return this.opts.nonSelectableColumns.includes(column);
+    },
+    isColumnSelectable(entry, column) {
+      return this.opts.editable && entry.showSelect && !this.isColumnNonSelectable(column);
+    },
     toggleSelected(entry, column) {
-      const isColumnDisabled = this.opts.nonSelectableColumns.includes(column);
-      if (this.opts.editable && entry.showSelect && !isColumnDisabled) {
+      if (this.isColumnSelectable(entry, column)) {
         if (entry.selected) {
           const idx = this.selectedRows.indexOf(entry[this.opts.uniqueKey]);
           this.selectedRows.splice(idx, 1);
