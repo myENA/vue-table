@@ -261,6 +261,11 @@ export default {
   },
   watch: {
   },
+  mounted() {
+    if (this.opts.sortBy) {
+      this.sortBy(this.opts.sortBy);
+    }
+  },
   created() {
     if (this.initialFetch) {
       this.loadData();
