@@ -93,6 +93,7 @@
                 :perPageValues="opts.perPageValues"
                 :currentPage="currentPage"
                 :totalRows="totalRows"
+                :noPaginationOnCreate="opts.noPaginationOnCreate"
               />
             </td>
           </tr>
@@ -267,7 +268,7 @@ export default {
     }
   },
   created() {
-    if (this.initialFetch) {
+    if (this.opts.initialFetch) {
       this.loadData();
     }
   },
