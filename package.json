@@ -2,7 +2,7 @@
   "name": "@myena/vue-table",
   "description": "Vue Table components (client/server) used in ENA projects",
   "libname": "EnaTable",
-  "version": "0.12.1",
+  "version": "0.13.0",
   "repository": "github:myENA/vue-table",
   "keywords": [
     "vue",
