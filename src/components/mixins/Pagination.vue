@@ -149,6 +149,10 @@ export default {
       type: Number,
       required: true,
     },
+    noPaginationOnCreate: {
+      type: Boolean,
+      required: false,
+    },
   },
   data() {
     return {
@@ -210,7 +214,9 @@ export default {
     },
   },
   created() {
-    this.paginate();
+    if (!this.noPaginationOnCreate) {
+      this.paginate();
+    }
   },
   methods: {
     goToPage(page) {
