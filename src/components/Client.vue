@@ -474,14 +474,17 @@ export default {
       // go to first page when search query changes
       this.currentPage = 1;
     },
-    filteredData() {
-      this.resetCurrentPage();
-      this.selectedRows = this.filteredData.reduce((acc, d) => {
-        if (d.showSelect && d.selected) {
-          acc.push(d[this.opts.uniqueKey]);
-        }
-        return acc;
-      }, []);
+    filteredData: {
+      immediate: true,
+      handler() {
+        this.resetCurrentPage();
+        this.selectedRows = this.filteredData.reduce((acc, d) => {
+          if (d.showSelect && d.selected) {
+            acc.push(d[this.opts.uniqueKey]);
+          }
+          return acc;
+        }, []);
+      },
     },
     pageData() {
       Object.keys(this.pageData).forEach((group) => {
