@@ -91,6 +91,12 @@ export default {
       groupBy: 'subregion',
       uniqueKey: 'alpha3Code',
       nonSelectableColumns: ['population'],
+      // define which fields are search-able and how
+      search: {
+        name: true,
+        capital: true,
+        // population: (row, key, filter) => true,
+      },
     },
   }),
   async created() {
