@@ -1,7 +1,7 @@
 <template>
   <div>
     <slot name="filter">
-      <div>
+      <div v-if="hasSearchFields">
         <div class="row">
           <div class="col-md-2">
             <slot name="filters">
@@ -220,11 +220,16 @@ th.sortable {
 </style>
 
 <script type="text/javascript">
-import { mergeDeepRight } from 'ramda';
+import { mergeDeepRight, union, difference } from 'ramda';
 import filters from './mixins/filters';
 import defaultProps from './mixins/default-props';
 import methods from './mixins/methods';
 import Pagination from './mixins/Pagination.vue';
+
+const getFilterForData = (searchFields, everyMatch, someMatch, filter) =>
+  row =>
+    everyMatch.every(key => searchFields[key](row, key, filter)) &&
+    someMatch.some(key => String(row[key]).toLowerCase().indexOf(filter.keyword) > -1);
 
 /**
  * @module EnaTableClient
@@ -255,12 +260,16 @@ export default {
       default: () => ([]),
     },
     /**
-     * The search query string. If updated will filter the results by the value
-     * @type {String}
+     * The filter object. If updated will filter the results by the value
+     *
+     * @type {Object}
      */
-    searchQuery: {
-      type: String,
-      default: '',
+    filter: {
+      type: Object,
+      default: () => ({
+        // The search query string. If updated will filter the results by the value
+        keyword: '',
+      }),
     },
     /**
      * Loading indicator. If true, will display the `loadingMsg` instead of the body
@@ -387,7 +396,7 @@ export default {
           sortable[key] = opts.sortable[key] || true;
         }
         if (typeof opts.search[key] === 'undefined') {
-          search[key] = true;
+          search[key] = false;
         } else {
           search[key] = opts.search[key];
         }
@@ -403,19 +412,20 @@ export default {
     collapseAllGroups() {
       return this.opts.collapseAllGroups;
     },
+    hasSearchFields() {
+      return Object.values(this.opts.search).some(v => v === true);
+    },
     filteredData() {
-      let { data } = this;
-      const searchQuery = this.searchBy && this.searchBy.toLowerCase();
-      if (searchQuery) {
-        data = data.filter(row =>
-          Object.keys(this.opts.search).some((key) => {
-            if (typeof this.opts.search[key] === 'function') {
-              return this.opts.search[key](row, key, searchQuery);
-            }
-            return String(row[key]).toLowerCase().indexOf(searchQuery) > -1;
-          }));
+      const { data } = this;
+      const filter = this.getFilter(this.filter, this.searchBy);
+      // at least one of the fields with "true" should match the record
+      const someMatch = this.getSomeMatchFields(this.opts.search);
+      // every other "function" field should match the function
+      const everyMatch = this.getEveryMatchFields(this.opts.search);
+      if (someMatch.length === 0 && everyMatch.length === 0) {
+        return data;
       }
-      return data;
+      return data.filter(getFilterForData(this.opts.search, someMatch, everyMatch, filter));
     },
     pageData() {
       const { sortKey } = this;
@@ -467,24 +477,24 @@ export default {
     },
   },
   watch: {
-    searchQuery(query) {
-      this.searchBy = query;
-    },
-    searchBy() {
+    filter() {
       // go to first page when search query changes
       this.currentPage = 1;
     },
-    filteredData: {
+    data: {
       immediate: true,
       handler() {
-        this.resetCurrentPage();
-        this.selectedRows = this.filteredData.reduce((acc, d) => {
+        this.selectedRows = this.data.reduce((acc, d) => {
           if (d.showSelect && d.selected) {
             acc.push(d[this.opts.uniqueKey]);
           }
           return acc;
         }, []);
       },
+    },
+    filteredData() {
+      this.setAllSelected();
+      this.resetCurrentPage();
     },
     pageData() {
       Object.keys(this.pageData).forEach((group) => {
@@ -503,7 +513,7 @@ export default {
         acc[id] = true;
         return acc;
       }, {});
-      const selectedData = this.filteredData.reduce((data, row) => {
+      const selectedData = this.data.reduce((data, row) => {
         if (row.showSelect) {
           const selectedRow = selected[row[this.opts.uniqueKey]] || false;
           Object.assign(row, {
@@ -531,6 +541,31 @@ export default {
     }
   },
   methods: {
+    getFilter(filter, searchBy) {
+      let { keyword = '' } = filter;
+      if (!keyword) {
+        keyword = searchBy;
+      }
+      keyword = keyword.toLowerCase();
+      return { ...filter, keyword };
+    },
+
+    getEveryMatchFields(searchFields) {
+      return Object.keys(searchFields).reduce((fields, key) => {
+        if (searchFields[key] === true) {
+          fields.push(key);
+        }
+        return fields;
+      }, []);
+    },
+    getSomeMatchFields(searchFields) {
+      return Object.keys(searchFields).reduce((fields, key) => {
+        if (typeof searchFields[key] === 'function') {
+          fields.push(key);
+        }
+        return fields;
+      }, []);
+    },
     search(value) {
       this.searchBy = value;
     },
@@ -560,20 +595,25 @@ export default {
       this.shown = Object.assign({}, this.shown);
     },
     selectAll() {
+      const selectableRows = this.filteredData.reduce((acc, d) => {
+        if (d.showSelect) {
+          acc.push(d[this.opts.uniqueKey]);
+        }
+        return acc;
+      }, []);
       if (this.allSelected) {
-        this.selectedRows = [];
+        this.selectedRows = difference(this.selectedRows, selectableRows);
       } else {
-        this.selectedRows = this.filteredData.reduce((acc, d) => {
-          if (d.showSelect) {
-            acc.push(d[this.opts.uniqueKey]);
-          }
-          return acc;
-        }, []);
+        this.selectedRows = union(this.selectedRows, selectableRows);
       }
     },
     setAllSelected() {
-      this.allSelected = this.selectedRows.length > 0
-        && this.selectedRows.length === this.filteredData.filter(d => d.showSelect).length;
+      if (this.selectedRows.length === 0) {
+        this.allSelected = false;
+      } else {
+        this.allSelected = this.filteredData.filter(d => d.showSelect).length ===
+          this.filteredData.filter(d => d.selected).length;
+      }
     },
     paginate({ currentPage, perPage }) {
       this.currentPage = currentPage;
