@@ -2754,6 +2754,34 @@ module.exports = function (exec, skipClosing) {
 
 /***/ }),
 
+/***/ "504c":
+/***/ (function(module, exports, __webpack_require__) {
+
+var DESCRIPTORS = __webpack_require__("9e1e");
+var getKeys = __webpack_require__("0d58");
+var toIObject = __webpack_require__("6821");
+var isEnum = __webpack_require__("52a7").f;
+module.exports = function (isEntries) {
+  return function (it) {
+    var O = toIObject(it);
+    var keys = getKeys(O);
+    var length = keys.length;
+    var i = 0;
+    var result = [];
+    var key;
+    while (length > i) {
+      key = keys[i++];
+      if (!DESCRIPTORS || isEnum.call(O, key)) {
+        result.push(isEntries ? [key, O[key]] : O[key]);
+      }
+    }
+    return result;
+  };
+};
+
+
+/***/ }),
+
 /***/ "50ed":
 /***/ (function(module, exports) {
 
@@ -3833,6 +3861,22 @@ module.exports = {};
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__("454f");
+
+/***/ }),
+
+/***/ "8615":
+/***/ (function(module, exports, __webpack_require__) {
+
+// https://github.com/tc39/proposal-object-values-entries
+var $export = __webpack_require__("5ca1");
+var $values = __webpack_require__("504c")(false);
+
+$export($export.S, 'Object', {
+  values: function values(it) {
+    return $values(it);
+  }
+});
+
 
 /***/ }),
 
@@ -7125,7 +7169,7 @@ var web_dom_iterable = __webpack_require__("ac6a");
 var external_vue_ = __webpack_require__("8bbf");
 var external_vue_default = /*#__PURE__*/__webpack_require__.n(external_vue_);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"80d340a2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Server.vue?vue&type=template&id=786ef77c&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"6b41858a-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Server.vue?vue&type=template&id=786ef77c&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_vm._t("filter"),_c('div',{class:[_vm.opts.classes.wrapper, _vm.$style.wrapper]},[_c('table',{class:[_vm.opts.classes.table, _vm.$style.table]},[_c('thead',[_c('tr',[_vm._l((_vm.columns),function(key){
 var _obj, _obj$1;
 return _c('th',{key:key,class:( _obj = {}, _obj[_vm.$style.sortable] = _vm.opts.sortable[key], _obj.sorted = _vm.sortKey === key, _obj[_vm.opts.columnsClasses[key]] = _vm.opts.columnsClasses[key] != null, _obj ),on:{"click":function($event){return _vm.sortBy({key: key})}}},[_vm._t('heading_' + key,[[_vm._v("\n                "+_vm._s(_vm._f("heading")(key,_vm.opts.headings))+"\n              ")]]),(_vm.opts.sortable[key])?_c('i',{class:( _obj$1 = {}, _obj$1[_vm.opts.classes.sort.none] = _vm.sortKey !== key || _vm.sortOrders[key] === null, _obj$1[_vm.opts.classes.sort[_vm.sortOrders[key]]] = _vm.sortKey === key, _obj$1 )}):_vm._e()],2)}),(_vm.opts.detailsRow)?_c('th',[_vm._t("heading_actions",[_vm._v("\n              Actions\n            ")])],2):_vm._e()],2)]),(_vm.loading)?_c('tbody',[_c('tr',[_c('td',{staticClass:"msg-row",attrs:{"colspan":_vm.colspan}},[_vm._t("loading",[_c('span',{domProps:{"innerHTML":_vm._s(_vm.opts.text.loading)}})])],2)])]):(_vm.data.length === 0)?_c('tbody',[_c('tr',[_c('td',{staticClass:"msg-row",attrs:{"colspan":_vm.colspan}},[_vm._t("no_data",[_c('span',{domProps:{"innerHTML":_vm._s(_vm.opts.text.noData)}})])],2)])]):_c('tbody',[_vm._l((_vm.data),function(entry,index){return [_c('tr',{key:'row_'+entry[_vm.opts.uniqueKey],class:_vm.computedRowClasses[index],attrs:{"data-id":entry[_vm.opts.uniqueKey]}},[_vm._l((_vm.columns),function(key){
@@ -7433,7 +7477,7 @@ var es6_regexp_split = __webpack_require__("28a5");
     }
   }
 });
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"80d340a2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/mixins/Pagination.vue?vue&type=template&id=0a3e1a07&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"6b41858a-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/mixins/Pagination.vue?vue&type=template&id=0a3e1a07&
 var Paginationvue_type_template_id_0a3e1a07_render = function () {
 var _obj, _obj$1, _obj$2, _obj$3;
 var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('ul',{class:[_vm.$style.pagination, _vm.classes.wrapper]},[_c('li',{class:( _obj = {}, _obj[_vm.$style.disabled] = _vm.currentPageValue === 1, _obj.disabled = _vm.currentPageValue === 1, _obj )},[_c('a',{attrs:{"href":"#","aria-label":_vm.text.previous || 'Previous',"title":_vm.text.previous || 'Previous'},on:{"click":function($event){$event.preventDefault();_vm.currentPageValue !== 1 && _vm.goToPage(_vm.currentPageValue-1)}}},[_c('span',{attrs:{"aria-hidden":"true"}},[_c('i',{class:_vm.classes.prev})]),_vm._v(_vm._s(_vm.text.prev))])]),_c('li',{class:( _obj$1 = {}, _obj$1[_vm.$style.active] = 1 === _vm.currentPageValue, _obj$1.active = 1 === _vm.currentPageValue, _obj$1 )},[_c('a',{attrs:{"href":"#","aria-label":"Page 1","title":"Page 1"},on:{"click":function($event){$event.preventDefault();return _vm.goToPage(1)}}},[_vm._v("\n        1\n      ")])]),(_vm.startPage > 2)?_c('li',[_c('span',[_vm._v("…")])]):_vm._e(),_vm._l((_vm.pagesToShow),function(page){
@@ -8288,8 +8332,8 @@ var Server_component = normalizeComponent(
 )
 
 /* harmony default export */ var Server = (Server_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"80d340a2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Client.vue?vue&type=template&id=2a7d1648&
-var Clientvue_type_template_id_2a7d1648_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_vm._t("filter",[_c('div',[_c('div',{staticClass:"row"},[_c('div',{staticClass:"col-md-2"},[_vm._t("filters",[_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Search")]),_c('div',{staticClass:"input-group"},[_c('input',{staticClass:"form-control",attrs:{"type":"text","placeholder":"Search by keyword"},on:{"input":function($event){return _vm.search($event.target.value)}}}),_vm._m(0)])])])],2),_c('div',{staticClass:"col-md-10"},[_c('div',{staticClass:"pull-right"},[_c('div',{staticClass:"form-group"},[_c('label',[_vm._v(" ")]),_c('div',[_vm._t("buttons")],2)])])])])])]),_c('div',{class:[_vm.opts.classes.wrapper, _vm.$style.wrapper]},[_c('table',{class:[_vm.opts.classes.table, _vm.$style.table]},[_c('thead',[_c('tr',[_vm._l((_vm.columns),function(key){
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"6b41858a-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Client.vue?vue&type=template&id=0db5b318&
+var Clientvue_type_template_id_0db5b318_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_vm._t("filter",[(_vm.hasSearchFields)?_c('div',[_c('div',{staticClass:"row"},[_c('div',{staticClass:"col-md-2"},[_vm._t("filters",[_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Search")]),_c('div',{staticClass:"input-group"},[_c('input',{staticClass:"form-control",attrs:{"type":"text","placeholder":"Search by keyword"},on:{"input":function($event){return _vm.search($event.target.value)}}}),_vm._m(0)])])])],2),_c('div',{staticClass:"col-md-10"},[_c('div',{staticClass:"pull-right"},[_c('div',{staticClass:"form-group"},[_c('label',[_vm._v(" ")]),_c('div',[_vm._t("buttons")],2)])])])])]):_vm._e()]),_c('div',{class:[_vm.opts.classes.wrapper, _vm.$style.wrapper]},[_c('table',{class:[_vm.opts.classes.table, _vm.$style.table]},[_c('thead',[_c('tr',[_vm._l((_vm.columns),function(key){
 var _obj, _obj$1;
 return _c('th',{key:key,class:( _obj = {}, _obj[_vm.$style.sortable] = _vm.opts.sortable[key], _obj.sorted = _vm.sortKey === key, _obj[_vm.opts.columnsClasses[key]] = _vm.opts.columnsClasses[key] != null, _obj ),on:{"click":function($event){return _vm.sortBy({key: key})}}},[_vm._t('heading_' + key,[(key === 'select')?[_c('div',{class:[_vm.opts.classes.checkbox, _vm.$style.checkbox]},[_c('label',[_c('input',{staticClass:"check-all",attrs:{"type":"checkbox","disabled":!_vm.opts.editable},domProps:{"checked":_vm.allSelected},on:{"change":_vm.selectAll}})])])]:[_vm._v("\n                "+_vm._s(_vm._f("heading")(key,_vm.opts.headings))+"\n              ")]]),(_vm.opts.sortable[key])?_c('i',{class:( _obj$1 = {}, _obj$1[_vm.opts.classes.sort.none] = _vm.sortKey !== key || _vm.sortOrders[key] === null, _obj$1[_vm.opts.classes.sort[_vm.sortOrders[key]]] = _vm.sortKey === key, _obj$1 )}):_vm._e()],2)}),(_vm.opts.detailsRow)?_c('th',[_vm._t("heading_actions",[_vm._v("\n              Actions\n            ")])],2):_vm._e()],2)]),(_vm.loading)?_c('tbody',[_c('tr',[_c('td',{staticClass:"msg-row",attrs:{"colspan":_vm.colspan}},[_vm._t("loading",[_c('span',{domProps:{"innerHTML":_vm._s(_vm.opts.text.loading)}})])],2)])]):(_vm.data.length === 0)?_c('tbody',[_c('tr',[_c('td',{staticClass:"msg-row",attrs:{"colspan":_vm.colspan}},[_vm._t("no_data",[_c('span',{domProps:{"innerHTML":_vm._s(_vm.opts.text.noData)}})])],2)])]):(_vm.filteredData.length === 0)?_c('tbody',[_c('tr',[_c('td',{staticClass:"msg-row",attrs:{"colspan":_vm.colspan}},[_vm._t("empty_results",[_c('span',{domProps:{"innerHTML":_vm._s(_vm.opts.text.emptyResults)}})])],2)])]):_vm._l((_vm.pageData),function(group,groupKey){
               var _obj;
@@ -8298,10 +8342,10 @@ return _c('tbody',{key:groupKey},[(groupKey !== 'all')?_c('tr',[_c('th',{attrs:{
               _vm.computedRowClasses[index]),attrs:{"data-id":entry[_vm.opts.uniqueKey]}},[_vm._l((_vm.columns),function(key){
             var _obj;
 return _c('td',{key:'cell_'+key,class:( _obj = {}, _obj[_vm.$style.selectable] = _vm.isColumnSelectable(entry, key), _obj[_vm.opts.columnsClasses[key]] = _vm.opts.columnsClasses[key] != null, _obj ),on:{"click":function($event){return _vm.toggleSelected(entry, key)}}},[_vm._t('column_' + key,[(_vm.opts.templates[key])?_c(_vm.opts.templates[key],{tag:"component",attrs:{"data":entry,"column":key,"index":index}}):(key === 'select')?[(entry.showSelect)?_c('div',{class:[_vm.opts.classes.checkbox, _vm.$style.checkbox]},[_c('label',[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.selectedRows),expression:"selectedRows"}],key:'select-'+entry[_vm.opts.uniqueKey],attrs:{"type":"checkbox","name":"selectedRows","disabled":!_vm.opts.editable},domProps:{"value":entry[_vm.opts.uniqueKey],"checked":Array.isArray(_vm.selectedRows)?_vm._i(_vm.selectedRows,entry[_vm.opts.uniqueKey])>-1:(_vm.selectedRows)},on:{"change":function($event){var $$a=_vm.selectedRows,$$el=$event.target,$$c=$$el.checked?(true):(false);if(Array.isArray($$a)){var $$v=entry[_vm.opts.uniqueKey],$$i=_vm._i($$a,$$v);if($$el.checked){$$i<0&&(_vm.selectedRows=$$a.concat([$$v]))}else{$$i>-1&&(_vm.selectedRows=$$a.slice(0,$$i).concat($$a.slice($$i+1)))}}else{_vm.selectedRows=$$c}}}})])]):_vm._e()]:[_vm._v(_vm._s(entry[key]))]],{"row":entry,"index":index})],2)}),(_vm.opts.detailsRow)?_c('td',[_vm._t("column_actions_pre",null,{"row":entry}),_vm._t("column_actions",[_c('a',{attrs:{"href":"#"},domProps:{"innerHTML":_vm._s(_vm.getToggleText(entry))},on:{"click":function($event){$event.preventDefault();return _vm.toggleRow(entry[_vm.opts.uniqueKey])}}})],{"row":entry}),_vm._t("column_actions_post",null,{"row":entry})],2):_vm._e()],2):_vm._e(),(_vm.opts.detailsRow && _vm.isShown(groupKey))?_c('tr',{directives:[{name:"show",rawName:"v-show",value:(_vm.isRowExpanded(entry[_vm.opts.uniqueKey])),expression:"isRowExpanded(entry[opts.uniqueKey])"}],key:'details_row_'+entry[_vm.opts.uniqueKey],attrs:{"data-details":entry[_vm.opts.uniqueKey]}},[_c('td',{attrs:{"colspan":_vm.colspan}},[_vm._t("details_row",null,{"row":entry})],2)]):_vm._e()]})],2)}),(_vm.opts.pagination && _vm.totalRows)?_c('tfoot',[_c('tr',[_c('td',{attrs:{"colspan":_vm.colspan}},[_c('Pagination',{attrs:{"classes":_vm.opts.classes.pagination,"text":_vm.opts.text.pagination,"pageInterval":_vm.opts.pageInterval,"perPage":_vm.opts.perPage,"perPageValues":_vm.opts.perPageValues,"currentPage":_vm.currentPage,"totalRows":_vm.totalRows},on:{"paginate":_vm.paginate}})],1)])]):_vm._e()],2)])],2)}
-var Clientvue_type_template_id_2a7d1648_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{staticClass:"input-group-addon"},[_c('i',{staticClass:"fa fa-search"})])}]
+var Clientvue_type_template_id_0db5b318_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{staticClass:"input-group-addon"},[_c('i',{staticClass:"fa fa-search"})])}]
 
 
-// CONCATENATED MODULE: ./src/components/Client.vue?vue&type=template&id=2a7d1648&
+// CONCATENATED MODULE: ./src/components/Client.vue?vue&type=template&id=0db5b318&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es7.array.includes.js
 var es7_array_includes = __webpack_require__("6762");
@@ -8318,8 +8362,8 @@ var get_own_property_symbols = __webpack_require__("e265");
 var get_own_property_symbols_default = /*#__PURE__*/__webpack_require__.n(get_own_property_symbols);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/object/keys.js
-var keys = __webpack_require__("a4bb");
-var keys_default = /*#__PURE__*/__webpack_require__.n(keys);
+var object_keys = __webpack_require__("a4bb");
+var keys_default = /*#__PURE__*/__webpack_require__.n(object_keys);
 
 // CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js
 
@@ -8347,6 +8391,9 @@ function _objectSpread(target) {
 }
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.array.sort.js
 var es6_array_sort = __webpack_require__("55dd");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es7.object.values.js
+var es7_object_values = __webpack_require__("8615");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.search.js
 var es6_regexp_search = __webpack_require__("386d");
@@ -8582,6 +8629,1257 @@ var mergeDeepRight_mergeDeepRight = /*#__PURE__*/_curry2(function mergeDeepRight
   }, lObj, rObj);
 });
 /* harmony default export */ var es_mergeDeepRight = (mergeDeepRight_mergeDeepRight);
+// CONCATENATED MODULE: ./node_modules/ramda/es/internal/_arrayFromIterator.js
+function _arrayFromIterator(iter) {
+  var list = [];
+  var next;
+  while (!(next = iter.next()).done) {
+    list.push(next.value);
+  }
+  return list;
+}
+// CONCATENATED MODULE: ./node_modules/ramda/es/internal/_includesWith.js
+function _includesWith(pred, x, list) {
+  var idx = 0;
+  var len = list.length;
+
+  while (idx < len) {
+    if (pred(x, list[idx])) {
+      return true;
+    }
+    idx += 1;
+  }
+  return false;
+}
+// CONCATENATED MODULE: ./node_modules/ramda/es/internal/_functionName.js
+function _functionName(f) {
+  // String(x => x) evaluates to "x => x", so the pattern may not match.
+  var match = String(f).match(/^function (\w*)/);
+  return match == null ? '' : match[1];
+}
+// CONCATENATED MODULE: ./node_modules/ramda/es/internal/_objectIs.js
+// Based on https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+function _objectIs(a, b) {
+  // SameValue algorithm
+  if (a === b) {
+    // Steps 1-5, 7-10
+    // Steps 6.b-6.e: +0 != -0
+    return a !== 0 || 1 / a === 1 / b;
+  } else {
+    // Step 6.a: NaN == NaN
+    return a !== a && b !== b;
+  }
+}
+
+/* harmony default export */ var internal_objectIs = (typeof Object.is === 'function' ? Object.is : _objectIs);
+// CONCATENATED MODULE: ./node_modules/ramda/es/internal/_isArguments.js
+
+
+var _isArguments_toString = Object.prototype.toString;
+var _isArguments_isArguments = /*#__PURE__*/function () {
+  return _isArguments_toString.call(arguments) === '[object Arguments]' ? function _isArguments(x) {
+    return _isArguments_toString.call(x) === '[object Arguments]';
+  } : function _isArguments(x) {
+    return _has('callee', x);
+  };
+}();
+
+/* harmony default export */ var internal_isArguments = (_isArguments_isArguments);
+// CONCATENATED MODULE: ./node_modules/ramda/es/keys.js
+
+
+
+
+// cover IE < 9 keys issues
+var hasEnumBug = ! /*#__PURE__*/{ toString: null }.propertyIsEnumerable('toString');
+var nonEnumerableProps = ['constructor', 'valueOf', 'isPrototypeOf', 'toString', 'propertyIsEnumerable', 'hasOwnProperty', 'toLocaleString'];
+// Safari bug
+var hasArgsEnumBug = /*#__PURE__*/function () {
+  'use strict';
+
+  return arguments.propertyIsEnumerable('length');
+}();
+
+var contains = function contains(list, item) {
+  var idx = 0;
+  while (idx < list.length) {
+    if (list[idx] === item) {
+      return true;
+    }
+    idx += 1;
+  }
+  return false;
+};
+
+/**
+ * Returns a list containing the names of all the enumerable own properties of
+ * the supplied object.
+ * Note that the order of the output array is not guaranteed to be consistent
+ * across different JS platforms.
+ *
+ * @func
+ * @memberOf R
+ * @since v0.1.0
+ * @category Object
+ * @sig {k: v} -> [k]
+ * @param {Object} obj The object to extract properties from
+ * @return {Array} An array of the object's own properties.
+ * @see R.keysIn, R.values
+ * @example
+ *
+ *      R.keys({a: 1, b: 2, c: 3}); //=> ['a', 'b', 'c']
+ */
+var keys_keys = typeof Object.keys === 'function' && !hasArgsEnumBug ? /*#__PURE__*/_curry1(function keys(obj) {
+  return Object(obj) !== obj ? [] : Object.keys(obj);
+}) : /*#__PURE__*/_curry1(function keys(obj) {
+  if (Object(obj) !== obj) {
+    return [];
+  }
+  var prop, nIdx;
+  var ks = [];
+  var checkArgsLength = hasArgsEnumBug && internal_isArguments(obj);
+  for (prop in obj) {
+    if (_has(prop, obj) && (!checkArgsLength || prop !== 'length')) {
+      ks[ks.length] = prop;
+    }
+  }
+  if (hasEnumBug) {
+    nIdx = nonEnumerableProps.length - 1;
+    while (nIdx >= 0) {
+      prop = nonEnumerableProps[nIdx];
+      if (_has(prop, obj) && !contains(ks, prop)) {
+        ks[ks.length] = prop;
+      }
+      nIdx -= 1;
+    }
+  }
+  return ks;
+});
+/* harmony default export */ var es_keys = (keys_keys);
+// CONCATENATED MODULE: ./node_modules/ramda/es/type.js
+
+
+/**
+ * Gives a single-word string description of the (native) type of a value,
+ * returning such answers as 'Object', 'Number', 'Array', or 'Null'. Does not
+ * attempt to distinguish user Object types any further, reporting them all as
+ * 'Object'.
+ *
+ * @func
+ * @memberOf R
+ * @since v0.8.0
+ * @category Type
+ * @sig (* -> {*}) -> String
+ * @param {*} val The value to test
+ * @return {String}
+ * @example
+ *
+ *      R.type({}); //=> "Object"
+ *      R.type(1); //=> "Number"
+ *      R.type(false); //=> "Boolean"
+ *      R.type('s'); //=> "String"
+ *      R.type(null); //=> "Null"
+ *      R.type([]); //=> "Array"
+ *      R.type(/[A-z]/); //=> "RegExp"
+ *      R.type(() => {}); //=> "Function"
+ *      R.type(undefined); //=> "Undefined"
+ */
+var type_type = /*#__PURE__*/_curry1(function type(val) {
+  return val === null ? 'Null' : val === undefined ? 'Undefined' : Object.prototype.toString.call(val).slice(8, -1);
+});
+/* harmony default export */ var es_type = (type_type);
+// CONCATENATED MODULE: ./node_modules/ramda/es/internal/_equals.js
+
+
+
+
+
+
+
+
+/**
+ * private _uniqContentEquals function.
+ * That function is checking equality of 2 iterator contents with 2 assumptions
+ * - iterators lengths are the same
+ * - iterators values are unique
+ *
+ * false-positive result will be returned for comparision of, e.g.
+ * - [1,2,3] and [1,2,3,4]
+ * - [1,1,1] and [1,2,3]
+ * */
+
+function _uniqContentEquals(aIterator, bIterator, stackA, stackB) {
+  var a = _arrayFromIterator(aIterator);
+  var b = _arrayFromIterator(bIterator);
+
+  function eq(_a, _b) {
+    return _equals(_a, _b, stackA.slice(), stackB.slice());
+  }
+
+  // if *a* array contains any element that is not included in *b*
+  return !_includesWith(function (b, aItem) {
+    return !_includesWith(eq, aItem, b);
+  }, b, a);
+}
+
+function _equals(a, b, stackA, stackB) {
+  if (internal_objectIs(a, b)) {
+    return true;
+  }
+
+  var typeA = es_type(a);
+
+  if (typeA !== es_type(b)) {
+    return false;
+  }
+
+  if (a == null || b == null) {
+    return false;
+  }
+
+  if (typeof a['fantasy-land/equals'] === 'function' || typeof b['fantasy-land/equals'] === 'function') {
+    return typeof a['fantasy-land/equals'] === 'function' && a['fantasy-land/equals'](b) && typeof b['fantasy-land/equals'] === 'function' && b['fantasy-land/equals'](a);
+  }
+
+  if (typeof a.equals === 'function' || typeof b.equals === 'function') {
+    return typeof a.equals === 'function' && a.equals(b) && typeof b.equals === 'function' && b.equals(a);
+  }
+
+  switch (typeA) {
+    case 'Arguments':
+    case 'Array':
+    case 'Object':
+      if (typeof a.constructor === 'function' && _functionName(a.constructor) === 'Promise') {
+        return a === b;
+      }
+      break;
+    case 'Boolean':
+    case 'Number':
+    case 'String':
+      if (!(typeof a === typeof b && internal_objectIs(a.valueOf(), b.valueOf()))) {
+        return false;
+      }
+      break;
+    case 'Date':
+      if (!internal_objectIs(a.valueOf(), b.valueOf())) {
+        return false;
+      }
+      break;
+    case 'Error':
+      return a.name === b.name && a.message === b.message;
+    case 'RegExp':
+      if (!(a.source === b.source && a.global === b.global && a.ignoreCase === b.ignoreCase && a.multiline === b.multiline && a.sticky === b.sticky && a.unicode === b.unicode)) {
+        return false;
+      }
+      break;
+  }
+
+  var idx = stackA.length - 1;
+  while (idx >= 0) {
+    if (stackA[idx] === a) {
+      return stackB[idx] === b;
+    }
+    idx -= 1;
+  }
+
+  switch (typeA) {
+    case 'Map':
+      if (a.size !== b.size) {
+        return false;
+      }
+
+      return _uniqContentEquals(a.entries(), b.entries(), stackA.concat([a]), stackB.concat([b]));
+    case 'Set':
+      if (a.size !== b.size) {
+        return false;
+      }
+
+      return _uniqContentEquals(a.values(), b.values(), stackA.concat([a]), stackB.concat([b]));
+    case 'Arguments':
+    case 'Array':
+    case 'Object':
+    case 'Boolean':
+    case 'Number':
+    case 'String':
+    case 'Date':
+    case 'Error':
+    case 'RegExp':
+    case 'Int8Array':
+    case 'Uint8Array':
+    case 'Uint8ClampedArray':
+    case 'Int16Array':
+    case 'Uint16Array':
+    case 'Int32Array':
+    case 'Uint32Array':
+    case 'Float32Array':
+    case 'Float64Array':
+    case 'ArrayBuffer':
+      break;
+    default:
+      // Values of other types are only equal if identical.
+      return false;
+  }
+
+  var keysA = es_keys(a);
+  if (keysA.length !== es_keys(b).length) {
+    return false;
+  }
+
+  var extendedStackA = stackA.concat([a]);
+  var extendedStackB = stackB.concat([b]);
+
+  idx = keysA.length - 1;
+  while (idx >= 0) {
+    var key = keysA[idx];
+    if (!(_has(key, b) && _equals(b[key], a[key], extendedStackA, extendedStackB))) {
+      return false;
+    }
+    idx -= 1;
+  }
+  return true;
+}
+// CONCATENATED MODULE: ./node_modules/ramda/es/equals.js
+
+
+
+/**
+ * Returns `true` if its arguments are equivalent, `false` otherwise. Handles
+ * cyclical data structures.
+ *
+ * Dispatches symmetrically to the `equals` methods of both arguments, if
+ * present.
+ *
+ * @func
+ * @memberOf R
+ * @since v0.15.0
+ * @category Relation
+ * @sig a -> b -> Boolean
+ * @param {*} a
+ * @param {*} b
+ * @return {Boolean}
+ * @example
+ *
+ *      R.equals(1, 1); //=> true
+ *      R.equals(1, '1'); //=> false
+ *      R.equals([1, 2, 3], [1, 2, 3]); //=> true
+ *
+ *      const a = {}; a.v = a;
+ *      const b = {}; b.v = b;
+ *      R.equals(a, b); //=> true
+ */
+var equals_equals = /*#__PURE__*/_curry2(function equals(a, b) {
+  return _equals(a, b, [], []);
+});
+/* harmony default export */ var es_equals = (equals_equals);
+// CONCATENATED MODULE: ./node_modules/ramda/es/internal/_indexOf.js
+
+
+function _indexOf(list, a, idx) {
+  var inf, item;
+  // Array.prototype.indexOf doesn't exist below IE9
+  if (typeof list.indexOf === 'function') {
+    switch (typeof a) {
+      case 'number':
+        if (a === 0) {
+          // manually crawl the list to distinguish between +0 and -0
+          inf = 1 / a;
+          while (idx < list.length) {
+            item = list[idx];
+            if (item === 0 && 1 / item === inf) {
+              return idx;
+            }
+            idx += 1;
+          }
+          return -1;
+        } else if (a !== a) {
+          // NaN
+          while (idx < list.length) {
+            item = list[idx];
+            if (typeof item === 'number' && item !== item) {
+              return idx;
+            }
+            idx += 1;
+          }
+          return -1;
+        }
+        // non-zero numbers can utilise Set
+        return list.indexOf(a, idx);
+
+      // all these types can utilise Set
+      case 'string':
+      case 'boolean':
+      case 'function':
+      case 'undefined':
+        return list.indexOf(a, idx);
+
+      case 'object':
+        if (a === null) {
+          // null can utilise Set
+          return list.indexOf(a, idx);
+        }
+    }
+  }
+  // anything else not covered above, defer to R.equals
+  while (idx < list.length) {
+    if (es_equals(list[idx], a)) {
+      return idx;
+    }
+    idx += 1;
+  }
+  return -1;
+}
+// CONCATENATED MODULE: ./node_modules/ramda/es/internal/_includes.js
+
+
+function _includes(a, list) {
+  return _indexOf(list, a, 0) >= 0;
+}
+// CONCATENATED MODULE: ./node_modules/ramda/es/internal/_Set.js
+
+
+var _Set = /*#__PURE__*/function () {
+  function _Set() {
+    /* globals Set */
+    this._nativeSet = typeof Set === 'function' ? new Set() : null;
+    this._items = {};
+  }
+
+  // until we figure out why jsdoc chokes on this
+  // @param item The item to add to the Set
+  // @returns {boolean} true if the item did not exist prior, otherwise false
+  //
+  _Set.prototype.add = function (item) {
+    return !hasOrAdd(item, true, this);
+  };
+
+  //
+  // @param item The item to check for existence in the Set
+  // @returns {boolean} true if the item exists in the Set, otherwise false
+  //
+  _Set.prototype.has = function (item) {
+    return hasOrAdd(item, false, this);
+  };
+
+  //
+  // Combines the logic for checking whether an item is a member of the set and
+  // for adding a new item to the set.
+  //
+  // @param item       The item to check or add to the Set instance.
+  // @param shouldAdd  If true, the item will be added to the set if it doesn't
+  //                   already exist.
+  // @param set        The set instance to check or add to.
+  // @return {boolean} true if the item already existed, otherwise false.
+  //
+  return _Set;
+}();
+
+function hasOrAdd(item, shouldAdd, set) {
+  var type = typeof item;
+  var prevSize, newSize;
+  switch (type) {
+    case 'string':
+    case 'number':
+      // distinguish between +0 and -0
+      if (item === 0 && 1 / item === -Infinity) {
+        if (set._items['-0']) {
+          return true;
+        } else {
+          if (shouldAdd) {
+            set._items['-0'] = true;
+          }
+          return false;
+        }
+      }
+      // these types can all utilise the native Set
+      if (set._nativeSet !== null) {
+        if (shouldAdd) {
+          prevSize = set._nativeSet.size;
+          set._nativeSet.add(item);
+          newSize = set._nativeSet.size;
+          return newSize === prevSize;
+        } else {
+          return set._nativeSet.has(item);
+        }
+      } else {
+        if (!(type in set._items)) {
+          if (shouldAdd) {
+            set._items[type] = {};
+            set._items[type][item] = true;
+          }
+          return false;
+        } else if (item in set._items[type]) {
+          return true;
+        } else {
+          if (shouldAdd) {
+            set._items[type][item] = true;
+          }
+          return false;
+        }
+      }
+
+    case 'boolean':
+      // set._items['boolean'] holds a two element array
+      // representing [ falseExists, trueExists ]
+      if (type in set._items) {
+        var bIdx = item ? 1 : 0;
+        if (set._items[type][bIdx]) {
+          return true;
+        } else {
+          if (shouldAdd) {
+            set._items[type][bIdx] = true;
+          }
+          return false;
+        }
+      } else {
+        if (shouldAdd) {
+          set._items[type] = item ? [false, true] : [true, false];
+        }
+        return false;
+      }
+
+    case 'function':
+      // compare functions for reference equality
+      if (set._nativeSet !== null) {
+        if (shouldAdd) {
+          prevSize = set._nativeSet.size;
+          set._nativeSet.add(item);
+          newSize = set._nativeSet.size;
+          return newSize === prevSize;
+        } else {
+          return set._nativeSet.has(item);
+        }
+      } else {
+        if (!(type in set._items)) {
+          if (shouldAdd) {
+            set._items[type] = [item];
+          }
+          return false;
+        }
+        if (!_includes(item, set._items[type])) {
+          if (shouldAdd) {
+            set._items[type].push(item);
+          }
+          return false;
+        }
+        return true;
+      }
+
+    case 'undefined':
+      if (set._items[type]) {
+        return true;
+      } else {
+        if (shouldAdd) {
+          set._items[type] = true;
+        }
+        return false;
+      }
+
+    case 'object':
+      if (item === null) {
+        if (!set._items['null']) {
+          if (shouldAdd) {
+            set._items['null'] = true;
+          }
+          return false;
+        }
+        return true;
+      }
+    /* falls through */
+    default:
+      // reduce the search size of heterogeneous sets by creating buckets
+      // for each type.
+      type = Object.prototype.toString.call(item);
+      if (!(type in set._items)) {
+        if (shouldAdd) {
+          set._items[type] = [item];
+        }
+        return false;
+      }
+      // scan through all previously applied items
+      if (!_includes(item, set._items[type])) {
+        if (shouldAdd) {
+          set._items[type].push(item);
+        }
+        return false;
+      }
+      return true;
+  }
+}
+
+// A simple Set type that honours R.equals semantics
+/* harmony default export */ var internal_Set = (_Set);
+// CONCATENATED MODULE: ./node_modules/ramda/es/difference.js
+
+
+
+/**
+ * Finds the set (i.e. no duplicates) of all elements in the first list not
+ * contained in the second list. Objects and Arrays are compared in terms of
+ * value equality, not reference equality.
+ *
+ * @func
+ * @memberOf R
+ * @since v0.1.0
+ * @category Relation
+ * @sig [*] -> [*] -> [*]
+ * @param {Array} list1 The first list.
+ * @param {Array} list2 The second list.
+ * @return {Array} The elements in `list1` that are not in `list2`.
+ * @see R.differenceWith, R.symmetricDifference, R.symmetricDifferenceWith, R.without
+ * @example
+ *
+ *      R.difference([1,2,3,4], [7,6,5,4,3]); //=> [1,2]
+ *      R.difference([7,6,5,4,3], [1,2,3,4]); //=> [7,6,5]
+ *      R.difference([{a: 1}, {b: 2}], [{a: 1}, {c: 3}]) //=> [{b: 2}]
+ */
+var difference_difference = /*#__PURE__*/_curry2(function difference(first, second) {
+  var out = [];
+  var idx = 0;
+  var firstLen = first.length;
+  var secondLen = second.length;
+  var toFilterOut = new internal_Set();
+
+  for (var i = 0; i < secondLen; i += 1) {
+    toFilterOut.add(second[i]);
+  }
+
+  while (idx < firstLen) {
+    if (toFilterOut.add(first[idx])) {
+      out[out.length] = first[idx];
+    }
+    idx += 1;
+  }
+  return out;
+});
+/* harmony default export */ var es_difference = (difference_difference);
+// CONCATENATED MODULE: ./node_modules/ramda/es/internal/_concat.js
+/**
+ * Private `concat` function to merge two array-like objects.
+ *
+ * @private
+ * @param {Array|Arguments} [set1=[]] An array-like object.
+ * @param {Array|Arguments} [set2=[]] An array-like object.
+ * @return {Array} A new, merged array.
+ * @example
+ *
+ *      _concat([4, 5, 6], [1, 2, 3]); //=> [4, 5, 6, 1, 2, 3]
+ */
+function _concat(set1, set2) {
+  set1 = set1 || [];
+  set2 = set2 || [];
+  var idx;
+  var len1 = set1.length;
+  var len2 = set2.length;
+  var result = [];
+
+  idx = 0;
+  while (idx < len1) {
+    result[result.length] = set1[idx];
+    idx += 1;
+  }
+  idx = 0;
+  while (idx < len2) {
+    result[result.length] = set2[idx];
+    idx += 1;
+  }
+  return result;
+}
+// CONCATENATED MODULE: ./node_modules/ramda/es/internal/_arity.js
+function _arity(n, fn) {
+  /* eslint-disable no-unused-vars */
+  switch (n) {
+    case 0:
+      return function () {
+        return fn.apply(this, arguments);
+      };
+    case 1:
+      return function (a0) {
+        return fn.apply(this, arguments);
+      };
+    case 2:
+      return function (a0, a1) {
+        return fn.apply(this, arguments);
+      };
+    case 3:
+      return function (a0, a1, a2) {
+        return fn.apply(this, arguments);
+      };
+    case 4:
+      return function (a0, a1, a2, a3) {
+        return fn.apply(this, arguments);
+      };
+    case 5:
+      return function (a0, a1, a2, a3, a4) {
+        return fn.apply(this, arguments);
+      };
+    case 6:
+      return function (a0, a1, a2, a3, a4, a5) {
+        return fn.apply(this, arguments);
+      };
+    case 7:
+      return function (a0, a1, a2, a3, a4, a5, a6) {
+        return fn.apply(this, arguments);
+      };
+    case 8:
+      return function (a0, a1, a2, a3, a4, a5, a6, a7) {
+        return fn.apply(this, arguments);
+      };
+    case 9:
+      return function (a0, a1, a2, a3, a4, a5, a6, a7, a8) {
+        return fn.apply(this, arguments);
+      };
+    case 10:
+      return function (a0, a1, a2, a3, a4, a5, a6, a7, a8, a9) {
+        return fn.apply(this, arguments);
+      };
+    default:
+      throw new Error('First argument to _arity must be a non-negative integer no greater than ten');
+  }
+}
+// CONCATENATED MODULE: ./node_modules/ramda/es/internal/_pipe.js
+function _pipe(f, g) {
+  return function () {
+    return g.call(this, f.apply(this, arguments));
+  };
+}
+// CONCATENATED MODULE: ./node_modules/ramda/es/internal/_isArray.js
+/**
+ * Tests whether or not an object is an array.
+ *
+ * @private
+ * @param {*} val The object to test.
+ * @return {Boolean} `true` if `val` is an array, `false` otherwise.
+ * @example
+ *
+ *      _isArray([]); //=> true
+ *      _isArray(null); //=> false
+ *      _isArray({}); //=> false
+ */
+/* harmony default export */ var _isArray = (Array.isArray || function _isArray(val) {
+  return val != null && val.length >= 0 && Object.prototype.toString.call(val) === '[object Array]';
+});
+// CONCATENATED MODULE: ./node_modules/ramda/es/internal/_isString.js
+function _isString(x) {
+  return Object.prototype.toString.call(x) === '[object String]';
+}
+// CONCATENATED MODULE: ./node_modules/ramda/es/internal/_isArrayLike.js
+
+
+
+
+/**
+ * Tests whether or not an object is similar to an array.
+ *
+ * @private
+ * @category Type
+ * @category List
+ * @sig * -> Boolean
+ * @param {*} x The object to test.
+ * @return {Boolean} `true` if `x` has a numeric length property and extreme indices defined; `false` otherwise.
+ * @example
+ *
+ *      _isArrayLike([]); //=> true
+ *      _isArrayLike(true); //=> false
+ *      _isArrayLike({}); //=> false
+ *      _isArrayLike({length: 10}); //=> false
+ *      _isArrayLike({0: 'zero', 9: 'nine', length: 10}); //=> true
+ */
+var _isArrayLike = /*#__PURE__*/_curry1(function isArrayLike(x) {
+  if (_isArray(x)) {
+    return true;
+  }
+  if (!x) {
+    return false;
+  }
+  if (typeof x !== 'object') {
+    return false;
+  }
+  if (_isString(x)) {
+    return false;
+  }
+  if (x.nodeType === 1) {
+    return !!x.length;
+  }
+  if (x.length === 0) {
+    return true;
+  }
+  if (x.length > 0) {
+    return x.hasOwnProperty(0) && x.hasOwnProperty(x.length - 1);
+  }
+  return false;
+});
+/* harmony default export */ var internal_isArrayLike = (_isArrayLike);
+// CONCATENATED MODULE: ./node_modules/ramda/es/internal/_xwrap.js
+var XWrap = /*#__PURE__*/function () {
+  function XWrap(fn) {
+    this.f = fn;
+  }
+  XWrap.prototype['@@transducer/init'] = function () {
+    throw new Error('init not implemented on XWrap');
+  };
+  XWrap.prototype['@@transducer/result'] = function (acc) {
+    return acc;
+  };
+  XWrap.prototype['@@transducer/step'] = function (acc, x) {
+    return this.f(acc, x);
+  };
+
+  return XWrap;
+}();
+
+function _xwrap(fn) {
+  return new XWrap(fn);
+}
+// CONCATENATED MODULE: ./node_modules/ramda/es/bind.js
+
+
+
+/**
+ * Creates a function that is bound to a context.
+ * Note: `R.bind` does not provide the additional argument-binding capabilities of
+ * [Function.prototype.bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind).
+ *
+ * @func
+ * @memberOf R
+ * @since v0.6.0
+ * @category Function
+ * @category Object
+ * @sig (* -> *) -> {*} -> (* -> *)
+ * @param {Function} fn The function to bind to context
+ * @param {Object} thisObj The context to bind `fn` to
+ * @return {Function} A function that will execute in the context of `thisObj`.
+ * @see R.partial
+ * @example
+ *
+ *      const log = R.bind(console.log, console);
+ *      R.pipe(R.assoc('a', 2), R.tap(log), R.assoc('a', 3))({a: 1}); //=> {a: 3}
+ *      // logs {a: 2}
+ * @symb R.bind(f, o)(a, b) = f.call(o, a, b)
+ */
+var bind_bind = /*#__PURE__*/_curry2(function bind(fn, thisObj) {
+  return _arity(fn.length, function () {
+    return fn.apply(thisObj, arguments);
+  });
+});
+/* harmony default export */ var es_bind = (bind_bind);
+// CONCATENATED MODULE: ./node_modules/ramda/es/internal/_reduce.js
+
+
+
+
+function _arrayReduce(xf, acc, list) {
+  var idx = 0;
+  var len = list.length;
+  while (idx < len) {
+    acc = xf['@@transducer/step'](acc, list[idx]);
+    if (acc && acc['@@transducer/reduced']) {
+      acc = acc['@@transducer/value'];
+      break;
+    }
+    idx += 1;
+  }
+  return xf['@@transducer/result'](acc);
+}
+
+function _iterableReduce(xf, acc, iter) {
+  var step = iter.next();
+  while (!step.done) {
+    acc = xf['@@transducer/step'](acc, step.value);
+    if (acc && acc['@@transducer/reduced']) {
+      acc = acc['@@transducer/value'];
+      break;
+    }
+    step = iter.next();
+  }
+  return xf['@@transducer/result'](acc);
+}
+
+function _methodReduce(xf, acc, obj, methodName) {
+  return xf['@@transducer/result'](obj[methodName](es_bind(xf['@@transducer/step'], xf), acc));
+}
+
+var symIterator = typeof Symbol !== 'undefined' ? Symbol.iterator : '@@iterator';
+
+function _reduce(fn, acc, list) {
+  if (typeof fn === 'function') {
+    fn = _xwrap(fn);
+  }
+  if (internal_isArrayLike(list)) {
+    return _arrayReduce(fn, acc, list);
+  }
+  if (typeof list['fantasy-land/reduce'] === 'function') {
+    return _methodReduce(fn, acc, list, 'fantasy-land/reduce');
+  }
+  if (list[symIterator] != null) {
+    return _iterableReduce(fn, acc, list[symIterator]());
+  }
+  if (typeof list.next === 'function') {
+    return _iterableReduce(fn, acc, list);
+  }
+  if (typeof list.reduce === 'function') {
+    return _methodReduce(fn, acc, list, 'reduce');
+  }
+
+  throw new TypeError('reduce: list must be array or iterable');
+}
+// CONCATENATED MODULE: ./node_modules/ramda/es/reduce.js
+
+
+
+/**
+ * Returns a single item by iterating through the list, successively calling
+ * the iterator function and passing it an accumulator value and the current
+ * value from the array, and then passing the result to the next call.
+ *
+ * The iterator function receives two values: *(acc, value)*. It may use
+ * [`R.reduced`](#reduced) to shortcut the iteration.
+ *
+ * The arguments' order of [`reduceRight`](#reduceRight)'s iterator function
+ * is *(value, acc)*.
+ *
+ * Note: `R.reduce` does not skip deleted or unassigned indices (sparse
+ * arrays), unlike the native `Array.prototype.reduce` method. For more details
+ * on this behavior, see:
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
+ *
+ * Dispatches to the `reduce` method of the third argument, if present. When
+ * doing so, it is up to the user to handle the [`R.reduced`](#reduced)
+ * shortcuting, as this is not implemented by `reduce`.
+ *
+ * @func
+ * @memberOf R
+ * @since v0.1.0
+ * @category List
+ * @sig ((a, b) -> a) -> a -> [b] -> a
+ * @param {Function} fn The iterator function. Receives two values, the accumulator and the
+ *        current element from the array.
+ * @param {*} acc The accumulator value.
+ * @param {Array} list The list to iterate over.
+ * @return {*} The final, accumulated value.
+ * @see R.reduced, R.addIndex, R.reduceRight
+ * @example
+ *
+ *      R.reduce(R.subtract, 0, [1, 2, 3, 4]) // => ((((0 - 1) - 2) - 3) - 4) = -10
+ *      //          -               -10
+ *      //         / \              / \
+ *      //        -   4           -6   4
+ *      //       / \              / \
+ *      //      -   3   ==>     -3   3
+ *      //     / \              / \
+ *      //    -   2           -1   2
+ *      //   / \              / \
+ *      //  0   1            0   1
+ *
+ * @symb R.reduce(f, a, [b, c, d]) = f(f(f(a, b), c), d)
+ */
+var reduce = /*#__PURE__*/_curry3(_reduce);
+/* harmony default export */ var es_reduce = (reduce);
+// CONCATENATED MODULE: ./node_modules/ramda/es/internal/_checkForMethod.js
+
+
+/**
+ * This checks whether a function has a [methodname] function. If it isn't an
+ * array it will execute that function otherwise it will default to the ramda
+ * implementation.
+ *
+ * @private
+ * @param {Function} fn ramda implemtation
+ * @param {String} methodname property to check for a custom implementation
+ * @return {Object} Whatever the return value of the method is.
+ */
+function _checkForMethod(methodname, fn) {
+  return function () {
+    var length = arguments.length;
+    if (length === 0) {
+      return fn();
+    }
+    var obj = arguments[length - 1];
+    return _isArray(obj) || typeof obj[methodname] !== 'function' ? fn.apply(this, arguments) : obj[methodname].apply(obj, Array.prototype.slice.call(arguments, 0, length - 1));
+  };
+}
+// CONCATENATED MODULE: ./node_modules/ramda/es/slice.js
+
+
+
+/**
+ * Returns the elements of the given list or string (or object with a `slice`
+ * method) from `fromIndex` (inclusive) to `toIndex` (exclusive).
+ *
+ * Dispatches to the `slice` method of the third argument, if present.
+ *
+ * @func
+ * @memberOf R
+ * @since v0.1.4
+ * @category List
+ * @sig Number -> Number -> [a] -> [a]
+ * @sig Number -> Number -> String -> String
+ * @param {Number} fromIndex The start index (inclusive).
+ * @param {Number} toIndex The end index (exclusive).
+ * @param {*} list
+ * @return {*}
+ * @example
+ *
+ *      R.slice(1, 3, ['a', 'b', 'c', 'd']);        //=> ['b', 'c']
+ *      R.slice(1, Infinity, ['a', 'b', 'c', 'd']); //=> ['b', 'c', 'd']
+ *      R.slice(0, -1, ['a', 'b', 'c', 'd']);       //=> ['a', 'b', 'c']
+ *      R.slice(-3, -1, ['a', 'b', 'c', 'd']);      //=> ['b', 'c']
+ *      R.slice(0, 3, 'ramda');                     //=> 'ram'
+ */
+var slice = /*#__PURE__*/_curry3( /*#__PURE__*/_checkForMethod('slice', function slice(fromIndex, toIndex, list) {
+  return Array.prototype.slice.call(list, fromIndex, toIndex);
+}));
+/* harmony default export */ var es_slice = (slice);
+// CONCATENATED MODULE: ./node_modules/ramda/es/tail.js
+
+
+
+
+/**
+ * Returns all but the first element of the given list or string (or object
+ * with a `tail` method).
+ *
+ * Dispatches to the `slice` method of the first argument, if present.
+ *
+ * @func
+ * @memberOf R
+ * @since v0.1.0
+ * @category List
+ * @sig [a] -> [a]
+ * @sig String -> String
+ * @param {*} list
+ * @return {*}
+ * @see R.head, R.init, R.last
+ * @example
+ *
+ *      R.tail([1, 2, 3]);  //=> [2, 3]
+ *      R.tail([1, 2]);     //=> [2]
+ *      R.tail([1]);        //=> []
+ *      R.tail([]);         //=> []
+ *
+ *      R.tail('abc');  //=> 'bc'
+ *      R.tail('ab');   //=> 'b'
+ *      R.tail('a');    //=> ''
+ *      R.tail('');     //=> ''
+ */
+var tail = /*#__PURE__*/_curry1( /*#__PURE__*/_checkForMethod('tail', /*#__PURE__*/es_slice(1, Infinity)));
+/* harmony default export */ var es_tail = (tail);
+// CONCATENATED MODULE: ./node_modules/ramda/es/pipe.js
+
+
+
+
+
+/**
+ * Performs left-to-right function composition. The leftmost function may have
+ * any arity; the remaining functions must be unary.
+ *
+ * In some libraries this function is named `sequence`.
+ *
+ * **Note:** The result of pipe is not automatically curried.
+ *
+ * @func
+ * @memberOf R
+ * @since v0.1.0
+ * @category Function
+ * @sig (((a, b, ..., n) -> o), (o -> p), ..., (x -> y), (y -> z)) -> ((a, b, ..., n) -> z)
+ * @param {...Function} functions
+ * @return {Function}
+ * @see R.compose
+ * @example
+ *
+ *      const f = R.pipe(Math.pow, R.negate, R.inc);
+ *
+ *      f(3, 4); // -(3^4) + 1
+ * @symb R.pipe(f, g, h)(a, b) = h(g(f(a, b)))
+ */
+function pipe() {
+  if (arguments.length === 0) {
+    throw new Error('pipe requires at least one argument');
+  }
+  return _arity(arguments[0].length, es_reduce(_pipe, arguments[0], es_tail(arguments)));
+}
+// CONCATENATED MODULE: ./node_modules/ramda/es/reverse.js
+
+
+
+/**
+ * Returns a new list or string with the elements or characters in reverse
+ * order.
+ *
+ * @func
+ * @memberOf R
+ * @since v0.1.0
+ * @category List
+ * @sig [a] -> [a]
+ * @sig String -> String
+ * @param {Array|String} list
+ * @return {Array|String}
+ * @example
+ *
+ *      R.reverse([1, 2, 3]);  //=> [3, 2, 1]
+ *      R.reverse([1, 2]);     //=> [2, 1]
+ *      R.reverse([1]);        //=> [1]
+ *      R.reverse([]);         //=> []
+ *
+ *      R.reverse('abc');      //=> 'cba'
+ *      R.reverse('ab');       //=> 'ba'
+ *      R.reverse('a');        //=> 'a'
+ *      R.reverse('');         //=> ''
+ */
+var reverse_reverse = /*#__PURE__*/_curry1(function reverse(list) {
+  return _isString(list) ? list.split('').reverse().join('') : Array.prototype.slice.call(list, 0).reverse();
+});
+/* harmony default export */ var es_reverse = (reverse_reverse);
+// CONCATENATED MODULE: ./node_modules/ramda/es/compose.js
+
+
+
+/**
+ * Performs right-to-left function composition. The rightmost function may have
+ * any arity; the remaining functions must be unary.
+ *
+ * **Note:** The result of compose is not automatically curried.
+ *
+ * @func
+ * @memberOf R
+ * @since v0.1.0
+ * @category Function
+ * @sig ((y -> z), (x -> y), ..., (o -> p), ((a, b, ..., n) -> o)) -> ((a, b, ..., n) -> z)
+ * @param {...Function} ...functions The functions to compose
+ * @return {Function}
+ * @see R.pipe
+ * @example
+ *
+ *      const classyGreeting = (firstName, lastName) => "The name's " + lastName + ", " + firstName + " " + lastName
+ *      const yellGreeting = R.compose(R.toUpper, classyGreeting);
+ *      yellGreeting('James', 'Bond'); //=> "THE NAME'S BOND, JAMES BOND"
+ *
+ *      R.compose(Math.abs, R.add(1), R.multiply(2))(-4) //=> 7
+ *
+ * @symb R.compose(f, g, h)(a, b) = f(g(h(a, b)))
+ */
+function compose() {
+  if (arguments.length === 0) {
+    throw new Error('compose requires at least one argument');
+  }
+  return pipe.apply(this, es_reverse(arguments));
+}
+// CONCATENATED MODULE: ./node_modules/ramda/es/internal/_identity.js
+function _identity(x) {
+  return x;
+}
+// CONCATENATED MODULE: ./node_modules/ramda/es/identity.js
+
+
+
+/**
+ * A function that does nothing but return the parameter supplied to it. Good
+ * as a default or placeholder function.
+ *
+ * @func
+ * @memberOf R
+ * @since v0.1.0
+ * @category Function
+ * @sig a -> a
+ * @param {*} x The value to return.
+ * @return {*} The input value, `x`.
+ * @example
+ *
+ *      R.identity(1); //=> 1
+ *
+ *      const obj = {};
+ *      R.identity(obj) === obj; //=> true
+ * @symb R.identity(a) = a
+ */
+var identity = /*#__PURE__*/_curry1(_identity);
+/* harmony default export */ var es_identity = (identity);
+// CONCATENATED MODULE: ./node_modules/ramda/es/uniqBy.js
+
+
+
+/**
+ * Returns a new list containing only one copy of each element in the original
+ * list, based upon the value returned by applying the supplied function to
+ * each list element. Prefers the first item if the supplied function produces
+ * the same value on two items. [`R.equals`](#equals) is used for comparison.
+ *
+ * @func
+ * @memberOf R
+ * @since v0.16.0
+ * @category List
+ * @sig (a -> b) -> [a] -> [a]
+ * @param {Function} fn A function used to produce a value to use during comparisons.
+ * @param {Array} list The array to consider.
+ * @return {Array} The list of unique items.
+ * @example
+ *
+ *      R.uniqBy(Math.abs, [-1, -5, 2, 10, 1, 2]); //=> [-1, -5, 2, 10]
+ */
+var uniqBy_uniqBy = /*#__PURE__*/_curry2(function uniqBy(fn, list) {
+  var set = new internal_Set();
+  var result = [];
+  var idx = 0;
+  var appliedItem, item;
+
+  while (idx < list.length) {
+    item = list[idx];
+    appliedItem = fn(item);
+    if (set.add(appliedItem)) {
+      result.push(item);
+    }
+    idx += 1;
+  }
+  return result;
+});
+/* harmony default export */ var es_uniqBy = (uniqBy_uniqBy);
+// CONCATENATED MODULE: ./node_modules/ramda/es/uniq.js
+
+
+
+/**
+ * Returns a new list containing only one copy of each element in the original
+ * list. [`R.equals`](#equals) is used to determine equality.
+ *
+ * @func
+ * @memberOf R
+ * @since v0.1.0
+ * @category List
+ * @sig [a] -> [a]
+ * @param {Array} list The array to consider.
+ * @return {Array} The list of unique items.
+ * @example
+ *
+ *      R.uniq([1, 1, 2, 1]); //=> [1, 2]
+ *      R.uniq([1, '1']);     //=> [1, '1']
+ *      R.uniq([[42], [42]]); //=> [[42]]
+ */
+var uniq = /*#__PURE__*/es_uniqBy(es_identity);
+/* harmony default export */ var es_uniq = (uniq);
+// CONCATENATED MODULE: ./node_modules/ramda/es/union.js
+
+
+
+
+
+/**
+ * Combines two lists into a set (i.e. no duplicates) composed of the elements
+ * of each list.
+ *
+ * @func
+ * @memberOf R
+ * @since v0.1.0
+ * @category Relation
+ * @sig [*] -> [*] -> [*]
+ * @param {Array} as The first list.
+ * @param {Array} bs The second list.
+ * @return {Array} The first and second lists concatenated, with
+ *         duplicates removed.
+ * @example
+ *
+ *      R.union([1, 2, 3], [2, 3, 4]); //=> [1, 2, 3, 4]
+ */
+var union = /*#__PURE__*/_curry2( /*#__PURE__*/compose(es_uniq, _concat));
+/* harmony default export */ var es_union = (union);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Client.vue?vue&type=script&lang=js&
 
 
@@ -8593,6 +9891,7 @@ var mergeDeepRight_mergeDeepRight = /*#__PURE__*/_curry2(function mergeDeepRight
 
 
 
+
 //
 //
 //
@@ -8819,9 +10118,20 @@ var mergeDeepRight_mergeDeepRight = /*#__PURE__*/_curry2(function mergeDeepRight
 
 
 
+
+var getFilterForData = function getFilterForData(searchFields, everyMatch, someMatch, filter) {
+  return function (row) {
+    return everyMatch.every(function (key) {
+      return searchFields[key](row, key, filter);
+    }) && someMatch.some(function (key) {
+      return String(row[key]).toLowerCase().indexOf(filter.keyword) > -1;
+    });
+  };
+};
 /**
  * @module EnaTableClient
  */
+
 
 /* harmony default export */ var Clientvue_type_script_lang_js_ = ({
   mixins: [filters, methods],
@@ -8855,12 +10165,18 @@ var mergeDeepRight_mergeDeepRight = /*#__PURE__*/_curry2(function mergeDeepRight
     },
 
     /**
-     * The search query string. If updated will filter the results by the value
-     * @type {String}
+     * The filter object. If updated will filter the results by the value
+     *
+     * @type {Object}
      */
-    searchQuery: {
-      type: String,
-      default: ''
+    filter: {
+      type: Object,
+      default: function _default() {
+        return {
+          // The search query string. If updated will filter the results by the value
+          keyword: ''
+        };
+      }
     },
 
     /**
@@ -9001,7 +10317,7 @@ var mergeDeepRight_mergeDeepRight = /*#__PURE__*/_curry2(function mergeDeepRight
         }
 
         if (typeof opts.search[key] === 'undefined') {
-          search[key] = true;
+          search[key] = false;
         } else {
           search[key] = opts.search[key];
         }
@@ -9014,28 +10330,27 @@ var mergeDeepRight_mergeDeepRight = /*#__PURE__*/_curry2(function mergeDeepRight
     collapseAllGroups: function collapseAllGroups() {
       return this.opts.collapseAllGroups;
     },
+    hasSearchFields: function hasSearchFields() {
+      return Object.values(this.opts.search).some(function (v) {
+        return v === true;
+      });
+    },
     filteredData: function filteredData() {
-      var _this2 = this;
-
       var data = this.data;
-      var searchQuery = this.searchBy && this.searchBy.toLowerCase();
+      var filter = this.getFilter(this.filter, this.searchBy); // at least one of the fields with "true" should match the record
 
-      if (searchQuery) {
-        data = data.filter(function (row) {
-          return Object.keys(_this2.opts.search).some(function (key) {
-            if (typeof _this2.opts.search[key] === 'function') {
-              return _this2.opts.search[key](row, key, searchQuery);
-            }
+      var someMatch = this.getSomeMatchFields(this.opts.search); // every other "function" field should match the function
 
-            return String(row[key]).toLowerCase().indexOf(searchQuery) > -1;
-          });
-        });
+      var everyMatch = this.getEveryMatchFields(this.opts.search);
+
+      if (someMatch.length === 0 && everyMatch.length === 0) {
+        return data;
       }
 
-      return data;
+      return data.filter(getFilterForData(this.opts.search, someMatch, everyMatch, filter));
     },
     pageData: function pageData() {
-      var _this3 = this;
+      var _this2 = this;
 
       var sortKey = this.sortKey;
       var data = this.filteredData;
@@ -9054,11 +10369,11 @@ var mergeDeepRight_mergeDeepRight = /*#__PURE__*/_curry2(function mergeDeepRight
           sortableFn = function sortableFn(a, b) {
             var aF = String(a[sortKey]);
             var bF = String(b[sortKey]);
-            return _this3.opts.sortCollator.compare(aF, bF) * order;
+            return _this2.opts.sortCollator.compare(aF, bF) * order;
           };
         } else if (typeof this.opts.sortable[sortKey] === 'function') {
           sortableFn = function sortableFn(a, b) {
-            return _this3.opts.sortable[sortKey](a, b) * order;
+            return _this2.opts.sortable[sortKey](a, b) * order;
           };
         }
 
@@ -9073,7 +10388,7 @@ var mergeDeepRight_mergeDeepRight = /*#__PURE__*/_curry2(function mergeDeepRight
       if (this.opts.groupBy) {
         return data.reduce(function (groupedData, row) {
           // eslint-disable-next-line
-          (groupedData[row[_this3.opts.groupBy]] = groupedData[row[_this3.opts.groupBy]] || []).push(row);
+          (groupedData[row[_this2.opts.groupBy]] = groupedData[row[_this2.opts.groupBy]] || []).push(row);
           return groupedData;
         }, {});
       }
@@ -9098,39 +10413,39 @@ var mergeDeepRight_mergeDeepRight = /*#__PURE__*/_curry2(function mergeDeepRight
     }
   },
   watch: {
-    searchQuery: function searchQuery(query) {
-      this.searchBy = query;
-    },
-    searchBy: function searchBy() {
+    filter: function filter() {
       // go to first page when search query changes
       this.currentPage = 1;
     },
-    filteredData: {
+    data: {
       immediate: true,
       handler: function handler() {
-        var _this4 = this;
+        var _this3 = this;
 
-        this.resetCurrentPage();
-        this.selectedRows = this.filteredData.reduce(function (acc, d) {
+        this.selectedRows = this.data.reduce(function (acc, d) {
           if (d.showSelect && d.selected) {
-            acc.push(d[_this4.opts.uniqueKey]);
+            acc.push(d[_this3.opts.uniqueKey]);
           }
 
           return acc;
         }, []);
       }
     },
+    filteredData: function filteredData() {
+      this.setAllSelected();
+      this.resetCurrentPage();
+    },
     pageData: function pageData() {
-      var _this5 = this;
+      var _this4 = this;
 
       Object.keys(this.pageData).forEach(function (group) {
-        _this5.pageData[group].forEach(function (row) {
-          _this5.shown[row[_this5.opts.groupBy]] = typeof _this5.shown[row[_this5.opts.groupBy]] === 'undefined' ? !_this5.opts.collapseAllGroups : _this5.shown[row[_this5.opts.groupBy]];
+        _this4.pageData[group].forEach(function (row) {
+          _this4.shown[row[_this4.opts.groupBy]] = typeof _this4.shown[row[_this4.opts.groupBy]] === 'undefined' ? !_this4.opts.collapseAllGroups : _this4.shown[row[_this4.opts.groupBy]];
         });
       });
     },
     selectedRows: function selectedRows() {
-      var _this6 = this;
+      var _this5 = this;
 
       this.setAllSelected();
       var selected = this.selectedRows.reduce(function (acc, id) {
@@ -9138,9 +10453,9 @@ var mergeDeepRight_mergeDeepRight = /*#__PURE__*/_curry2(function mergeDeepRight
         acc[id] = true;
         return acc;
       }, {});
-      var selectedData = this.filteredData.reduce(function (data, row) {
+      var selectedData = this.data.reduce(function (data, row) {
         if (row.showSelect) {
-          var selectedRow = selected[row[_this6.opts.uniqueKey]] || false;
+          var selectedRow = selected[row[_this5.opts.uniqueKey]] || false;
           Object.assign(row, {
             selected: !!selectedRow
           });
@@ -9168,11 +10483,42 @@ var mergeDeepRight_mergeDeepRight = /*#__PURE__*/_curry2(function mergeDeepRight
     }
   },
   methods: {
+    getFilter: function getFilter(filter, searchBy) {
+      var _filter$keyword = filter.keyword,
+          keyword = _filter$keyword === void 0 ? '' : _filter$keyword;
+
+      if (!keyword) {
+        keyword = searchBy;
+      }
+
+      keyword = keyword.toLowerCase();
+      return _objectSpread({}, filter, {
+        keyword: keyword
+      });
+    },
+    getEveryMatchFields: function getEveryMatchFields(searchFields) {
+      return Object.keys(searchFields).reduce(function (fields, key) {
+        if (searchFields[key] === true) {
+          fields.push(key);
+        }
+
+        return fields;
+      }, []);
+    },
+    getSomeMatchFields: function getSomeMatchFields(searchFields) {
+      return Object.keys(searchFields).reduce(function (fields, key) {
+        if (typeof searchFields[key] === 'function') {
+          fields.push(key);
+        }
+
+        return fields;
+      }, []);
+    },
     search: function search(value) {
       this.searchBy = value;
     },
     sortBy: function sortBy(obj) {
-      var _this7 = this;
+      var _this6 = this;
 
       var key = obj.key,
           order = obj.order;
@@ -9180,8 +10526,8 @@ var mergeDeepRight_mergeDeepRight = /*#__PURE__*/_curry2(function mergeDeepRight
       if (this.opts.sortable[key]) {
         this.sortKey = key;
         this.columns.forEach(function (elem) {
-          if (elem !== _this7.sortKey) {
-            _this7.sortOrders[elem] = null;
+          if (elem !== _this6.sortKey) {
+            _this6.sortOrders[elem] = null;
           }
         });
 
@@ -9201,24 +10547,32 @@ var mergeDeepRight_mergeDeepRight = /*#__PURE__*/_curry2(function mergeDeepRight
       this.shown = Object.assign({}, this.shown);
     },
     selectAll: function selectAll() {
-      var _this8 = this;
+      var _this7 = this;
+
+      var selectableRows = this.filteredData.reduce(function (acc, d) {
+        if (d.showSelect) {
+          acc.push(d[_this7.opts.uniqueKey]);
+        }
+
+        return acc;
+      }, []);
 
       if (this.allSelected) {
-        this.selectedRows = [];
+        this.selectedRows = es_difference(this.selectedRows, selectableRows);
       } else {
-        this.selectedRows = this.filteredData.reduce(function (acc, d) {
-          if (d.showSelect) {
-            acc.push(d[_this8.opts.uniqueKey]);
-          }
-
-          return acc;
-        }, []);
+        this.selectedRows = es_union(this.selectedRows, selectableRows);
       }
     },
     setAllSelected: function setAllSelected() {
-      this.allSelected = this.selectedRows.length > 0 && this.selectedRows.length === this.filteredData.filter(function (d) {
-        return d.showSelect;
-      }).length;
+      if (this.selectedRows.length === 0) {
+        this.allSelected = false;
+      } else {
+        this.allSelected = this.filteredData.filter(function (d) {
+          return d.showSelect;
+        }).length === this.filteredData.filter(function (d) {
+          return d.selected;
+        }).length;
+      }
     },
     paginate: function paginate(_ref) {
       var currentPage = _ref.currentPage,
@@ -9276,8 +10630,8 @@ function Client_injectStyles (context) {
 
 var Client_component = normalizeComponent(
   components_Clientvue_type_script_lang_js_,
-  Clientvue_type_template_id_2a7d1648_render,
-  Clientvue_type_template_id_2a7d1648_staticRenderFns,
+  Clientvue_type_template_id_0db5b318_render,
+  Clientvue_type_template_id_0db5b318_staticRenderFns,
   false,
   Client_injectStyles,
   null,
