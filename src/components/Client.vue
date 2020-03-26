@@ -32,7 +32,7 @@
       <table :class="[opts.classes.table, $style.table]">
         <thead>
           <tr>
-            <th v-for="key in columns" :key="key" @click="sortBy({key})"
+            <th v-for="key in allColumns" :key="key" @click="sortBy({key})"
               :class="{ [$style.sortable]: opts.sortable[key], sorted: sortKey === key,
                 [opts.columnsClasses[key]]: opts.columnsClasses[key] != null }">
               <slot :name="'heading_' + key">
@@ -57,11 +57,6 @@
                   [opts.classes.sort[sortOrders[key]]] : sortKey === key,
                 }">
               </i>
-            </th>
-            <th v-if="opts.detailsRow">
-              <slot name="heading_actions">
-                Actions
-              </slot>
             </th>
           </tr>
         </thead>
@@ -111,7 +106,7 @@
                 ...computedRowClasses[index],
               }"
               >
-              <td v-for="key in columns" :key="'cell_'+key"
+              <td v-for="key in allColumns" :key="'cell_'+key"
               :class="{
                 [$style.selectable]: isColumnSelectable(entry, key),
                 [opts.columnsClasses[key]]: opts.columnsClasses[key] != null,
@@ -132,17 +127,16 @@
                       </label>
                     </div>
                   </template>
+                  <template v-else-if="key === 'actions'">
+                    <ActionsCell
+                      :row="entry"
+                      :is-row-expanded="isRowExpanded(entry[opts.uniqueKey])"
+                      :opts="opts"
+                      @toggleRow="toggleRow"
+                    />
+                  </template>
                   <template v-else>{{entry[key]}}</template>
                 </slot>
-              </td>
-              <td v-if="opts.detailsRow">
-                <slot name="column_actions_pre" :row="entry"></slot>
-                <slot name="column_actions" :row="entry">
-                  <a href="#" @click.prevent="toggleRow(entry[opts.uniqueKey])"
-                    v-html="getToggleText(entry)">
-                  </a>
-                </slot>
-                <slot name="column_actions_post" :row="entry"></slot>
               </td>
             </tr>
             <tr
@@ -225,6 +219,7 @@ import filters from './mixins/filters';
 import defaultProps from './mixins/default-props';
 import methods from './mixins/methods';
 import Pagination from './mixins/Pagination.vue';
+import ActionsCell from './mixins/ActionsCell.vue';
 
 const getFilterForData = (searchFields, everyMatch, someMatch, filter) =>
   row =>
@@ -238,6 +233,7 @@ export default {
   mixins: [filters, methods],
   components: {
     Pagination,
+    ActionsCell,
   },
   props: {
     /**
@@ -370,20 +366,6 @@ export default {
     };
   },
   computed: {
-    computedRowClasses() {
-      return this.data.map((row) => {
-        const classes = {};
-        Object.keys(this.opts.rowClasses).forEach((prop) => {
-          if (row[prop]) {
-            classes[this.opts.rowClasses[prop]] = true;
-          }
-        });
-        return classes;
-      });
-    },
-    colspan() {
-      return this.columns.length + (this.opts.detailsRow ? 1 : 0);
-    },
     opts() {
       const opts = mergeDeepRight(
         this.defaults,
@@ -392,7 +374,8 @@ export default {
       const sortable = {};
       const search = {};
       this.columns.forEach((key) => {
-        if (key !== 'select' && (opts.sortable === true || opts.sortable[key])) {
+        if (key !== 'select' && key !== 'actions' &&
+          (opts.sortable === true || opts.sortable[key])) {
           sortable[key] = opts.sortable[key] || true;
         }
         if (typeof opts.search[key] === 'undefined') {
@@ -573,7 +556,7 @@ export default {
       const { key, order } = obj;
       if (this.opts.sortable[key]) {
         this.sortKey = key;
-        this.columns.forEach((elem) => {
+        this.allColumns.forEach((elem) => {
           if (elem !== this.sortKey) {
             this.sortOrders[elem] = null;
           }
@@ -620,7 +603,7 @@ export default {
       this.perPage = perPage;
     },
     isColumnNonSelectable(column) {
-      return this.opts.nonSelectableColumns.includes(column);
+      return this.opts.nonSelectableColumns.includes(column) || column === 'actions';
     },
     isColumnSelectable(entry, column) {
       return this.opts.editable && entry.showSelect && !this.isColumnNonSelectable(column);

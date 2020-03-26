@@ -150,4 +150,8 @@ export default {
    * Key-value options for column and class
    */
   rowClasses: {},
+  /**
+   * Show the actions cell (with expand) last or first
+   */
+  actionsCellLast: true,
 };

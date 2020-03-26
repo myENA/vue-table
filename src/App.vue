@@ -97,6 +97,10 @@ export default {
         capital: true,
         // population: (row, key, filter) => true,
       },
+      // text: {
+      //   expand: '<i class="fa fa-chevron-right" />',
+      //   collapse: '<i class="fa fa-chevron-down" />',
+      // },
     },
   }),
   async created() {

@@ -21,11 +21,6 @@
                 }">
               </i>
             </th>
-            <th v-if="opts.detailsRow">
-              <slot name="heading_actions">
-                Actions
-              </slot>
-            </th>
           </tr>
         </thead>
         <tbody v-if="loading">
@@ -55,17 +50,16 @@
                   <component v-if="opts.templates[key]" :is="opts.templates[key]"
                     :data="entry" :column="key" :index="index">
                   </component>
+                  <template v-else-if="key === 'actions'">
+                    <ActionsCell
+                      :row="entry"
+                      :is-row-expanded="isRowExpanded(entry[opts.uniqueKey])"
+                      :opts="opts"
+                      @toggleRow="toggleRow"
+                    />
+                  </template>
                   <template v-else>{{entry[key]}}</template>
                 </slot>
-              </td>
-              <td v-if="opts.detailsRow">
-                <slot name="column_actions_pre" :row="entry"></slot>
-                <slot name="column_actions" :row="entry">
-                  <a href="#" @click.prevent="toggleRow(entry[opts.uniqueKey])"
-                    v-html="getToggleText(entry)">
-                  </a>
-                </slot>
-                <slot name="column_actions_post" :row="entry"></slot>
               </td>
             </tr>
             <tr
@@ -155,6 +149,7 @@ import filters from './mixins/filters';
 import defaultProps from './mixins/default-props';
 import methods from './mixins/methods';
 import Pagination from './mixins/Pagination.vue';
+import ActionsCell from './mixins/ActionsCell.vue';
 
 /**
  * @module EnaTableServer
@@ -163,6 +158,7 @@ export default {
   mixins: [filters, methods],
   components: {
     Pagination,
+    ActionsCell,
   },
   props: {
     /**
@@ -226,20 +222,6 @@ export default {
     };
   },
   computed: {
-    computedRowClasses() {
-      return this.data.map((row) => {
-        const classes = {};
-        Object.keys(this.opts.rowClasses).forEach(prop => {
-          if (row[prop]) {
-            classes[this.opts.rowClasses[prop]] = true;
-          }
-        });
-        return classes;
-      });
-    },
-    colspan() {
-      return this.columns.length + (this.opts.detailsRow ? 1 : 0);
-    },
     opts() {
       const opts = Object.assign(
         {},

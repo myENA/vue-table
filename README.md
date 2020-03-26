@@ -77,18 +77,18 @@ const MyView = new Vue({
        * @type {Array}
        */
       columns: Array,
-			/**
-			 * The filter object. If updated will filter the results by the value
-			 *
-			 * @type {Object}
-			 */
-			filter: {
-				type: Object,
-				default: () => ({
-					// The search query string. If updated will filter the results by the value
-					keyword: '',
-				}),
-			},
+      /**
+       * The filter object. If updated will filter the results by the value
+       *
+       * @type {Object}
+       */
+      filter: {
+        type: Object,
+        default: () => ({
+          // The search query string. If updated will filter the results by the value
+          keyword: '',
+        }),
+      },
       /**
        * Loading indicator. If true, will display the `loadingMsg` instead of the body
        * @type {Boolean}

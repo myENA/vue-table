@@ -1,4 +1,27 @@
 export default {
+  computed: {
+    allColumns() {
+      const allColumns = this.columns.slice();
+      if (!this.columns.includes('actions') && this.opts.detailsRow) {
+        allColumns.push('actions');
+      }
+      return allColumns;
+    },
+    computedRowClasses() {
+      return this.data.map((row) => {
+        const classes = {};
+        Object.keys(this.opts.rowClasses).forEach((prop) => {
+          if (row[prop]) {
+            classes[this.opts.rowClasses[prop]] = true;
+          }
+        });
+        return classes;
+      });
+    },
+    colspan() {
+      return this.allColumns.length;
+    },
+  },
   methods: {
     isShown(key) {
       return typeof this.shown[key] === 'undefined' || this.shown[key];
@@ -10,11 +33,6 @@ export default {
     },
     isRowExpanded(id) {
       return this.expandedRows[id];
-    },
-    getToggleText(entry) {
-      return this.isRowExpanded(entry[this.opts.uniqueKey]) ?
-        this.opts.text.collapse :
-        this.opts.text.expand;
     },
   },
 };
