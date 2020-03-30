@@ -602,6 +602,11 @@ export default {
     paginate({ currentPage, perPage }) {
       this.currentPage = currentPage;
       this.perPage = perPage;
+      this.$emit('paginate', {
+        currentPage,
+        perPage,
+        pageData: this.pageData,
+      });
     },
     isColumnNonSelectable(column) {
       return this.opts.nonSelectableColumns.includes(column) || column === 'actions';
