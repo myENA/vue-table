@@ -3425,7 +3425,7 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"166a8899-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Client.vue?vue&type=template&id=58fb8740&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"be55d13e-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Client.vue?vue&type=template&id=7954cf24&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_vm._t("filter",[(_vm.hasSearchFields)?_c('div',[_c('div',{staticClass:"row"},[_c('div',{staticClass:"col-md-2"},[_vm._t("filters",[_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Search")]),_c('div',{staticClass:"input-group"},[_c('input',{staticClass:"form-control",attrs:{"type":"text","placeholder":"Search by keyword"},on:{"input":function($event){return _vm.search($event.target.value)}}}),_vm._m(0)])])])],2),_c('div',{staticClass:"col-md-10"},[_c('div',{staticClass:"pull-right"},[_c('div',{staticClass:"form-group"},[_c('label',[_vm._v(" ")]),_c('div',[_vm._t("buttons")],2)])])])])]):_vm._e()]),_c('div',{class:[_vm.opts.classes.wrapper, _vm.$style.wrapper]},[_c('table',{class:[_vm.opts.classes.table, _vm.$style.table]},[_c('thead',[_c('tr',_vm._l((_vm.allColumns),function(key){
 var _obj, _obj$1;
 return _c('th',{key:key,class:( _obj = {}, _obj[_vm.$style.sortable] = _vm.opts.sortable[key], _obj.sorted = _vm.sortKey === key, _obj[_vm.opts.columnsClasses[key]] = _vm.opts.columnsClasses[key] != null, _obj ),on:{"click":function($event){return _vm.sortBy({key: key})}}},[_vm._t('heading_' + key,[(key === 'select')?[_c('div',{class:[_vm.opts.classes.checkbox, _vm.$style.checkbox]},[_c('label',[_c('input',{staticClass:"check-all",attrs:{"type":"checkbox","disabled":!_vm.opts.editable},domProps:{"checked":_vm.allSelected},on:{"change":_vm.selectAll}})])])]:[_vm._v("\n                "+_vm._s(_vm._f("heading")(key,_vm.opts.headings))+"\n              ")]]),(_vm.opts.sortable[key])?_c('i',{class:( _obj$1 = {}, _obj$1[_vm.opts.classes.sort.none] = _vm.sortKey !== key || _vm.sortOrders[key] === null, _obj$1[_vm.opts.classes.sort[_vm.sortOrders[key]]] = _vm.sortKey === key, _obj$1 )}):_vm._e()],2)}),0)]),(_vm.loading)?_c('tbody',[_c('tr',[_c('td',{staticClass:"msg-row",attrs:{"colspan":_vm.colspan}},[_vm._t("loading",[_c('span',{domProps:{"innerHTML":_vm._s(_vm.opts.text.loading)}})])],2)])]):(_vm.data.length === 0)?_c('tbody',[_c('tr',[_c('td',{staticClass:"msg-row",attrs:{"colspan":_vm.colspan}},[_vm._t("no_data",[_c('span',{domProps:{"innerHTML":_vm._s(_vm.opts.text.noData)}})])],2)])]):(_vm.filteredData.length === 0)?_c('tbody',[_c('tr',[_c('td',{staticClass:"msg-row",attrs:{"colspan":_vm.colspan}},[_vm._t("empty_results",[_c('span',{domProps:{"innerHTML":_vm._s(_vm.opts.text.emptyResults)}})])],2)])]):_vm._l((_vm.pageData),function(group,groupKey){
@@ -3438,7 +3438,7 @@ return _c('td',{key:'cell_'+key,class:( _obj = {}, _obj[_vm.$style.selectable] =
 var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{staticClass:"input-group-addon"},[_c('i',{staticClass:"fa fa-search"})])}]
 
 
-// CONCATENATED MODULE: ./src/components/Client.vue?vue&type=template&id=58fb8740&
+// CONCATENATED MODULE: ./src/components/Client.vue?vue&type=template&id=7954cf24&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es7.array.includes.js
 var es7_array_includes = __webpack_require__("6762");
@@ -5264,7 +5264,7 @@ var es6_regexp_split = __webpack_require__("28a5");
     }
   }
 });
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"166a8899-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/mixins/Pagination.vue?vue&type=template&id=0a3e1a07&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"be55d13e-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/mixins/Pagination.vue?vue&type=template&id=0a3e1a07&
 var Paginationvue_type_template_id_0a3e1a07_render = function () {
 var _obj, _obj$1, _obj$2, _obj$3;
 var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('ul',{class:[_vm.$style.pagination, _vm.classes.wrapper]},[_c('li',{class:( _obj = {}, _obj[_vm.$style.disabled] = _vm.currentPageValue === 1, _obj.disabled = _vm.currentPageValue === 1, _obj )},[_c('a',{attrs:{"href":"#","aria-label":_vm.text.previous || 'Previous',"title":_vm.text.previous || 'Previous'},on:{"click":function($event){$event.preventDefault();_vm.currentPageValue !== 1 && _vm.goToPage(_vm.currentPageValue-1)}}},[_c('span',{attrs:{"aria-hidden":"true"}},[_c('i',{class:_vm.classes.prev})]),_vm._v(_vm._s(_vm.text.prev))])]),_c('li',{class:( _obj$1 = {}, _obj$1[_vm.$style.active] = 1 === _vm.currentPageValue, _obj$1.active = 1 === _vm.currentPageValue, _obj$1 )},[_c('a',{attrs:{"href":"#","aria-label":"Page 1","title":"Page 1"},on:{"click":function($event){$event.preventDefault();return _vm.goToPage(1)}}},[_vm._v("\n        1\n      ")])]),(_vm.startPage > 2)?_c('li',[_c('span',[_vm._v("…")])]):_vm._e(),_vm._l((_vm.pagesToShow),function(page){
@@ -5654,7 +5654,7 @@ var component = normalizeComponent(
 )
 
 /* harmony default export */ var Pagination = (component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"166a8899-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/mixins/ActionsCell.vue?vue&type=template&id=4fa00450&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"be55d13e-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/mixins/ActionsCell.vue?vue&type=template&id=4fa00450&
 var ActionsCellvue_type_template_id_4fa00450_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_vm._t("column_actions_pre",null,{"row":_vm.row}),_vm._t("column_actions",[_c('a',{attrs:{"href":"#"},domProps:{"innerHTML":_vm._s(_vm.getToggleText(_vm.row))},on:{"click":function($event){$event.preventDefault();return _vm.toggleRow(_vm.row[_vm.opts.uniqueKey])}}})],{"row":_vm.row}),_vm._t("column_actions_post",null,{"row":_vm.row})],2)}
 var ActionsCellvue_type_template_id_4fa00450_staticRenderFns = []
 
@@ -5954,13 +5954,17 @@ var ActionsCell_component = normalizeComponent(
 
 
 
-var getFilterForData = function getFilterForData(searchFields, everyMatch, someMatch, filter) {
+var getFilterForData = function getFilterForData(_ref) {
+  var searchFields = _ref.searchFields,
+      someMatch = _ref.someMatch,
+      everyMatch = _ref.everyMatch,
+      filter = _ref.filter;
   return function (row) {
     return everyMatch.every(function (key) {
       return searchFields[key](row, key, filter);
-    }) && someMatch.some(function (key) {
+    }) && (someMatch.length === 0 || someMatch.some(function (key) {
       return String(row[key]).toLowerCase().indexOf(filter.keyword) > -1;
-    });
+    }));
   };
 };
 /**
@@ -6167,7 +6171,12 @@ var getFilterForData = function getFilterForData(searchFields, everyMatch, someM
         return data;
       }
 
-      return data.filter(getFilterForData(this.opts.search, someMatch, everyMatch, filter));
+      return data.filter(getFilterForData({
+        searchFields: this.opts.search,
+        someMatch: someMatch,
+        everyMatch: everyMatch,
+        filter: filter
+      }));
     },
     pageData: function pageData() {
       var _this = this;
@@ -6316,7 +6325,7 @@ var getFilterForData = function getFilterForData(searchFields, everyMatch, someM
         keyword: keyword
       });
     },
-    getEveryMatchFields: function getEveryMatchFields(searchFields) {
+    getSomeMatchFields: function getSomeMatchFields(searchFields) {
       return Object.keys(searchFields).reduce(function (fields, key) {
         if (searchFields[key] === true) {
           fields.push(key);
@@ -6325,7 +6334,7 @@ var getFilterForData = function getFilterForData(searchFields, everyMatch, someM
         return fields;
       }, []);
     },
-    getSomeMatchFields: function getSomeMatchFields(searchFields) {
+    getEveryMatchFields: function getEveryMatchFields(searchFields) {
       return Object.keys(searchFields).reduce(function (fields, key) {
         if (typeof searchFields[key] === 'function') {
           fields.push(key);
@@ -6394,11 +6403,16 @@ var getFilterForData = function getFilterForData(searchFields, everyMatch, someM
         }).length;
       }
     },
-    paginate: function paginate(_ref) {
-      var currentPage = _ref.currentPage,
-          perPage = _ref.perPage;
+    paginate: function paginate(_ref2) {
+      var currentPage = _ref2.currentPage,
+          perPage = _ref2.perPage;
       this.currentPage = currentPage;
       this.perPage = perPage;
+      this.$emit('paginate', {
+        currentPage: currentPage,
+        perPage: perPage,
+        pageData: this.pageData
+      });
     },
     isColumnNonSelectable: function isColumnNonSelectable(column) {
       return this.opts.nonSelectableColumns.includes(column) || column === 'actions';
