@@ -221,10 +221,11 @@ import methods from './mixins/methods';
 import Pagination from './mixins/Pagination.vue';
 import ActionsCell from './mixins/ActionsCell.vue';
 
-const getFilterForData = (searchFields, everyMatch, someMatch, filter) =>
+const getFilterForData = ({ searchFields, someMatch, everyMatch, filter }) =>
   row =>
     everyMatch.every(key => searchFields[key](row, key, filter)) &&
-    someMatch.some(key => String(row[key]).toLowerCase().indexOf(filter.keyword) > -1);
+      (someMatch.length === 0 || someMatch.some(key =>
+        String(row[key]).toLowerCase().indexOf(filter.keyword) > -1));
 
 /**
  * @module EnaTableClient
@@ -408,7 +409,7 @@ export default {
       if (someMatch.length === 0 && everyMatch.length === 0) {
         return data;
       }
-      return data.filter(getFilterForData(this.opts.search, someMatch, everyMatch, filter));
+      return data.filter(getFilterForData({ searchFields: this.opts.search, someMatch, everyMatch, filter }));
     },
     pageData() {
       const { sortKey } = this;
@@ -533,7 +534,7 @@ export default {
       return { ...filter, keyword };
     },
 
-    getEveryMatchFields(searchFields) {
+    getSomeMatchFields(searchFields) {
       return Object.keys(searchFields).reduce((fields, key) => {
         if (searchFields[key] === true) {
           fields.push(key);
@@ -541,7 +542,7 @@ export default {
         return fields;
       }, []);
     },
-    getSomeMatchFields(searchFields) {
+    getEveryMatchFields(searchFields) {
       return Object.keys(searchFields).reduce((fields, key) => {
         if (typeof searchFields[key] === 'function') {
           fields.push(key);
