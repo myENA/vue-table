@@ -476,9 +476,12 @@ export default {
         }, []);
       },
     },
-    filteredData() {
-      this.setAllSelected();
-      this.resetCurrentPage();
+    filteredData: {
+      immediate: true,
+      handler() {
+        this.setAllSelected();
+        this.resetCurrentPage();
+      },
     },
     pageData() {
       Object.keys(this.pageData).forEach((group) => {
