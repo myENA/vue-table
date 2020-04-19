@@ -12,7 +12,7 @@
 
     <h1>All countries</h1>
     <h2>ServerTable, which loads data page by page</h2>
-    <ServerTable :columns="columns" :url="url" :options="options" ref="serverTable">
+    <ServerTable :columns="columns" :url="url" :options="options" ref="serverTable" :fetch="fetch" :parse="parse">
       <div slot="filter">
         <input placeholder="Search by name" v-model="options.filter.name"/>
         <button @click="filter">Find</button>
@@ -27,47 +27,21 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue';
 import 'bootstrap/dist/js/bootstrap';
 import axios from 'axios';
 import Qs from 'qs';
 import ServerTable from './components/Server.vue';
 import ClientTable from './components/Client.vue';
 
-const myServerTable = {
-  extends: ServerTable,
-  methods: {
-    async fetch(params) {
-      const { data } = await axios.get(this.url, {
-        params: Object.assign({}, params, {
-          filter: this.options.filter,
-        }),
-        paramsSerializer(p) {
-          return Qs.stringify(p, { arrayFormat: 'brackets' });
-        },
-      });
-      return data;
-    },
-    parse({ list, total }) {
-      return {
-        data: list,
-        total,
-      };
-    },
-  },
-};
-
-const myClientTable = {
-  extends: ClientTable,
-  methods: {
-
-  },
-};
+const myServerTable = defineComponent(ServerTable);
+const myClientTable = defineComponent(ClientTable);
 
 export default {
   name: 'app',
   components: {
-    ServerTable,
-    ClientTable,
+    ServerTable: myServerTable,
+    ClientTable: myClientTable,
   },
   data: () => ({
     columns: ['name', 'capital', 'population'],
@@ -111,6 +85,23 @@ export default {
     filter() {
       // when filtering is applied, retrieve first page
       this.$refs.serverTable.getFirstPage();
+    },
+    async fetch(params) {
+      const { data } = await axios.get(this.url, {
+        params: Object.assign({}, params, {
+          filter: this.options.filter,
+        }),
+        paramsSerializer(p) {
+          return Qs.stringify(p, { arrayFormat: 'brackets' });
+        },
+      });
+      return data;
+    },
+    parse({ list, total }) {
+      return {
+        data: list,
+        total,
+      };
     },
   },
 };
