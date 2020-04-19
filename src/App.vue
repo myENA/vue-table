@@ -12,7 +12,7 @@
 
     <h1>All countries</h1>
     <h2>ServerTable, which loads data page by page</h2>
-    <ServerTable :columns="columns" :url="url" :options="options" ref="serverTable" :fetch="fetch" :parse="parse">
+    <ServerTable :columns="columns" :url="url" :options="options" ref="serverTable" :fetch-data="fetchData" :parse="parse">
       <div slot="filter">
         <input placeholder="Search by name" v-model="options.filter.name"/>
         <button @click="filter">Find</button>
@@ -86,7 +86,7 @@ export default {
       // when filtering is applied, retrieve first page
       this.$refs.serverTable.getFirstPage();
     },
-    async fetch(url, params) {
+    async fetchData(url, params) {
       const { data } = await axios.get(url, {
         params: Object.assign({}, params, {
           filter: this.options.filter,

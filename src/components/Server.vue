@@ -195,7 +195,7 @@ const useServerTable = () => ({
       type: Object,
       default: () => ({}),
     },
-    fetch: {
+    fetchData: {
       type: Function,
       default: defaultFetch,
     },
@@ -272,7 +272,7 @@ const useServerTable = () => ({
         const {
           data: responseData,
           total,
-        } = props.parse(await props.fetch(props.url, params));
+        } = props.parse(await props.fetchData(props.url, params));
         state.data = responseData;
         state.totalRows = total;
       } catch (e) {
