@@ -86,8 +86,8 @@ export default {
       // when filtering is applied, retrieve first page
       this.$refs.serverTable.getFirstPage();
     },
-    async fetch(params) {
-      const { data } = await axios.get(this.url, {
+    async fetch(url, params) {
+      const { data } = await axios.get(url, {
         params: Object.assign({}, params, {
           filter: this.options.filter,
         }),

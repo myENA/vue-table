@@ -153,8 +153,8 @@ import methods from './mixins/methods';
 import Pagination from './mixins/Pagination.vue';
 import ActionsCell from './mixins/ActionsCell.vue';
 
-const defaultFetch = async (params) => {
-  const { data } = await axios.get(this.url, {
+const defaultFetch = async (url, params) => {
+  const { data } = await axios.get(url, {
     params,
   });
   return data;
@@ -272,7 +272,7 @@ const useServerTable = () => ({
         const {
           data: responseData,
           total,
-        } = props.parse(await props.fetch(params));
+        } = props.parse(await props.fetch(props.url, params));
         state.data = responseData;
         state.totalRows = total;
       } catch (e) {
