@@ -48,7 +48,7 @@
                   </div>
                 </template>
                 <template v-else>
-                  {{ key | heading(opts.headings) }}
+                  {{ heading(key, opts.headings) }}
                 </template>
               </slot>
               <i v-if="opts.sortable[key]"
@@ -215,7 +215,7 @@ th.sortable {
 
 <script type="text/javascript">
 import { mergeDeepRight, union, difference } from 'ramda';
-import filters from './mixins/filters';
+import useFilters from './mixins/filters';
 import defaultProps from './mixins/default-props';
 import methods from './mixins/methods';
 import Pagination from './mixins/Pagination.vue';
@@ -231,7 +231,7 @@ const getFilterForData = ({ searchFields, someMatch, everyMatch, filter }) =>
  * @module EnaTableClient
  */
 export default {
-  mixins: [filters, methods],
+  mixins: [methods],
   components: {
     Pagination,
     ActionsCell,
@@ -521,6 +521,11 @@ export default {
       });
       this.shown = shown;
     },
+  },
+  setup() {
+    return {
+      ...useFilters(),
+    };
   },
   mounted() {
     if (this.opts.sortBy) {

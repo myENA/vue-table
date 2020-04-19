@@ -11,7 +11,7 @@
                 [opts.columnsClasses[key]]: opts.columnsClasses[key] != null }">
               <slot :name="'heading_' + key">
                 <template>
-                  {{ key | heading(opts.headings) }}
+                  {{ heading(key, opts.headings) }}
                 </template>
               </slot>
               <i v-if="opts.sortable[key]"
@@ -145,7 +145,7 @@ th.sortable {
 
 <script type="text/javascript">
 import axios from 'axios';
-import filters from './mixins/filters';
+import useFilters from './mixins/filters';
 import defaultProps from './mixins/default-props';
 import methods from './mixins/methods';
 import Pagination from './mixins/Pagination.vue';
@@ -155,7 +155,7 @@ import ActionsCell from './mixins/ActionsCell.vue';
  * @module EnaTableServer
  */
 export default {
-  mixins: [filters, methods],
+  mixins: [methods],
   components: {
     Pagination,
     ActionsCell,
@@ -243,6 +243,11 @@ export default {
     },
   },
   watch: {
+  },
+  setup() {
+    return {
+      ...useFilters(),
+    };
   },
   mounted() {
     if (this.opts.sortBy) {

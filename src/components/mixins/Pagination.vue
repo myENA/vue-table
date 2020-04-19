@@ -67,7 +67,7 @@
     <div :class="[$style.info, classes.info]">
       <div v-if="totalRows">
         <span>
-          {{text.info.showing | format(startRow+1, endRow, totalRows)}}
+          {{formatStr(text.info.showing, startRow+1, endRow, totalRows)}}
         </span>
         <select v-model="perPageValue"
           :class="[$style.perPageSelector, classes.formControl]">
@@ -116,10 +116,9 @@
 </style>
 
 <script>
-import filters from './filters';
+import useFilters from './filters';
 
 export default {
-  mixins: [filters],
   props: {
     classes: {
       type: Object,
@@ -212,6 +211,11 @@ export default {
     currentPage() {
       this.currentPageValue = this.currentPage;
     },
+  },
+  setup() {
+    return {
+      ...useFilters(),
+    };
   },
   created() {
     if (!this.noPaginationOnCreate) {
