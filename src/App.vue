@@ -3,25 +3,37 @@
     <h1>Countries of Europe</h1>
     <h2>ClientTable, which needs all data pre-loaded</h2>
     <ClientTable :columns="clientColumns" :data="clientData" :options="clientOptions">
-      <div slot="details_row" slot-scope="{ row }">
-        <h4>Details for {{row.name}}.</h4>
-        <p><strong>Alpha2Code:</strong> {{row.alpha2Code}}</p>
-        <p><strong>Domain(s):</strong> {{row.topLevelDomain.join(', ')}}</p>
-      </div>
+      <template #details_row="{ row }">
+        <div>
+          <h4>Details for {{row.name}}.</h4>
+          <p><strong>Alpha2Code:</strong> {{row.alpha2Code}}</p>
+          <p><strong>Domain(s):</strong> {{row.topLevelDomain.join(', ')}}</p>
+        </div>
+      </template>
     </ClientTable>
 
     <h1>All countries</h1>
     <h2>ServerTable, which loads data page by page</h2>
-    <ServerTable :columns="columns" :url="url" :options="options" ref="serverTable" :fetch-data="fetchData" :parse="parse">
-      <div slot="filter">
-        <input placeholder="Search by name" v-model="options.filter.name"/>
-        <button @click="filter">Find</button>
-      </div>
-      <div slot="details_row" slot-scope="{ row }">
-        <h4>Details for {{row.name}}.</h4>
-        <p><strong>Alpha2Code:</strong> {{row.alpha2Code}}</p>
-        <p><strong>Domain(s):</strong> {{row.topLevelDomain.join(', ')}}</p>
-      </div>
+    <ServerTable
+      ref="serverTable"
+      :columns="columns"
+      :url="url"
+      :options="options"
+      :fetch-data="fetchData"
+      :parse="parse">
+      <template #filter>
+        <div>
+          <input placeholder="Search by name" v-model="options.filter.name"/>
+          <button @click="filter">Find</button>
+        </div>
+      </template>
+      <template #details_row="{ row }">
+        <div>
+          <h4>Details for {{row.name}}.</h4>
+          <p><strong>Alpha2Code:</strong> {{row.alpha2Code}}</p>
+          <p><strong>Domain(s):</strong> {{row.topLevelDomain.join(', ')}}</p>
+        </div>
+      </template>
     </ServerTable>
   </div>
 </template>
