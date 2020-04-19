@@ -66,8 +66,8 @@ const myClientTable = {
 export default {
   name: 'app',
   components: {
-    ServerTable: myServerTable,
-    ClientTable: myClientTable,
+    ServerTable,
+    ClientTable,
   },
   data: () => ({
     columns: ['name', 'capital', 'population'],
