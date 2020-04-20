@@ -1,4 +1,5 @@
 import { onMounted } from 'vue';
+import { setSort } from '@/components/mixins/methods';
 
 const useLoad = (props, state, opts) => {
   const loadData = async () => {
@@ -60,26 +61,9 @@ const usePagination = (state, loadData) => {
   };
 };
 
-const useSort = (state, opts, loadData) => {
+const useSort = (props, state, opts, loadData) => {
   const sortBy = (obj) => {
-    const { key, order } = obj;
-    if (opts.value.sortable[key]) {
-      state.sortKey = key;
-      props.columns.forEach((elem) => {
-        if (elem !== state.sortKey) {
-          state.sortOrders[elem] = null;
-        }
-      });
-
-      if (order) {
-        state.sortOrders[key] = order;
-      } else if (state.sortOrders[key] === null) {
-        state.sortOrders[key] = 'ascending';
-      } else if (state.sortOrders[key] === 'ascending') {
-        state.sortOrders[key] = 'descending';
-      } else {
-        state.sortOrders[key] = null;
-      }
+    if (setSort(obj, props.columns, opts.value.sortable, state)) {
       loadData();
     }
   };

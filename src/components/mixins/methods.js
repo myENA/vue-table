@@ -42,4 +42,27 @@ const useToggle = (state, context) => ({
   },
 });
 
-export { useToggle, useComputedColumns };
+const setSort = ({ key, order }, columns, sortable, state) => {
+  if (sortable[key]) {
+    state.sortKey = key;
+    columns.forEach((elem) => {
+      if (elem !== state.sortKey) {
+        state.sortOrders[elem] = null;
+      }
+    });
+
+    if (order) {
+      state.sortOrders[key] = order;
+    } else if (state.sortOrders[key] === null) {
+      state.sortOrders[key] = 'ascending';
+    } else if (state.sortOrders[key] === 'ascending') {
+      state.sortOrders[key] = 'descending';
+    } else {
+      state.sortOrders[key] = null;
+    }
+    return true;
+  }
+  return false;
+};
+
+export { useToggle, useComputedColumns, setSort };

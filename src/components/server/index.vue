@@ -238,7 +238,7 @@ export default {
       ...useFilters(),
       ...useToggle(state, context),
       ...useComputedColumns({ columns: props.columns, opts, data: state.data }),
-      ...useSort(state, opts, loadData),
+      ...useSort(props, state, opts, loadData),
       ...usePagination(state, loadData),
       opts,
       loadData,

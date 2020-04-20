@@ -214,23 +214,14 @@ th.sortable {
 </style>
 
 <script type="text/javascript">
-import { reactive, toRefs, computed } from 'vue';
-import { union, difference } from 'ramda';
-import useFilters from './mixins/filters';
-import useDefaultOptions from './mixins/default-options';
-import { useToggle, useComputedColumns } from './mixins/methods';
-import Pagination from './Pagination.vue';
-import ActionsCell from './mixins/ActionsCell.vue';
+import { reactive, toRefs, computed, watch } from 'vue';
+import useFilters from '@/components/mixins/filters';
+import useDefaultOptions from '@/components/mixins/default-options';
+import { useToggle, useComputedColumns } from '@/components/mixins/methods';
+import Pagination from '@/components/Pagination.vue';
+import ActionsCell from '@/components/mixins/ActionsCell.vue';
+import { usePagination, useSort, useSelect, useFilter, useGroups } from './methods';
 
-const getFilterForData = ({ searchFields, someMatch, everyMatch, filter }) =>
-  row =>
-    everyMatch.every(key => searchFields[key](row, key, filter)) &&
-      (someMatch.length === 0 || someMatch.some(key =>
-        String(row[key]).toLowerCase().indexOf(filter.keyword) > -1));
-
-/**
- * @module EnaTableClient
- */
 export default {
   components: {
     Pagination,
@@ -287,147 +278,7 @@ export default {
       default: () => ({}),
     },
   },
-  computed: {
-    collapseAllGroups() {
-      return this.opts.collapseAllGroups;
-    },
-    hasSearchFields() {
-      return Object.values(this.opts.search).some(v => v === true);
-    },
-    filteredData() {
-      const { data } = this;
-      const filter = this.getFilter(this.filter, this.searchBy);
-      // at least one of the fields with "true" should match the record
-      const someMatch = this.getSomeMatchFields(this.opts.search);
-      // every other "function" field should match the function
-      const everyMatch = this.getEveryMatchFields(this.opts.search);
-      if (someMatch.length === 0 && everyMatch.length === 0) {
-        return data;
-      }
-      return data.filter(getFilterForData({
-        searchFields: this.opts.search,
-        someMatch,
-        everyMatch,
-        filter,
-      }));
-    },
-    pageData() {
-      const { sortKey } = this;
-      let data = this.filteredData;
-      let order = 0;
-      if (this.sortOrders[sortKey] === 'ascending') {
-        order = 1;
-      } else if (this.sortOrders[sortKey] === 'descending') {
-        order = -1;
-      }
-      if (sortKey && this.opts.sortable && order) {
-        let sortableFn;
-        if (this.opts.sortable[sortKey] === true) {
-          sortableFn = (a, b) => {
-            const aF = String(a[sortKey]);
-            const bF = String(b[sortKey]);
-            return this.opts.sortCollator.compare(aF, bF) * order;
-          };
-        } else if (typeof this.opts.sortable[sortKey] === 'function') {
-          sortableFn = (a, b) => this.opts.sortable[sortKey](a, b) * order;
-        }
-        data = data.slice().sort(sortableFn);
-      }
-      if (this.opts.pagination) {
-        // slice the data if pagionation is enabled
-        data = data.slice(this.startRow, this.endRow);
-      }
-      if (this.opts.groupBy) {
-        return data.reduce((groupedData, row) => {
-          // eslint-disable-next-line
-          (groupedData[row[this.opts.groupBy]] = groupedData[row[this.opts.groupBy]] || [])
-            .push(row);
-          return groupedData;
-        }, {});
-      }
-      return { all: data };
-    },
-    totalRows() {
-      return this.filteredData.length;
-    },
-    startRow() {
-      return (this.currentPage - 1) * this.perPage;
-    },
-    endRow() {
-      return Math.min(this.startRow + this.perPage, this.totalRows);
-    },
-    selectedRowIds() {
-      return this.selectedRows.reduce((obj, id) => ({ ...obj, [id]: true }), {});
-    },
-  },
-  watch: {
-    filter() {
-      // go to first page when search query changes
-      this.currentPage = 1;
-    },
-    data: {
-      immediate: true,
-      handler() {
-        this.selectedRows = this.data.reduce((acc, d) => {
-          if (d.showSelect && d.selected) {
-            acc.push(d[this.opts.uniqueKey]);
-          }
-          return acc;
-        }, []);
-      },
-    },
-    filteredData: {
-      immediate: true,
-      handler() {
-        this.setAllSelected();
-        this.resetCurrentPage();
-      },
-    },
-    pageData() {
-      Object.keys(this.pageData).forEach((group) => {
-        this.pageData[group].forEach((row) => {
-          this.shown[row[this.opts.groupBy]] =
-            typeof this.shown[row[this.opts.groupBy]] === 'undefined' ?
-              !this.opts.collapseAllGroups :
-              this.shown[row[this.opts.groupBy]];
-        });
-      });
-    },
-    selectedRows() {
-      this.setAllSelected();
-      const selected = this.selectedRows.reduce((acc, id) => {
-        // eslint-disable-next-line
-        acc[id] = true;
-        return acc;
-      }, {});
-      const selectedData = this.data.reduce((data, row) => {
-        if (row.showSelect) {
-          const selectedRow = selected[row[this.opts.uniqueKey]] || false;
-          Object.assign(row, {
-            selected: !!selectedRow,
-          });
-          if (selectedRow) {
-            data.push(row);
-          }
-        }
-        return data;
-      }, []);
-      this.$emit('selectedRows', selectedData);
-    },
-    collapseAllGroups(collapse) {
-      const shown = Object.assign({}, this.shown);
-      Object.keys(shown).forEach((key) => {
-        shown[key] = !collapse;
-      });
-      this.shown = shown;
-    },
-  },
   setup(props, context) {
-    const sortOrders = {};
-    props.columns.forEach((key) => {
-      sortOrders[key] = null;
-    });
-
     const search = {};
     props.columns.forEach((key) => {
       if (typeof props.options.search[key] === 'undefined') {
@@ -454,13 +305,63 @@ export default {
     const state = reactive({
       allSelected: false,
       selectedRows: [],
-      sortOrders,
+      sortOrders: props.columns.reduce((orders, col) => ({ ...orders, [col]: null }), {}),
       sortKey: '',
       searchBy: '',
       currentPage: 1,
       perPage: opts.value.perPage,
-      shown: {},
       expandedRows: {},
+      shown: {},
+    });
+
+    const computedFilter = computed(() => props.filter);
+    const computedData = computed(() => props.data);
+
+    const { filteredData, ...restFilter } = useFilter(computedData, computedFilter, state, opts);
+
+    const totalRows = computed(() => filteredData.value.length);
+    const startRow = computed(() => (state.currentPage - 1) * state.perPage);
+    const endRow = computed(() => Math.min(startRow.value + state.perPage, totalRows.value));
+    const pageData = computed(() => {
+      const { sortKey, sortOrders } = state;
+      let data = filteredData.value;
+      let order = 0;
+      if (sortOrders[sortKey] === 'ascending') {
+        order = 1;
+      } else if (sortOrders[sortKey] === 'descending') {
+        order = -1;
+      }
+      if (sortKey && opts.value.sortable && order) {
+        let sortableFn;
+        if (opts.value.sortable[sortKey] === true) {
+          sortableFn = (a, b) => {
+            const aF = String(a[sortKey]);
+            const bF = String(b[sortKey]);
+            return opts.value.sortCollator.compare(aF, bF) * order;
+          };
+        } else if (typeof opts.value.sortable[sortKey] === 'function') {
+          sortableFn = (a, b) => opts.value.sortable[sortKey](a, b) * order;
+        }
+        data = data.slice().sort(sortableFn);
+      }
+      if (opts.value.pagination) {
+        // slice the data if pagionation is enabled
+        data = data.slice(startRow.value, endRow.value);
+      }
+      if (opts.value.groupBy) {
+        return data.reduce((groupedData, row) => {
+          // eslint-disable-next-line
+          (groupedData[row[opts.value.groupBy]] = groupedData[row[opts.value.groupBy]] || [])
+            .push(row);
+          return groupedData;
+        }, {});
+      }
+      return { all: data };
+    });
+
+    watch(computedFilter, () => {
+      // go to first page when search query changes
+      state.currentPage = 1;
     });
 
     return {
@@ -468,121 +369,18 @@ export default {
       ...useFilters(),
       ...useToggle(state, context),
       ...useComputedColumns({ columns: props.columns, opts, data: props.data }),
+      ...usePagination(context, state, filteredData),
+      ...useSort(props, state, opts),
+      ...useSelect(props.data, filteredData, state, opts, context),
+      ...useGroups(pageData, state.shown, opts),
+      filteredData,
+      ...restFilter,
       opts,
+      totalRows,
+      startRow,
+      endRow,
+      pageData,
     };
-  },
-  mounted() {
-    if (this.opts.sortBy) {
-      this.sortBy(this.opts.sortBy);
-    }
-  },
-  methods: {
-    getFilter(filter, searchBy) {
-      let { keyword = '' } = filter;
-      if (!keyword) {
-        keyword = searchBy;
-      }
-      keyword = keyword.toLowerCase();
-      return { ...filter, keyword };
-    },
-
-    getSomeMatchFields(searchFields) {
-      return Object.keys(searchFields).reduce((fields, key) => {
-        if (searchFields[key] === true) {
-          fields.push(key);
-        }
-        return fields;
-      }, []);
-    },
-    getEveryMatchFields(searchFields) {
-      return Object.keys(searchFields).reduce((fields, key) => {
-        if (typeof searchFields[key] === 'function') {
-          fields.push(key);
-        }
-        return fields;
-      }, []);
-    },
-    search(value) {
-      this.searchBy = value;
-    },
-    sortBy(obj) {
-      const { key, order } = obj;
-      if (this.opts.sortable[key]) {
-        this.sortKey = key;
-        this.allColumns.forEach((elem) => {
-          if (elem !== this.sortKey) {
-            this.sortOrders[elem] = null;
-          }
-        });
-
-        if (order) {
-          this.sortOrders[key] = order;
-        } else if (this.sortOrders[key] === null) {
-          this.sortOrders[key] = 'ascending';
-        } else if (this.sortOrders[key] === 'ascending') {
-          this.sortOrders[key] = 'descending';
-        } else {
-          this.sortOrders[key] = null;
-        }
-      }
-    },
-    toggleGroup(key) {
-      this.shown[key] = typeof this.shown[key] === 'undefined' ? false : !this.shown[key];
-      this.shown = Object.assign({}, this.shown);
-    },
-    selectAll() {
-      const selectableRows = this.filteredData.reduce((acc, d) => {
-        if (d.showSelect) {
-          acc.push(d[this.opts.uniqueKey]);
-        }
-        return acc;
-      }, []);
-      if (this.allSelected) {
-        this.selectedRows = difference(this.selectedRows, selectableRows);
-      } else {
-        this.selectedRows = union(this.selectedRows, selectableRows);
-      }
-    },
-    setAllSelected() {
-      if (this.selectedRows.length === 0) {
-        this.allSelected = false;
-      } else {
-        this.allSelected = this.filteredData.filter(d => d.showSelect).length ===
-          this.filteredData.filter(d => d.selected).length;
-      }
-    },
-    paginate({ currentPage, perPage }) {
-      this.currentPage = currentPage;
-      this.perPage = perPage;
-      this.$emit('paginate', {
-        currentPage,
-        perPage,
-        pageData: this.pageData,
-      });
-    },
-    isColumnNonSelectable(column) {
-      return this.opts.nonSelectableColumns.includes(column) || column === 'actions';
-    },
-    isColumnSelectable(entry, column) {
-      return this.opts.editable && entry.showSelect && !this.isColumnNonSelectable(column);
-    },
-    toggleSelected(entry, column) {
-      if (this.isColumnSelectable(entry, column)) {
-        if (entry.selected) {
-          const idx = this.selectedRows.indexOf(entry[this.opts.uniqueKey]);
-          this.selectedRows.splice(idx, 1);
-        } else {
-          this.selectedRows.push(entry[this.opts.uniqueKey]);
-        }
-      }
-    },
-    resetCurrentPage() {
-      // go to last page if current page is no longer valid
-      const lastPage = Math.max(1, Math.ceil(this.totalRows / this.perPage));
-      if (lastPage < this.currentPage) {
-        this.currentPage = lastPage;
-      }
-    },
   },
 };
 </script>
