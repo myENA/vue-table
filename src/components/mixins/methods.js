@@ -32,7 +32,7 @@ const useToggle = (state, context) => ({
   toggleRow(id) {
     state.expandedRows[id] = !state.expandedRows[id];
     // state.expandedRows = Object.assign({}, state.expandedRows);
-    context.$emit('toggleRow', id, state.expandedRows);
+    context.emit('toggleRow', id, state.expandedRows);
   },
   isRowExpanded(id) {
     return state.expandedRows[id];

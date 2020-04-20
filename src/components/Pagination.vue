@@ -116,7 +116,71 @@
 </style>
 
 <script>
-import useFilters from './filters';
+import { reactive, toRefs, computed, watch } from 'vue';
+import useFilters from '@/components/mixins/filters';
+
+const computePages = (props, state) => {
+  const totalPages = computed(() => Math.ceil(props.totalRows / state.perPageValue));
+  const pagesToShow = computed(() => {
+    const halfInterval = (props.pageInterval - 1) / 2;
+    let startPage = Math.max(2, state.currentPageValue - halfInterval);
+    let endPage = Math.min(totalPages.value - 1, state.currentPageValue + halfInterval);
+    if (startPage + props.pageInterval - 1 > endPage) {
+      endPage = Math.min(totalPages.value - 1, startPage + props.pageInterval - 1);
+    }
+    if (endPage - (props.pageInterval - 1)) {
+      startPage = Math.max(2, endPage - (props.pageInterval - 1));
+    }
+    const pages = [];
+    for (let i = startPage; i <= endPage; i += 1) {
+      pages.push(i);
+    }
+    return pages;
+  });
+  const startPage = computed(() => pagesToShow[0]);
+  const endPage = computed(() => pagesToShow[pagesToShow.length - 1]);
+  return {
+    totalPages,
+    pagesToShow,
+    startPage,
+    endPage,
+  };
+};
+
+const usePagination = (props, context, state, totalPages) => {
+  const paginate = () => {
+    context.emit('paginate', {
+      currentPage: state.currentPageValue,
+      perPage: state.perPageValue,
+    });
+  };
+  const goToPage = (page) => {
+    if (page >= 1 && page <= totalPages.value) {
+      state.currentPageValue = page;
+    }
+    paginate();
+  };
+
+  watch(totalPages, () => {
+    if (state.currentPageValue > totalPages.value) {
+      // set the current page to the last page if the number of pages has been reduced below it
+      state.currentPageValue = totalPages.value;
+    } else if (!state.currentPageValue && totalPages.value) {
+      // if there was no current page and then the number of pages was set, go to first page
+      state.currentPageValue = 1;
+    }
+  });
+  return {
+    paginate,
+    goToPage,
+  };
+};
+
+const computeRows = (props, state) => {
+  const startRow = computed(() => (state.currentPageValue - 1) * state.perPageValue);
+  const endRow = computed(() => Math.min(startRow.value + state.perPageValue, props.totalRows));
+  return { startRow, endRow };
+};
 
 export default {
   props: {
@@ -153,88 +217,27 @@ export default {
       required: false,
     },
   },
-  data() {
-    return {
-      perPageValue: this.perPage,
-      currentPageValue: this.currentPage,
-    };
-  },
-  computed: {
-    pagesToShow() {
-      const halfInterval = (this.pageInterval - 1) / 2;
-      let startPage = Math.max(2, this.currentPageValue - halfInterval);
-      let endPage = Math.min(this.totalPages - 1, this.currentPageValue + halfInterval);
-      if (startPage + this.pageInterval - 1 > endPage) {
-        endPage = Math.min(this.totalPages - 1, startPage + this.pageInterval - 1);
-      }
-      if (endPage - (this.pageInterval - 1)) {
-        startPage = Math.max(2, endPage - (this.pageInterval - 1));
-      }
-      const pages = [];
-      for (let i = startPage; i <= endPage; i += 1) {
-        pages.push(i);
-      }
-      return pages;
-    },
-    totalPages() {
-      return Math.ceil(this.totalRows / this.perPageValue);
-    },
-    startRow() {
-      return (this.currentPageValue - 1) * this.perPageValue;
-    },
-    endRow() {
-      return Math.min(this.startRow + this.perPageValue, this.totalRows);
-    },
-    startPage() {
-      return this.pagesToShow[0];
-    },
-    endPage() {
-      return this.pagesToShow[this.pagesToShow.length - 1];
-    },
-  },
-  watch: {
-    totalPages() {
-      if (this.currentPageValue > this.totalPages) {
-        // set the current page to the last page if the number of pages has been reduced below it
-        this.currentPageValue = this.totalPages;
-      } else if (!this.currentPageValue && this.totalPages) {
-        // if there was no current page and then the number of pages was set, go to first page
-        this.currentPageValue = 1;
-      }
-    },
-    perPageValue() {
-      this.paginate();
-    },
-    perPage() {
-      this.perPageValue = this.perPage;
-    },
-    currentPage() {
-      this.currentPageValue = this.currentPage;
-    },
-  },
-  setup() {
+  setup(props, context) {
+    const state = reactive({
+      perPageValue: props.perPage,
+      currentPageValue: props.currentPage,
+    });
+
+    const { totalPages, ...restPages } = computePages(props, state);
+
     return {
       ...useFilters(),
+      ...toRefs(state),
+      ...usePagination(props, context, state, totalPages),
+      totalPages,
+      ...restPages,
+      ...computeRows(props, state),
     };
   },
   created() {
     if (!this.noPaginationOnCreate) {
       this.paginate();
     }
-  },
-  methods: {
-    goToPage(page) {
-      if (page >= 1 && page <= this.totalPages) {
-        this.currentPageValue = page;
-      }
-      this.paginate();
-    },
-    paginate() {
-      this.$emit('paginate', {
-        currentPage: this.currentPageValue,
-        perPage: this.perPageValue,
-      });
-    },
   },
 };
 </script>

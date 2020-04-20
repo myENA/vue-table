@@ -147,7 +147,7 @@ import { reactive, toRefs } from 'vue';
 import useFilters from '@/components/mixins/filters';
 import useDefaultOptions from '@/components/mixins/default-options';
 import { useToggle, useComputedColumns } from '@/components/mixins/methods';
-import Pagination from '@/components/mixins/Pagination.vue';
+import Pagination from '@/components/Pagination.vue';
 import ActionsCell from '@/components/mixins/ActionsCell.vue';
 import { useLoad, usePagination, useSort } from './methods';
 

@@ -219,7 +219,7 @@ import { union, difference } from 'ramda';
 import useFilters from './mixins/filters';
 import useDefaultOptions from './mixins/default-options';
 import { useToggle, useComputedColumns } from './mixins/methods';
-import Pagination from './mixins/Pagination.vue';
+import Pagination from './Pagination.vue';
 import ActionsCell from './mixins/ActionsCell.vue';
 
 const getFilterForData = ({ searchFields, someMatch, everyMatch, filter }) =>
