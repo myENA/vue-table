@@ -220,7 +220,7 @@ const useServerTable = () => ({
     });
 
     const opts = computed(() => {
-      const mOpts = mergeDeepRight(
+      const mOpts = [
         defaultProps,
         {
           params: {
@@ -230,8 +230,8 @@ const useServerTable = () => ({
             sort_dir: 'sort_dir',
           },
         },
-        props.options
-      );
+        props.options,
+      ].reduce(mergeDeepRight, {});
       const sortable = {};
       props.columns.forEach((key) => {
         if (mOpts.sortable === true || mOpts.sortable[key]) {
