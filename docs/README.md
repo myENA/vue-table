@@ -13,6 +13,6 @@ Components to render a table (or data grid if you will) using prefetched data (C
 
 ## Dependencies
 
-- Vue 2
-- Bootstrap 3
-- FontAwesome 4
+- Vue 3
+- Ramda (only if you'r including the src)
+- Axios (soft - used for ServerTable. Will not be needed if you don't use it or if you pass the `fetchData` prop)

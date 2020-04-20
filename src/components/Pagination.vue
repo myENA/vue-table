@@ -139,7 +139,7 @@ const calculatePages = (pageInterval, currentPageValue, totalPages) => {
 const computePages = (props, state) => {
   const totalPages = computed(() => Math.ceil(props.totalRows / state.perPageValue));
   const pagesToShow = computed(() =>
-    calculatePages(props.pageInterval, props.currentPageValue, totalPages.value));
+    calculatePages(props.pageInterval, state.currentPageValue, totalPages.value));
 
   const startPage = computed(() => pagesToShow[0]);
   const endPage = computed(() => pagesToShow[pagesToShow.length - 1]);

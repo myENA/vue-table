@@ -10,7 +10,7 @@ module.exports = {
     },
   },
   lintOnSave: false,
-  configureWebpack: (/*config*/) => {
+  configureWebpack: (/* config */) => {
     const customConfig = {
       plugins: [
         new webpack.ProvidePlugin({
@@ -30,11 +30,8 @@ module.exports = {
     if (process.env.VUE_CLI_BUILD_TARGET === 'lib') {
       // set external modules so they won't get bundled with the lib
       customConfig.externals = [
-        'bootbox',
-        'bootstrap',
-        'font-awesome',
-        'jquery',
         'vue',
+        'axios',
       ];
     }
     // config parameter can be mutated

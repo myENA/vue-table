@@ -40,7 +40,7 @@
 
 <script>
 import { defineComponent } from 'vue';
-import 'bootstrap/dist/js/bootstrap';
+// import 'bootstrap/dist/js/bootstrap';
 import axios from 'axios';
 import Qs from 'qs';
 import ServerTable from './components/server/index.vue';
