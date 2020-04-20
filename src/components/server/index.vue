@@ -143,12 +143,13 @@ th.sortable {
 
 <script type="text/javascript">
 import axios from 'axios';
-import { onMounted, computed, reactive, toRefs } from 'vue';
-import useFilters from './mixins/filters';
-import useDefaultOptions from './mixins/default-options';
-import { useToggle, useComputedColumns } from './mixins/methods';
-import Pagination from './mixins/Pagination.vue';
-import ActionsCell from './mixins/ActionsCell.vue';
+import { reactive, toRefs } from 'vue';
+import useFilters from '@/components/mixins/filters';
+import useDefaultOptions from '@/components/mixins/default-options';
+import { useToggle, useComputedColumns } from '@/components/mixins/methods';
+import Pagination from '@/components/mixins/Pagination.vue';
+import ActionsCell from '@/components/mixins/ActionsCell.vue';
+import { useLoad, usePagination, useSort } from './methods';
 
 const defaultFetch = async (url, params) => {
   const { data } = await axios.get(url, {
@@ -230,90 +231,15 @@ export default {
       expandedRows: {},
     });
 
-
-    const loadData = async () => {
-      const params = {
-        [opts.value.params.page]: state.currentPage,
-        [opts.value.params.per_page]: state.perPage,
-      };
-      let direction;
-      if (state.sortOrders[state.sortKey] === 'ascending') {
-        direction = 1;
-      } else if (state.sortOrders[state.sortKey] === 'descending') {
-        direction = -1;
-      } else {
-        direction = 0;
-        state.sortKey = undefined;
-      }
-      if (state.sortKey) {
-        Object.assign(params, {
-          [opts.value.params.sort_by]: state.sortKey,
-          [opts.value.params.sort_dir]: direction,
-        });
-      }
-      try {
-        const {
-          data: responseData,
-          total,
-        } = props.parse(await props.fetchData(props.url, params));
-        state.data = responseData;
-        state.totalRows = total;
-      } catch (e) {
-        state.data = [];
-        state.totalRows = 0;
-        throw e;
-      } finally {
-        state.loading = false;
-      }
-    };
-    const sortBy = (obj) => {
-      const { key, order } = obj;
-      if (opts.value.sortable[key]) {
-        state.sortKey = key;
-        props.columns.forEach((elem) => {
-          if (elem !== state.sortKey) {
-            state.sortOrders[elem] = null;
-          }
-        });
-
-        if (order) {
-          state.sortOrders[key] = order;
-        } else if (state.sortOrders[key] === null) {
-          state.sortOrders[key] = 'ascending';
-        } else if (state.sortOrders[key] === 'ascending') {
-          state.sortOrders[key] = 'descending';
-        } else {
-          state.sortOrders[key] = null;
-        }
-        loadData();
-      }
-    };
-
-    const getFirstPage = () => {
-      state.currentPage = 1;
-      loadData();
-    };
-
-    const paginate = (p) => {
-      state.currentPage = p.currentPage;
-      state.perPage = p.perPage;
-      loadData();
-    };
-
-    onMounted(() => {
-      if (opts.value.sortBy) {
-        sortBy(opts.value.sortBy);
-      }
-    });
+    const { loadData } = useLoad(props, state, opts);
 
     return {
       ...toRefs(state),
       ...useFilters(),
       ...useToggle(state, context),
       ...useComputedColumns({ columns: props.columns, opts, data: state.data }),
-      sortBy,
-      getFirstPage,
-      paginate,
+      ...useSort(state, opts, loadData),
+      ...usePagination(state, loadData),
       opts,
       loadData,
     };

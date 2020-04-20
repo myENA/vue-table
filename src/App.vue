@@ -43,7 +43,7 @@ import { defineComponent } from 'vue';
 import 'bootstrap/dist/js/bootstrap';
 import axios from 'axios';
 import Qs from 'qs';
-import ServerTable from './components/Server.vue';
+import ServerTable from './components/server/index.vue';
 import ClientTable from './components/Client.vue';
 
 const myServerTable = defineComponent(ServerTable);

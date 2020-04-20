@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import Server from './Server.vue';
+import Server from './server/index.vue';
 import Client from './Client.vue';
 
 const components = {
