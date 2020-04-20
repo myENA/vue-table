@@ -1,38 +1,45 @@
-export default {
-  computed: {
-    allColumns() {
-      const allColumns = this.columns.slice();
-      if (!this.columns.includes('actions') && this.opts.detailsRow) {
-        allColumns.push('actions');
+import { computed } from 'vue';
+
+const useComputedColumns = ({ columns, opts, data }) => {
+  const allColumns = computed(() => {
+    const columnsCopy = columns.slice();
+    if (!columns.includes('actions') && opts.detailsRow) {
+      columnsCopy.push('actions');
+    }
+    return columnsCopy;
+  });
+
+  const colspan = computed(() => allColumns.value.length);
+
+  const computedRowClasses = computed(() => data.map((row) => {
+    const classes = {};
+    Object.keys(opts.rowClasses).forEach((prop) => {
+      if (row[prop]) {
+        classes[opts.rowClasses[prop]] = true;
       }
-      return allColumns;
-    },
-    computedRowClasses() {
-      return this.data.map((row) => {
-        const classes = {};
-        Object.keys(this.opts.rowClasses).forEach((prop) => {
-          if (row[prop]) {
-            classes[this.opts.rowClasses[prop]] = true;
-          }
-        });
-        return classes;
-      });
-    },
-    colspan() {
-      return this.allColumns.length;
-    },
-  },
-  methods: {
-    isShown(key) {
-      return typeof this.shown[key] === 'undefined' || this.shown[key];
-    },
-    toggleRow(id) {
-      this.expandedRows[id] = !this.expandedRows[id];
-      this.expandedRows = Object.assign({}, this.expandedRows);
-      this.$emit('toggleRow', id, this.expandedRows);
-    },
-    isRowExpanded(id) {
-      return this.expandedRows[id];
-    },
-  },
+    });
+    return classes;
+  }));
+
+  return {
+    allColumns,
+    colspan,
+    computedRowClasses,
+  };
 };
+
+const useToggle = (state, context) => ({
+  toggleRow(id) {
+    state.expandedRows[id] = !state.expandedRows[id];
+    // state.expandedRows = Object.assign({}, state.expandedRows);
+    context.$emit('toggleRow', id, state.expandedRows);
+  },
+  isRowExpanded(id) {
+    return state.expandedRows[id];
+  },
+  isShown(key) {
+    return typeof state.shown[key] === 'undefined' || state.shown[key];
+  },
+});
+
+export { useToggle, useComputedColumns };

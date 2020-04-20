@@ -1,5 +1,5 @@
 const heading = (key, headings) => {
-  if (undefined !== headings[key]) {
+  if (typeof headings[key] !== 'undefined') {
     return headings[key];
   }
   const firstUpper = w => w.charAt(0).toUpperCase() + w.slice(1);
@@ -7,9 +7,9 @@ const heading = (key, headings) => {
 };
 const formatStr = (str, ...args) => [...args].reduce((s, a) => s.replace(/%s/, a), str);
 
-export default function() {
+export default function () {
   return {
     heading,
     formatStr,
-  }
-};
+  };
+}

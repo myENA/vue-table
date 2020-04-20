@@ -214,10 +214,11 @@ th.sortable {
 </style>
 
 <script type="text/javascript">
+import { reactive, toRefs, computed } from 'vue';
 import { mergeDeepRight, union, difference } from 'ramda';
 import useFilters from './mixins/filters';
 import defaultProps from './mixins/default-props';
-import methods from './mixins/methods';
+import { useToggle, useComputedColumns } from './mixins/methods';
 import Pagination from './mixins/Pagination.vue';
 import ActionsCell from './mixins/ActionsCell.vue';
 
@@ -231,7 +232,6 @@ const getFilterForData = ({ searchFields, someMatch, everyMatch, filter }) =>
  * @module EnaTableClient
  */
 export default {
-  mixins: [methods],
   components: {
     Pagination,
     ActionsCell,
@@ -349,50 +349,7 @@ export default {
       })),
     },
   },
-  data() {
-    const sortOrders = {};
-    this.columns.forEach((key) => {
-      sortOrders[key] = null;
-    });
-    return {
-      allSelected: false,
-      selectedRows: [],
-      sortOrders,
-      sortKey: '',
-      searchBy: '',
-      shown: {},
-      expandedRows: {},
-      currentPage: 1,
-      perPage: this.options.perPage || this.defaults.perPage,
-    };
-  },
   computed: {
-    opts() {
-      const opts = mergeDeepRight(
-        this.defaults,
-        this.options
-      );
-      const sortable = {};
-      const search = {};
-      this.columns.forEach((key) => {
-        if (key !== 'select' && key !== 'actions' &&
-          (opts.sortable === true || opts.sortable[key])) {
-          sortable[key] = opts.sortable[key] || true;
-        }
-        if (typeof opts.search[key] === 'undefined') {
-          search[key] = false;
-        } else {
-          search[key] = opts.search[key];
-        }
-      });
-      return Object.assign(
-        opts,
-        {
-          sortable,
-          search,
-        }
-      );
-    },
     collapseAllGroups() {
       return this.opts.collapseAllGroups;
     },
@@ -522,9 +479,66 @@ export default {
       this.shown = shown;
     },
   },
-  setup() {
+  setup(props, context) {
+    const sortOrders = {};
+    props.columns.forEach((key) => {
+      sortOrders[key] = null;
+    });
+    const state = reactive({
+      allSelected: false,
+      selectedRows: [],
+      sortOrders,
+      sortKey: '',
+      searchBy: '',
+      currentPage: 1,
+      perPage: props.options.perPage || defaultProps.perPage,
+      shown: {},
+      expandedRows: {},
+    });
+
+    const opts = computed(() => {
+      const mOpts = [
+        defaultProps,
+        {
+          search: {},
+          groupBy: false,
+          collapseAllGroups: false,
+          groupMeta: {},
+          pagination: true,
+          editable: false,
+          nonSelectableColumns: [],
+          sortCollator: new Intl.Collator('en', {
+            numeric: true,
+            sensitivity: 'base',
+          }),
+        },
+        props.options,
+      ].reduce(mergeDeepRight, {});
+      const sortable = {};
+      const search = {};
+      props.columns.forEach((key) => {
+        if (key !== 'select' && key !== 'actions' &&
+          (mOpts.sortable === true || mOpts.sortable[key])) {
+          sortable[key] = mOpts.sortable[key] || true;
+        }
+        if (typeof mOpts.search[key] === 'undefined') {
+          search[key] = false;
+        } else {
+          search[key] = mOpts.search[key];
+        }
+      });
+      return {
+        ...mOpts,
+        sortable,
+        search,
+      };
+    });
     return {
+      ...toRefs(state),
       ...useFilters(),
+      ...useToggle(state, context),
+      ...useComputedColumns({ columns: props.columns, opts, data: props.data }),
+      opts,
     };
   },
   mounted() {

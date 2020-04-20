@@ -147,7 +147,7 @@ import { onMounted, computed, reactive, toRefs } from 'vue';
 import { mergeDeepRight } from 'ramda';
 import useFilters from './mixins/filters';
 import defaultProps from './mixins/default-props';
-import methods from './mixins/methods';
+import { useToggle, useComputedColumns } from './mixins/methods';
 import Pagination from './mixins/Pagination.vue';
 import ActionsCell from './mixins/ActionsCell.vue';
 
@@ -164,7 +164,6 @@ const defaultParse = response => response;
  * @module EnaTableServer
  */
 const useServerTable = () => ({
-  mixins: [methods],
   components: {
     Pagination,
     ActionsCell,
@@ -202,7 +201,7 @@ const useServerTable = () => ({
       default: defaultParse,
     },
   },
-  setup(props) {
+  setup(props, context) {
     const state = reactive({
       loading: true,
       data: [],
@@ -324,6 +323,8 @@ const useServerTable = () => ({
     return {
       ...toRefs(state),
       ...useFilters(),
+      ...useToggle(state, context),
+      ...useComputedColumns({ columns: props.columns, opts, data: state.data }),
       sortBy,
       getFirstPage,
       paginate,
