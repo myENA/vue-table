@@ -163,7 +163,7 @@ const defaultParse = response => response;
 /**
  * @module EnaTableServer
  */
-const useServerTable = () => ({
+export default {
   components: {
     Pagination,
     ActionsCell,
@@ -172,7 +172,10 @@ const useServerTable = () => ({
     /**
      * URL to fetch data from
      */
-    url: '',
+    url: {
+      type: String,
+      required: true,
+    },
     /**
      * List of keys to use from each object (table columns)
      *
@@ -337,8 +340,5 @@ const useServerTable = () => ({
       this.loadData();
     }
   },
-});
-
-export { useServerTable };
-export default useServerTable();
+};
 </script>
