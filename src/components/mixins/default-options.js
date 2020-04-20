@@ -1,4 +1,7 @@
-export default {
+import { computed } from 'vue';
+import { mergeDeepRight } from 'ramda';
+
+const defaultOptions = {
   /**
    * Key-value pairs with the headings to overwrite (label to display)
    * can also be overwritten with slot: "heading_colname"
@@ -155,3 +158,30 @@ export default {
    */
   actionsCellLast: true,
 };
+
+
+const useDefaultOptions = ({ options, columns }, componentDefaults) => {
+  const opts = computed(() => {
+    const mOpts = [
+      defaultOptions,
+      componentDefaults,
+      options,
+    ].reduce(mergeDeepRight, {});
+    const sortable = {};
+    columns.forEach((key) => {
+      if (key !== 'select' && key !== 'actions' &&
+        (mOpts.sortable === true || mOpts.sortable[key])) {
+        sortable[key] = mOpts.sortable[key] || true;
+      }
+    });
+    return {
+      ...mOpts,
+      sortable,
+    };
+  });
+  return {
+    opts,
+  };
+};
+
+export default useDefaultOptions;

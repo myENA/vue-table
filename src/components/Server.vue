@@ -144,9 +144,8 @@ th.sortable {
 <script type="text/javascript">
 import axios from 'axios';
 import { onMounted, computed, reactive, toRefs } from 'vue';
-import { mergeDeepRight } from 'ramda';
 import useFilters from './mixins/filters';
-import defaultProps from './mixins/default-props';
+import useDefaultOptions from './mixins/default-options';
 import { useToggle, useComputedColumns } from './mixins/methods';
 import Pagination from './mixins/Pagination.vue';
 import ActionsCell from './mixins/ActionsCell.vue';
@@ -205,48 +204,32 @@ export default {
     },
   },
   setup(props, context) {
+    const sortOrders = {};
+    props.columns.forEach((key) => {
+      sortOrders[key] = null;
+    });
+
+    const { opts } = useDefaultOptions(props, {
+      params: {
+        page: 'page',
+        per_page: 'per_page',
+        sort_by: 'sort_by',
+        sort_dir: 'sort_dir',
+      },
+    });
+
     const state = reactive({
       loading: true,
       data: [],
       totalRows: 0,
       currentPage: 1,
       sortKey: '',
-      perPage: props.options.perPage || defaultProps.perPage,
-      sortOrders: {},
+      perPage: opts.value.perPage,
+      sortOrders,
       shown: {},
       expandedRows: {},
     });
 
-    props.columns.forEach((key) => {
-      state.sortOrders[key] = null;
-    });
-
-    const opts = computed(() => {
-      const mOpts = [
-        defaultProps,
-        {
-          params: {
-            page: 'page',
-            per_page: 'per_page',
-            sort_by: 'sort_by',
-            sort_dir: 'sort_dir',
-          },
-        },
-        props.options,
-      ].reduce(mergeDeepRight, {});
-      const sortable = {};
-      props.columns.forEach((key) => {
-        if (mOpts.sortable === true || mOpts.sortable[key]) {
-          sortable[key] = mOpts.sortable[key] || true;
-        }
-      });
-      return Object.assign(
-        mOpts,
-        {
-          sortable,
-        }
-      );
-    });
 
     const loadData = async () => {
       const params = {

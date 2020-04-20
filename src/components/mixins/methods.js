@@ -3,7 +3,7 @@ import { computed } from 'vue';
 const useComputedColumns = ({ columns, opts, data }) => {
   const allColumns = computed(() => {
     const columnsCopy = columns.slice();
-    if (!columns.includes('actions') && opts.detailsRow) {
+    if (!columns.includes('actions') && opts.value.detailsRow) {
       columnsCopy.push('actions');
     }
     return columnsCopy;
@@ -13,9 +13,9 @@ const useComputedColumns = ({ columns, opts, data }) => {
 
   const computedRowClasses = computed(() => data.map((row) => {
     const classes = {};
-    Object.keys(opts.rowClasses).forEach((prop) => {
+    Object.keys(opts.value.rowClasses).forEach((prop) => {
       if (row[prop]) {
-        classes[opts.rowClasses[prop]] = true;
+        classes[opts.value.rowClasses[prop]] = true;
       }
     });
     return classes;

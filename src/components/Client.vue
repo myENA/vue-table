@@ -215,9 +215,9 @@ th.sortable {
 
 <script type="text/javascript">
 import { reactive, toRefs, computed } from 'vue';
-import { mergeDeepRight, union, difference } from 'ramda';
+import { union, difference } from 'ramda';
 import useFilters from './mixins/filters';
-import defaultProps from './mixins/default-props';
+import useDefaultOptions from './mixins/default-options';
 import { useToggle, useComputedColumns } from './mixins/methods';
 import Pagination from './mixins/Pagination.vue';
 import ActionsCell from './mixins/ActionsCell.vue';
@@ -286,68 +286,6 @@ export default {
       type: Object,
       default: () => ({}),
     },
-    /**
-     * Default option values. Will be overwritten by the "options" value
-     *
-     * @type {Object<Object>}
-     */
-    defaults: {
-      type: Object,
-      default: () => (Object.assign({}, defaultProps, {
-        /**
-         * Key-value pairs with custom search function per column,
-         * or false to disable search for that column
-         *
-         * @type {Object}
-         */
-        search: {},
-        /**
-         * Field to group by - key name
-         *
-         * @default
-         * @type {Boolean|String}
-         */
-        groupBy: false,
-        /**
-         * Expand/collapse all groups
-         *
-         * @default
-         * @type {Boolean}
-         */
-        collapseAllGroups: false,
-        /**
-         * Object of data to use for each group "header" (key is the group value)
-         *
-         * @type {Object}
-         */
-        groupMeta: {},
-        /**
-         * false, to disable pagination - show all; defaults to true
-         *
-         * @default
-         * @type {Boolean}
-         */
-        pagination: true,
-        /**
-         * Is the table editable (eg: can select value)
-         * @type {Boolean}
-         */
-        editable: false,
-        /**
-         * List of columns that should be disabled for click to select/deselect
-         * @type {Array}
-         */
-        nonSelectableColumns: [],
-        /**
-         * The collator used for sorting
-         * @type {Intl.Collator}
-         */
-        sortCollator: new Intl.Collator('en', {
-          numeric: true,
-          sensitivity: 'base',
-        }),
-      })),
-    },
   },
   computed: {
     collapseAllGroups() {
@@ -366,7 +304,12 @@ export default {
       if (someMatch.length === 0 && everyMatch.length === 0) {
         return data;
       }
-      return data.filter(getFilterForData({ searchFields: this.opts.search, someMatch, everyMatch, filter }));
+      return data.filter(getFilterForData({
+        searchFields: this.opts.search,
+        someMatch,
+        everyMatch,
+        filter,
+      }));
     },
     pageData() {
       const { sortKey } = this;
@@ -484,6 +427,30 @@ export default {
     props.columns.forEach((key) => {
       sortOrders[key] = null;
     });
+
+    const search = {};
+    props.columns.forEach((key) => {
+      if (typeof props.options.search[key] === 'undefined') {
+        search[key] = false;
+      } else {
+        search[key] = props.options.search[key];
+      }
+    });
+
+    const { opts } = useDefaultOptions(props, {
+      search,
+      groupBy: false,
+      collapseAllGroups: false,
+      groupMeta: {},
+      pagination: true,
+      editable: false,
+      nonSelectableColumns: [],
+      sortCollator: new Intl.Collator('en', {
+        numeric: true,
+        sensitivity: 'base',
+      }),
+    });
+
     const state = reactive({
       allSelected: false,
       selectedRows: [],
@@ -491,48 +458,11 @@ export default {
       sortKey: '',
       searchBy: '',
       currentPage: 1,
-      perPage: props.options.perPage || defaultProps.perPage,
+      perPage: opts.value.perPage,
       shown: {},
       expandedRows: {},
     });
 
-    const opts = computed(() => {
-      const mOpts = [
-        defaultProps,
-        {
-          search: {},
-          groupBy: false,
-          collapseAllGroups: false,
-          groupMeta: {},
-          pagination: true,
-          editable: false,
-          nonSelectableColumns: [],
-          sortCollator: new Intl.Collator('en', {
-            numeric: true,
-            sensitivity: 'base',
-          }),
-        },
-        props.options,
-      ].reduce(mergeDeepRight, {});
-      const sortable = {};
-      const search = {};
-      props.columns.forEach((key) => {
-        if (key !== 'select' && key !== 'actions' &&
-          (mOpts.sortable === true || mOpts.sortable[key])) {
-          sortable[key] = mOpts.sortable[key] || true;
-        }
-        if (typeof mOpts.search[key] === 'undefined') {
-          search[key] = false;
-        } else {
-          search[key] = mOpts.search[key];
-        }
-      });
-      return {
-        ...mOpts,
-        sortable,
-        search,
-      };
-    });
     return {
       ...toRefs(state),
       ...useFilters(),
