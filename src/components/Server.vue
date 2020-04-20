@@ -10,9 +10,7 @@
               :class="{ [$style.sortable]: opts.sortable[key], sorted: sortKey === key,
                 [opts.columnsClasses[key]]: opts.columnsClasses[key] != null }">
               <slot :name="'heading_' + key">
-                <template>
-                  {{ heading(key, opts.headings) }}
-                </template>
+                {{ heading(key, opts.headings) }}
               </slot>
               <i v-if="opts.sortable[key]"
                 :class="{
