@@ -7,13 +7,13 @@
     "serve": "vue-cli-service serve --host localhost",
     "build": "node build.js",
     "test:unit": "vue-cli-service test:unit",
+    "test:unitw": "vue-cli-service test:unit --watch",
     "lint": "vue-cli-service lint",
     "build:example": "vue-cli-service build --dest example",
     "docs:build": "vuepress build docs",
     "docs:dev": "vuepress dev docs",
     "postversion": "git push && git push --tags && echo Run: \"npm publish\"",
-    "preversion": "npm run test:unit && npm run build && git add -A dist",
-    "test:unitw": "vue-cli-service test:unit --watch"
+    "preversion": "npm run test:unit && npm run build && git add -A dist"
   },
   "main": "dist/index.js",
   "files": [

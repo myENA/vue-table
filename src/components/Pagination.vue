@@ -119,26 +119,31 @@
 import { reactive, toRefs, computed, watch } from 'vue';
 import useFilters from '@/components/mixins/filters';
 
+const calculatePages = (pageInterval, currentPageValue, totalPages) => {
+  const halfInterval = (pageInterval - 1) / 2;
+  let startPage = Math.max(2, currentPageValue - halfInterval);
+  let endPage = Math.min(totalPages - 1, currentPageValue + halfInterval);
+  if (startPage + pageInterval - 1 > endPage) {
+    endPage = Math.min(totalPages - 1, startPage + pageInterval - 1);
+  }
+  if (endPage - (pageInterval - 1)) {
+    startPage = Math.max(2, endPage - (pageInterval - 1));
+  }
+  const pages = [];
+  for (let i = startPage; i <= endPage; i += 1) {
+    pages.push(i);
+  }
+  return pages;
+};
+
 const computePages = (props, state) => {
   const totalPages = computed(() => Math.ceil(props.totalRows / state.perPageValue));
-  const pagesToShow = computed(() => {
-    const halfInterval = (props.pageInterval - 1) / 2;
-    let startPage = Math.max(2, state.currentPageValue - halfInterval);
-    let endPage = Math.min(totalPages.value - 1, state.currentPageValue + halfInterval);
-    if (startPage + props.pageInterval - 1 > endPage) {
-      endPage = Math.min(totalPages.value - 1, startPage + props.pageInterval - 1);
-    }
-    if (endPage - (props.pageInterval - 1)) {
-      startPage = Math.max(2, endPage - (props.pageInterval - 1));
-    }
-    const pages = [];
-    for (let i = startPage; i <= endPage; i += 1) {
-      pages.push(i);
-    }
-    return pages;
-  });
+  const pagesToShow = computed(() =>
+    calculatePages(props.pageInterval, props.currentPageValue, totalPages.value));
+
   const startPage = computed(() => pagesToShow[0]);
   const endPage = computed(() => pagesToShow[pagesToShow.length - 1]);
+
   return {
     totalPages,
     pagesToShow,
@@ -240,4 +245,6 @@ export default {
     }
   },
 };
+
+export { calculatePages };
 </script>

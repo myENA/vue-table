@@ -1,21 +1,21 @@
 import { expect } from 'chai';
-import { shallowMount } from '@vue/test-utils';
-import Server from '@/components/Server.vue';
+import { mount } from '@vue/test-utils';
+import Server from '@/components/server/index.vue';
 
 describe('Server.vue', () => {
   it('renders a table with 1 row', () => {
-    const wrapper = shallowMount(Server, {
-      propsData: {
-      },
-      methods: {
-        fetch() {
+    const wrapper = mount(Server, {
+      props: {
+        fetchData() {
           return {
             data: [{ first_name: '1', id: 1 }],
             total: 1,
           };
         },
+        parse: r => r,
+        url: '',
       },
     });
-    expect(wrapper.contains('table tbody tr')).to.be.true;
+    expect(wrapper.find('table tbody tr')).to.exist;
   });
 });
