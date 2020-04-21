@@ -1,4 +1,4 @@
-import { computed, watch, ref, onMounted } from 'vue';
+import { computed, watch, onMounted } from 'vue';
 import { union, difference } from 'ramda';
 import { setSort } from '@/components/mixins/methods';
 
