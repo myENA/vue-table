@@ -1,24 +1,25 @@
-import { onMounted } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { setSort } from '@/components/common/methods';
 
-const useLoad = (props, state, opts) => {
+const useLoad = (props, state, opts, { sortOrders, sortKey }) => {
   const loadData = async () => {
     const params = {
       [opts.value.params.page]: state.currentPage,
       [opts.value.params.per_page]: state.perPage,
     };
     let direction;
-    if (state.sortOrders[state.sortKey] === 'ascending') {
+    let sortBy = sortKey.value;
+    if (sortOrders.value[sortBy] === 'ascending') {
       direction = 1;
-    } else if (state.sortOrders[state.sortKey] === 'descending') {
+    } else if (sortOrders.value[sortBy] === 'descending') {
       direction = -1;
     } else {
       direction = 0;
-      state.sortKey = undefined;
+      sortBy = undefined;
     }
-    if (state.sortKey) {
+    if (sortBy) {
       Object.assign(params, {
-        [opts.value.params.sort_by]: state.sortKey,
+        [opts.value.params.sort_by]: sortBy,
         [opts.value.params.sort_dir]: direction,
       });
     }
@@ -37,6 +38,10 @@ const useLoad = (props, state, opts) => {
       state.loading = false;
     }
   };
+
+  watch(sortOrders, loadData, {
+    deep: true,
+  });
 
   return {
     loadData,
@@ -61,19 +66,22 @@ const usePagination = (state, loadData) => {
   };
 };
 
-const useSort = (props, state, opts, loadData) => {
-  const sortBy = (obj) => {
-    if (setSort(obj, props.columns, opts.value.sortable, state)) {
-      loadData();
-    }
-  };
+const useSort = (props, opts) => {
+  const sortKey = ref('');
+  const sortOrders = ref(props.columns.reduce((orders, col) => ({ ...orders, [col]: null }), {}));
+
+  const sortBy = obj =>
+    setSort(obj, props.columns, opts.value.sortable, { sortKey, sortOrders });
 
   onMounted(() => {
     if (opts.value.sortBy) {
       sortBy(opts.value.sortBy);
     }
   });
+
   return {
+    sortKey,
+    sortOrders,
     sortBy,
   };
 };

@@ -42,23 +42,23 @@ const useToggle = (context) => {
   };
 };
 
-const setSort = ({ key, order }, columns, sortable, state) => {
+const setSort = ({ key, order }, columns, sortable, { sortKey, sortOrders }) => {
   if (sortable[key]) {
-    state.sortKey = key;
+    sortKey.value = key;
     columns.forEach((elem) => {
-      if (elem !== state.sortKey) {
-        state.sortOrders[elem] = null;
+      if (elem !== sortKey.value) {
+        sortOrders.value[elem] = null;
       }
     });
 
     if (order) {
-      state.sortOrders[key] = order;
-    } else if (state.sortOrders[key] === null) {
-      state.sortOrders[key] = 'ascending';
-    } else if (state.sortOrders[key] === 'ascending') {
-      state.sortOrders[key] = 'descending';
+      sortOrders.value[key] = order;
+    } else if (sortOrders.value[key] === null) {
+      sortOrders.value[key] = 'ascending';
+    } else if (sortOrders.value[key] === 'ascending') {
+      sortOrders.value[key] = 'descending';
     } else {
-      state.sortOrders[key] = null;
+      sortOrders.value[key] = null;
     }
     return true;
   }

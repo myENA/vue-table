@@ -31,9 +31,12 @@ const usePagination = (context, state, filteredData) => {
   };
 };
 
-const useSort = (props, state, opts) => {
+const useSort = (props, opts) => {
+  const sortKey = ref('');
+  const sortOrders = ref(props.columns.reduce((orders, col) => ({ ...orders, [col]: null }), {}));
+
   const sortBy = obj =>
-    setSort(obj, props.columns, opts.value.sortable, state);
+    setSort(obj, props.columns, opts.value.sortable, { sortKey, sortOrders });
 
   onMounted(() => {
     if (opts.value.sortBy) {
@@ -41,6 +44,8 @@ const useSort = (props, state, opts) => {
     }
   });
   return {
+    sortKey,
+    sortOrders,
     sortBy,
   };
 };

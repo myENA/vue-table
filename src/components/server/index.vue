@@ -205,11 +205,6 @@ export default {
     },
   },
   setup(props, context) {
-    const sortOrders = {};
-    props.columns.forEach((key) => {
-      sortOrders[key] = null;
-    });
-
     const { opts } = useDefaultOptions(props, {
       params: {
         page: 'page',
@@ -224,20 +219,20 @@ export default {
       data: [],
       totalRows: 0,
       currentPage: 1,
-      sortKey: '',
       perPage: opts.value.perPage,
-      sortOrders,
     });
 
-    const { loadData } = useLoad(props, state, opts);
+    const sort = useSort(props, opts);
+
+    const { loadData } = useLoad(props, state, opts, sort);
 
     return {
       ...toRefs(state),
       ...useFormatters(),
       ...useToggle(state, context),
       ...useComputedColumns({ columns: props.columns, opts, data: state.data }),
-      ...useSort(props, state, opts, loadData),
       ...usePagination(state, loadData),
+      ...sort,
       opts,
       loadData,
     };

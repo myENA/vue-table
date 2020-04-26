@@ -303,8 +303,6 @@ export default {
     });
 
     const state = reactive({
-      sortOrders: props.columns.reduce((orders, col) => ({ ...orders, [col]: null }), {}),
-      sortKey: '',
       searchBy: '',
       currentPage: 1,
       perPage: opts.value.perPage,
@@ -318,25 +316,25 @@ export default {
     const totalRows = computed(() => filteredData.value.length);
     const startRow = computed(() => (state.currentPage - 1) * state.perPage);
     const endRow = computed(() => Math.min(startRow.value + state.perPage, totalRows.value));
+    const { sortKey, sortOrders, sortBy } = useSort(props, opts);
     const pageData = computed(() => {
-      const { sortKey, sortOrders } = state;
       let data = filteredData.value;
       let order = 0;
-      if (sortOrders[sortKey] === 'ascending') {
+      if (sortOrders.value[sortKey.value] === 'ascending') {
         order = 1;
-      } else if (sortOrders[sortKey] === 'descending') {
+      } else if (sortOrders.value[sortKey.value] === 'descending') {
         order = -1;
       }
-      if (sortKey && opts.value.sortable && order) {
+      if (sortKey.value && opts.value.sortable && order) {
         let sortableFn;
-        if (opts.value.sortable[sortKey] === true) {
+        if (opts.value.sortable[sortKey.value] === true) {
           sortableFn = (a, b) => {
-            const aF = String(a[sortKey]);
-            const bF = String(b[sortKey]);
+            const aF = String(a[sortKey.value]);
+            const bF = String(b[sortKey.value]);
             return opts.value.sortCollator.compare(aF, bF) * order;
           };
-        } else if (typeof opts.value.sortable[sortKey] === 'function') {
-          sortableFn = (a, b) => opts.value.sortable[sortKey](a, b) * order;
+        } else if (typeof opts.value.sortable[sortKey.value] === 'function') {
+          sortableFn = (a, b) => opts.value.sortable[sortKey.value](a, b) * order;
         }
         data = data.slice().sort(sortableFn);
       }
@@ -366,7 +364,9 @@ export default {
       ...useToggle(state, context),
       ...useComputedColumns({ columns: props.columns, opts, data: props.data }),
       ...usePagination(context, state, filteredData),
-      ...useSort(props, state, opts),
+      sortKey,
+      sortOrders,
+      sortBy,
       ...useSelect(props.data, filteredData, opts, context),
       ...useGroups(pageData, opts),
       filteredData,
