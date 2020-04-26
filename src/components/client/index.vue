@@ -308,8 +308,6 @@ export default {
       searchBy: '',
       currentPage: 1,
       perPage: opts.value.perPage,
-      expandedRows: {},
-      shown: {},
     });
 
     const computedFilter = computed(() => props.filter);
@@ -370,7 +368,7 @@ export default {
       ...usePagination(context, state, filteredData),
       ...useSort(props, state, opts),
       ...useSelect(props.data, filteredData, opts, context),
-      ...useGroups(pageData, state.shown, opts),
+      ...useGroups(pageData, opts),
       filteredData,
       ...restFilter,
       opts,

@@ -195,32 +195,36 @@ const useFilter = (computedData, computedFilter, state, opts) => {
   };
 };
 
-const useGroups = (pageData, shown, opts) => {
+const useGroups = (pageData, opts) => {
+  const shown = ref({});
+
   const toggleGroup = (key) => {
-    shown[key] = typeof shown[key] === 'undefined' ? false : !shown[key];
+    shown.value[key] = typeof shown.value[key] === 'undefined' ? false : !shown.value[key];
   };
+  const isShown = key => typeof shown.value[key] === 'undefined' || shown.value[key];
 
   const collapseAllGroups = computed(() => opts.value.collapseAllGroups);
 
   watch(collapseAllGroups, () => {
-    Object.keys(shown).forEach((key) => {
-      shown[key] = !collapseAllGroups.value;
+    Object.keys(shown.value).forEach((key) => {
+      shown.value[key] = !collapseAllGroups.value;
     });
   });
 
   watch(pageData, () => {
     Object.keys(pageData.value).forEach((group) => {
       pageData.value[group].forEach((row) => {
-        shown[row[opts.value.groupBy]] =
-          typeof shown[row[opts.value.groupBy]] === 'undefined' ?
+        shown.value[row[opts.value.groupBy]] =
+          typeof shown.value[row[opts.value.groupBy]] === 'undefined' ?
             !collapseAllGroups.value :
-            shown[row[opts.value.groupBy]];
+            shown.value[row[opts.value.groupBy]];
       });
     });
   });
 
   return {
     shown,
+    isShown,
     toggleGroup,
   };
 };

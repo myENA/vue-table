@@ -227,8 +227,6 @@ export default {
       sortKey: '',
       perPage: opts.value.perPage,
       sortOrders,
-      shown: {},
-      expandedRows: {},
     });
 
     const { loadData } = useLoad(props, state, opts);

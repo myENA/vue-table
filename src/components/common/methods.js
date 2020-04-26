@@ -1,4 +1,4 @@
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
 const useComputedColumns = ({ columns, opts, data }) => {
   const allColumns = computed(() => {
@@ -28,19 +28,19 @@ const useComputedColumns = ({ columns, opts, data }) => {
   };
 };
 
-const useToggle = (state, context) => ({
-  toggleRow(id) {
-    state.expandedRows[id] = !state.expandedRows[id];
-    // state.expandedRows = Object.assign({}, state.expandedRows);
-    context.emit('toggleRow', id, state.expandedRows);
-  },
-  isRowExpanded(id) {
-    return state.expandedRows[id];
-  },
-  isShown(key) {
-    return typeof state.shown[key] === 'undefined' || state.shown[key];
-  },
-});
+const useToggle = (context) => {
+  const expandedRows = ref({});
+
+  const toggleRow = (id) => {
+    context.emit('toggleRow', id, expandedRows.value);
+  };
+  const isRowExpanded = id => expandedRows.value[id];
+
+  return {
+    toggleRow,
+    isRowExpanded,
+  };
+};
 
 const setSort = ({ key, order }, columns, sortable, state) => {
   if (sortable[key]) {
