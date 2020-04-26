@@ -1,11 +1,16 @@
 import { onMounted, ref, watch } from 'vue';
 import { setSort } from '@/components/common/methods';
 
-const useLoad = (props, state, opts, { sortOrders, sortKey }) => {
+const useLoad = (props, opts, { currentPage, perPage }, { sortOrders, sortKey }) => {
+  const loading = ref(true);
+  const data = ref([]);
+  const totalRows = ref(0);
+
   const loadData = async () => {
+    loading.value = true;
     const params = {
-      [opts.value.params.page]: state.currentPage,
-      [opts.value.params.per_page]: state.perPage,
+      [opts.value.params.page]: currentPage.value,
+      [opts.value.params.per_page]: perPage.value,
     };
     let direction;
     let sortBy = sortKey.value;
@@ -28,39 +33,47 @@ const useLoad = (props, state, opts, { sortOrders, sortKey }) => {
         data: responseData,
         total,
       } = props.parse(await props.fetchData(props.url, params));
-      state.data = responseData;
-      state.totalRows = total;
+      data.value = responseData;
+      totalRows.value = total;
     } catch (e) {
-      state.data = [];
-      state.totalRows = 0;
+      data.value = [];
+      totalRows.value = 0;
       throw e;
     } finally {
-      state.loading = false;
+      loading.value = false;
     }
   };
 
   watch(sortOrders, loadData, {
     deep: true,
   });
+  watch(currentPage, loadData);
+  watch(perPage, loadData);
 
   return {
     loadData,
+    loading,
+    data,
+    totalRows,
   };
 };
 
-const usePagination = (state, loadData) => {
+const usePagination = (defaultPerPage) => {
+  const currentPage = ref(1);
+  const perPage = ref(defaultPerPage);
+
   const getFirstPage = () => {
-    state.currentPage = 1;
-    loadData();
+    currentPage.value = 1;
   };
 
   const paginate = (p) => {
-    state.currentPage = p.currentPage;
-    state.perPage = p.perPage;
-    loadData();
+    currentPage.value = p.currentPage;
+    perPage.value = p.perPage;
   };
 
   return {
+    currentPage,
+    perPage,
     paginate,
     getFirstPage,
   };

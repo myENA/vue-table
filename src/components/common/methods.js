@@ -11,10 +11,10 @@ const useComputedColumns = ({ columns, opts, data }) => {
 
   const colspan = computed(() => allColumns.value.length);
 
-  const computedRowClasses = computed(() => data.map((row) => {
+  const computedRowClasses = computed(() => data.value.map((row) => {
     const classes = {};
     Object.keys(opts.value.rowClasses).forEach((prop) => {
-      if (row[prop]) {
+      if (row.value[prop]) {
         classes[opts.value.rowClasses[prop]] = true;
       }
     });

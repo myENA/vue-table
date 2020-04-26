@@ -143,7 +143,6 @@ th.sortable {
 
 <script type="text/javascript">
 import axios from 'axios';
-import { reactive, toRefs } from 'vue';
 import useFormatters from '@/components/common/formatters';
 import useDefaultOptions from '@/components/common/default-options';
 import { useToggle, useComputedColumns } from '@/components/common/methods';
@@ -214,27 +213,22 @@ export default {
       },
     });
 
-    const state = reactive({
-      loading: true,
-      data: [],
-      totalRows: 0,
-      currentPage: 1,
-      perPage: opts.value.perPage,
-    });
-
     const sort = useSort(props, opts);
+    const pagination = usePagination(opts.value.perPage);
 
-    const { loadData } = useLoad(props, state, opts, sort);
+    const { loadData, data, loading, totalRows } = useLoad(props, opts, pagination, sort);
 
     return {
-      ...toRefs(state),
       ...useFormatters(),
-      ...useToggle(state, context),
-      ...useComputedColumns({ columns: props.columns, opts, data: state.data }),
-      ...usePagination(state, loadData),
+      ...useToggle(context),
+      ...useComputedColumns({ columns: props.columns, opts, data }),
       ...sort,
+      ...pagination,
       opts,
       loadData,
+      data,
+      loading,
+      totalRows,
     };
   },
   created() {
