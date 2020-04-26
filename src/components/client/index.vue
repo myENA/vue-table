@@ -303,8 +303,6 @@ export default {
     });
 
     const state = reactive({
-      allSelected: false,
-      selectedRows: [],
       sortOrders: props.columns.reduce((orders, col) => ({ ...orders, [col]: null }), {}),
       sortKey: '',
       searchBy: '',
@@ -371,7 +369,7 @@ export default {
       ...useComputedColumns({ columns: props.columns, opts, data: props.data }),
       ...usePagination(context, state, filteredData),
       ...useSort(props, state, opts),
-      ...useSelect(props.data, filteredData, state, opts, context),
+      ...useSelect(props.data, filteredData, opts, context),
       ...useGroups(pageData, state.shown, opts),
       filteredData,
       ...restFilter,

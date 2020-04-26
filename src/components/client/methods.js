@@ -1,4 +1,4 @@
-import { computed, watch, onMounted } from 'vue';
+import { computed, watch, onMounted, ref } from 'vue';
 import { union, difference } from 'ramda';
 import { setSort } from '@/components/common/methods';
 
@@ -45,7 +45,9 @@ const useSort = (props, state, opts) => {
   };
 };
 
-const useSelect = (data, filteredData, state, opts, context) => {
+const useSelect = (data, filteredData, opts, context) => {
+  const allSelected = ref(false);
+  const selectedRows = ref([]);
   const selectAll = () => {
     const selectableRows = filteredData.reduce((acc, d) => {
       if (d.showSelect) {
@@ -53,17 +55,17 @@ const useSelect = (data, filteredData, state, opts, context) => {
       }
       return acc;
     }, []);
-    if (state.allSelected) {
-      state.selectedRows = difference(state.selectedRows, selectableRows);
+    if (allSelected.value) {
+      selectedRows.value = difference(selectedRows.value, selectableRows);
     } else {
-      state.selectedRows = union(state.selectedRows, selectableRows);
+      selectedRows.value = union(selectedRows.value, selectableRows);
     }
   };
   const setAllSelected = () => {
-    if (state.selectedRows.length === 0) {
-      state.allSelected = false;
+    if (selectedRows.value.length === 0) {
+      allSelected.value = false;
     } else {
-      state.allSelected = filteredData.filter(d => d.showSelect).length ===
+      allSelected.value = filteredData.filter(d => d.showSelect).length ===
         filteredData.filter(d => d.selected).length;
     }
   };
@@ -74,19 +76,19 @@ const useSelect = (data, filteredData, state, opts, context) => {
   const toggleSelected = (entry, column) => {
     if (isColumnSelectable(entry, column)) {
       if (entry.selected) {
-        const idx = state.selectedRows.indexOf(entry[opts.value.uniqueKey]);
-        state.selectedRows.splice(idx, 1);
+        const idx = selectedRows.value.indexOf(entry[opts.value.uniqueKey]);
+        selectedRows.value.splice(idx, 1);
       } else {
-        state.selectedRows.push(entry[opts.value.uniqueKey]);
+        selectedRows.value.push(entry[opts.value.uniqueKey]);
       }
     }
   };
 
   const selectedRowIds = computed(() =>
-    state.selectedRows.reduce((obj, id) => ({ ...obj, [id]: true }), {}));
+    selectedRows.value.reduce((obj, id) => ({ ...obj, [id]: true }), {}));
 
   watch(data, () => {
-    state.selectedRows = data.reduce((acc, d) => {
+    selectedRows.value = data.reduce((acc, d) => {
       if (d.showSelect && d.selected) {
         acc.push(d[opts.value.uniqueKey]);
       }
@@ -94,14 +96,13 @@ const useSelect = (data, filteredData, state, opts, context) => {
     }, []);
   });
 
-
   watch(filteredData, () => {
     setAllSelected();
   });
 
-  watch(state.selectedRows, () => {
+  watch(selectedRows.value, () => {
     setAllSelected();
-    const selected = state.selectedRows.reduce((acc, id) => {
+    const selected = selectedRows.value.reduce((acc, id) => {
       // eslint-disable-next-line
       acc[id] = true;
       return acc;
@@ -128,6 +129,8 @@ const useSelect = (data, filteredData, state, opts, context) => {
     toggleSelected,
     setAllSelected,
     selectedRowIds,
+    selectedRows,
+    allSelected,
   };
 };
 
