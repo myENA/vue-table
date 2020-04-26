@@ -1,6 +1,6 @@
 import { computed, watch, onMounted } from 'vue';
 import { union, difference } from 'ramda';
-import { setSort } from '@/components/mixins/methods';
+import { setSort } from '@/components/common/methods';
 
 const usePagination = (context, state, filteredData) => {
   const paginate = ({ currentPage, perPage }) => {

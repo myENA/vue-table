@@ -117,7 +117,7 @@
 
 <script>
 import { reactive, toRefs, computed, watch } from 'vue';
-import useFilters from '@/components/mixins/filters';
+import useFormatters from '@/components/common/formatters';
 
 const calculatePages = (pageInterval, currentPageValue, totalPages) => {
   const halfInterval = (pageInterval - 1) / 2;
@@ -231,7 +231,7 @@ export default {
     const { totalPages, ...restPages } = computePages(props, state);
 
     return {
-      ...useFilters(),
+      ...useFormatters(),
       ...toRefs(state),
       ...usePagination(props, context, state, totalPages),
       totalPages,

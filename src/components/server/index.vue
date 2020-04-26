@@ -144,11 +144,11 @@ th.sortable {
 <script type="text/javascript">
 import axios from 'axios';
 import { reactive, toRefs } from 'vue';
-import useFilters from '@/components/mixins/filters';
-import useDefaultOptions from '@/components/mixins/default-options';
-import { useToggle, useComputedColumns } from '@/components/mixins/methods';
+import useFormatters from '@/components/common/formatters';
+import useDefaultOptions from '@/components/common/default-options';
+import { useToggle, useComputedColumns } from '@/components/common/methods';
 import Pagination from '@/components/Pagination.vue';
-import ActionsCell from '@/components/mixins/ActionsCell.vue';
+import ActionsCell from '@/components/common/ActionsCell.vue';
 import { useLoad, usePagination, useSort } from './methods';
 
 const defaultFetch = async (url, params) => {
@@ -235,7 +235,7 @@ export default {
 
     return {
       ...toRefs(state),
-      ...useFilters(),
+      ...useFormatters(),
       ...useToggle(state, context),
       ...useComputedColumns({ columns: props.columns, opts, data: state.data }),
       ...useSort(props, state, opts, loadData),

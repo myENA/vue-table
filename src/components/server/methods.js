@@ -1,5 +1,5 @@
 import { onMounted } from 'vue';
-import { setSort } from '@/components/mixins/methods';
+import { setSort } from '@/components/common/methods';
 
 const useLoad = (props, state, opts) => {
   const loadData = async () => {
