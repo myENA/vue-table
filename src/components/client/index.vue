@@ -9,7 +9,7 @@
                 <label>Search</label>
                 <div class="input-group">
                   <input type="text" class="form-control" placeholder="Search by keyword"
-                    @input="search($event.target.value)" />
+                    @input="search($event.target.value)" aria-label="Search by keyword"/>
                   <span class="input-group-addon"><i class="fa fa-search"></i></span>
                 </div>
               </div>
@@ -32,31 +32,40 @@
       <table :class="[opts.classes.table, $style.table]">
         <thead>
           <tr>
-            <th v-for="key in allColumns" :key="key" @click="sortBy({key})"
+            <th v-for="key in allColumns" :key="key"
               :class="{ [$style.sortable]: opts.sortable[key], sorted: sortKey === key,
                 [opts.columnsClasses[key]]: opts.columnsClasses[key] != null }">
-              <slot :name="'heading_' + key">
-                <template v-if="key === 'select'">
-                  <div :class="[opts.classes.checkbox, $style.checkbox]">
-                    <label>
-                      <input class="check-all"
-                        type="checkbox"
-                        @change="selectAll"
-                        :checked="allSelected" :disabled="!opts.editable"
-                        />
-                    </label>
-                  </div>
-                </template>
-                <template v-else>
-                  {{ heading(key, opts.headings) }}
-                </template>
-              </slot>
-              <i v-if="opts.sortable[key]"
-                :class="{
-                  [opts.classes.sort.none] : sortKey !== key || sortOrders[key] === null,
-                  [opts.classes.sort[sortOrders[key]]] : sortKey === key,
-                }">
-              </i>
+              <template v-if="key === 'select'">
+                <div :class="[opts.classes.checkbox, $style.checkbox]">
+                  <label>
+                    <input class="check-all"
+                      type="checkbox"
+                      @change="selectAll"
+                      :checked="allSelected"
+                      :disabled="!opts.editable"
+                      aria-label="Select all rows"
+                      />
+                  </label>
+                </div>
+              </template>
+              <template v-else>
+                <a href="#"
+                  :tabindex="opts.sortable[key] ? '': -1"
+                  role="button"
+                  @keydown.space.prevent="sortBy({key})"
+                  @click.prevent="sortBy({key})"
+                  >
+                  <slot :name="'heading_' + key">
+                    {{ heading(key, opts.headings) }}
+                  </slot>
+                  <i v-if="opts.sortable[key]"
+                    :class="{
+                      [opts.classes.sort.none] : sortKey !== key || sortOrders[key] === null,
+                      [opts.classes.sort[sortOrders[key]]] : sortKey === key,
+                    }">
+                  </i>
+                </a>
+              </template>
             </th>
           </tr>
         </thead>
@@ -84,7 +93,13 @@
         <tbody v-else v-for="(group, groupKey) in pageData" :key="groupKey">
           <tr v-if="groupKey !== 'all'">
             <th :colspan="colspan">
-              <a href="#" @click.prevent="toggleGroup(groupKey)">
+              <a
+                href="#"
+                role="button"
+                @keydown.space.prevent="toggleGroup(groupKey)"
+                @click.prevent="toggleGroup(groupKey)"
+                :aria-label="`Toggle group of rows for ${groupKey}`"
+                >
                 <i :class="{
                   [opts.classes.group.hide]: isShown(groupKey),
                   [opts.classes.group.show]: !isShown(groupKey),
@@ -123,7 +138,9 @@
                         <input type="checkbox" name="selectedRows"
                           v-model="selectedRows" :disabled="!opts.editable"
                           :key="'select-'+entry[opts.uniqueKey]"
-                          :value="entry[opts.uniqueKey]">
+                          :value="entry[opts.uniqueKey]"
+                          aria-label="Select row"
+                          >
                       </label>
                     </div>
                   </template>
@@ -179,6 +196,21 @@
   > thead:first-child > tr:first-child > th {
     border-top: 1px solid #333;
     border-bottom: 1px solid #333;
+    a {
+      cursor: default;
+      color: inherit;
+      text-decoration: none;
+      display: block;
+    }
+    &.sortable {
+      a {
+        cursor: pointer;
+      }
+      i {
+        margin-top: 5px;
+        margin-left: 5px;
+      }
+    }
   }
   tbody > tr:first-child > th {
     background-color: #F2F2F2;
@@ -203,14 +235,6 @@
 td.selectable:hover {
   cursor: pointer;
 }
-th.sortable {
-  cursor: pointer;
-  i {
-    margin-top: 5px;
-    margin-left: 5px;
-  }
-}
-
 </style>
 
 <script type="text/javascript">

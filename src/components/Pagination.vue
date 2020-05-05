@@ -2,25 +2,30 @@
   <div>
     <ul :class="[$style.pagination, classes.wrapper]">
       <li :class="{
-          [$style.disabled]: currentPageValue === 1,
-          disabled: currentPageValue === 1
+          [$style.disabled]: isFirstPage,
+          disabled: isFirstPage
         }">
         <a href="#"
           :aria-label="text.previous || 'Previous'"
           :title="text.previous || 'Previous'"
-          @click.prevent="currentPageValue !== 1 && goToPage(currentPageValue-1)">
+          role="button"
+          @keydown.space.prevent="!isFirstPage && goToPage(currentPageValue-1)"
+          @click.prevent="!isFirstPage && goToPage(currentPageValue-1)">
           <span aria-hidden="true"><i
             :class="classes.prev"
             ></i></span>{{text.prev}}</a>
       </li>
       <li :class="{
-        [$style.active]: 1 === currentPageValue,
-        active: 1 === currentPageValue,
+        [$style.active]: isFirstPage,
+        active: isFirstPage,
         }">
         <a href="#"
           aria-label="Page 1"
           title="Page 1"
-          @click.prevent="goToPage(1)">
+          role="button"
+          @keydown.space.prevent="goToPage(1)"
+          @click.prevent="goToPage(1)"
+          >
           1
         </a>
       </li>
@@ -36,30 +41,39 @@
         <a href="#"
           :aria-label="`Page ${page}`"
           :title="`Page ${page}`"
-          @click.prevent="goToPage(page)">{{page}}</a>
+          role="button"
+          @keydown.space.prevent="(page)"
+          @click.prevent="goToPage(page)"
+          >{{page}}</a>
       </li>
       <li v-if="endPage < totalPages - 1">
         <span>&hellip;</span>
       </li>
       <li v-if="totalPages > 1"
         :class="{
-          [$style.active]: totalPages === currentPageValue,
-          active: totalPages === currentPageValue,
+          [$style.active]: isLastPage,
+          active: isLastPage,
         }">
         <a href="#"
           :aria-label="`Page ${totalPages}`"
           :title="`Page ${totalPages}`"
-          @click.prevent="goToPage(totalPages)">{{totalPages}}
+          role="button"
+          @keydown.space.prevent="goToPage(totalPages)"
+          @click.prevent="goToPage(totalPages)"
+          >{{totalPages}}
         </a>
       </li>
       <li :class="{
-          [$style.disabled]: currentPageValue === totalPages || totalPages === 0,
-          disabled: currentPageValue === totalPages || totalPages === 0
+          [$style.disabled]: isNextDisabled,
+          disabled: isNextDisabled
         }">
         <a href="#"
           :aria-label="text.next || 'Next'"
           :title="text.next || 'Next'"
-          @click.prevent="(currentPageValue !== totalPages && totalPages !== 0) && goToPage(currentPageValue+1)">{{text.next}}<span
+          role="button"
+          @keydown.space.prevent="isNextEnabled && goToPage(currentPageValue+1)"
+          @click.prevent="isNextEnabled && goToPage(currentPageValue+1)"
+          >{{text.next}}<span
             aria-hidden="true"><i :class="classes.next"></i></span>
         </a>
       </li>
@@ -69,8 +83,11 @@
         <span>
           {{formatStr(text.info.showing, startRow+1, endRow, totalRows)}}
         </span>
-        <select v-model="perPageValue"
-          :class="[$style.perPageSelector, classes.formControl]">
+        <select
+          v-model="perPageValue"
+          :class="[$style.perPageSelector, classes.formControl]"
+          aria-label="Number of records per page"
+          >
           <option
             v-for="perPageValue in perPageValues"
             :value="perPageValue"
@@ -83,7 +100,7 @@
           {{text.info.records}}
         </span>
       </div>
-      <div v-else >
+      <div v-else>
         <span>
           {{text.info.noRows}}
         </span>
@@ -138,17 +155,28 @@ const calculatePages = (pageInterval, currentPageValue, totalPages) => {
 
 const computePages = (props, state) => {
   const totalPages = computed(() => Math.ceil(props.totalRows / state.perPageValue));
-  const pagesToShow = computed(() =>
-    calculatePages(props.pageInterval, state.currentPageValue, totalPages.value));
+  const pagesToShow = computed(() => calculatePages(
+    props.pageInterval,
+    state.currentPageValue,
+    totalPages.value
+  ));
 
   const startPage = computed(() => pagesToShow[0]);
   const endPage = computed(() => pagesToShow[pagesToShow.length - 1]);
+  const isFirstPage = computed(() => state.currentPageValue === 1);
+  const isLastPage = computed(() => state.currentPageValue === totalPages.value);
+  const isNextEnabled = computed(() => !isLastPage.value && totalPages.value !== 0);
+  const isNextDisabled = computed(() => !isNextDisabled.value);
 
   return {
     totalPages,
     pagesToShow,
     startPage,
     endPage,
+    isNextDisabled,
+    isNextEnabled,
+    isFirstPage,
+    isLastPage,
   };
 };
 

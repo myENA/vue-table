@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="container-fluid">
+  <main class="container-fluid">
     <h1>Countries of Europe</h1>
     <h2>ClientTable, which needs all data pre-loaded</h2>
     <ClientTable :columns="clientColumns" :data="clientData" :options="clientOptions">
@@ -23,7 +23,7 @@
       :parse="parse">
       <template #filter>
         <div>
-          <input placeholder="Search by name" v-model="options.filter.name"/>
+          <input placeholder="Search by name" v-model="options.filter.name" aria-label="Search"/>
           <button @click="filter">Find</button>
         </div>
       </template>
@@ -35,7 +35,7 @@
         </div>
       </template>
     </ServerTable>
-  </div>
+  </main>
 </template>
 
 <script>
@@ -91,7 +91,7 @@ export default {
   }),
   async created() {
     const { data } = await axios.get('https://restcountries.eu/rest/v2/region/europe');
-    this.clientData = data.map(d => Object.assign({}, d, { showSelect: true }));
+    this.clientData = data.map((d) => ({ ...d, showSelect: true }));
   },
   methods: {
     filter() {
@@ -100,9 +100,7 @@ export default {
     },
     async fetchData(url, params) {
       const { data } = await axios.get(url, {
-        params: Object.assign({}, params, {
-          filter: this.options.filter,
-        }),
+        params: { ...params, filter: this.options.filter },
         paramsSerializer(p) {
           return Qs.stringify(p, { arrayFormat: 'brackets' });
         },

@@ -2,7 +2,11 @@
   <div>
     <slot name="column_actions_pre" :row="row"></slot>
     <slot name="column_actions" :row="row">
-      <a href="#" @click.prevent="toggleRow(row[opts.uniqueKey])"
+      <a
+        href="#"
+        role="button"
+        @keydown.space.prevent="toggleRow(row[opts.uniqueKey])"
+        @click.prevent="toggleRow(row[opts.uniqueKey])"
         v-html="getToggleText(row)">
       </a>
     </slot>
@@ -31,9 +35,9 @@ export default {
       this.$emit('toggleRow', id);
     },
     getToggleText() {
-      return this.isRowExpanded ?
-        this.opts.text.collapse :
-        this.opts.text.expand;
+      return this.isRowExpanded
+        ? this.opts.text.collapse
+        : this.opts.text.expand;
     },
   },
 };
