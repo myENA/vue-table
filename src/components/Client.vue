@@ -51,6 +51,8 @@
               <template v-else>
                 <a href="#"
                 :tabindex="opts.sortable[key] ? '': -1"
+                role="button"
+                @keydown.space.prevent="sortBy({key})"
                 @click.prevent="sortBy({key})"
                 >
                   <slot :name="'heading_' + key">
@@ -91,7 +93,11 @@
         <tbody v-else v-for="(group, groupKey) in pageData" :key="groupKey">
           <tr v-if="groupKey !== 'all'">
             <th :colspan="colspan">
-              <a href="#" @click.prevent="toggleGroup(groupKey)"
+              <a
+                href="#"
+                role="button"
+                @keydown.space.prevent="toggleGroup(groupKey)"
+                @click.prevent="toggleGroup(groupKey)"
                 :aria-label="`Toggle group of rows for ${groupKey}`">
                 <i :class="{
                   [opts.classes.group.hide]: isShown(groupKey),

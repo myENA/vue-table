@@ -8,6 +8,8 @@
         <a href="#"
           :aria-label="text.previous || 'Previous'"
           :title="text.previous || 'Previous'"
+          role="button"
+          @keydown.space.prevent="currentPageValue !== 1 && goToPage(currentPageValue-1)"
           @click.prevent="currentPageValue !== 1 && goToPage(currentPageValue-1)">
           <span aria-hidden="true"><i
             :class="classes.prev"
@@ -20,6 +22,8 @@
         <a href="#"
           aria-label="Page 1"
           title="Page 1"
+          role="button"
+          @keydown.space.prevent="goToPage(1)"
           @click.prevent="goToPage(1)">
           1
         </a>
@@ -36,6 +40,8 @@
         <a href="#"
           :aria-label="`Page ${page}`"
           :title="`Page ${page}`"
+          role="button"
+          @keydown.space.prevent="goToPage(page)"
           @click.prevent="goToPage(page)">{{page}}</a>
       </li>
       <li v-if="endPage < totalPages - 1">
@@ -49,6 +55,8 @@
         <a href="#"
           :aria-label="`Page ${totalPages}`"
           :title="`Page ${totalPages}`"
+          role="button"
+          @keydown.space.prevent="goToPage(totalPages)"
           @click.prevent="goToPage(totalPages)">{{totalPages}}
         </a>
       </li>
@@ -59,8 +67,10 @@
         <a href="#"
           :aria-label="text.next || 'Next'"
           :title="text.next || 'Next'"
-          @click.prevent="(currentPageValue !== totalPages && totalPages !== 0) && goToPage(currentPageValue+1)">{{text.next}}<span
-            aria-hidden="true"><i :class="classes.next"></i></span>
+          role="button"
+          @keydown.space.prevent="(currentPageValue !== totalPages && totalPages !== 0) && goToPage(currentPageValue+1)"
+          @click.prevent="(currentPageValue !== totalPages && totalPages !== 0) && goToPage(currentPageValue+1)">{{text.next}}
+          <span aria-hidden="true"><i :class="classes.next"></i></span>
         </a>
       </li>
     </ul>
@@ -84,7 +94,7 @@
           {{text.info.records}}
         </span>
       </div>
-      <div v-else >
+      <div v-else>
         <span>
           {{text.info.noRows}}
         </span>
