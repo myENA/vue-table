@@ -9,7 +9,8 @@
                 <label>Search</label>
                 <div class="input-group">
                   <input type="text" class="form-control" placeholder="Search by keyword"
-                    @input="search($event.target.value)" />
+                    @input="search($event.target.value)"
+                    aria-label="Search by keyword"/>
                   <span class="input-group-addon"><i class="fa fa-search"></i></span>
                 </div>
               </div>
@@ -32,31 +33,37 @@
       <table :class="[opts.classes.table, $style.table]">
         <thead>
           <tr>
-            <th v-for="key in allColumns" :key="key" @click="sortBy({key})"
+            <th v-for="key in allColumns" :key="key"
               :class="{ [$style.sortable]: opts.sortable[key], sorted: sortKey === key,
                 [opts.columnsClasses[key]]: opts.columnsClasses[key] != null }">
-              <slot :name="'heading_' + key">
-                <template v-if="key === 'select'">
-                  <div :class="[opts.classes.checkbox, $style.checkbox]">
-                    <label>
-                      <input class="check-all"
-                        type="checkbox"
-                        @change="selectAll"
-                        :checked="allSelected" :disabled="!opts.editable"
-                        />
-                    </label>
-                  </div>
-                </template>
-                <template v-else>
-                  {{ key | heading(opts.headings) }}
-                </template>
-              </slot>
-              <i v-if="opts.sortable[key]"
-                :class="{
-                  [opts.classes.sort.none] : sortKey !== key || sortOrders[key] === null,
-                  [opts.classes.sort[sortOrders[key]]] : sortKey === key,
-                }">
-              </i>
+              <template v-if="key === 'select'">
+                <span :class="[opts.classes.checkbox, $style.checkbox]">
+                  <label>
+                    <input class="check-all"
+                      type="checkbox"
+                      @change="selectAll"
+                      :checked="allSelected" :disabled="!opts.editable"
+                      aria-label="Select all rows"
+                      />
+                  </label>
+                </span>
+              </template>
+              <template v-else>
+                <a href="#"
+                :tabindex="opts.sortable[key] ? '': -1"
+                @click.prevent="sortBy({key})"
+                >
+                  <slot :name="'heading_' + key">
+                    {{ key | heading(opts.headings) }}
+                  </slot>
+                  <i v-if="opts.sortable[key]"
+                    :class="{
+                      [opts.classes.sort.none] : sortKey !== key || sortOrders[key] === null,
+                      [opts.classes.sort[sortOrders[key]]] : sortKey === key,
+                    }">
+                  </i>
+                </a>
+              </template>
             </th>
           </tr>
         </thead>
@@ -84,7 +91,8 @@
         <tbody v-else v-for="(group, groupKey) in pageData" :key="groupKey">
           <tr v-if="groupKey !== 'all'">
             <th :colspan="colspan">
-              <a href="#" @click.prevent="toggleGroup(groupKey)">
+              <a href="#" @click.prevent="toggleGroup(groupKey)"
+                :aria-label="`Toggle group of rows for ${groupKey}`">
                 <i :class="{
                   [opts.classes.group.hide]: isShown(groupKey),
                   [opts.classes.group.show]: !isShown(groupKey),
@@ -123,7 +131,8 @@
                         <input type="checkbox" name="selectedRows"
                           v-model="selectedRows" :disabled="!opts.editable"
                           :key="'select-'+entry[opts.uniqueKey]"
-                          :value="entry[opts.uniqueKey]">
+                          :value="entry[opts.uniqueKey]"
+                          aria-label="Select row">
                       </label>
                     </div>
                   </template>
@@ -179,6 +188,21 @@
   > thead:first-child > tr:first-child > th {
     border-top: 1px solid #333;
     border-bottom: 1px solid #333;
+    a {
+      cursor: default;
+      color: inherit;
+      text-decoration: none;
+      display: block;
+    }
+    &.sortable {
+      a {
+        cursor: pointer;
+      }
+      i {
+        margin-top: 5px;
+        margin-left: 5px;
+      }
+    }
   }
   tbody > tr:first-child > th {
     background-color: #F2F2F2;
@@ -203,13 +227,6 @@
 td.selectable:hover {
   cursor: pointer;
 }
-th.sortable {
-  cursor: pointer;
-  i {
-    margin-top: 5px;
-    margin-left: 5px;
-  }
-}
 
 </style>
 
@@ -221,11 +238,9 @@ import methods from './mixins/methods';
 import Pagination from './mixins/Pagination.vue';
 import ActionsCell from './mixins/ActionsCell.vue';
 
-const getFilterForData = ({ searchFields, someMatch, everyMatch, filter }) =>
-  row =>
-    everyMatch.every(key => searchFields[key](row, key, filter)) &&
-      (someMatch.length === 0 || someMatch.some(key =>
-        String(row[key]).toLowerCase().indexOf(filter.keyword) > -1));
+const getFilterForData = ({ searchFields, someMatch, everyMatch, filter }) => (row) => everyMatch.every((key) => searchFields[key](row, key, filter))
+    && (someMatch.length === 0
+      || someMatch.some((key) => String(row[key]).toLowerCase().indexOf(filter.keyword) > -1));
 
 /**
  * @module EnaTableClient
@@ -293,7 +308,8 @@ export default {
      */
     defaults: {
       type: Object,
-      default: () => (Object.assign({}, defaultProps, {
+      default: () => ({
+        ...defaultProps,
         /**
          * Key-value pairs with custom search function per column,
          * or false to disable search for that column
@@ -346,7 +362,7 @@ export default {
           numeric: true,
           sensitivity: 'base',
         }),
-      })),
+      }),
     },
   },
   data() {
@@ -375,8 +391,8 @@ export default {
       const sortable = {};
       const search = {};
       this.columns.forEach((key) => {
-        if (key !== 'select' && key !== 'actions' &&
-          (opts.sortable === true || opts.sortable[key])) {
+        if (key !== 'select' && key !== 'actions'
+          && (opts.sortable === true || opts.sortable[key])) {
           sortable[key] = opts.sortable[key] || true;
         }
         if (typeof opts.search[key] === 'undefined') {
@@ -397,7 +413,7 @@ export default {
       return this.opts.collapseAllGroups;
     },
     hasSearchFields() {
-      return Object.values(this.opts.search).some(v => v === true);
+      return Object.values(this.opts.search).some((v) => v === true);
     },
     filteredData() {
       const { data } = this;
@@ -486,10 +502,9 @@ export default {
     pageData() {
       Object.keys(this.pageData).forEach((group) => {
         this.pageData[group].forEach((row) => {
-          this.shown[row[this.opts.groupBy]] =
-            typeof this.shown[row[this.opts.groupBy]] === 'undefined' ?
-              !this.opts.collapseAllGroups :
-              this.shown[row[this.opts.groupBy]];
+          this.shown[row[this.opts.groupBy]] = typeof this.shown[row[this.opts.groupBy]] === 'undefined'
+            ? !this.opts.collapseAllGroups
+            : this.shown[row[this.opts.groupBy]];
         });
       });
     },
@@ -515,7 +530,7 @@ export default {
       this.$emit('selectedRows', selectedData);
     },
     collapseAllGroups(collapse) {
-      const shown = Object.assign({}, this.shown);
+      const shown = { ...this.shown };
       Object.keys(shown).forEach((key) => {
         shown[key] = !collapse;
       });
@@ -579,7 +594,7 @@ export default {
     },
     toggleGroup(key) {
       this.shown[key] = typeof this.shown[key] === 'undefined' ? false : !this.shown[key];
-      this.shown = Object.assign({}, this.shown);
+      this.shown = { ...this.shown };
     },
     selectAll() {
       const selectableRows = this.filteredData.reduce((acc, d) => {
@@ -598,8 +613,8 @@ export default {
       if (this.selectedRows.length === 0) {
         this.allSelected = false;
       } else {
-        this.allSelected = this.filteredData.filter(d => d.showSelect).length ===
-          this.filteredData.filter(d => d.selected).length;
+        this.allSelected = this.filteredData.filter((d) => d.showSelect).length
+          === this.filteredData.filter((d) => d.selected).length;
       }
     },
     paginate({ currentPage, perPage }) {

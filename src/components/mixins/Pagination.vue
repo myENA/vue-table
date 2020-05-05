@@ -70,7 +70,8 @@
           {{text.info.showing | format(startRow+1, endRow, totalRows)}}
         </span>
         <select v-model="perPageValue"
-          :class="[$style.perPageSelector, classes.formControl]">
+          :class="[$style.perPageSelector, classes.formControl]"
+          aria-label="Number of records per page">
           <option
             v-for="perPageValue in perPageValues"
             :value="perPageValue"
