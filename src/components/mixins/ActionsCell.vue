@@ -4,6 +4,8 @@
     <slot name="column_actions" :row="row">
       <a href="#"
         role="button"
+        :aria-label="`${isRowExpanded ? 'Hide' : 'Show'} details`"
+        :aria-expanded="isRowExpanded ? 'true' : 'false'"
         @keydown.space.prevent="toggleRow(row[opts.uniqueKey])"
         @click.prevent="toggleRow(row[opts.uniqueKey])"
         v-html="getToggleText(row)">
