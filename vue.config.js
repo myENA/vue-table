@@ -5,12 +5,12 @@ module.exports = {
   css: {
     loaderOptions: {
       css: {
-        localIdentName: `${pkg.libname}[name]_[local]_[hash:base64:5]`,
+        // localIdentName: `${pkg.libname}[name]_[local]_[hash:base64:5]`,
       },
     },
   },
   lintOnSave: false,
-  configureWebpack: (/*config*/) => {
+  configureWebpack: (/* config */) => {
     const customConfig = {
       plugins: [
         new webpack.ProvidePlugin({

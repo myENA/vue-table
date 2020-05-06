@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="container-fluid">
+  <main id="app" class="container-fluid">
     <h1>Countries of Europe</h1>
     <h2>ClientTable, which needs all data pre-loaded</h2>
     <ClientTable :columns="clientColumns" :data="clientData" :options="clientOptions">
@@ -14,7 +14,7 @@
     <h2>ServerTable, which loads data page by page</h2>
     <ServerTable :columns="columns" :url="url" :options="options" ref="serverTable">
       <div slot="filter">
-        <input placeholder="Search by name" v-model="options.filter.name"/>
+        <input placeholder="Search by name" v-model="options.filter.name" aria-label="Search" />
         <button @click="filter">Find</button>
       </div>
       <div slot="details_row" slot-scope="{ row }">
@@ -23,7 +23,7 @@
         <p><strong>Domain(s):</strong> {{row.topLevelDomain.join(', ')}}</p>
       </div>
     </ServerTable>
-  </div>
+  </main>
 </template>
 
 <script>
@@ -38,9 +38,7 @@ const myServerTable = {
   methods: {
     async fetch(params) {
       const { data } = await axios.get(this.url, {
-        params: Object.assign({}, params, {
-          filter: this.options.filter,
-        }),
+        params: { ...params, filter: this.options.filter },
         paramsSerializer(p) {
           return Qs.stringify(p, { arrayFormat: 'brackets' });
         },
@@ -105,7 +103,7 @@ export default {
   }),
   async created() {
     const { data } = await axios.get('https://restcountries.eu/rest/v2/region/europe');
-    this.clientData = data.map(d => Object.assign({}, d, { showSelect: true }));
+    this.clientData = data.map((d) => ({ ...d, showSelect: true }));
   },
   methods: {
     filter() {
