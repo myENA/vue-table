@@ -11,6 +11,7 @@
                 [opts.columnsClasses[key]]: opts.columnsClasses[key] != null }">
               <a href="#"
                 :tabindex="opts.sortable[key] ? '': -1"
+                :aria-label="key | heading(opts.headings)"
                 @click.prevent="sortBy({key})"
                 >
                 <slot :name="'heading_' + key">

@@ -51,6 +51,7 @@
               <template v-else>
                 <a href="#"
                 :tabindex="opts.sortable[key] ? '': -1"
+                :aria-label="key | heading(opts.headings)"
                 role="button"
                 @keydown.space.prevent="sortBy({key})"
                 @click.prevent="sortBy({key})"
