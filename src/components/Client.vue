@@ -206,6 +206,9 @@
     &.sortable {
       a {
         cursor: pointer;
+        &:focus {
+          text-decoration: underline;
+        }
       }
       i {
         margin-top: 5px;
