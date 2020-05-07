@@ -79,6 +79,9 @@ export default {
       columnsClasses: {
         name: 'name-cls',
       },
+      headings: {
+        name: '',
+      },
     },
     clientColumns: ['select', 'name', 'capital', 'population'],
     clientData: [],

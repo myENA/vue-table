@@ -9,7 +9,9 @@
             <th v-for="key in columns" :key="key"
               :class="{ [$style.sortable]: opts.sortable[key], sorted: sortKey === key,
                 [opts.columnsClasses[key]]: opts.columnsClasses[key] != null }">
-              <a href="#"
+              <a
+                v-if="opts.headings[key] !== ''"
+                href="#"
                 :tabindex="opts.sortable[key] ? '': -1"
                 :aria-label="key | heading(opts.headings)"
                 @click.prevent="sortBy({key})"

@@ -49,7 +49,9 @@
                 </span>
               </template>
               <template v-else>
-                <a href="#"
+                <a
+                v-if="opts.headings[key] !== ''"
+                href="#"
                 :tabindex="opts.sortable[key] ? '': -1"
                 :aria-label="key | heading(opts.headings)"
                 role="button"
