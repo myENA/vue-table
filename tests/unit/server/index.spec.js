@@ -13,11 +13,11 @@ describe('Server table', () => {
               total: 1,
             };
           },
-          parse: r => r,
+          parse: (r) => r,
           url: '',
         },
       });
-      expect(wrapper.find('table tbody tr')).to.exist;
+      expect(wrapper.find('table tbody tr').exists()).to.be.true;
     });
   });
 });

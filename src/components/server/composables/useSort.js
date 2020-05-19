@@ -5,8 +5,7 @@ const useSort = (props, opts) => {
   const sortKey = ref('');
   const sortOrders = ref(props.columns.reduce((orders, col) => ({ ...orders, [col]: null }), {}));
 
-  const sortBy = obj =>
-    setSort(obj, props.columns, opts.value.sortable, { sortKey, sortOrders });
+  const sortBy = (obj) => setSort(obj, props.columns, opts.value.sortable, { sortKey, sortOrders });
 
   onMounted(() => {
     if (opts.value.sortBy) {

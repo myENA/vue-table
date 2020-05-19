@@ -1,4 +1,4 @@
-const setSort = ({ key, order }, columns, sortable, { sortKey, sortOrders }) => {
+const setSort = ({ key, order = undefined }, columns, sortable, { sortKey, sortOrders }) => {
   if (sortable[key]) {
     sortKey.value = key;
     columns.forEach((elem) => {
