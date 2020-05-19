@@ -310,7 +310,8 @@ export default {
   setup(props, context) {
     const search = {};
     props.columns.forEach((key) => {
-      if (typeof props.options.search[key] === 'undefined') {
+      if (typeof props.options.search === 'undefined'
+        || typeof props.options.search[key] === 'undefined') {
         search[key] = false;
       } else {
         search[key] = props.options.search[key];

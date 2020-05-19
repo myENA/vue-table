@@ -160,7 +160,18 @@ const defaultFetch = async (url, params) => {
   return data;
 };
 
-const defaultParse = (response) => response;
+const defaultParse = (response) => {
+  if (typeof response === 'undefined') {
+    console.warn('No response returned');
+  }
+  if (typeof response.data === 'undefined') {
+    console.warn('Response data must have a "data" key containing the items for current page');
+  }
+  if (typeof response.total === 'undefined') {
+    console.warn('Response data must have a "total" key containing the total number of items');
+  }
+  return response;
+};
 
 /**
  * @module EnaTableServer
@@ -199,11 +210,11 @@ export default {
     },
     fetchData: {
       type: Function,
-      default: defaultFetch,
+      default: () => defaultFetch,
     },
     parse: {
       type: Function,
-      default: defaultParse,
+      default: () => defaultParse,
     },
   },
   setup(props, context) {
