@@ -145,10 +145,13 @@ th.sortable {
 import axios from 'axios';
 import useFormatters from '@/components/common/formatters';
 import useDefaultOptions from '@/components/common/default-options';
-import { useToggle, useComputedColumns } from '@/components/common/methods';
+import useToggle from '@/components/common/composables/useToggle';
+import useComputedColumns from '@/components/common/composables/useComputedColumns';
 import Pagination from '@/components/Pagination.vue';
 import ActionsCell from '@/components/common/ActionsCell.vue';
-import { useLoad, usePagination, useSort } from './methods';
+import useLoad from './composables/useLoad';
+import usePagination from './composables/usePagination';
+import useSort from './composables/useSort';
 
 const defaultFetch = async (url, params) => {
   const { data } = await axios.get(url, {
@@ -157,7 +160,7 @@ const defaultFetch = async (url, params) => {
   return data;
 };
 
-const defaultParse = response => response;
+const defaultParse = (response) => response;
 
 /**
  * @module EnaTableServer

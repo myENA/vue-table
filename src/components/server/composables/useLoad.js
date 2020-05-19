@@ -1,5 +1,4 @@
-import { onMounted, ref, watch } from 'vue';
-import { setSort } from '@/components/common/methods';
+import { ref, watch } from 'vue';
 
 const useLoad = (props, opts, { currentPage, perPage }, { sortOrders, sortKey }) => {
   const loading = ref(true);
@@ -58,45 +57,4 @@ const useLoad = (props, opts, { currentPage, perPage }, { sortOrders, sortKey })
   };
 };
 
-const usePagination = (defaultPerPage) => {
-  const currentPage = ref(1);
-  const perPage = ref(defaultPerPage);
-
-  const getFirstPage = () => {
-    currentPage.value = 1;
-  };
-
-  const paginate = (p) => {
-    currentPage.value = p.currentPage;
-    perPage.value = p.perPage;
-  };
-
-  return {
-    currentPage,
-    perPage,
-    paginate,
-    getFirstPage,
-  };
-};
-
-const useSort = (props, opts) => {
-  const sortKey = ref('');
-  const sortOrders = ref(props.columns.reduce((orders, col) => ({ ...orders, [col]: null }), {}));
-
-  const sortBy = obj =>
-    setSort(obj, props.columns, opts.value.sortable, { sortKey, sortOrders });
-
-  onMounted(() => {
-    if (opts.value.sortBy) {
-      sortBy(opts.value.sortBy);
-    }
-  });
-
-  return {
-    sortKey,
-    sortOrders,
-    sortBy,
-  };
-};
-
-export { useLoad, usePagination, useSort };
+export default useLoad;

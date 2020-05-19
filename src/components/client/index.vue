@@ -241,10 +241,15 @@ td.selectable:hover {
 import { reactive, toRefs, computed, watch } from 'vue';
 import useFormatters from '@/components/common/formatters';
 import useDefaultOptions from '@/components/common/default-options';
-import { useToggle, useComputedColumns } from '@/components/common/methods';
+import useToggle from '@/components/common/composables/useToggle';
+import useComputedColumns from '@/components/common/composables/useComputedColumns';
 import Pagination from '@/components/Pagination.vue';
 import ActionsCell from '@/components/common/ActionsCell.vue';
-import { usePagination, useSort, useSelect, useFilter, useGroups } from './methods';
+import usePagination from './composables/usePagination';
+import useSort from './composables/useSort';
+import useSelect from './composables/useSelect';
+import useFilter from './composables/useFilter';
+import useGroups from './composables/useGroups';
 
 export default {
   components: {
