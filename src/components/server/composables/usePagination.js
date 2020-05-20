@@ -1,5 +1,5 @@
 
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 
 const usePagination = (defaultPerPage) => {
   const currentPage = ref(1);

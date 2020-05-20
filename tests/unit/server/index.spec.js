@@ -17,7 +17,7 @@ describe('Server table', () => {
       expect(tds.length).to.eq(1);
       expect(tds[0].text()).to.eq('Loading ...');
       await wrapper.vm.$nextTick();
-      await new Promise((res) => { setTimeout(() => { res(); }, 500); });
+      await new Promise((res) => { setTimeout(() => { res(); }, 1000); });
       const tr = wrapper.findAll('table tbody tr');
       expect(tr.length).to.eq(10);
     });
