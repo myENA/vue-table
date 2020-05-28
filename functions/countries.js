@@ -4,7 +4,7 @@ const collator = new Intl.Collator('en', { sensitivity: 'base', numeric: true })
 
 exports.handler = (event, context, callback) => {
   // your server-side functionality
-  const { page = 1, per_page: perPage = 10, sort_by: sortBy = 'name', sort_dir: sortDir = 1, filter = {} } = context.queryStringParameters;
+  const { page = 1, per_page: perPage = 10, sort_by: sortBy = 'name', sort_dir: sortDir = 1, filter = {} } = event.queryStringParameters;
   // filter
   const filtered = countries.filter((c) => !filter.name
     || (filter.name && c.name.toLowerCase().indexOf(filter.name.toLowerCase()) !== -1));
