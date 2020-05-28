@@ -13,7 +13,6 @@ exports.handler = (event, context, callback) => {
   // slice & send
   const start = (page - 1) * perPage;
   const end = start + parseInt(perPage, 10);
-  // Enable CORS using the `cors` express middleware.
   callback(null, {
     statusCode: 200,
     body: JSON.stringify({
