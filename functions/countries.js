@@ -15,10 +15,10 @@ exports.handler = (event, context, callback) => {
   const end = start + parseInt(perPage, 10);
   // Enable CORS using the `cors` express middleware.
   callback(null, {
-    status: 200,
-    body: {
+    statusCode: 200,
+    body: JSON.stringify({
       list: filtered.slice(start, end),
       total: filtered.length,
-    },
+    }),
   });
 };
