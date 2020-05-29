@@ -24,7 +24,7 @@ npm install @myena/vue-table
 - FontAwesome 4
 
 # Demo
-https://vue-myena-table.firebaseapp.com/
+https://myena-vue-table.netlify.app/
 
 # Vue Client Table
 
