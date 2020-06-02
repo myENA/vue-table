@@ -281,7 +281,7 @@ export default {
       );
     },
     isLoading() {
-      return this.polling ? this.loadingOverride : this.Loading;
+      return this.polling ? this.loadingOverride : this.loading;
     },
   },
   watch: {
