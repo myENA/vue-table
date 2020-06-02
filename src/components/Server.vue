@@ -225,6 +225,15 @@ export default {
         },
       }),
     },
+    /**
+     * Polling indicator. If true this will allow refreshing data in the background without
+     * showing the loading icon
+     * @type {Boolean}
+     */
+    polling: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     const sortOrders = {};
@@ -284,7 +293,9 @@ export default {
       return data;
     },
     async loadData() {
-      this.loading = true;
+      if (!this.polling) {
+        this.loading = true;
+      }
 
       const params = {
         [this.opts.params.page]: this.currentPage,
