@@ -33,7 +33,7 @@
             </th>
           </tr>
         </thead>
-        <tbody v-if="loading">
+        <tbody v-if="isLoading">
           <tr>
             <td class="msg-row" :colspan="colspan">
               <slot name="loading"><span v-html="opts.text.loading"></span></slot>
@@ -234,6 +234,14 @@ export default {
       type: Boolean,
       default: false,
     },
+    /**
+     * Loading indicator. If true, will display the `loadingMsg` instead of the body
+     * @type {Boolean}
+     */
+    loadingOverride: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     const sortOrders = {};
@@ -272,6 +280,9 @@ export default {
         }
       );
     },
+    isLoading() {
+      return this.polling ? this.loadingOverride : this.loading;
+    },
   },
   watch: {
   },
@@ -293,9 +304,7 @@ export default {
       return data;
     },
     async loadData() {
-      if (!this.polling) {
-        this.loading = true;
-      }
+      this.loading = true;
 
       const params = {
         [this.opts.params.page]: this.currentPage,
