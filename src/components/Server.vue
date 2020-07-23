@@ -258,6 +258,7 @@ export default {
       currentPage: 1,
       perPage: this.options.perPage || this.defaults.perPage,
       totalRows: 0,
+      pollLoading: false,
     };
   },
   computed: {
@@ -281,10 +282,13 @@ export default {
       );
     },
     isLoading() {
-      return this.polling ? this.loadingOverride : this.loading;
+      return this.polling ? this.pollLoading : this.loading;
     },
   },
   watch: {
+    loadingOverride() {
+      this.pollLoading = this.loadingOverride;
+    },
   },
   mounted() {
     if (this.opts.sortBy) {
@@ -293,7 +297,7 @@ export default {
   },
   created() {
     if (this.opts.initialFetch) {
-      this.loadData();
+      this.loadData(true);
     }
   },
   methods: {
@@ -303,8 +307,15 @@ export default {
       });
       return data;
     },
-    async loadData() {
-      this.loading = true;
+    updateLoading(show, value) {
+      if (this.polling && show) {
+        this.pollLoading = value;
+      } else {
+        this.loading = value;
+      }
+    },
+    async loadData(showPollLoading = false) {
+      this.updateLoading(showPollLoading, true);
 
       const params = {
         [this.opts.params.page]: this.currentPage,
@@ -337,7 +348,7 @@ export default {
         this.totalRows = 0;
         throw e;
       } finally {
-        this.loading = false;
+        this.updateLoading(showPollLoading, false);
       }
     },
     parse(response) {
@@ -362,17 +373,17 @@ export default {
         } else {
           this.sortOrders[key] = null;
         }
-        this.loadData();
+        this.loadData(true);
       }
     },
     getFirstPage() {
       this.currentPage = 1;
-      this.loadData();
+      this.loadData(true);
     },
     paginate({ currentPage, perPage }) {
       this.currentPage = currentPage;
       this.perPage = perPage;
-      this.loadData();
+      this.loadData(true);
     },
   },
 };
