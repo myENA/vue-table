@@ -6,18 +6,30 @@
       <table :class="[opts.classes.table, $style.table]">
         <thead>
           <tr>
-            <th v-for="key in columns" :key="key" @click="sortBy({key})"
+            <th v-for="key in columns" :key="key"
               :class="{ [$style.sortable]: opts.sortable[key], sorted: sortKey === key,
                 [opts.columnsClasses[key]]: opts.columnsClasses[key] != null }">
-              <slot :name="'heading_' + key">
-                {{ heading(key, opts.headings) }}
-              </slot>
-              <i v-if="opts.sortable[key]"
-                :class="{
-                  [opts.classes.sort.none] : sortKey !== key || sortOrders[key] === null,
-                  [opts.classes.sort[sortOrders[key]]] : sortKey === key,
-                }">
-              </i>
+              <a
+                v-if="opts.headings[key] !== ''"
+                href="#"
+                :tabindex="opts.sortable[key] ? '': -1"
+                :aria-label="key | heading(opts.headings)"
+                role="button"
+                @keydown.space.prevent="sortBy({key})"
+                @click.prevent="sortBy({key})"
+                >
+                <slot :name="'heading_' + key">
+                  <template>
+                    {{ heading(key, opts.headings) }}
+                  </template>
+                </slot>
+                <i v-if="opts.sortable[key]"
+                  :class="{
+                    [opts.classes.sort.none] : sortKey !== key || sortOrders[key] === null,
+                    [opts.classes.sort[sortOrders[key]]] : sortKey === key,
+                  }">
+                </i>
+              </a>
             </th>
           </tr>
         </thead>
@@ -104,6 +116,24 @@
   > thead:first-child > tr:first-child > th {
     border-top: 1px solid #333;
     border-bottom: 1px solid #333;
+    a {
+      cursor: default;
+      color: inherit;
+      text-decoration: none;
+      display: block;
+    }
+    &.sortable {
+      a {
+        cursor: pointer;
+        &:focus {
+          text-decoration: underline;
+        }
+      }
+      i {
+        margin-top: 5px;
+        margin-left: 5px;
+      }
+    }
   }
   tbody > tr:first-child > th {
     background-color: #F2F2F2;
@@ -123,13 +153,6 @@
     label {
       min-height: 18px;
     }
-  }
-}
-th.sortable {
-  cursor: pointer;
-  i {
-    margin-top: 5px;
-    margin-left: 5px;
   }
 }
 .pagination {

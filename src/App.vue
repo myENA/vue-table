@@ -53,7 +53,7 @@ export default {
   },
   data: () => ({
     columns: ['name', 'capital', 'population'],
-    url: 'https://us-central1-vue-myena-table.cloudfunctions.net/countries',
+    url: '.netlify/functions/countries',
     options: {
       perPage: 5,
       uniqueKey: 'alpha3Code',
@@ -62,6 +62,9 @@ export default {
       },
       columnsClasses: {
         name: 'name-cls',
+      },
+      headings: {
+        name: '',
       },
     },
     clientColumns: ['select', 'name', 'capital', 'population'],
