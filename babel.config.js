@@ -1,4 +1,4 @@
-const presets = ['@vue/app'];
+const presets = ['@vue/cli-plugin-babel/preset'];
 const plugins = [];
 
 if (process.env.NODE_ENV === 'test') {

@@ -36,14 +36,17 @@
           </tr>
         </tbody>
         <tbody v-else>
-          <template v-for="(entry, index) in data">
+          <template
+            v-for="(entry, index) in data"
+            :key="'row_'+entry[opts.uniqueKey]">
             <tr
-              :key="'row_'+entry[opts.uniqueKey]"
               :data-id="entry[opts.uniqueKey]"
               :class="computedRowClasses[index]"
               >
-              <td v-for="key in columns" :key="'cell_'+key"
-              :class="{[opts.columnsClasses[key]]: opts.columnsClasses[key] != null }">
+              <td
+                v-for="key in columns"
+                :key="'cell_'+key"
+                :class="{[opts.columnsClasses[key]]: opts.columnsClasses[key] != null }">
                 <slot :name="'column_' + key" :row="entry">
                   <component v-if="opts.templates[key]" :is="opts.templates[key]"
                     :data="entry" :column="key" :index="index">
