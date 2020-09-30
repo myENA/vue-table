@@ -1,6 +1,6 @@
-import { expect } from 'chai';
 import { shallowMount } from '@vue/test-utils';
 import ActionsCell from '@/components/common/ActionsCell.vue';
+import '../setup';
 
 describe('ActionsCell', () => {
   let wrapper;
@@ -21,15 +21,15 @@ describe('ActionsCell', () => {
   describe('#render', () => {
     it('has expand action link', () => {
       const expand = wrapper.find('div > a');
-      expect(expand.exists()).to.be.true;
+      expect(expand.exists()).toBe(true);
     });
     it('returns correct text', async () => {
       const expand = wrapper.find('div > a');
-      expect(expand.text()).to.eq('E');
+      expect(expand.text()).toBe('E');
       await wrapper.setProps({
         isRowExpanded: true,
       });
-      expect(expand.text()).to.eq('C');
+      expect(expand.text()).toBe('C');
     });
   });
   describe('#events', () => {
@@ -37,8 +37,8 @@ describe('ActionsCell', () => {
       const expand = wrapper.find('div > a');
       await expand.trigger('click');
       const emitted = wrapper.emitted();
-      expect(emitted.toggleRow).to.exist;
-      expect(emitted.toggleRow[0][0]).to.eq(1);
+      expect(emitted.toggleRow).toBeDefined();
+      expect(emitted.toggleRow[0][0]).toBe(1);
     });
   });
 });

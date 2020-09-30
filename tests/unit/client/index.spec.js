@@ -1,6 +1,6 @@
-import { expect } from 'chai';
 import { shallowMount } from '@vue/test-utils';
 import Client from '@/components/client/index.vue';
+import '../setup';
 
 describe('Client table', () => {
   describe('#render', () => {
@@ -14,8 +14,8 @@ describe('Client table', () => {
       });
     });
     it('a table with 1 row', () => {
-      expect(wrapper.find('table tbody tr').exists()).to.be.true;
-      expect(wrapper.findAll('table tbody tr > td').length).to.eq(2);
+      expect(wrapper.find('table tbody tr').exists()).toBe(true);
+      expect(wrapper.findAll('table tbody tr > td').length).toBe(2);
     });
   });
 });

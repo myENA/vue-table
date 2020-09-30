@@ -6,7 +6,7 @@ version: 2
 jobs:
   install:
     docker:
-      - image: circleci/node:10.13.0
+      - image: circleci/node:14.7.0
 
     working_directory: ~/repo
 
@@ -33,7 +33,7 @@ jobs:
             - ~/repo
   test:
     docker:
-      - image: circleci/node:10.13.0
+      - image: circleci/node:14.7.0
 
     working_directory: ~/repo
 
@@ -41,7 +41,16 @@ jobs:
       - restore_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       # run tests!
-      - run: npm run test:unit
+      - run:
+          command: npm run test:ci
+          environment:
+            JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
+      - store_test_results:
+          path: ./reports/junit/
+      - store_artifacts:
+          path: ./reports/junit
+      - store_artifacts:
+          path: ./coverage/lcov.info
 
 workflows:
   version: 2

@@ -1,6 +1,6 @@
 import { reactive, ref } from 'vue';
-import { expect } from 'chai';
 import usePagination from '@/components/client/composables/usePagination';
+import '../../setup';
 
 describe('Client composables', () => {
   describe('#usePagination', () => {
@@ -13,8 +13,8 @@ describe('Client composables', () => {
       const filteredData = ref([]);
       const use = usePagination(ctx, state, filteredData);
 
-      expect(use.paginate).to.exist;
-      expect(use.resetCurrentPage).to.exist;
+      expect(use.paginate).toBeDefined();
+      expect(use.resetCurrentPage).toBeDefined();
     });
     describe('#paginate', () => {
       it('sets values', () => {
@@ -26,8 +26,8 @@ describe('Client composables', () => {
         const filteredData = ref([]);
         const use = usePagination(ctx, state, filteredData);
         use.paginate({ currentPage: 2, perPage: 5 });
-        expect(state.currentPage).to.eq(2);
-        expect(state.perPage).to.eq(5);
+        expect(state.currentPage).toBe(2);
+        expect(state.perPage).toBe(5);
         // TODO test event and fn calls
       });
     });

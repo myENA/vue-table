@@ -13,7 +13,7 @@
                 v-if="opts.headings[key] !== ''"
                 href="#"
                 :tabindex="opts.sortable[key] ? '': -1"
-                :aria-label="key | heading(opts.headings)"
+                :aria-label="heading(key, opts.headings)"
                 role="button"
                 @keydown.space.prevent="sortBy({key})"
                 @click.prevent="sortBy({key})"
@@ -199,9 +199,6 @@ const defaultParse = (response) => {
   return response;
 };
 
-/**
- * @module EnaTableServer
- */
 export default {
   components: {
     Pagination,
@@ -213,7 +210,7 @@ export default {
      */
     url: {
       type: String,
-      required: true,
+      default: '',
     },
     /**
      * List of keys to use from each object (table columns)
@@ -257,7 +254,6 @@ export default {
     const pagination = usePagination(opts.value.perPage);
 
     const { loadData, data, loading, totalRows } = useLoad(props, opts, pagination, sort);
-
     return {
       ...useFormatters(),
       ...useToggle(context),
