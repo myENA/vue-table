@@ -439,7 +439,7 @@ export default {
       }
       return data.filter(getFilterForData({ searchFields: this.opts.search, someMatch, everyMatch, filter }));
     },
-    pageData() {
+    sortedData() {
       const { sortKey } = this;
       let data = this.filteredData;
       let order = 0;
@@ -461,6 +461,10 @@ export default {
         }
         data = data.slice().sort(sortableFn);
       }
+      return data;
+    },
+    pageData() {
+      let data = this.sortedData;
       if (this.opts.pagination) {
         // slice the data if pagionation is enabled
         data = data.slice(this.startRow, this.endRow);
@@ -659,6 +663,75 @@ export default {
       const lastPage = Math.max(1, Math.ceil(this.totalRows / this.perPage));
       if (lastPage < this.currentPage) {
         this.currentPage = lastPage;
+      }
+    },
+    getFileNameWithExtension(name) {
+      // check if the filename has the .csv extension and add it if it does not
+      if (name.slice(-4) !== '.csv') {
+        return `${name}.csv`;
+      }
+      return name;
+    },
+    prepareValueForCsv(value = '') {
+      let preparedValue = value;
+      if (preparedValue) {
+        preparedValue = preparedValue.toString();
+      }
+      preparedValue = preparedValue.replace(/"/g, '""');
+      if (preparedValue.search(/("|,|\n)/g) >= 0) {
+        preparedValue = `"${preparedValue}"`;
+      }
+      return preparedValue;
+    },
+    getCsvData({ headers, columns, top }) {
+      const rows = [];
+      const list = this.sortedData.slice(top);
+      list.forEach((entry) => {
+        const r = [];
+        columns.forEach((c) => {
+          r.push(this.prepareValueForCsv(entry[c]));
+        });
+        rows.push(r);
+      });
+      const data = [headers, ...rows];
+      return data.map((r) => r.join(',')).join('\n');
+    },
+    getExportHeaders(columns) {
+      return columns.map((key) => {
+        // TODO replace this with the filter method once merged with the vue3 branch
+        if (undefined !== this.opts.headings[key]) {
+          return this.opts.headings[key];
+        }
+        const firstUpper = (w) => w.charAt(0).toUpperCase() + w.slice(1);
+        return key.split('_').map(firstUpper).join(' ');
+      });
+    },
+    download({
+      filename,
+      columns = this.columns,
+      headers = this.getExportHeaders(columns),
+      top = 0,
+    }) {
+      const filenameWithExtension = this.getFileNameWithExtension(filename);
+      const csvData = this.getCsvData({
+        headers,
+        columns,
+        top,
+      });
+      const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+      if (navigator.msSaveBlob) {
+        navigator.msSaveBlob(blob, filenameWithExtension);
+      } else {
+        const link = document.createElement('a');
+        if (link.download !== undefined) {
+          const url = URL.createObjectURL(blob);
+          link.setAttribute('href', url);
+          link.setAttribute('download', filenameWithExtension);
+          link.style.visibility = 'hidden';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }
       }
     },
   },

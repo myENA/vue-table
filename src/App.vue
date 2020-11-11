@@ -2,13 +2,14 @@
   <main id="app" class="container-fluid">
     <h1>Countries of Europe</h1>
     <h2>ClientTable, which needs all data pre-loaded</h2>
-    <ClientTable :columns="clientColumns" :data="clientData" :options="clientOptions">
+    <ClientTable ref="clientTable" :columns="clientColumns" :data="clientData" :options="clientOptions">
       <div slot="details_row" slot-scope="{ row }">
         <h4>Details for {{row.name}}.</h4>
         <p><strong>Alpha2Code:</strong> {{row.alpha2Code}}</p>
         <p><strong>Domain(s):</strong> {{row.topLevelDomain.join(', ')}}</p>
       </div>
     </ClientTable>
+    <button @click="downloadClientCsv">Download</button>
 
     <h1>All countries</h1>
     <h2>ServerTable, which loads data page by page</h2>
@@ -112,6 +113,12 @@ export default {
     filter() {
       // when filtering is applied, retrieve first page
       this.$refs.serverTable.getFirstPage();
+    },
+    downloadClientCsv() {
+      this.$refs.clientTable.download({
+        filename: 'my-data.csv',
+        columns: ['name', 'capital', 'population'],
+      });
     },
   },
 };
