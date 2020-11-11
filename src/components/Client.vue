@@ -708,7 +708,7 @@ export default {
     },
     getCsvData({ headers, columns, top }) {
       const rows = [];
-      const list = this.sortedData.slice(top);
+      const list = this.sortedData.slice(0, top);
       list.forEach((entry) => {
         const r = [];
         columns.forEach((c) => {
