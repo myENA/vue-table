@@ -250,9 +250,16 @@ import methods from './mixins/methods';
 import Pagination from './mixins/Pagination.vue';
 import ActionsCell from './mixins/ActionsCell.vue';
 
-const getFilterForData = ({ searchFields, someMatch, everyMatch, filter }) => (row) => everyMatch.every((key) => searchFields[key](row, key, filter))
-    && (someMatch.length === 0
-      || someMatch.some((key) => String(row[key]).toLowerCase().indexOf(filter.keyword) > -1));
+const getFilterForData = ({ searchFields, someMatch, everyMatch, filter, customMatch = {} }) => (row) => everyMatch.every((key) => searchFields[key](row, key, filter))
+  && (
+    someMatch.length === 0
+    || someMatch.some((key) => {
+      if (customMatch[key]) {
+        return customMatch[key](row, key, filter);
+      }
+      return String(row[key]).toLowerCase().indexOf(filter.keyword) > -1;
+    })
+  );
 
 /**
  * @module EnaTableClient
@@ -324,11 +331,21 @@ export default {
         ...defaultProps,
         /**
          * Key-value pairs with custom search function per column,
-         * or false to disable search for that column
+         * or true to enable keyword search for that column
+         *    At least one keyword search-able columns should match AND
+         *    All custom-search function columns should match
          *
          * @type {Object}
          */
         search: {},
+        /**
+        /**
+         * Key-value pairs with custom search function (by keyword) per column
+         * Applies for those search-able columns with "true", but which need customized search
+         *
+         * @type {Object}
+         */
+        searchCustom: {},
         /**
          * Field to group by - key name
          *
@@ -437,7 +454,13 @@ export default {
       if (someMatch.length === 0 && everyMatch.length === 0) {
         return data;
       }
-      return data.filter(getFilterForData({ searchFields: this.opts.search, someMatch, everyMatch, filter }));
+      return data.filter(getFilterForData({
+        searchFields: this.opts.search,
+        someMatch,
+        everyMatch,
+        filter,
+        customMatch: this.opts.searchCustom,
+      }));
     },
     sortedData() {
       const { sortKey } = this;

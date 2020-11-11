@@ -99,6 +99,9 @@ export default {
         capital: true,
         // population: (row, key, filter) => true,
       },
+      searchCustom: {
+        capital: (row, key, filter) => row[key].toLowerCase().includes(filter.keyword),
+      },
       // text: {
       //   expand: '<i class="fa fa-chevron-right" />',
       //   collapse: '<i class="fa fa-chevron-down" />',
