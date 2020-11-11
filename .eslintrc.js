@@ -42,6 +42,11 @@ module.exports = {
       ObjectExpression: { consistent: true },
       ObjectPattern: { multiline: true },
     }],
+    'template-curly-spacing': 'off',
+    indent: [
+      'error', 2,
+      { ignoredNodes: ['TemplateLiteral'] }
+    ],
   },
   parserOptions: {
     parser: 'babel-eslint',
