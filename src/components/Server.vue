@@ -66,7 +66,14 @@
                       :is-row-expanded="isRowExpanded(entry[opts.uniqueKey])"
                       :opts="opts"
                       @toggleRow="toggleRow"
-                    />
+                    >
+                      <template #column_actions_pre="{row}">
+                        <slot name="column_actions_pre" :row="row"/>
+                      </template>
+                      <template #column_actions_post="{row}">
+                        <slot name="column_actions_post" :row="row"/>
+                      </template>
+                    </ActionsCell>
                   </template>
                   <template v-else>{{entry[key]}}</template>
                 </slot>
