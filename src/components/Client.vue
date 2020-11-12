@@ -155,9 +155,6 @@
                       <template #column_actions_pre="{row}">
                         <slot name="column_actions_pre" :row="row"/>
                       </template>
-                      <template #column_actions="{row}">
-                        <slot name="column_actions" :row="row"/>
-                      </template>
                       <template #column_actions_post="{row}">
                         <slot name="column_actions_post" :row="row"/>
                       </template>
