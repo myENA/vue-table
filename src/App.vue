@@ -2,7 +2,7 @@
   <main class="container-fluid">
     <h1>Countries of Europe</h1>
     <h2>ClientTable, which needs all data pre-loaded</h2>
-    <ClientTable :columns="clientColumns" :data="clientData" :options="clientOptions">
+    <ClientTable ref="clientTable" :columns="clientColumns" :data="clientData" :options="clientOptions">
       <template #details_row="{ row }">
         <div>
           <h4>Details for {{row.name}}.</h4>
@@ -11,6 +11,7 @@
         </div>
       </template>
     </ClientTable>
+    <button @click="downloadClientCsv">Download</button>
 
     <h1>All countries</h1>
     <h2>ServerTable, which loads data page by page</h2>
@@ -82,6 +83,9 @@ export default {
         capital: true,
         // population: (row, key, filter) => true,
       },
+      searchCustom: {
+        capital: (row, key, filter) => row[key].toLowerCase().includes(filter.keyword),
+      },
       // text: {
       //   expand: '<i class="fa fa-chevron-right" />',
       //   collapse: '<i class="fa fa-chevron-down" />',
@@ -111,6 +115,12 @@ export default {
         data: list,
         total,
       };
+    },
+    downloadClientCsv() {
+      this.$refs.clientTable.download({
+        filename: 'my-data.csv',
+        columns: ['name', 'capital', 'population'],
+      });
     },
   },
 };

@@ -1,12 +1,23 @@
-import { ref, watch } from 'vue';
+import { ref, watch, computed } from 'vue';
 
 const useLoad = (props, opts, { currentPage, perPage }, { sortOrders, sortKey }) => {
   const loading = ref(true);
+  const pollLoading = ref(false);
   const data = ref([]);
   const totalRows = ref(0);
 
-  const loadData = async () => {
-    loading.value = true;
+  const isLoading = computed(() => (props.polling ? pollLoading.value : loading.value));
+
+  const updateLoading = (show, value) => {
+    if (props.polling && show) {
+      pollLoading.value = value;
+    } else {
+      loading.value = value;
+    }
+  };
+
+  const loadData = async (showPollLoading = false) => {
+    updateLoading(showPollLoading, true);
     const params = {
       [opts.value.params.page]: currentPage.value,
       [opts.value.params.per_page]: perPage.value,
@@ -39,19 +50,22 @@ const useLoad = (props, opts, { currentPage, perPage }, { sortOrders, sortKey })
       totalRows.value = 0;
       throw e;
     } finally {
-      loading.value = false;
+      updateLoading(showPollLoading, false);
     }
   };
 
-  watch(sortOrders, loadData, {
+  watch(sortOrders, () => loadData(true), {
     deep: true,
   });
-  watch(currentPage, loadData);
-  watch(perPage, loadData);
+  watch(currentPage, () => loadData(true));
+  watch(perPage, () => loadData(true));
+  watch(props.loadingOverride, () => {
+    pollLoading.value = props.loadingOverride;
+  });
 
   return {
     loadData,
-    loading,
+    isLoading,
     data,
     totalRows,
   };

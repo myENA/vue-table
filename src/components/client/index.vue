@@ -150,7 +150,14 @@
                       :is-row-expanded="isRowExpanded(entry[opts.uniqueKey])"
                       :opts="opts"
                       @toggleRow="toggleRow"
-                    />
+                    >
+                      <template #column_actions_pre="{row}">
+                        <slot name="column_actions_pre" :row="row"/>
+                      </template>
+                      <template #column_actions_post="{row}">
+                        <slot name="column_actions_post" :row="row"/>
+                      </template>
+                    </ActionsCell>
                   </template>
                   <template v-else>{{entry[key]}}</template>
                 </slot>
@@ -250,6 +257,7 @@ import useSort from './composables/useSort';
 import useSelect from './composables/useSelect';
 import useFilter from './composables/useFilter';
 import useGroups from './composables/useGroups';
+import useDownload from './composables/useDownload';
 
 export default {
   components: {
@@ -347,7 +355,7 @@ export default {
     const startRow = computed(() => (state.currentPage - 1) * state.perPage);
     const endRow = computed(() => Math.min(startRow.value + state.perPage, totalRows.value));
     const { sortKey, sortOrders, sortBy } = useSort(props, opts);
-    const pageData = computed(() => {
+    const sortedData = computed(() => {
       let data = filteredData.value;
       let order = 0;
       if (sortOrders.value[sortKey.value] === 'ascending') {
@@ -368,6 +376,10 @@ export default {
         }
         data = data.slice().sort(sortableFn);
       }
+      return data;
+    });
+    const pageData = computed(() => {
+      let data = sortedData.value;
       if (opts.value.pagination) {
         // slice the data if pagionation is enabled
         data = data.slice(startRow.value, endRow.value);
@@ -381,6 +393,12 @@ export default {
         }, {});
       }
       return { all: data };
+    });
+
+    const { download } = useDownload({
+      sortedData,
+      columns: props.columns,
+      headings: opts.value.headings,
     });
 
     watch(computedFilter, () => {
@@ -406,6 +424,7 @@ export default {
       startRow,
       endRow,
       pageData,
+      download,
     };
   },
 };

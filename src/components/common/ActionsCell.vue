@@ -1,15 +1,14 @@
 <template>
   <div>
     <slot name="column_actions_pre" :row="row"></slot>
-    <slot name="column_actions" :row="row">
-      <a
-        href="#"
-        role="button"
-        @keydown.space.prevent="toggleRow(row[opts.uniqueKey])"
-        @click.prevent="toggleRow(row[opts.uniqueKey])"
-        v-html="getToggleText(row)">
-      </a>
-    </slot>
+    <a href="#"
+      role="button"
+      :aria-label="`${isRowExpanded ? 'Hide' : 'Show'} details`"
+      :aria-expanded="isRowExpanded ? 'true' : 'false'"
+      @keydown.space.prevent="toggleRow(row[opts.uniqueKey])"
+      @click.prevent="toggleRow(row[opts.uniqueKey])"
+      v-html="getToggleText(row)">
+    </a>
     <slot name="column_actions_post" :row="row"></slot>
   </div>
 </template>

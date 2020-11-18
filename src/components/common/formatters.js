@@ -7,6 +7,8 @@ const heading = (key, headings) => {
 };
 const formatStr = (str, ...args) => [...args].reduce((s, a) => s.replace(/%s/, a), str);
 
+export { heading };
+
 export default function () {
   return {
     heading,

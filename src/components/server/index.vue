@@ -33,7 +33,7 @@
             </th>
           </tr>
         </thead>
-        <tbody v-if="loading">
+        <tbody v-if="isLoading">
           <tr>
             <td class="msg-row" :colspan="colspan">
               <slot name="loading"><span v-html="opts.text.loading"></span></slot>
@@ -69,7 +69,14 @@
                       :is-row-expanded="isRowExpanded(entry[opts.uniqueKey])"
                       :opts="opts"
                       @toggleRow="toggleRow"
-                    />
+                    >
+                      <template #column_actions_pre="{row}">
+                        <slot name="column_actions_pre" :row="row"/>
+                      </template>
+                      <template #column_actions_post="{row}">
+                        <slot name="column_actions_post" :row="row"/>
+                      </template>
+                    </ActionsCell>
                   </template>
                   <template v-else>{{entry[key]}}</template>
                 </slot>
@@ -239,6 +246,23 @@ export default {
       type: Function,
       default: () => defaultParse,
     },
+    /**
+     * Polling indicator. If true this will allow refreshing data in the background without
+     * showing the loading icon
+     * @type {Boolean}
+     */
+    polling: {
+      type: Boolean,
+      default: false,
+    },
+    /**
+     * Loading indicator. If true, will display the `loadingMsg` instead of the body
+     * @type {Boolean}
+     */
+    loadingOverride: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup(props, context) {
     const { opts } = useDefaultOptions(props, {
@@ -253,7 +277,7 @@ export default {
     const sort = useSort(props, opts);
     const pagination = usePagination(opts.value.perPage);
 
-    const { loadData, data, loading, totalRows } = useLoad(props, opts, pagination, sort);
+    const { loadData, data, isLoading, totalRows } = useLoad(props, opts, pagination, sort);
     return {
       ...useFormatters(),
       ...useToggle(context),
@@ -263,13 +287,13 @@ export default {
       opts,
       loadData,
       data,
-      loading,
+      isLoading,
       totalRows,
     };
   },
   created() {
     if (this.opts.initialFetch) {
-      this.loadData();
+      this.loadData(true);
     }
   },
 };
