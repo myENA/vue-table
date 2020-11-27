@@ -663,7 +663,7 @@ export default {
         this.allSelected = false;
       } else {
         this.allSelected = this.filteredData.filter((d) => d.showSelect).length
-          === this.filteredData.filter((d) => d.selected).length;
+          === this.selectedRows.length;
       }
     },
     paginate({ currentPage, perPage }) {
