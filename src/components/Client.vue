@@ -519,7 +519,10 @@ export default {
       return Math.min(this.startRow + this.perPage, this.totalRows);
     },
     selectedRowIds() {
-      return this.selectedRows.reduce((obj, id) => ({ ...obj, [id]: true }), {});
+      return this.selectedRows.reduce((acc, id) => {
+        acc[id] = true;
+        return acc;
+      }, {});
     },
   },
   watch: {

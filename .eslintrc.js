@@ -36,6 +36,7 @@ module.exports = {
       props: true,
       ignorePropertyModificationsFor: [
         'state',
+        'acc',
       ],
     }],
     'object-curly-newline': ['error', {
