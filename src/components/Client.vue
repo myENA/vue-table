@@ -639,6 +639,7 @@ export default {
         } else {
           this.sortOrders[key] = null;
         }
+        this.sortOrders = { ...this.sortOrders };
       }
     },
     toggleGroup(key) {
