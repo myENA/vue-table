@@ -292,7 +292,7 @@ export default {
       return this.polling ? this.pollLoading : this.loading;
     },
     pageData() {
-      return { 
+      return {
         all: this.data,
       };
     },
