@@ -85,4 +85,71 @@ describe('Client.vue', () => {
       }],
     });
   });
+
+  it('Adds row classes on ungrouped tables', () => {
+    const wrapper = shallowMount(Client, {
+      propsData: {
+        data: [{
+          first_name: '1',
+          id: 1,
+          testClass: true,
+        }, {
+          first_name: '2',
+          id: 2,
+          testClass: true,
+        }, {
+          first_name: '3',
+          id: 3,
+          testClass: false,
+        }],
+        options: {
+          rowClasses: {
+            testClass: 'testClass',
+          },
+        },
+      },
+    });
+    expect(wrapper.contains('table tbody tr')).to.be.true;
+
+    const rows = wrapper.findAll('table tbody tr.testClass');
+    expect(rows).to.have.lengthOf(2);
+  });
+
+  it('Adds row classes on grouped tables', () => {
+    const wrapper = shallowMount(Client, {
+      propsData: {
+        data: [{
+          first_name: '1',
+          id: 1,
+          testClass: true,
+        }, {
+          first_name: '2',
+          id: 2,
+          testClass: false,
+        }, {
+          first_name: '2',
+          id: 3,
+          testClass: false,
+        }, {
+          first_name: '3',
+          id: 4,
+          testClass: true,
+        }, {
+          first_name: '3',
+          id: 5,
+          testClass: true,
+        }],
+        options: {
+          groupBy: 'first_name',
+          rowClasses: {
+            testClass: 'testClass',
+          },
+        },
+      },
+    });
+    expect(wrapper.contains('table tbody tr')).to.be.true;
+
+    const rows = wrapper.findAll('table tbody tr.testClass');
+    expect(rows).to.have.lengthOf(3);
+  });
 });
