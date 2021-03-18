@@ -8,6 +8,19 @@ export default {
       return allColumns;
     },
     computedRowClasses() {
+      if (this.opts.groupBy) {
+        return Object.values(this.pageData).map((rowGroup) => {
+          return rowGroup.map((row) => {
+            const classes = {};
+            Object.keys(this.opts.rowClasses).forEach((prop) => {
+              if (row[prop]) {
+                classes[this.opts.rowClasses[prop]] = true;
+              }
+            });
+            return classes;
+          });
+        });
+      }
       return this.data.map((row) => {
         const classes = {};
         Object.keys(this.opts.rowClasses).forEach((prop) => {

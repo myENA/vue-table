@@ -93,7 +93,7 @@
             </td>
           </tr>
         </tbody>
-        <tbody v-else v-for="(group, groupKey) in pageData" :key="groupKey">
+        <tbody v-else v-for="(group, groupKey, groupIndex) in pageData" :key="groupKey">
           <tr v-if="groupKey !== 'all'">
             <th :colspan="colspan">
               <a
@@ -120,7 +120,7 @@
               :class="{
                 selectable: opts.editable && entry.showSelect,
                 selected: selectedRowIds[entry[opts.uniqueKey]],
-                ...computedRowClasses[index],
+                ...computedRowClasses[groupIndex][index],
               }"
               >
               <td v-for="key in allColumns" :key="'cell_'+key"

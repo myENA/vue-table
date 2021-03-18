@@ -52,7 +52,7 @@
             <tr
               :key="'row_'+entry[opts.uniqueKey]"
               :data-id="entry[opts.uniqueKey]"
-              :class="computedRowClasses[index]"
+              :class="computedRowClasses[0][index]"
               >
               <td v-for="key in columns" :key="'cell_'+key"
               :class="{[opts.columnsClasses[key]]: opts.columnsClasses[key] != null }">
@@ -290,6 +290,11 @@ export default {
     },
     isLoading() {
       return this.polling ? this.pollLoading : this.loading;
+    },
+    pageData() {
+      return { 
+        all: this.data,
+      };
     },
   },
   watch: {
