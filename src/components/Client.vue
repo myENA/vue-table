@@ -532,6 +532,7 @@ export default {
     },
     data: {
       immediate: true,
+      deep: true,
       handler() {
         this.selectedRows = this.data.reduce((acc, d) => {
           if (d.showSelect && d.selected) {
