@@ -1,4 +1,4 @@
-import { computed, watch, ref } from 'vue';
+import { computed, watch, ref } from 'vue-demi';
 import { union, difference } from 'ramda';
 
 export default (data, filteredData, opts, context) => {

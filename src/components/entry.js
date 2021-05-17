@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import Vue from 'vue-demi';
 import Server from './server/index.vue';
 import Client from './client/index.vue';
 

@@ -11,9 +11,14 @@
           role="button"
           @keydown.space.prevent="!isFirstPage && goToPage(currentPageValue-1)"
           @click.prevent="!isFirstPage && goToPage(currentPageValue-1)">
-          <span aria-hidden="true"><i
-            :class="classes.prev"
-            ></i></span>{{text.prev}}</a>
+          <span aria-hidden="true">
+            <i
+              :class="classes.prev"
+              aria-hidden="true"
+            />
+          </span>
+          {{text.prev}}
+        </a>
       </li>
       <li :class="{
         [$style.active]: isFirstPage,
@@ -133,7 +138,7 @@
 </style>
 
 <script>
-import { reactive, toRefs, computed, watch } from 'vue';
+import { reactive, toRefs, computed, watch } from 'vue-demi';
 import useFormatters from '@/components/common/formatters';
 
 const calculatePages = (pageInterval, currentPageValue, totalPages) => {

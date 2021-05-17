@@ -1,4 +1,4 @@
-import { computed, watch, ref } from 'vue';
+import { computed, watch, ref } from 'vue-demi';
 
 export default (pageData, opts) => {
   const shown = ref({});

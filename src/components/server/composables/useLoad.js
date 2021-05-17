@@ -1,4 +1,4 @@
-import { ref, watch, computed } from 'vue';
+import { ref, watch, computed } from 'vue-demi';
 
 const useLoad = (props, opts, { currentPage, perPage }, { sortOrders, sortKey }) => {
   const loading = ref(true);
@@ -7,6 +7,7 @@ const useLoad = (props, opts, { currentPage, perPage }, { sortOrders, sortKey })
   const totalRows = ref(0);
 
   const isLoading = computed(() => (props.polling ? pollLoading.value : loading.value));
+  const loadingOverride = computed(() => props.loadingOverride);
 
   const updateLoading = (show, value) => {
     if (props.polling && show) {
@@ -59,7 +60,7 @@ const useLoad = (props, opts, { currentPage, perPage }, { sortOrders, sortKey })
   });
   watch(currentPage, () => loadData(true));
   watch(perPage, () => loadData(true));
-  watch(props.loadingOverride, () => {
+  watch(loadingOverride, () => {
     pollLoading.value = props.loadingOverride;
   });
 

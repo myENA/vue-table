@@ -1,4 +1,4 @@
-import { computed } from 'vue';
+import { computed } from 'vue-demi';
 
 const getFilterForData = ({ searchFields, someMatch, everyMatch, filter }) => (row) => everyMatch.every((key) => searchFields[key](row, key, filter))
     && (someMatch.length === 0 || someMatch.some((key) => String(row[key]).toLowerCase().indexOf(filter.keyword) > -1));

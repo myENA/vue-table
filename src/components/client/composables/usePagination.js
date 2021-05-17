@@ -1,4 +1,4 @@
-import { watch } from 'vue';
+import { watch } from 'vue-demi';
 
 export default (context, state, filteredData) => {
   const paginate = ({ currentPage, perPage }) => {

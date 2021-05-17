@@ -1,4 +1,4 @@
-import { onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue-demi';
 import { setSort } from '@/components/common/methods';
 
 const useSort = (props, opts) => {
