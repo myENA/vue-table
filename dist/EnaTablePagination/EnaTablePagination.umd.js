@@ -200,6 +200,14 @@ module.exports = !DESCRIPTORS && !fails(function () {
 
 /***/ }),
 
+/***/ "0d7c":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+module.exports = {"pagination":"Pagination_pagination_2v60Q","info":"Pagination_info_3InW3","perPageSelector":"Pagination_perPageSelector_sgORs"};
+
+/***/ }),
+
 /***/ "1276":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1291,6 +1299,58 @@ module.exports = function ($this, dummy, Wrapper) {
   ) setPrototypeOf($this, NewTargetPrototype);
   return $this;
 };
+
+
+/***/ }),
+
+/***/ "72dd":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export set */
+/* unused harmony export del */
+/* unused harmony export Vue2 */
+/* unused harmony export isVue2 */
+/* unused harmony export isVue3 */
+/* unused harmony export install */
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("8bbf");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (checked) */ if(__webpack_require__.o(vue__WEBPACK_IMPORTED_MODULE_0__, "computed")) __webpack_require__.d(__webpack_exports__, "computed", function() { return vue__WEBPACK_IMPORTED_MODULE_0__["computed"]; });
+
+/* harmony reexport (checked) */ if(__webpack_require__.o(vue__WEBPACK_IMPORTED_MODULE_0__, "reactive")) __webpack_require__.d(__webpack_exports__, "reactive", function() { return vue__WEBPACK_IMPORTED_MODULE_0__["reactive"]; });
+
+/* harmony reexport (checked) */ if(__webpack_require__.o(vue__WEBPACK_IMPORTED_MODULE_0__, "toRefs")) __webpack_require__.d(__webpack_exports__, "toRefs", function() { return vue__WEBPACK_IMPORTED_MODULE_0__["toRefs"]; });
+
+/* harmony reexport (checked) */ if(__webpack_require__.o(vue__WEBPACK_IMPORTED_MODULE_0__, "watch")) __webpack_require__.d(__webpack_exports__, "watch", function() { return vue__WEBPACK_IMPORTED_MODULE_0__["watch"]; });
+
+
+
+var isVue2 = false
+var isVue3 = true
+var Vue2 = undefined
+
+function install() {}
+
+function set(target, key, val) {
+  if (Array.isArray(target)) {
+    target.length = Math.max(target.length, key)
+    target.splice(key, 1, val)
+    return val
+  }
+  target[key] = val
+  return val
+}
+
+function del(target, key) {
+  if (Array.isArray(target)) {
+    target.splice(key, 1)
+    return
+  }
+  delete target[key]
+}
+
+
+
 
 
 /***/ }),
@@ -2448,6 +2508,17 @@ module.exports = function (METHOD_NAME, options) {
 
 /***/ }),
 
+/***/ "b00c":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_10_oneOf_0_0_node_modules_css_loader_dist_cjs_js_ref_10_oneOf_0_1_node_modules_vue_loader_v16_dist_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_10_oneOf_0_2_node_modules_less_loader_dist_cjs_js_ref_10_oneOf_0_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_v16_dist_index_js_ref_0_1_Pagination_vue_vue_type_style_index_0_id_d0a4c8ac_lang_less_module_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("0d7c");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_10_oneOf_0_0_node_modules_css_loader_dist_cjs_js_ref_10_oneOf_0_1_node_modules_vue_loader_v16_dist_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_10_oneOf_0_2_node_modules_less_loader_dist_cjs_js_ref_10_oneOf_0_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_v16_dist_index_js_ref_0_1_Pagination_vue_vue_type_style_index_0_id_d0a4c8ac_lang_less_module_true__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_10_oneOf_0_0_node_modules_css_loader_dist_cjs_js_ref_10_oneOf_0_1_node_modules_vue_loader_v16_dist_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_10_oneOf_0_2_node_modules_less_loader_dist_cjs_js_ref_10_oneOf_0_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_v16_dist_index_js_ref_0_1_Pagination_vue_vue_type_style_index_0_id_d0a4c8ac_lang_less_module_true__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (default from non-harmony) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _node_modules_mini_css_extract_plugin_dist_loader_js_ref_10_oneOf_0_0_node_modules_css_loader_dist_cjs_js_ref_10_oneOf_0_1_node_modules_vue_loader_v16_dist_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_10_oneOf_0_2_node_modules_less_loader_dist_cjs_js_ref_10_oneOf_0_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_v16_dist_index_js_ref_0_1_Pagination_vue_vue_type_style_index_0_id_d0a4c8ac_lang_less_module_true__WEBPACK_IMPORTED_MODULE_0___default.a; });
+ 
+
+/***/ }),
+
 /***/ "b622":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2565,17 +2636,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ "be29":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_10_oneOf_0_0_node_modules_css_loader_dist_cjs_js_ref_10_oneOf_0_1_node_modules_vue_cli_service_node_modules_vue_loader_v16_dist_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_10_oneOf_0_2_node_modules_less_loader_dist_cjs_js_ref_10_oneOf_0_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_cli_service_node_modules_vue_loader_v16_dist_index_js_ref_0_1_Pagination_vue_vue_type_style_index_0_lang_less_module_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("c7bd");
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_10_oneOf_0_0_node_modules_css_loader_dist_cjs_js_ref_10_oneOf_0_1_node_modules_vue_cli_service_node_modules_vue_loader_v16_dist_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_10_oneOf_0_2_node_modules_less_loader_dist_cjs_js_ref_10_oneOf_0_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_cli_service_node_modules_vue_loader_v16_dist_index_js_ref_0_1_Pagination_vue_vue_type_style_index_0_lang_less_module_true__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_10_oneOf_0_0_node_modules_css_loader_dist_cjs_js_ref_10_oneOf_0_1_node_modules_vue_cli_service_node_modules_vue_loader_v16_dist_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_10_oneOf_0_2_node_modules_less_loader_dist_cjs_js_ref_10_oneOf_0_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_cli_service_node_modules_vue_loader_v16_dist_index_js_ref_0_1_Pagination_vue_vue_type_style_index_0_lang_less_module_true__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (default from non-harmony) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _node_modules_mini_css_extract_plugin_dist_loader_js_ref_10_oneOf_0_0_node_modules_css_loader_dist_cjs_js_ref_10_oneOf_0_1_node_modules_vue_cli_service_node_modules_vue_loader_v16_dist_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_10_oneOf_0_2_node_modules_less_loader_dist_cjs_js_ref_10_oneOf_0_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_cli_service_node_modules_vue_loader_v16_dist_index_js_ref_0_1_Pagination_vue_vue_type_style_index_0_lang_less_module_true__WEBPACK_IMPORTED_MODULE_0___default.a; });
- 
-
-/***/ }),
-
 /***/ "c04e":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2628,14 +2688,6 @@ var store = global[SHARED] || setGlobal(SHARED, {});
 
 module.exports = store;
 
-
-/***/ }),
-
-/***/ "c7bd":
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-module.exports = {"pagination":"Pagination_pagination_2v60Q","info":"Pagination_info_3InW3","perPageSelector":"Pagination_perPageSelector_sgORs"};
 
 /***/ }),
 
@@ -3272,7 +3324,7 @@ function _defineProperty(obj, key, value) {
 // EXTERNAL MODULE: external "vue"
 var external_vue_ = __webpack_require__("8bbf");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist??ref--0-1!./src/components/Pagination.vue?vue&type=template&id=4cf57b2a&bindings={"classes":"props","text":"props","currentPage":"props","perPage":"props","perPageValues":"props","pageInterval":"props","totalRows":"props","noPaginationOnCreate":"props","totalPages":"setup"}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader-v16/dist/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader-v16/dist??ref--0-1!./src/components/Pagination.vue?vue&type=template&id=d0a4c8ac
 
 
 var _hoisted_1 = {
@@ -3318,8 +3370,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return !_ctx.isFirstPage && _ctx.goToPage(_ctx.currentPageValue - 1);
     }, ["prevent"]))
   }, [Object(external_vue_["createVNode"])("span", _hoisted_1, [Object(external_vue_["createVNode"])("i", {
-    class: $props.classes.prev
-  }, null, 2)]), Object(external_vue_["createTextVNode"])(Object(external_vue_["toDisplayString"])($props.text.prev), 1
+    class: $props.classes.prev,
+    "aria-hidden": "true"
+  }, null, 2)]), Object(external_vue_["createTextVNode"])(" " + Object(external_vue_["toDisplayString"])($props.text.prev), 1
   /* TEXT */
   )], 40, ["aria-label", "title"])], 2), Object(external_vue_["createVNode"])("li", {
     class: (_class2 = {}, _defineProperty(_class2, _ctx.$style.active, _ctx.isFirstPage), _defineProperty(_class2, "active", _ctx.isFirstPage), _class2)
@@ -3402,7 +3455,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* KEYED_FRAGMENT */
   ))], 2), [[external_vue_["vModelSelect"], _ctx.perPageValue]]), Object(external_vue_["createVNode"])("span", null, Object(external_vue_["toDisplayString"])($props.text.info.records), 1)])) : (Object(external_vue_["openBlock"])(), Object(external_vue_["createBlock"])("div", _hoisted_8, [Object(external_vue_["createVNode"])("span", null, Object(external_vue_["toDisplayString"])($props.text.info.noRows), 1)]))], 2)]);
 }
-// CONCATENATED MODULE: ./src/components/Pagination.vue?vue&type=template&id=4cf57b2a&bindings={"classes":"props","text":"props","currentPage":"props","perPage":"props","perPageValues":"props","pageInterval":"props","totalRows":"props","noPaginationOnCreate":"props","totalPages":"setup"}
+// CONCATENATED MODULE: ./src/components/Pagination.vue?vue&type=template&id=d0a4c8ac
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.number.constructor.js
 var es_number_constructor = __webpack_require__("a9e3");
@@ -3513,6 +3566,9 @@ function _objectWithoutProperties(source, excluded) {
 
   return target;
 }
+// EXTERNAL MODULE: ./node_modules/vue-demi/lib/index.esm.js
+var index_esm = __webpack_require__("72dd");
+
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
 
@@ -3569,13 +3625,14 @@ var formatStr = function formatStr(str) {
   }, str);
 };
 
+
 /* harmony default export */ var formatters = (function () {
   return {
     heading: heading,
     formatStr: formatStr
   };
 });
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist??ref--0-1!./src/components/Pagination.vue?vue&type=script&lang=js
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader-v16/dist??ref--0-1!./src/components/Pagination.vue?vue&type=script&lang=js
 
 
 
@@ -3605,28 +3662,28 @@ var calculatePages = function calculatePages(pageInterval, currentPageValue, tot
 };
 
 var Paginationvue_type_script_lang_js_computePages = function computePages(props, state) {
-  var totalPages = Object(external_vue_["computed"])(function () {
+  var totalPages = Object(index_esm["computed"])(function () {
     return Math.ceil(props.totalRows / state.perPageValue);
   });
-  var pagesToShow = Object(external_vue_["computed"])(function () {
+  var pagesToShow = Object(index_esm["computed"])(function () {
     return calculatePages(props.pageInterval, state.currentPageValue, totalPages.value);
   });
-  var startPage = Object(external_vue_["computed"])(function () {
+  var startPage = Object(index_esm["computed"])(function () {
     return pagesToShow[0];
   });
-  var endPage = Object(external_vue_["computed"])(function () {
+  var endPage = Object(index_esm["computed"])(function () {
     return pagesToShow[pagesToShow.length - 1];
   });
-  var isFirstPage = Object(external_vue_["computed"])(function () {
+  var isFirstPage = Object(index_esm["computed"])(function () {
     return state.currentPageValue === 1;
   });
-  var isLastPage = Object(external_vue_["computed"])(function () {
+  var isLastPage = Object(index_esm["computed"])(function () {
     return state.currentPageValue === totalPages.value;
   });
-  var isNextEnabled = Object(external_vue_["computed"])(function () {
+  var isNextEnabled = Object(index_esm["computed"])(function () {
     return !isLastPage.value && totalPages.value !== 0;
   });
-  var isNextDisabled = Object(external_vue_["computed"])(function () {
+  var isNextDisabled = Object(index_esm["computed"])(function () {
     return !isNextDisabled.value;
   });
   return {
@@ -3657,7 +3714,7 @@ var Paginationvue_type_script_lang_js_usePagination = function usePagination(pro
     paginate();
   };
 
-  Object(external_vue_["watch"])(totalPages, function () {
+  Object(index_esm["watch"])(totalPages, function () {
     if (state.currentPageValue > totalPages.value) {
       // set the current page to the last page if the number of pages has been reduced below it
       state.currentPageValue = totalPages.value;
@@ -3673,10 +3730,10 @@ var Paginationvue_type_script_lang_js_usePagination = function usePagination(pro
 };
 
 var Paginationvue_type_script_lang_js_computeRows = function computeRows(props, state) {
-  var startRow = Object(external_vue_["computed"])(function () {
+  var startRow = Object(index_esm["computed"])(function () {
     return (state.currentPageValue - 1) * state.perPageValue;
   });
-  var endRow = Object(external_vue_["computed"])(function () {
+  var endRow = Object(index_esm["computed"])(function () {
     return Math.min(startRow.value + state.perPageValue, props.totalRows);
   });
   return {
@@ -3727,7 +3784,7 @@ var Paginationvue_type_script_lang_js_computeRows = function computeRows(props, 
     }
   },
   setup: function setup(props, context) {
-    var state = Object(external_vue_["reactive"])({
+    var state = Object(index_esm["reactive"])({
       perPageValue: props.perPage,
       currentPageValue: props.currentPage
     });
@@ -3736,7 +3793,7 @@ var Paginationvue_type_script_lang_js_computeRows = function computeRows(props, 
         totalPages = _computePages.totalPages,
         restPages = _objectWithoutProperties(_computePages, ["totalPages"]);
 
-    return _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({}, formatters()), Object(external_vue_["toRefs"])(state)), Paginationvue_type_script_lang_js_usePagination(props, context, state, totalPages)), {}, {
+    return _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({}, formatters()), Object(index_esm["toRefs"])(state)), Paginationvue_type_script_lang_js_usePagination(props, context, state, totalPages)), {}, {
       totalPages: totalPages
     }, restPages), Paginationvue_type_script_lang_js_computeRows(props, state));
   },
@@ -3749,8 +3806,8 @@ var Paginationvue_type_script_lang_js_computeRows = function computeRows(props, 
 
 // CONCATENATED MODULE: ./src/components/Pagination.vue?vue&type=script&lang=js
  
-// EXTERNAL MODULE: ./src/components/Pagination.vue?vue&type=style&index=0&lang=less&module=true
-var Paginationvue_type_style_index_0_lang_less_module_true = __webpack_require__("be29");
+// EXTERNAL MODULE: ./src/components/Pagination.vue?vue&type=style&index=0&id=d0a4c8ac&lang=less&module=true
+var Paginationvue_type_style_index_0_id_d0a4c8ac_lang_less_module_true = __webpack_require__("b00c");
 
 // CONCATENATED MODULE: ./src/components/Pagination.vue
 
@@ -3759,7 +3816,7 @@ var Paginationvue_type_style_index_0_lang_less_module_true = __webpack_require__
 
 const cssModules = Paginationvue_type_script_lang_js.__cssModules = {}
 
-cssModules["$style"] = Paginationvue_type_style_index_0_lang_less_module_true["default"]
+cssModules["$style"] = Paginationvue_type_style_index_0_id_d0a4c8ac_lang_less_module_true["default"]
 Paginationvue_type_script_lang_js.render = render
 
 /* harmony default export */ var Pagination = (Paginationvue_type_script_lang_js);
