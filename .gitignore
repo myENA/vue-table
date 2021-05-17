@@ -20,3 +20,7 @@ yarn-error.log*
 *.sw*
 
 /proj.sublime-workspace
+.nyc_output
+coverage
+docs/.vuepress/dist
+reports/

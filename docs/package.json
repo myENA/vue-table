@@ -1,0 +1,16 @@
+{
+  "name": "@myena/vue-table-docs",
+  "version": "1.0.0",
+  "description": "Components to render a table (or data grid if you will) using prefetched data (ClientTable) or data served by an API (ServerTable).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs:build": "vuepress build",
+    "docs:dev": "vuepress dev"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vuepress": "^1.6.0"
+  }
+}

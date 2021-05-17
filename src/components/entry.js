@@ -1,6 +1,6 @@
-import Vue from 'vue';
-import Server from './Server.vue';
-import Client from './Client.vue';
+import Vue from 'vue-demi';
+import Server from './server/index.vue';
+import Client from './client/index.vue';
 
 const components = {
   Server,
