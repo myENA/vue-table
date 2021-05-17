@@ -246,12 +246,12 @@ td.selectable:hover {
 
 <script type="text/javascript">
 import { reactive, toRefs, computed, watch } from 'vue-demi';
-import useFormatters from '@/components/common/formatters';
-import useDefaultOptions from '@/components/common/default-options';
-import useToggle from '@/components/common/composables/useToggle';
-import useComputedColumns from '@/components/common/composables/useComputedColumns';
-import Pagination from '@/components/Pagination.vue';
-import ActionsCell from '@/components/common/ActionsCell.vue';
+import useFormatters from '../common/formatters';
+import useDefaultOptions from '../common/default-options';
+import useToggle from '../common/composables/useToggle';
+import useComputedColumns from '../common/composables/useComputedColumns';
+import Pagination from '../Pagination.vue';
+import ActionsCell from '../common/ActionsCell.vue';
 import usePagination from './composables/usePagination';
 import useSort from './composables/useSort';
 import useSelect from './composables/useSelect';

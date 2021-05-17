@@ -139,7 +139,7 @@
 
 <script>
 import { reactive, toRefs, computed, watch } from 'vue-demi';
-import useFormatters from '@/components/common/formatters';
+import useFormatters from './common/formatters';
 
 const calculatePages = (pageInterval, currentPageValue, totalPages) => {
   const halfInterval = (pageInterval - 1) / 2;

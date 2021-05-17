@@ -49,11 +49,11 @@
         </tbody>
         <tbody v-else>
           <template
-            v-for="(entry, index) in data"
-            :key="'row_'+entry[opts.uniqueKey]">
+            v-for="(entry, index) in data">
             <tr
               :data-id="entry[opts.uniqueKey]"
               :class="computedRowClasses[index]"
+              :key="'row_'+entry[opts.uniqueKey]"
               >
               <td
                 v-for="key in columns"
@@ -176,12 +176,12 @@
 
 <script type="text/javascript">
 import axios from 'axios';
-import useFormatters from '@/components/common/formatters';
-import useDefaultOptions from '@/components/common/default-options';
-import useToggle from '@/components/common/composables/useToggle';
-import useComputedColumns from '@/components/common/composables/useComputedColumns';
-import Pagination from '@/components/Pagination.vue';
-import ActionsCell from '@/components/common/ActionsCell.vue';
+import useFormatters from '../common/formatters';
+import useDefaultOptions from '../common/default-options';
+import useToggle from '../common/composables/useToggle';
+import useComputedColumns from '../common/composables/useComputedColumns';
+import Pagination from '../Pagination.vue';
+import ActionsCell from '../common/ActionsCell.vue';
 import useLoad from './composables/useLoad';
 import usePagination from './composables/usePagination';
 import useSort from './composables/useSort';

@@ -1,4 +1,4 @@
-import { heading } from '@/components/common/formatters';
+import { heading } from '../../common/formatters';
 
 const getFileNameWithExtension = (name) => {
   // check if the filename has the .csv extension and add it if it does not

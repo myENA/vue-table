@@ -1,5 +1,5 @@
 import { onMounted, ref } from 'vue-demi';
-import { setSort } from '@/components/common/methods';
+import { setSort } from '../../common/methods';
 
 const useSort = (props, opts) => {
   const sortKey = ref('');
