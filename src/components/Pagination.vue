@@ -171,7 +171,7 @@ const computePages = (props, state) => {
   const isFirstPage = computed(() => state.currentPageValue === 1);
   const isLastPage = computed(() => state.currentPageValue === totalPages.value);
   const isNextEnabled = computed(() => !isLastPage.value && totalPages.value !== 0);
-  const isNextDisabled = computed(() => !isNextDisabled.value);
+  const isNextDisabled = computed(() => !isNextEnabled.value);
 
   return {
     totalPages,

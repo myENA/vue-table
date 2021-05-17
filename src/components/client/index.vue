@@ -415,7 +415,7 @@ export default {
       sortKey,
       sortOrders,
       sortBy,
-      ...useSelect(props.data, filteredData, opts, context),
+      ...useSelect(computedData, filteredData, opts, context),
       ...useGroups(pageData, opts),
       filteredData,
       ...restFilter,
