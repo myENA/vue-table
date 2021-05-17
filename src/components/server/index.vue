@@ -47,13 +47,15 @@
             </td>
           </tr>
         </tbody>
-        <tbody v-else>
-          <template
-            v-for="(entry, index) in data">
+        <template v-else>
+          <tbody
+            v-for="(entry, index) in data"
+            :key="'row_'+entry[opts.uniqueKey]"
+            >
             <tr
               :data-id="entry[opts.uniqueKey]"
               :class="computedRowClasses[index]"
-              :key="'row_'+entry[opts.uniqueKey]"
+              :key="'data_row_'+entry[opts.uniqueKey]"
               >
               <td
                 v-for="key in columns"
@@ -93,8 +95,8 @@
                 </slot>
               </td>
             </tr>
-          </template>
-        </tbody>
+          </tbody>
+        </template>
         <tfoot v-show="totalRows">
           <tr>
             <td :colspan="colspan">
