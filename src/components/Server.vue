@@ -6,7 +6,7 @@
       <table :class="[opts.classes.table, $style.table]">
         <thead>
           <tr>
-            <th v-for="key in columns" :key="key"
+            <th v-for="key in allColumns" :key="key"
               :class="{ [$style.sortable]: opts.sortable[key], sorted: sortKey === key,
                 [opts.columnsClasses[key]]: opts.columnsClasses[key] != null }">
               <a
@@ -54,7 +54,7 @@
               :data-id="entry[opts.uniqueKey]"
               :class="computedRowClasses[0][index]"
               >
-              <td v-for="key in columns" :key="'cell_'+key"
+              <td v-for="key in allColumns" :key="'cell_'+key"
               :class="{[opts.columnsClasses[key]]: opts.columnsClasses[key] != null }">
                 <slot :name="'column_' + key" :row="entry">
                   <component v-if="opts.templates[key]" :is="opts.templates[key]"
