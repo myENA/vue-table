@@ -708,15 +708,10 @@ export default {
       return name;
     },
     prepareValueForCsv(value = '') {
-      let preparedValue = value;
-      if (preparedValue) {
-        preparedValue = preparedValue.toString();
+      if (!value && value !== 0) {
+        return '';
       }
-      preparedValue = preparedValue.replace(/"/g, '""');
-      if (preparedValue.search(/("|,|\n)/g) >= 0) {
-        preparedValue = `"${preparedValue}"`;
-      }
-      return preparedValue;
+      return `"${value.toString().replace(/"/g, '\\"').replace(/(\r\n|\n|\r)/gm, '')}"`;
     },
     getCsvData({ headers, columns, top }) {
       const rows = [];
