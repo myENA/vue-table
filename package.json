@@ -1,6 +1,6 @@
 {
   "name": "@myena/vue-table",
-  "version": "0.16.8",
+  "version": "0.16.9",
   "description": "Vue Table components (client/server) used in ENA projects",
   "author": "Andy Ghiuta <andy.ghiuta@gmail.com>",
   "scripts": {
