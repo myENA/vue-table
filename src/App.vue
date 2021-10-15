@@ -5,8 +5,8 @@
     <ClientTable ref="clientTable" :columns="clientColumns" :data="clientData" :options="clientOptions">
       <div slot="details_row" slot-scope="{ row }">
         <h4>Details for {{row.name}}.</h4>
-        <p><strong>Alpha2Code:</strong> {{row.alpha2Code}}</p>
-        <p><strong>Domain(s):</strong> {{row.topLevelDomain.join(', ')}}</p>
+        <p><strong>Alpha2Code:</strong> {{row.cca2}}</p>
+        <p><strong>Domain(s):</strong> {{row.tld.join(', ')}}</p>
       </div>
     </ClientTable>
     <button @click="downloadClientCsv">Download</button>
@@ -20,8 +20,8 @@
       </div>
       <div slot="details_row" slot-scope="{ row }">
         <h4>Details for {{row.name}}.</h4>
-        <p><strong>Alpha2Code:</strong> {{row.alpha2Code}}</p>
-        <p><strong>Domain(s):</strong> {{row.topLevelDomain.join(', ')}}</p>
+        <p><strong>Alpha2Code:</strong> {{row.cca2}}</p>
+        <p><strong>Domain(s):</strong> {{row.tld.join(', ')}}</p>
       </div>
     </ServerTable>
   </main>
@@ -38,13 +38,34 @@ const myServerTable = {
   extends: ServerTable,
   methods: {
     async fetch(params) {
-      const { data } = await axios.get(this.url, {
-        params: { ...params, filter: this.options.filter },
+      let { data } = await axios.get(this.url, {
+        params,
         paramsSerializer(p) {
           return Qs.stringify(p, { arrayFormat: 'brackets' });
         },
       });
-      return data;
+      // usually these actions are done on the server side
+      // prepare data
+      data = data.map((d) => ({
+        ...d,
+        tld: d.tld ?? [],
+        name: d.name.common,
+        capital: d.capital.join(', '),
+      }));
+      // filter by name
+      data = data.filter((row) => !this.options.filter.name
+        || row.name.common.toLowerCase().includes(this.options.filter.name.toLowerCase()));
+      if (params.sort_by) {
+        // sort
+        data = data.sort((a, b) => params.sort_dir * `${a[params.sort_by]}`.localeCompare(`${b[params.sort_by]}`));
+      }
+      // paginate
+      const start = (params.page - 1) * params.per_page;
+      const end = start + params.per_page;
+      return {
+        list: data.slice(start, end),
+        total: data.length,
+      };
     },
     parse({ list, total }) {
       return {
@@ -70,10 +91,10 @@ export default {
   },
   data: () => ({
     columns: ['name', 'capital', 'population'],
-    url: '.netlify/functions/countries',
+    url: 'https://restcountries.com/v3.1/region/europe',
     options: {
       perPage: 5,
-      uniqueKey: 'alpha3Code',
+      uniqueKey: 'ccn3',
       filter: {
         name: null,
       },
@@ -83,6 +104,7 @@ export default {
       headings: {
         name: '',
       },
+      detailsRow: true,
     },
     clientColumns: ['select', 'name', 'capital', 'population'],
     clientData: [],
@@ -91,7 +113,7 @@ export default {
       detailsRow: true,
       editable: true,
       groupBy: 'subregion',
-      uniqueKey: 'alpha3Code',
+      uniqueKey: 'ccn3',
       nonSelectableColumns: ['population'],
       // define which fields are search-able and how
       search: {
@@ -109,8 +131,14 @@ export default {
     },
   }),
   async created() {
-    const { data } = await axios.get('https://restcountries.eu/rest/v2/region/europe');
-    this.clientData = data.map((d) => ({ ...d, showSelect: true }));
+    const { data } = await axios.get('https://restcountries.com/v3.1/region/europe');
+    this.clientData = data.map((d) => ({
+      ...d,
+      showSelect: true,
+      tld: d.tld ?? [],
+      name: d.name.common,
+      capital: d.capital.join(', '),
+    }));
   },
   methods: {
     filter() {
