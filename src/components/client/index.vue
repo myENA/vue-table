@@ -245,7 +245,7 @@ td.selectable:hover {
 </style>
 
 <script type="text/javascript">
-import { reactive, toRefs, computed, watch } from 'vue-demi';
+import { reactive, toRefs, computed, watch } from 'vue';
 import useFormatters from '../common/formatters';
 import useDefaultOptions from '../common/default-options';
 import useToggle from '../common/composables/useToggle';

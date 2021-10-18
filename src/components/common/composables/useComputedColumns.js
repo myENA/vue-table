@@ -1,9 +1,8 @@
-import { computed } from 'vue-demi';
+import { computed } from 'vue';
 
 export default ({ columns, opts, data }) => {
   const allColumns = computed(() => {
     const columnsCopy = columns.slice();
-    const a = 1;
     if (!columns.includes('actions') && opts.value.detailsRow) {
       columnsCopy.push('actions');
     }

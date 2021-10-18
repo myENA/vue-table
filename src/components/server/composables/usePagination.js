@@ -1,5 +1,5 @@
 
-import { ref } from 'vue-demi';
+import { ref } from 'vue';
 
 const usePagination = (defaultPerPage) => {
   const currentPage = ref(1);

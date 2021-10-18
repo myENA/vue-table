@@ -6,9 +6,12 @@
       <table :class="[opts.classes.table, $style.table]">
         <thead>
           <tr>
-            <th v-for="key in columns" :key="key"
+            <th
+              v-for="key in columns"
+              :key="key"
               :class="{ [$style.sortable]: opts.sortable[key], sorted: sortKey === key,
-                [opts.columnsClasses[key]]: opts.columnsClasses[key] != null }">
+                [opts.columnsClasses[key]]: opts.columnsClasses[key] != null }"
+              :scope="key">
               <a
                 v-if="opts.headings[key] !== ''"
                 href="#"
@@ -19,11 +22,11 @@
                 @click.prevent="sortBy({key})"
                 >
                 <slot :name="'heading_' + key">
-                  <template>
-                    {{ heading(key, opts.headings) }}
-                  </template>
+                  {{ heading(key, opts.headings) }}
                 </slot>
-                <i v-if="opts.sortable[key]"
+                <i
+                  v-if="opts.sortable[key]"
+                  aria-hidden="true"
                   :class="{
                     [opts.classes.sort.none] : sortKey !== key || sortOrders[key] === null,
                     [opts.classes.sort[sortOrders[key]]] : sortKey === key,
