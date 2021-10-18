@@ -65,7 +65,7 @@ export default {
         name: 'name-cls',
       },
       headings: {
-        name: '',
+        name: 'Country Name',
       },
       detailsRow: true,
     },
@@ -75,7 +75,7 @@ export default {
       perPage: 20,
       detailsRow: true,
       editable: true,
-      groupBy: 'subregion',
+      // groupBy: 'subregion',
       uniqueKey: 'ccn3',
       nonSelectableColumns: ['population'],
       // define which fields are search-able and how
@@ -94,7 +94,24 @@ export default {
     },
   }),
   async created() {
-    const { data } = await axios.get('https://restcountries.com/v3.1/region/europe');
+    // const { data } = await axios.get('https://restcountries.com/v3.1/region/europe');
+    const data = [
+      { ccn3: 'DEU', name: { common: 'Germany' }, capital: ['Berlin'], population: 8, tld: ['.de'] },
+      { ccn3: 'FRA', name: { common: 'France' }, capital: ['Paris'], population: 66, tld: ['.fr'] },
+      { ccn3: 'GBR', name: { common: 'United Kingdom' }, capital: ['London'], population: 65, tld: ['.uk'] },
+      { ccn3: 'ITA', name: { common: 'Italy' }, capital: ['Rome'], population: 60, tld: ['.it'] },
+      { ccn3: 'NLD', name: { common: 'Netherlands' }, capital: ['Amsterdam'], population: 16, tld: ['.nl'] },
+      { ccn3: 'NOR', name: { common: 'Norway' }, capital: ['Oslo'], population: 5, tld: ['.no'] },
+      { ccn3: 'SWE', name: { common: 'Sweden' }, capital: ['Stockholm'], population: 9, tld: ['.se'] },
+      { ccn3: 'CHE', name: { common: 'Switzerland' }, capital: ['Bern'], population: 8, tld: ['.ch'] },
+      { ccn3: 'AUT', name: { common: 'Austria' }, capital: ['Vienna'], population: 8, tld: ['.at'] },
+      { ccn3: 'BEL', name: { common: 'Belgium' }, capital: ['Brussels'], population: 11, tld: ['.be'] },
+      { ccn3: 'BGR', name: { common: 'Bulgaria' }, capital: ['Sofia'], population: 7, tld: ['.bg'] },
+      { ccn3: 'CYP', name: { common: 'Cyprus' }, capital: ['Nicosia'], population: 9, tld: ['.cy'] },
+      { ccn3: 'CZE', name: { common: 'Czech Republic' }, capital: ['Prague'], population: 10, tld: ['.cz'] },
+      { ccn3: 'DNK', name: { common: 'Denmark' }, capital: ['Copenhagen'], population: 5, tld: ['.dk'] },
+      { ccn3: 'EST', name: { common: 'Estonia' }, capital: ['Tallinn'], population: 1, tld: ['.ee'] },
+    ];
     this.clientData = data.map((d) => ({
       ...d,
       showSelect: true,
@@ -109,12 +126,29 @@ export default {
       this.$refs.serverTable.getFirstPage();
     },
     async fetchData(url, params) {
-      let { data } = await axios.get(url, {
-        params,
-        paramsSerializer(p) {
-          return Qs.stringify(p, { arrayFormat: 'brackets' });
-        },
-      });
+      // let { data } = await axios.get(url, {
+      //   params,
+      //   paramsSerializer(p) {
+      //     return Qs.stringify(p, { arrayFormat: 'brackets' });
+      //   },
+      // });
+      let data = [
+        { ccn3: 'DEU', name: { common: 'Germany' }, capital: ['Berlin'], population: 8, tld: ['.de'] },
+        { ccn3: 'FRA', name: { common: 'France' }, capital: ['Paris'], population: 66, tld: ['.fr'] },
+        { ccn3: 'GBR', name: { common: 'United Kingdom' }, capital: ['London'], population: 65, tld: ['.uk'] },
+        { ccn3: 'ITA', name: { common: 'Italy' }, capital: ['Rome'], population: 60, tld: ['.it'] },
+        { ccn3: 'NLD', name: { common: 'Netherlands' }, capital: ['Amsterdam'], population: 16, tld: ['.nl'] },
+        { ccn3: 'NOR', name: { common: 'Norway' }, capital: ['Oslo'], population: 5, tld: ['.no'] },
+        { ccn3: 'SWE', name: { common: 'Sweden' }, capital: ['Stockholm'], population: 9, tld: ['.se'] },
+        { ccn3: 'CHE', name: { common: 'Switzerland' }, capital: ['Bern'], population: 8, tld: ['.ch'] },
+        { ccn3: 'AUT', name: { common: 'Austria' }, capital: ['Vienna'], population: 8, tld: ['.at'] },
+        { ccn3: 'BEL', name: { common: 'Belgium' }, capital: ['Brussels'], population: 11, tld: ['.be'] },
+        { ccn3: 'BGR', name: { common: 'Bulgaria' }, capital: ['Sofia'], population: 7, tld: ['.bg'] },
+        { ccn3: 'CYP', name: { common: 'Cyprus' }, capital: ['Nicosia'], population: 9, tld: ['.cy'] },
+        { ccn3: 'CZE', name: { common: 'Czech Republic' }, capital: ['Prague'], population: 10, tld: ['.cz'] },
+        { ccn3: 'DNK', name: { common: 'Denmark' }, capital: ['Copenhagen'], population: 5, tld: ['.dk'] },
+        { ccn3: 'EST', name: { common: 'Estonia' }, capital: ['Tallinn'], population: 1, tld: ['.ee'] },
+      ];
       // usually these actions are done on the server side
       // prepare data
       data = data.map((d) => ({

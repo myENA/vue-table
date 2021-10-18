@@ -6,14 +6,14 @@
   "scripts": {
     "serve": "vue-cli-service serve --host localhost",
     "build": "node build.js",
+    "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "build:example": "vue-cli-service build --dest example",
+    "jcm": "jest-codemods --force",
     "postversion": "git push && git push --tags && echo Run: \"npm publish\"",
     "preversion": "npm run test:unit && npm run build && git add -A dist",
-    "test:unit": "vue-cli-service test:unit",
-    "test:unit-watch": "vue-cli-service test:unit --watch",
     "test:ci": "vue-cli-service test:unit --ci --runInBand --reporters=default --reporters=jest-junit",
-    "jcm": "jest-codemods --force"
+    "test:unit-watch": "vue-cli-service test:unit --watch"
   },
   "main": "dist/index.js",
   "files": [
@@ -21,11 +21,12 @@
     "src/components/*"
   ],
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-plugin-unit-jest": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
-    "@vue/compiler-sfc": "^3.0.0-0",
+    "@vue/cli-plugin-babel": "^4.5.14",
+    "@vue/cli-plugin-eslint": "^4.5.14",
+    "@vue/cli-plugin-unit-jest": "^4.5.14",
+    "@vue/cli-service": "^4.5.14",
+    "@vue/compat": "^3.2.20",
+    "@vue/compiler-sfc": "^3.2.20",
     "@vue/eslint-config-airbnb": "^5.1.0",
     "@vue/test-utils": "^2.0.0-0",
     "axios": "^0.19.0",
@@ -44,19 +45,13 @@
     "qs": "^6.6.0",
     "ramda": "^0.26.1",
     "typescript": "^4.0.3",
-    "vue": "^3.0.0",
-    "vue-demi": "^0.7.4",
+    "vue": "^3.2.20",
     "vue-jest": "^5.0.0-alpha.9"
   },
   "peerDependencies": {
     "axios": "^0.18.0",
     "@vue/composition-api": "^1.0.0-beta.1",
-    "vue": "^2.0.0 || >=3.0.0"
-  },
-  "peerDependenciesMeta": {
-    "@vue/composition-api": {
-      "optional": true
-    }
+    "vue": ">=3.2.0"
   },
   "keywords": [
     "vue",
@@ -64,5 +59,10 @@
   ],
   "libname": "EnaTable",
   "license": "MIT",
+  "peerDependenciesMeta": {
+    "@vue/composition-api": {
+      "optional": true
+    }
+  },
   "repository": "github:myENA/vue-table"
 }

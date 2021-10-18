@@ -1,4 +1,4 @@
-import { computed, watch, ref } from 'vue-demi';
+import { computed, watch, ref } from 'vue';
 
 export default (pageData, opts) => {
   const shown = ref({});
@@ -24,7 +24,7 @@ export default (pageData, opts) => {
           : shown.value[row[opts.value.groupBy]];
       });
     });
-  });
+  }, { deep: true });
 
   return {
     shown,

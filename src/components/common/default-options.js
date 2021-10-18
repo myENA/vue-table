@@ -1,4 +1,4 @@
-import { computed } from 'vue-demi';
+import { computed } from 'vue';
 import { mergeDeepRight } from 'ramda';
 
 const defaultOptions = {

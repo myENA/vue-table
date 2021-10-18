@@ -1,4 +1,4 @@
-import { computed, watch, ref } from 'vue-demi';
+import { computed, watch, ref } from 'vue';
 import { union, difference } from 'ramda';
 
 export default (data, filteredData, opts, context) => {
@@ -51,11 +51,11 @@ export default (data, filteredData, opts, context) => {
       }
       return acc;
     }, []);
-  });
+  }, { deep: true });
 
   watch(() => [...filteredData.value], () => {
     setAllSelected();
-  });
+  }, { deep: true });
 
   watch(() => [...selectedRows.value], () => {
     const selected = selectedRows.value.reduce((acc, id) => {
@@ -77,7 +77,7 @@ export default (data, filteredData, opts, context) => {
     }, []);
     setAllSelected();
     context.emit('selectedRows', selectedData);
-  });
+  }, { deep: true });
 
   return {
     selectAll,

@@ -1,4 +1,4 @@
-import { ref } from 'vue-demi';
+import { ref } from 'vue';
 
 export default (context) => {
   const expandedRows = ref({});

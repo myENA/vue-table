@@ -138,7 +138,7 @@
 </style>
 
 <script>
-import { reactive, toRefs, computed, watch } from 'vue-demi';
+import { reactive, toRefs, computed, watch } from 'vue';
 import useFormatters from './common/formatters';
 
 const calculatePages = (pageInterval, currentPageValue, totalPages) => {

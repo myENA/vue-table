@@ -1,4 +1,4 @@
-import { ref, watch, computed } from 'vue-demi';
+import { ref, watch, computed } from 'vue';
 
 const useLoad = (props, opts, { currentPage, perPage }, { sortOrders, sortKey }) => {
   const loading = ref(true);
