@@ -11,7 +11,7 @@
     "build:example": "vue-cli-service build --dest example",
     "jcm": "jest-codemods --force",
     "postversion": "git push && git push --tags && echo Run: \"npm publish\"",
-    "preversion": "npm run test:unit && npm run build && git add -A dist",
+    "preversion": "npm run test:unit",
     "test:ci": "vue-cli-service test:unit --ci --runInBand --reporters=default --reporters=jest-junit",
     "test:unit-watch": "vue-cli-service test:unit --watch"
   },
