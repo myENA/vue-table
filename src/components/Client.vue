@@ -177,6 +177,10 @@
             </tr>
           </template>
         </tbody>
+        <tbody v-if="opts.aditionalActions">
+          <slot name="actionsForSelectedItems">
+          </slot>
+        </tbody>
         <tfoot v-if="opts.pagination && totalRows">
           <tr>
             <td :colspan="colspan">
