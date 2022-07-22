@@ -20,7 +20,7 @@
   ],
   "dependencies": {
     "core-js": "^3.6.4",
-    "ramda": "^0.26.1"
+    "ramda": "^0.28.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.3.1",
