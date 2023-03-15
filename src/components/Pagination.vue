@@ -94,11 +94,11 @@
           aria-label="Number of records per page"
           >
           <option
-            v-for="perPageValue in perPageValues"
-            :value="perPageValue"
-            :key="perPageValue"
+            v-for="perPageV in perPageValues"
+            :value="perPageV"
+            :key="perPageV"
             >
-            {{perPageValue}}
+            {{ perPageV }}
           </option>
         </select>
         <span>
@@ -166,8 +166,8 @@ const computePages = (props, state) => {
     totalPages.value
   ));
 
-  const startPage = computed(() => pagesToShow[0]);
-  const endPage = computed(() => pagesToShow[pagesToShow.length - 1]);
+  const startPage = computed(() => pagesToShow.value[0]);
+  const endPage = computed(() => pagesToShow[pagesToShow.value.length - 1]);
   const isFirstPage = computed(() => state.currentPageValue === 1);
   const isLastPage = computed(() => state.currentPageValue === totalPages.value);
   const isNextEnabled = computed(() => !isLastPage.value && totalPages.value !== 0);
@@ -207,6 +207,7 @@ const usePagination = (props, context, state, totalPages) => {
       // if there was no current page and then the number of pages was set, go to first page
       state.currentPageValue = 1;
     }
+    paginate();
   });
   return {
     paginate,
