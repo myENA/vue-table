@@ -167,7 +167,7 @@ const computePages = (props, state) => {
   ));
 
   const startPage = computed(() => pagesToShow.value[0]);
-  const endPage = computed(() => pagesToShow[pagesToShow.value.length - 1]);
+  const endPage = computed(() => pagesToShow.value[pagesToShow.value.length - 1]);
   const isFirstPage = computed(() => state.currentPageValue === 1);
   const isLastPage = computed(() => state.currentPageValue === totalPages.value);
   const isNextEnabled = computed(() => !isLastPage.value && totalPages.value !== 0);
