@@ -14,7 +14,7 @@ export default ({ columns, opts, data }) => {
   const computedRowClasses = computed(() => data.value.map((row) => {
     const classes = {};
     Object.keys(opts.value.rowClasses).forEach((prop) => {
-      if (row.value[prop]) {
+      if (row[prop]) {
         classes[opts.value.rowClasses[prop]] = true;
       }
     });
