@@ -8912,7 +8912,7 @@ var es_string_includes = __webpack_require__("2532");
     return data.value.map(function (row) {
       var classes = {};
       Object.keys(opts.value.rowClasses).forEach(function (prop) {
-        if (row.value[prop]) {
+        if (row[prop]) {
           classes[opts.value.rowClasses[prop]] = true;
         }
       });
