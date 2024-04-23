@@ -118,7 +118,7 @@
               :class="{
                 selectable: opts.editable && entry.showSelect,
                 selected: selectedRowIds[entry[opts.uniqueKey]],
-                ...computedRowClasses[index],
+                ...computedRowClasses[index + (currentPage -1) * perPage],
               }"
               >
               <td v-for="key in allColumns" :key="'cell_'+key"
