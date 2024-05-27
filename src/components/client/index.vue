@@ -414,7 +414,7 @@ export default {
       ...toRefs(state),
       ...useFormatters(),
       ...useToggle(context),
-      ...useComputedColumns({ columns: props.columns, opts, data: computedData }),
+      ...useComputedColumns({ columns: props.columns, opts, data: sortedData }),
       ...usePagination(context, state, filteredData),
       sortKey,
       sortOrders,
