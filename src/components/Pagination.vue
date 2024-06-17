@@ -47,7 +47,7 @@
           :aria-label="`Page ${page}`"
           :title="`Page ${page}`"
           role="button"
-          @keydown.space.prevent="(page)"
+          @keydown.space.prevent="goToPage(page)"
           @click.prevent="goToPage(page)"
           >{{page}}</a>
       </li>
