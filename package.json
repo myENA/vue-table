@@ -1,6 +1,6 @@
 {
   "name": "@myena/vue-table",
-  "version": "1.0.0-13",
+  "version": "1.1.0",
   "description": "Vue Table components (client/server) used in ENA projects",
   "author": "Andy Ghiuta <andy.ghiuta@gmail.com>",
   "scripts": {
@@ -50,7 +50,6 @@
   },
   "peerDependencies": {
     "axios": "^0.27.2",
-    "@vue/composition-api": "^1.0.0-beta.1",
     "vue": ">=3.2.0"
   },
   "keywords": [
@@ -59,10 +58,5 @@
   ],
   "libname": "EnaTable",
   "license": "MIT",
-  "peerDependenciesMeta": {
-    "@vue/composition-api": {
-      "optional": true
-    }
-  },
   "repository": "github:myENA/vue-table"
 }
