@@ -548,7 +548,15 @@ export default {
     },
     filteredData: {
       immediate: true,
-      handler() {
+      handler(value) {
+        // updated selected rows when filtering data to fix issue with select/deselect all
+        this.selectedRows = value.reduce((acc, d) => {
+          if (d.showSelect && d.selected) {
+            acc.push(d[this.opts.uniqueKey]);
+          }
+          return acc;
+        }, []);
+
         this.setAllSelected();
         this.resetCurrentPage();
       },
